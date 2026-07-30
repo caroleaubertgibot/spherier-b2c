@@ -1,0 +1,18 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[dev]
+  framework = "#static"
+  publish = "."
+
+# Chemins courts côté navigateur, indépendants de l'emplacement des fonctions.
+[[redirects]]
+  from = "/api/snapshot-latest"
+  to = "/.netlify/functions/snapshot-latest"
+  status = 200
+
+[[redirects]]
+  from = "/api/snapshot-save"
+  to = "/.netlify/functions/snapshot-save"
+  status = 200
