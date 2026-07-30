@@ -1,10 +1,13 @@
+# Seul le contenu de public/ est servi au navigateur. Le template, les scripts de
+# build et le code des fonctions restent hors du site public : les fonctions sont
+# exécutées côté serveur, elles n'ont jamais à être téléchargeables.
 [build]
-  publish = "."
+  publish = "public"
   functions = "netlify/functions"
 
 [dev]
   framework = "#static"
-  publish = "."
+  publish = "public"
 
 # Chemins courts côté navigateur, indépendants de l'emplacement des fonctions.
 [[redirects]]
@@ -15,4 +18,11 @@
 [[redirects]]
   from = "/api/snapshot-save"
   to = "/.netlify/functions/snapshot-save"
+  status = 200
+
+# La racine sert le sphérier sans redirection visible : https://<site>/?c=<uuid>
+# fonctionne donc aussi bien que /spherier.html?c=<uuid>.
+[[redirects]]
+  from = "/"
+  to = "/spherier.html"
   status = 200

@@ -56,7 +56,11 @@ async function build() {
   referentielJson = JSON.stringify(referentiel, null, 2);
 
   const templatePath = path.join(__dirname, 'spherier.template.html');
-  const outputPath = path.join(__dirname, 'spherier.html');
+  // Tout ce qui est écrit dans public/ sera servi tel quel au navigateur. Le template,
+  // les scripts de build et le code des fonctions restent volontairement en dehors.
+  const publicDir = path.join(__dirname, 'public');
+  const outputPath = path.join(publicDir, 'spherier.html');
+  fs.mkdirSync(publicDir, { recursive: true });
 
   let html = fs.readFileSync(templatePath, 'utf8');
   for (const { marker, value } of PLACEHOLDERS) {
