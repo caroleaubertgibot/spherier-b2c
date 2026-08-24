@@ -1418,9 +1418,17 @@
     document.body.dataset.panneau = 'theme:' + theme.code;
   }
 
+  // Le masquage est différé le temps de l'animation de fermeture. Rouvrir pendant ce
+  // délai — enchaîner deux étoiles, par exemple — laissait le minuteur masquer le
+  // panneau fraîchement ouvert : il apparaissait puis disparaissait aussitôt.
+  let minuteurFermeture = null;
+
   function afficherPanneau() {
-    if (elVoile.hidden) {
-      dernierFocus = document.activeElement;
+    clearTimeout(minuteurFermeture);
+    minuteurFermeture = null;
+    const etaitFerme = elVoile.hidden || !elVoile.classList.contains('visible');
+    if (etaitFerme) {
+      if (elVoile.hidden) dernierFocus = document.activeElement;
       elVoile.hidden = false;
       requestAnimationFrame(() => elVoile.classList.add('visible'));
       document.body.style.overflow = 'hidden';
@@ -1501,7 +1509,7 @@
     elVoile.classList.remove('visible');
     document.body.style.overflow = '';
     delete document.body.dataset.panneau;
-    setTimeout(() => { elVoile.hidden = true; }, 280);
+    minuteurFermeture = setTimeout(() => { elVoile.hidden = true; minuteurFermeture = null; }, 280);
     if (dernierFocus && dernierFocus.focus) dernierFocus.focus();
   }
 
