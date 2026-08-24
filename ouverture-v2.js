@@ -3,6 +3,17 @@ const { ECHELLE_V2 } = require('./dimensions-v2.js');
 // Niveau à partir duquel une compétence compte pour débloquer les thématiques suivantes.
 const NIVEAU_ACQUIS = 2;
 
+// Combien de compétences d'une thématique doivent être acquises pour qu'elle débloque
+// ses suites : la moitié, arrondie à l'inférieur.
+//
+// Le plancher à 1 est une garde : floor(n/2) vaut 0 dès qu'une thématique compte 0 ou 1
+// compétence, ce qui ouvrirait ses cibles sans que rien n'ait été travaillé. Aucune
+// thématique n'est dans ce cas aujourd'hui (toutes en ont 3 à 5), mais en ajouter une
+// très courte provoquerait autrement une régression silencieuse.
+function seuilDOuverture(nombreDeCompetences) {
+  return Math.max(1, Math.floor(nombreDeCompetences / 2));
+}
+
 // Calcul de l'ouverture des thématiques.
 //
 // La règle vit ICI et nulle part ailleurs : le serveur la calcule, le navigateur ne fait
@@ -36,7 +47,7 @@ function calculerOuverture({ referentiel, levels = {} }) {
   function progression(themeId) {
     const codes = competencesParTheme.get(themeId) ?? [];
     const atteintes = codes.filter((code) => (levels[code] ?? 0) >= NIVEAU_ACQUIS).length;
-    return { atteintes, seuil: Math.floor(codes.length / 2), total: codes.length };
+    return { atteintes, seuil: seuilDOuverture(codes.length), total: codes.length };
   }
 
   const themes = {};
@@ -91,4 +102,4 @@ function normaliserNiveau(valeur) {
   return Math.min(3, Math.max(0, Math.round(n)));
 }
 
-module.exports = { calculerOuverture, niveauxComplets, normaliserNiveau, NIVEAU_ACQUIS };
+module.exports = { calculerOuverture, niveauxComplets, normaliserNiveau, seuilDOuverture, NIVEAU_ACQUIS };

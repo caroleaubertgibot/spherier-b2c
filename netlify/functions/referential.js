@@ -1,6 +1,6 @@
 require('dotenv').config({ quiet: true });
 
-const { getReferentielV2 } = require('../../referentiel-v2.js');
+const { getReferentielV2, etatCacheReferentiel } = require('../../referentiel-v2.js');
 
 const HEADERS = { 'Content-Type': 'application/json; charset=utf-8' };
 
@@ -20,9 +20,12 @@ exports.handler = async (event) => {
   try {
     const referentiel = await getReferentielV2();
     return reponse(200, referentiel, {
-      // Cache court : le référentiel bouge rarement et la lecture coûte ~1,3 s.
-      // Assez bref pour qu'une correction dans Notion se voie presque aussitôt.
-      'Cache-Control': 'public, max-age=60, stale-while-revalidate=300',
+      // Pas de cache HTTP : c'est le cache mémoire côté serveur (TTL 10 min) qui absorbe
+      // la charge. Une copie retenue par le CDN survivrait à /api/refresh et rendrait la
+      // purge sans effet visible.
+      'Cache-Control': 'no-store',
+      // Observabilité : savoir si la réponse vient du cache et quand il expire.
+      'X-Referentiel-Cache': JSON.stringify(etatCacheReferentiel()),
     });
   } catch (err) {
     console.error('referential:', err);

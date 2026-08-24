@@ -59,7 +59,46 @@ async function interroger(databaseId) {
 
 // --- Assemblage du référentiel ------------------------------------------------------
 
-async function getReferentielV2() {
+// Cache mémoire du référentiel.
+//
+// Le lire intégralement à chaque affichage n'est pas tenable : 40 thèmes + 152
+// compétences + ressources représentent plusieurs appels paginés à l'API Notion
+// (limitée à 3 req/s), soit ~1,3 s et du quota consommé à chaque ouverture de page.
+//
+// Le référentiel reste néanmoins lu EN LIVE au sens où il n'est jamais figé au build :
+// une correction dans Notion se voit seule, au pire après le TTL. Les fonctions
+// serverless étant éphémères, ce cache n'est ni durable ni partagé entre instances —
+// il sert à absorber les rafales, pas à garantir une cohérence globale.
+const TTL_CACHE_MS = 10 * 60 * 1000;
+let cache = { referentiel: null, expireA: 0, posePar: null };
+
+function viderCacheReferentiel() {
+  cache = { referentiel: null, expireA: 0, posePar: null };
+}
+
+function etatCacheReferentiel() {
+  return {
+    present: cache.referentiel !== null,
+    expire_dans_s: cache.referentiel ? Math.max(0, Math.round((cache.expireA - Date.now()) / 1000)) : 0,
+    pose_a: cache.posePar,
+  };
+}
+
+// `force: true` contourne le cache sans le vider (lecture fraîche ponctuelle).
+async function getReferentielV2({ force = false } = {}) {
+  if (!force && cache.referentiel && Date.now() < cache.expireA) {
+    return cache.referentiel;
+  }
+  const referentiel = await lireReferentielDepuisNotion();
+  cache = {
+    referentiel,
+    expireA: Date.now() + TTL_CACHE_MS,
+    posePar: new Date().toISOString(),
+  };
+  return referentiel;
+}
+
+async function lireReferentielDepuisNotion() {
   for (const [cle, valeur] of Object.entries({ NOTION_TOKEN, DB_THEMES, DB_COMPETENCES, DB_RESSOURCES })) {
     if (!valeur) throw new Error(`Variable d'environnement manquante : ${cle}`);
   }
@@ -138,4 +177,10 @@ async function getReferentielV2() {
   };
 }
 
-module.exports = { getReferentielV2, VERSION_REFERENTIEL };
+module.exports = {
+  getReferentielV2,
+  viderCacheReferentiel,
+  etatCacheReferentiel,
+  VERSION_REFERENTIEL,
+  TTL_CACHE_MS,
+};
