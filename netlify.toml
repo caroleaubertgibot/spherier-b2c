@@ -16,6 +16,17 @@
   status = 200
 
 [[redirects]]
+  from = "/api/state"
+  to = "/.netlify/functions/state"
+  status = 200
+
+[[redirects]]
+  from = "/api/snapshot"
+  to = "/.netlify/functions/snapshot"
+  status = 200
+
+# Contrats v1, conservés tant que le renderer actuel n'est pas remplacé (phase 3).
+[[redirects]]
   from = "/api/snapshot-latest"
   to = "/.netlify/functions/snapshot-latest"
   status = 200
