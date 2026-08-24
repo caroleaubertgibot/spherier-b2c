@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Sphérier — Les Sommets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #0a0e1a;
+    --night-deep: #050811;
+    --night-soft: #131826;
+    --paper: #f0ebe0;
+    --paper-dim: #c9c2b3;
+    --stone: #6b6557;
+    --gold: #c9a661;
+    --gold-bright: #e8c987;
+    --line-faint: rgba(240, 235, 224, 0.08);
+    --line: rgba(240, 235, 224, 0.18);
+
+    /* Teintes des 5 dimensions. Le doré reste réservé à la sélection « maintenant ». */
+    --d-int: #d97a4a;
+    --d-ali: #7eb0ce;
+    --d-com: #c4523e;
+    --d-rel: #9c8fd1;
+    --d-tra: #6e9c8f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter Tight', sans-serif;
+    background: var(--night-deep);
+    color: var(--paper);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  .cosmos {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(217, 122, 74, 0.08) 0%, transparent 40%),
+      radial-gradient(ellipse at 70% 80%, rgba(90, 138, 168, 0.08) 0%, transparent 40%),
+      radial-gradient(ellipse at 50% 50%, var(--night-soft) 0%, var(--night-deep) 80%);
+  }
+  .stars { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .star {
+    position: absolute;
+    background: var(--paper);
+    border-radius: 50%;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+  }
+  .mountains {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 22vh; z-index: 1; pointer-events: none;
+    background: linear-gradient(to top, var(--night-deep) 0%, transparent 100%);
+  }
+  .mountains svg { position: absolute; bottom: 0; width: 100%; height: 100%; }
+
+  .app {
+    position: relative;
+    z-index: 3;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 26px 0 20px;
+    border-bottom: 1px solid var(--line-faint);
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand-mark {
+    width: 30px; height: 30px;
+    border: 1px solid var(--gold);
+    transform: rotate(45deg);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .brand-mark::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid var(--d-int);
+  }
+  .brand-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    letter-spacing: 0.12em;
+    line-height: 1.1;
+  }
+  .brand-text small {
+    display: block;
+    font-size: 9px;
+    color: var(--stone);
+    margin-top: 4px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+  .header-etat {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--paper-dim);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-etat .puce {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 6px var(--gold-bright);
+    flex-shrink: 0;
+  }
+
+  /* TITRE */
+  .titre { text-align: center; padding: 40px 0 34px; }
+  .titre h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(24px, 4vw, 32px);
+    letter-spacing: 0.04em;
+  }
+  .titre h1::before, .titre h1::after {
+    content: '✧';
+    margin: 0 18px;
+    color: var(--gold);
+    font-size: 0.55em;
+    vertical-align: middle;
+  }
+  .titre p {
+    font-size: 13.5px;
+    color: var(--paper-dim);
+    max-width: 520px;
+    margin: 14px auto 0;
+    line-height: 1.65;
+  }
+
+  /* ÉTAT DE CHARGEMENT / MESSAGE */
+  .message {
+    text-align: center;
+    padding: 50px 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--paper-dim);
+  }
+  .message[hidden] { display: none; }
+  .message .mark { display: block; font-size: 34px; color: var(--gold); opacity: 0.5; margin-bottom: 16px; }
+  .message.erreur .mark { color: var(--d-com); }
+  .message small {
+    display: block;
+    margin-top: 12px;
+    font-family: 'Inter Tight', sans-serif;
+    font-style: normal;
+    font-size: 12.5px;
+    color: var(--stone);
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+  @keyframes respire { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.9; } }
+  .chargement .mark { animation: respire 1.8s ease-in-out infinite; }
+
+  /* DIMENSIONS */
+  .dimensions { display: flex; flex-direction: column; gap: 12px; }
+  .dimensions[hidden] { display: none; }
+
+  .dimension {
+    border: 1px solid var(--line-faint);
+    border-radius: 14px;
+    background: rgba(240, 235, 224, 0.022);
+    overflow: hidden;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .dimension:hover { border-color: var(--line); }
+  .dimension.ouverte {
+    border-color: var(--teinte);
+    background: rgba(240, 235, 224, 0.04);
+  }
+
+  .dimension-entete {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    padding: 20px 22px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+    font: inherit;
+  }
+  .dimension-astre {
+    width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .dimension-astre svg { display: block; overflow: hidden; }
+
+  .dimension-nom {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 21px;
+    letter-spacing: 0.02em;
+    color: var(--paper);
+  }
+  .dimension-compte {
+    display: block;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-top: 5px;
+  }
+  .dimension-chevron {
+    font-size: 12px;
+    color: var(--stone);
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  .dimension.ouverte .dimension-chevron { transform: rotate(180deg); color: var(--teinte); }
+  .dimension-entete:hover .dimension-nom { color: var(--paper); }
+
+  .dimension-corps {
+    display: none;
+    padding: 0 22px 22px;
+    border-top: 1px solid var(--line-faint);
+  }
+  .dimension.ouverte .dimension-corps {
+    display: block;
+    animation: deplie 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @keyframes deplie {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .dimension-definition {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--paper-dim);
+    padding-top: 18px;
+    max-width: 620px;
+  }
+
+  /* Emplacement de la constellation — remplie à l'étape suivante. */
+  .constellation-zone {
+    margin-top: 20px;
+    padding: 30px 20px;
+    border: 1px dashed var(--line-faint);
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--stone);
+  }
+
+  @media (max-width: 640px) {
+    .app { padding: 0 16px 60px; }
+    .dimension-entete { padding: 16px 16px; gap: 14px; grid-template-columns: 28px 1fr auto; }
+    .dimension-astre { width: 28px; height: 28px; }
+    .dimension-nom { font-size: 18px; }
+    .dimension-corps { padding: 0 16px 18px; }
+    .titre { padding: 30px 0 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cosmos"></div>
+<div class="stars" id="stars"></div>
+<div class="mountains">
+  <svg viewBox="0 0 1400 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,300 L0,220 L120,140 L240,200 L380,80 L520,160 L640,40 L780,120 L900,60 L1040,140 L1180,90 L1300,170 L1400,130 L1400,300 Z" fill="#050811" opacity="0.9"/>
+    <path d="M0,300 L0,260 L150,200 L290,250 L430,180 L580,230 L720,170 L860,220 L1000,180 L1140,240 L1280,200 L1400,250 L1400,300 Z" fill="#0a0e1a" opacity="0.95"/>
+  </svg>
+</div>
+
+<div class="app">
+  <header class="header">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div class="brand-text">
+        Les Sommets
+        <small>Club de Dev Perso</small>
+      </div>
+    </div>
+    <div class="header-etat" id="header-etat" hidden>
+      <span class="puce"></span>
+      <span id="header-etat-texte"></span>
+    </div>
+  </header>
+
+  <div class="titre">
+    <h1>Votre Sphérier</h1>
+    <p>Cinq dimensions à explorer. Ouvrez celle qui vous appelle pour découvrir ses thématiques et vous y situer.</p>
+  </div>
+
+  <div class="message chargement" id="message">
+    <span class="mark">✧</span>
+    <span id="message-texte">Lecture de votre sphérier…</span>
+    <small id="message-detail"></small>
+  </div>
+
+  <div class="dimensions" id="dimensions" hidden></div>
+</div>
+
+<script>
+  // ============================================================
+  // IDENTITÉ DU CLIENT
+  // ============================================================
+  // L'UUID vient de l'URL (?c=…), jamais d'un défaut codé en dur : sans lui, on ne sait
+  // pas à qui appartient l'état et rien ne doit être chargé ni enregistré.
+  const UUID_V4_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  function lireClientId() {
+    try {
+      const brut = new URLSearchParams(window.location.search).get('c');
+      if (!brut) return null;
+      const valeur = brut.trim();
+      return UUID_V4_RE.test(valeur) ? valeur.toLowerCase() : null;
+    } catch {
+      return null;
+    }
+  }
+
+  const CLIENT_ID = lireClientId();
+
+  // ============================================================
+  // ÉTAT
+  // ============================================================
+  // Le référentiel et l'état sont lus au chargement, jamais figés dans la page : une
+  // correction dans Notion se voit sans redéploiement.
+  const etat = {
+    referentiel: null,
+    computed: null,   // { levels, themes } calculés par le serveur
+    snapshot: null,
+    dimensionOuverte: null,
+  };
+
+  // Teinte par dimension : présentation seule, le serveur ne s'en occupe pas.
+  const TEINTES = {
+    INT: 'var(--d-int)',
+    ALI: 'var(--d-ali)',
+    COM: 'var(--d-com)',
+    REL: 'var(--d-rel)',
+    TRA: 'var(--d-tra)',
+  };
+  const TEINTES_HEX = {
+    INT: '#d97a4a', ALI: '#7eb0ce', COM: '#c4523e', REL: '#9c8fd1', TRA: '#6e9c8f',
+  };
+
+  // ============================================================
+  // FOND ÉTOILÉ
+  // ============================================================
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 90; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const taille = Math.random() * 2 + 0.5;
+    star.style.width = taille + 'px';
+    star.style.height = taille + 'px';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.opacity = 0.4;
+    star.style.animationDelay = Math.random() * 4 + 's';
+    starsContainer.appendChild(star);
+  }
+
+  // ============================================================
+  // MESSAGES
+  // ============================================================
+  const elMessage = document.getElementById('message');
+  const elMessageTexte = document.getElementById('message-texte');
+  const elMessageDetail = document.getElementById('message-detail');
+  const elDimensions = document.getElementById('dimensions');
+  const elHeaderEtat = document.getElementById('header-etat');
+  const elHeaderEtatTexte = document.getElementById('header-etat-texte');
+
+  function afficherMessage(texte, detail = '', variante = 'chargement') {
+    elMessageTexte.textContent = texte;
+    elMessageDetail.textContent = detail;
+    elMessage.className = 'message ' + variante;
+    elMessage.hidden = false;
+    elDimensions.hidden = true;
+  }
+
+  function masquerMessage() {
+    elMessage.hidden = true;
+    elDimensions.hidden = false;
+  }
+
+  function echapper(str) {
+    return String(str).replace(/[&<>"']/g, (c) => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+    ));
+  }
+
+  // ============================================================
+  // RENDU DES 5 DIMENSIONS
+  // ============================================================
+  function competencesDeDimension(dimension) {
+    const idsThemes = new Set(
+      etat.referentiel.themes.filter((t) => t.dimension === dimension.name).map((t) => t.id)
+    );
+    return etat.referentiel.competencies.filter((c) => idsThemes.has(c.theme));
+  }
+
+  function astreDimension(idDimension) {
+    const teinte = TEINTES_HEX[idDimension] || '#f0ebe0';
+    return `<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+      <circle cx="13" cy="13" r="10" fill="${teinte}" fill-opacity="0.10"/>
+      <circle cx="13" cy="13" r="6.5" fill="${teinte}" fill-opacity="0.22"/>
+      <circle cx="13" cy="13" r="3.4" fill="${teinte}"/>
+    </svg>`;
+  }
+
+  function rendreDimensions() {
+    // L'ordre d'affichage est celui du serveur : Intériorité, Alignement, Communication,
+    // Relations, Trajectoire.
+    elDimensions.innerHTML = etat.referentiel.dimensions.map((d) => {
+      const themes = etat.referentiel.themes.filter((t) => t.dimension === d.name);
+      const competences = competencesDeDimension(d);
+      return `
+        <section class="dimension" data-dimension="${echapper(d.id)}" style="--teinte: ${TEINTES[d.id] || 'var(--paper)'}">
+          <button type="button" class="dimension-entete" aria-expanded="false" data-toggle="${echapper(d.id)}">
+            <span class="dimension-astre">${astreDimension(d.id)}</span>
+            <span>
+              <span class="dimension-nom">${echapper(d.name)}</span>
+              <span class="dimension-compte">${themes.length} thématiques · ${competences.length} compétences</span>
+            </span>
+            <span class="dimension-chevron">▾</span>
+          </button>
+          <div class="dimension-corps">
+            <p class="dimension-definition">${echapper(d.definition)}</p>
+            <div class="constellation-zone">La constellation de cette dimension s'affichera ici.</div>
+          </div>
+        </section>
+      `;
+    }).join('');
+
+    elDimensions.querySelectorAll('[data-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => basculerDimension(btn.dataset.toggle));
+    });
+  }
+
+  // Comportement toggle : ouvrir une dimension referme celle qui l'était, et recliquer
+  // sur la même la referme.
+  function basculerDimension(idDimension) {
+    const dejaOuverte = etat.dimensionOuverte === idDimension;
+    etat.dimensionOuverte = dejaOuverte ? null : idDimension;
+
+    elDimensions.querySelectorAll('.dimension').forEach((section) => {
+      const ouverte = section.dataset.dimension === etat.dimensionOuverte;
+      section.classList.toggle('ouverte', ouverte);
+      section.querySelector('.dimension-entete').setAttribute('aria-expanded', String(ouverte));
+    });
+  }
+
+  // ============================================================
+  // CHARGEMENT
+  // ============================================================
+  async function lireJson(url) {
+    const reponse = await fetch(url);
+    if (!reponse.ok) {
+      const detail = await reponse.json().catch(() => ({}));
+      throw new Error(detail.erreur || `Le serveur a répondu ${reponse.status}`);
+    }
+    return reponse.json();
+  }
+
+  async function demarrer() {
+    if (!CLIENT_ID) {
+      afficherMessage(
+        'Lien invalide ou incomplet',
+        "Ce lien ne permet pas de vous reconnaître. Ouvrez votre sphérier depuis votre espace pour retrouver votre progression.",
+        'erreur'
+      );
+      document.body.dataset.lienValide = 'non';
+      return;
+    }
+    document.body.dataset.lienValide = 'oui';
+
+    try {
+      // Les deux appels partent ensemble : le second réutilise le cache serveur du
+      // référentiel, il ne paie donc pas une seconde lecture de Notion.
+      const [referentiel, etatClient] = await Promise.all([
+        lireJson('/api/referential'),
+        lireJson(`/api/state?uuid=${encodeURIComponent(CLIENT_ID)}`),
+      ]);
+
+      etat.referentiel = referentiel;
+      etat.computed = etatClient.computed;
+      etat.snapshot = etatClient.snapshot;
+
+      rendreDimensions();
+      masquerMessage();
+
+      const ouvertes = Object.values(etat.computed.themes).filter((t) => t.status === 'open').length;
+      elHeaderEtatTexte.textContent = `${ouvertes} thématique${ouvertes > 1 ? 's' : ''} ouverte${ouvertes > 1 ? 's' : ''}`;
+      elHeaderEtat.hidden = false;
+
+      document.body.dataset.pret = 'oui';
+      document.body.dataset.snapshotCharge = etat.snapshot ? 'oui' : 'non';
+    } catch (err) {
+      afficherMessage(
+        'Votre sphérier est momentanément indisponible',
+        err.message,
+        'erreur'
+      );
+      document.body.dataset.pret = 'erreur';
+    }
+  }
+
+  demarrer();
+</script>
+
+</body>
+</html>
