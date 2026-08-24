@@ -11,6 +11,11 @@
 
 # Chemins courts côté navigateur, indépendants de l'emplacement des fonctions.
 [[redirects]]
+  from = "/api/referential"
+  to = "/.netlify/functions/referential"
+  status = 200
+
+[[redirects]]
   from = "/api/snapshot-latest"
   to = "/.netlify/functions/snapshot-latest"
   status = 200
