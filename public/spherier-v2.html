@@ -612,6 +612,69 @@
   }
   .panneau-retour:hover { text-decoration: underline; }
 
+
+  .barre-libelle {
+    flex: 1 1 240px; min-width: 0;
+    padding: 9px 15px; border-radius: 999px;
+    border: 1px solid var(--line-faint); background: rgba(240,235,224,.04);
+    color: var(--paper); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13.5px;
+    outline: none; transition: border-color .25s ease;
+  }
+  .barre-libelle::placeholder { color: var(--stone); }
+  .barre-libelle:focus { border-color: var(--gold); }
+  .dernier-point {
+    text-align: center; margin-top: 10px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 12.5px; color: var(--stone);
+  }
+  .dernier-point[hidden] { display: none; }
+
+
+  /* ACCÈS AUX SÉLECTIONS */
+  .btn-mois {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 8px 16px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line-faint); background: rgba(240,235,224,.04);
+    color: var(--paper-dim); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
+    transition: all .25s ease;
+  }
+  .btn-mois:hover { border-color: var(--gold); color: var(--gold-bright); }
+  .btn-mois .compte { font-style: normal; font-family: 'Inter Tight', sans-serif;
+    font-size: 10.5px; letter-spacing: .08em; color: var(--gold);
+    border: 1px solid rgba(201,166,97,.45); border-radius: 999px; padding: 1px 8px; }
+  .btn-mois[hidden] { display: none; }
+
+  /* PANNEAU DES SÉLECTIONS */
+  .sel-groupe + .sel-groupe { margin-top: 22px; }
+  .sel-dim { font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--stone); margin: 16px 0 9px; display: flex; align-items: center; gap: 8px; }
+  .sel-dim i { width: 8px; height: 8px; border-radius: 50%; background: var(--h); flex-shrink: 0; }
+  .sel-item {
+    display: grid; grid-template-columns: 1fr auto; gap: 10px 12px; align-items: center;
+    padding: 12px 15px; border-radius: 11px; margin-bottom: 7px;
+    border: 1px solid var(--line-faint); background: rgba(240,235,224,.025);
+  }
+  .sel-item.cible { border-color: rgba(201,166,97,.4); background: rgba(201,166,97,.06); }
+  .sel-nom { background: none; border: none; padding: 0; cursor: pointer; text-align: left;
+    font: inherit; font-size: 13.5px; color: var(--paper); line-height: 1.4; }
+  .sel-nom:hover { text-decoration: underline; }
+  .sel-nom small { display: block; font-size: 11px; color: var(--stone); margin-top: 3px; }
+  .sel-etat { font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 12px; color: var(--stone); white-space: nowrap; text-align: right; }
+  .sel-verrou { color: var(--stone); }
+  .sel-promouvoir {
+    grid-column: 1 / -1; justify-self: start;
+    background: none; border: 1px solid rgba(201,166,97,.4); border-radius: 999px;
+    color: var(--gold); font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 12.5px; padding: 5px 13px; cursor: pointer; transition: all .2s ease;
+  }
+  .sel-promouvoir:hover { background: rgba(201,166,97,.16); color: var(--gold-bright); }
+  .sel-vide { font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 13px; line-height: 1.65; color: var(--stone); }
+  .sel-rappel { font-size: 12.5px; color: var(--stone); margin-top: 14px;
+    padding-top: 13px; border-top: 1px solid var(--line-faint);
+    font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
   @media (max-width: 640px) {
     .barre-sauvegarde { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 12px; }
     .barre-actions { justify-content: stretch; }
@@ -653,6 +716,9 @@
       </div>
     </div>
     <div class="header-etat" id="header-etat" hidden>
+      <button type="button" class="btn-mois" id="btn-mois" hidden>
+        Mon mois <span class="compte" id="btn-mois-compte"></span>
+      </button>
       <span class="puce"></span>
       <span id="header-etat-texte"></span>
     </div>
@@ -661,6 +727,7 @@
   <div class="titre">
     <h1>Votre Sphérier</h1>
     <p>Cinq dimensions à explorer. Ouvrez celle qui vous appelle pour découvrir ses thématiques et vous y situer.</p>
+    <p class="dernier-point" id="dernier-point" hidden></p>
   </div>
 
   <div class="message chargement" id="message">
@@ -674,6 +741,9 @@
 
 <div class="barre-sauvegarde" id="barre" aria-live="polite">
   <p class="barre-texte" id="barre-texte"></p>
+  <input type="text" class="barre-libelle" id="barre-libelle" maxlength="80"
+         placeholder="Nommer ce point — ex. Octobre, ce qui se passe en moi"
+         aria-label="Nom de ce point d'étape">
   <div class="barre-actions">
     <button type="button" class="btn-annuler" id="btn-annuler">Annuler</button>
     <button type="button" class="btn-enregistrer" id="btn-enregistrer">Enregistrer</button>
@@ -1154,6 +1224,7 @@
 
     enregistrerBrouillon();
     majBarre();
+    majBoutonMois();
     // Une ouverture qui bascule change les traits, les teintes et les cadenas : on
     // redessine la constellation concernée. Sinon un simple rafraîchissement d'étoiles
     // suffit, et l'animation reste imperceptible.
@@ -1170,25 +1241,36 @@
     });
   }
 
+  // « Maintenant » et « plus tard » s'excluent : une compétence que l'on travaille
+  // n'est plus en attente, et la promotion est donc un déplacement, pas une copie.
   function basculerPlusTard(code) {
     appliquerChangement(() => {
-      brouillon.later = brouillon.later.includes(code)
-        ? brouillon.later.filter((c) => c !== code)
-        : [...brouillon.later, code];
+      if (brouillon.later.includes(code)) {
+        brouillon.later = brouillon.later.filter((c) => c !== code);
+      } else {
+        brouillon.later = [...brouillon.later, code];
+        brouillon.current = brouillon.current.filter((c) => c !== code);
+      }
     });
   }
 
   function basculerMaintenant(code) {
     appliquerChangement(() => {
-      brouillon.current = brouillon.current.includes(code)
-        ? brouillon.current.filter((c) => c !== code)
-        : [...brouillon.current, code];
+      if (brouillon.current.includes(code)) {
+        brouillon.current = brouillon.current.filter((c) => c !== code);
+      } else {
+        brouillon.current = [...brouillon.current, code];
+        brouillon.later = brouillon.later.filter((c) => c !== code);
+      }
     });
   }
 
   function remplacerMaintenant(sortant, entrant) {
     appliquerChangement(() => {
-      brouillon.current = brouillon.current.filter((c) => c !== sortant).concat(entrant);
+      brouillon.current = [...new Set(
+        brouillon.current.filter((c) => c !== sortant).concat(entrant)
+      )];
+      brouillon.later = brouillon.later.filter((c) => c !== entrant);
     });
   }
 
@@ -1319,7 +1401,7 @@
 
   // Quatrième cible : plutôt qu'un refus sec qui obligerait à retrouver les trois
   // autres dans la carte pour en retirer une, on propose l'échange sur place.
-  function proposerRemplacement(competence) {
+  function proposerRemplacement(competence, apres) {
     const zone = document.getElementById('zone-remplacement');
     const actuelles = brouillon.current
       .map((code) => etat.referentiel.competencies.find((c) => c.id === code))
@@ -1340,7 +1422,7 @@
     zone.querySelectorAll('[data-sortant]').forEach((btn) => {
       btn.addEventListener('click', () => {
         remplacerMaintenant(btn.dataset.sortant, competence.id);
-        rafraichirPanneau(competence.id);
+        if (apres) apres(); else rafraichirPanneau(competence.id);
       });
     });
     document.getElementById('remplacement-annuler').addEventListener('click', () => { zone.innerHTML = ''; });
@@ -1422,6 +1504,138 @@
   // délai — enchaîner deux étoiles, par exemple — laissait le minuteur masquer le
   // panneau fraîchement ouvert : il apparaissait puis disparaissait aussitôt.
   let minuteurFermeture = null;
+
+  // ============================================================
+  // PANNEAU « MON MOIS » — les sélections rassemblées
+  // ============================================================
+  // Une wishlist éparpillée sur cinq dimensions est inutilisable : le membre coche et
+  // ne retrouve jamais. Ce panneau est un RACCOURCI vers la carte, pas une seconde
+  // interface : chaque entrée y ramène.
+  const elBtnMois = document.getElementById('btn-mois');
+  const elBtnMoisCompte = document.getElementById('btn-mois-compte');
+
+  function majBoutonMois() {
+    const n = brouillon.current.length + brouillon.later.length;
+    elBtnMois.hidden = n === 0;
+    elBtnMoisCompte.textContent = brouillon.current.length + '/' + MAX_MAINTENANT;
+  }
+
+  function dimensionDe(competence) {
+    const t = etat.referentiel.themes.find((x) => x.id === competence.theme);
+    return etat.referentiel.dimensions.find((d) => d.name === t?.dimension);
+  }
+
+  function ligneSelection(code, options = {}) {
+    const c = etat.referentiel.competencies.find((x) => x.id === code);
+    if (!c) return '';
+    const t = etat.referentiel.themes.find((x) => x.id === c.theme);
+    const niveau = brouillon.levels[code] ?? 0;
+    const ouverte = estOuverte(c.theme);
+    const etatTexte = options.cible
+      ? (niveau === 0 ? 'À situer' : echapper(etat.referentiel.scale[niveau]))
+      : (ouverte
+          ? `<span>Accessible</span>`
+          : `<span class="sel-verrou">Thématique à débloquer</span>`);
+
+    // La promotion n'a de sens que si la thématique est ouverte : c'est la seule
+    // contrainte du serveur sur « maintenant ».
+    const promouvoir = (!options.cible && ouverte)
+      ? `<button type="button" class="sel-promouvoir" data-promouvoir="${echapper(code)}">La travailler ce mois</button>`
+      : '';
+
+    return `<div class="sel-item${options.cible ? ' cible' : ''}">
+      <button type="button" class="sel-nom" data-aller="${echapper(code)}">
+        ${echapper(c.name)}<small>${echapper(t ? t.name : '')}</small>
+      </button>
+      <span class="sel-etat">${etatTexte}</span>
+      ${promouvoir}
+    </div>`;
+  }
+
+  function ouvrirMois() {
+    competenceAffichee = null;
+    themeAffiche = null;
+    elPanneau.style.setProperty('--teinte-p', '#c9a661');
+
+    elPanneauTete.innerHTML = `
+      <p class="panneau-fil"><b>Vos choix</b></p>
+      <h2 class="panneau-titre" id="panneau-titre">Mon mois</h2>
+      <p class="panneau-def">Ce que vous travaillez maintenant, et ce que vous gardez pour la suite.</p>`;
+
+    const cibles = brouillon.current.length
+      ? brouillon.current.map((c) => ligneSelection(c, { cible: true })).join('')
+      : `<p class="sel-vide">Aucune compétence choisie pour ce mois. Trois au maximum : c'est peu, et c'est voulu — mieux vaut trois compétences travaillées qu'une liste d'intentions.</p>`;
+
+    // « Plus tard » groupé par dimension : c'est ce qui transforme un fourre-tout en
+    // file d'attente lisible.
+    const parDim = new Map();
+    brouillon.later.forEach((code) => {
+      const c = etat.referentiel.competencies.find((x) => x.id === code);
+      if (!c) return;
+      const d = dimensionDe(c);
+      const cle = d ? d.id : '?';
+      if (!parDim.has(cle)) parDim.set(cle, { dimension: d, codes: [] });
+      parDim.get(cle).codes.push(code);
+    });
+    const ordre = etat.referentiel.dimensions.map((d) => d.id);
+    const groupes = [...parDim.entries()]
+      .sort((a, b) => ordre.indexOf(a[0]) - ordre.indexOf(b[0]))
+      .map(([id, g]) => `
+        <p class="sel-dim" style="--h: ${TEINTES_HEX[id] || '#f0ebe0'}"><i></i>${echapper(g.dimension ? g.dimension.name : '')}</p>
+        ${g.codes.map((c) => ligneSelection(c)).join('')}`).join('');
+
+    const plusTard = brouillon.later.length
+      ? groupes
+      : `<p class="sel-vide">Rien en attente. Sur n'importe quelle compétence, « Garder pour plus tard » la range ici — y compris dans une thématique encore fermée.</p>`;
+
+    elPanneauCorps.innerHTML = `
+      <section class="panneau-section sel-groupe">
+        <p class="panneau-label">Ce mois — ${brouillon.current.length}/${MAX_MAINTENANT}</p>
+        ${cibles}
+      </section>
+      <section class="panneau-section sel-groupe">
+        <p class="panneau-label">Pour plus tard${brouillon.later.length ? ' — ' + brouillon.later.length : ''}</p>
+        ${plusTard}
+      </section>
+      <div id="zone-remplacement"></div>
+      <p class="sel-rappel">Touchez une compétence pour la retrouver dans sa constellation.</p>`;
+    elPanneauCorps.scrollTop = 0;
+
+    elPanneauCorps.querySelectorAll('[data-aller]').forEach((btn) => {
+      btn.addEventListener('click', () => allerVersCompetence(btn.dataset.aller));
+    });
+    elPanneauCorps.querySelectorAll('[data-promouvoir]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const code = btn.dataset.promouvoir;
+        const competence = etat.referentiel.competencies.find((c) => c.id === code);
+        if (brouillon.current.length >= MAX_MAINTENANT) {
+          proposerRemplacement(competence, () => ouvrirMois());
+          document.getElementById('zone-remplacement').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          return;
+        }
+        basculerMaintenant(code);
+        ouvrirMois();
+      });
+    });
+
+    afficherPanneau();
+    document.body.dataset.panneau = 'mois';
+  }
+
+  // Rejoindre une compétence dans la carte : déplie sa dimension, dessine sa
+  // constellation au besoin, puis ouvre son panneau.
+  function allerVersCompetence(code) {
+    const competence = etat.referentiel.competencies.find((c) => c.id === code);
+    if (!competence) return;
+    const d = dimensionDe(competence);
+    if (!d) return;
+    if (etat.dimensionOuverte !== d.id) basculerDimension(d.id);
+    const zone = elDimensions.querySelector(`[data-dimension="${d.id}"]`);
+    if (zone) zone.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    ouvrirCompetence(code, d.id);
+  }
+
+  elBtnMois.addEventListener('click', ouvrirMois);
 
   function afficherPanneau() {
     clearTimeout(minuteurFermeture);
@@ -1574,6 +1788,24 @@
   const elBarreTexte = document.getElementById('barre-texte');
   const elBtnEnregistrer = document.getElementById('btn-enregistrer');
   const elBandeau = document.getElementById('bandeau');
+  const elLibelle = document.getElementById('barre-libelle');
+  const elDernierPoint = document.getElementById('dernier-point');
+
+  // Les snapshots créés avant l'ajout de ce champ n'ont pas de libellé. Plutôt que de
+  // les afficher « sans nom », on les nomme par leur date : l'historique reste lisible.
+  function libelleSnapshot(snapshot) {
+    if (!snapshot) return null;
+    if (snapshot.libelle) return snapshot.libelle;
+    const d = new Date(snapshot.cree_le);
+    return 'Point du ' + d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function majDernierPoint() {
+    const nom = libelleSnapshot(etat.snapshot);
+    if (!nom) { elDernierPoint.hidden = true; return; }
+    elDernierPoint.textContent = `Dernier point enregistré : ${nom}`;
+    elDernierPoint.hidden = false;
+  }
 
   function majBarre() {
     if (!estModifie()) { elBarre.classList.remove('visible'); return; }
@@ -1611,6 +1843,7 @@
         body: JSON.stringify({
           uuid: CLIENT_ID,
           referential_version: 2,
+          label: elLibelle.value.trim() || null,
           levels: brouillon.levels,
           selections: { current: brouillon.current, later: brouillon.later },
         }),
@@ -1629,7 +1862,10 @@
       brouillon = { levels: { ...reference.levels }, current: [...reference.current], later: [...reference.later] };
 
       try { localStorage.removeItem(cleBrouillon()); } catch {}
+      elLibelle.value = '';
+      majDernierPoint();
       majBarre();
+      majBoutonMois();
       redessinerConstellations();
       if (competenceAffichee) rafraichirPanneau(competenceAffichee.code);
 
@@ -1702,10 +1938,14 @@
       etat.snapshot = etatClient.snapshot;
 
       const sel = etatClient.snapshot?.blob?.selections ?? { current: [], later: [] };
+      // Normalisation à la lecture : un snapshot écrit avant que l'exclusion mutuelle
+      // n'existe peut contenir une compétence dans les deux listes. On l'affiche
+      // proprement sans attendre le prochain enregistrement.
+      const cur = [...new Set(sel.current || [])];
       reference = {
         levels: { ...etat.computed.levels },
-        current: [...(sel.current || [])],
-        later: [...(sel.later || [])],
+        current: cur,
+        later: [...new Set(sel.later || [])].filter((c) => !cur.includes(c)),
       };
       brouillon = { levels: { ...reference.levels }, current: [...reference.current], later: [...reference.later] };
 
@@ -1729,7 +1969,9 @@
 
       rendreDimensions();
       masquerMessage();
+      majDernierPoint();
       majBarre();
+      majBoutonMois();
 
       const ouvertes = Object.values(etat.computed.themes).filter((t) => t.status === 'open').length;
       // Formulation tournée vers ce qui est accessible : un ratio « 6 sur 40 » se lit

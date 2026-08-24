@@ -85,7 +85,10 @@ function validerEtNormaliser({ referentiel, corps }) {
 
   const filtrerCodes = (liste) => [...new Set(liste)].filter((code) => competenceParCode.has(code));
   const currentFiltre = filtrerCodes(current);
-  const laterFiltre = filtrerCodes(later);
+  // « Maintenant » et « plus tard » s'excluent : une compétence que l'on travaille
+  // n'est plus en attente. Sans cette normalisation, promouvoir depuis la wishlist
+  // laisserait la compétence dans les deux listes.
+  const laterFiltre = filtrerCodes(later).filter((code) => !currentFiltre.includes(code));
 
   if (currentFiltre.length > MAX_CIBLES_MAINTENANT) {
     erreurs.push(`selections.current est limité à ${MAX_CIBLES_MAINTENANT} compétences (reçu ${currentFiltre.length}).`);
