@@ -564,6 +564,54 @@
   .bandeau button { margin-top: 9px; background: none; border: 1px solid currentColor;
     color: inherit; font: inherit; font-size: 12.5px; padding: 5px 13px; border-radius: 999px; cursor: pointer; }
 
+
+  /* THÉMATIQUE : cliquable, verrouillée comprise — c'est ce qui fait du verrou un
+     horizon plutôt qu'un mur. */
+  .theme { cursor: pointer; }
+  .theme:focus-visible { outline: none; }
+  .theme:focus-visible .theme-noyau { stroke: var(--gold-bright); stroke-width: 2.4; }
+  .theme:hover .theme-noyau { stroke-width: 2.4; }
+
+  /* CONDITION D'OUVERTURE */
+  .horizon {
+    display: flex; gap: 13px; align-items: flex-start;
+    padding: 15px 17px; margin-top: 4px;
+    border: 1px solid rgba(240,235,224,.16); border-radius: 12px;
+    background: rgba(240,235,224,.035);
+  }
+  .horizon-marque { flex-shrink: 0; margin-top: 1px; }
+  .horizon-texte { font-size: 13.5px; line-height: 1.65; color: var(--paper-dim); }
+  .horizon-texte b { display: block; color: var(--paper); font-weight: 500;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; margin-bottom: 5px; }
+
+  /* LISTE DES COMPÉTENCES D'UNE THÉMATIQUE */
+  .liste-comp { display: flex; flex-direction: column; gap: 7px; }
+  .comp-item {
+    display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 13px;
+    width: 100%; text-align: left; cursor: pointer; font: inherit; color: inherit;
+    padding: 12px 15px; border-radius: 11px;
+    border: 1px solid var(--line-faint); background: rgba(240,235,224,.025);
+    transition: border-color .2s ease;
+  }
+  .comp-item:hover { border-color: var(--line); }
+  .comp-item:focus-visible { outline: 2px solid var(--teinte-p); outline-offset: 2px; }
+  .comp-astre { display: flex; align-items: center; justify-content: center; }
+  .comp-nom { font-size: 13.5px; line-height: 1.4; }
+  .comp-palier { font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 12px; color: var(--stone); white-space: nowrap; }
+  .comp-marques { display: flex; gap: 5px; align-items: center; margin-top: 3px; }
+  .comp-marque { font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase;
+    padding: 1px 7px; border-radius: 999px; border: 1px solid currentColor; }
+  .comp-marque-maintenant { color: var(--gold); }
+  .comp-marque-plus-tard { color: var(--paper-dim); border-style: dashed; }
+
+  .panneau-retour {
+    background: none; border: none; cursor: pointer; padding: 0;
+    color: var(--teinte-p); font: inherit; font-size: 12.5px;
+    display: inline-flex; align-items: center; gap: 7px; margin-bottom: 11px;
+  }
+  .panneau-retour:hover { text-decoration: underline; }
+
   @media (max-width: 640px) {
     .barre-sauvegarde { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 12px; }
     .barre-actions { justify-content: stretch; }
@@ -919,7 +967,9 @@
       )).join('');
 
       const couleurNoyau = ouverte ? teinte : '#8d8677';
-      return `<g class="theme ${ouverte ? 'theme-ouvert' : 'theme-verrouille'}" data-theme="${echapper(theme.id)}" data-code="${echapper(theme.code)}">
+      return `<g class="theme ${ouverte ? 'theme-ouvert' : 'theme-verrouille'}" data-theme="${echapper(theme.id)}" data-code="${echapper(theme.code)}"
+                 role="button" tabindex="0" aria-label="${echapper(theme.name)}${ouverte ? '' : ' — à débloquer'}">
+        <circle class="theme-cible" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU + 12}" fill="transparent"/>
         <circle class="theme-halo" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU + 9}" fill="${couleurNoyau}" fill-opacity="${ouverte ? 0.10 : 0.04}"/>
         <circle class="theme-noyau" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU}" fill="var(--night-deep)" stroke="${couleurNoyau}" stroke-opacity="${ouverte ? 0.85 : 0.4}"/>
         ${ouverte ? '' : `<text class="theme-cadenas" x="${theme.x}" y="${theme.y + 4}">✦</text>`}
@@ -939,9 +989,17 @@
     `;
     ajusterCadrage(conteneur.querySelector('svg'));
 
+    conteneur.querySelectorAll('.theme[data-theme]').forEach((g) => {
+      const ouvrir = () => ouvrirTheme(g.dataset.theme, idDimension);
+      g.addEventListener('click', ouvrir);
+      g.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ouvrir(); }
+      });
+    });
+
     conteneur.querySelectorAll('.etoile[data-competence]').forEach((g) => {
       const ouvrir = () => ouvrirCompetence(g.dataset.competence, idDimension);
-      g.addEventListener('click', ouvrir);
+      g.addEventListener('click', (e) => { e.stopPropagation(); ouvrir(); });
       g.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ouvrir(); }
       });
@@ -1061,11 +1119,25 @@
       const ouverte = details.some((d) => d.atteintes >= d.seuil);
       res[t.id] = {
         status: ouverte ? 'open' : 'locked',
-        unlock_hint: ouverte ? '' : `Se débloque via ${details.map((d) =>
-          `« ${d.nom} » (${d.atteintes}/${d.seuil} compétence${d.seuil > 1 ? 's' : ''} au palier « ${etat.referentiel.scale[NIVEAU_ACQUIS]} » ou plus)`).join(' ou ')}.`,
+        unlock_hint: ouverte ? '' : indiceLocal(details),
       };
     });
     return res;
+  }
+
+  // Même formulation que le serveur, mot pour mot : l'aperçu local ne doit pas dire
+  // autre chose que ce que dira la réponse après enregistrement.
+  function indiceLocal(details) {
+    const palier = etat.referentiel.scale[NIVEAU_ACQUIS];
+    const reste = (d) => Math.max(0, d.seuil - d.atteintes);
+    const compte = (n) => `${n} compétence${n > 1 ? 's' : ''}`;
+    if (details.length === 1) {
+      const d = details[0];
+      return `Encore ${compte(reste(d))} dans « ${d.nom} » au palier « ${palier} », et cette thématique s'ouvre.`;
+    }
+    const nombre = details.length === 2 ? 'Deux' : 'Plusieurs';
+    const chemins = details.map((d, i) => (i === 0 ? compte(reste(d)) : String(reste(d))) + ` dans « ${d.nom} »`).join(', ou ');
+    return `${nombre} chemins mènent ici, un seul suffit : au palier « ${palier} », ${chemins}.`;
   }
 
   const estOuverte = (themeId) => etat.computed.themes[themeId]?.status === 'open';
@@ -1275,6 +1347,87 @@
   }
 
   let competenceAffichee = null;
+  let themeAffiche = null;
+
+  // ============================================================
+  // PANNEAU DE THÉMATIQUE
+  // ============================================================
+  // Une thématique verrouillée est entièrement consultable : définition, compétences,
+  // énoncés, ressources, auto-évaluation et « plus tard ». Seule l'action « maintenant »
+  // est bloquée. C'est ce qui en fait un horizon et non un mur.
+  function ouvrirTheme(themeId, idDimension) {
+    const theme = etat.referentiel.themes.find((t) => t.id === themeId);
+    if (!theme) return;
+    const dimension = etat.referentiel.dimensions.find((d) => d.id === idDimension);
+    const teinte = TEINTES_HEX[idDimension] || '#f0ebe0';
+    const ouverte = estOuverte(themeId);
+    const infos = etat.computed.themes[themeId] || {};
+
+    themeAffiche = { id: themeId, dimension: idDimension };
+    competenceAffichee = null;
+
+    const competences = etat.referentiel.competencies.filter((c) => c.theme === themeId);
+    const items = competences.map((c) => {
+      const niveau = brouillon.levels[c.id] ?? 0;
+      const marques = [
+        brouillon.current.includes(c.id) ? '<span class="comp-marque comp-marque-maintenant">Ce mois</span>' : '',
+        brouillon.later.includes(c.id) ? '<span class="comp-marque comp-marque-plus-tard">Plus tard</span>' : '',
+      ].filter(Boolean).join('');
+      return `<button type="button" class="comp-item" data-competence="${echapper(c.id)}">
+        <span class="comp-astre">${astreCran(Math.max(niveau, 1), ouverte ? teinte : '#8d8677')
+          .replace('fill-opacity="' + CRANS[Math.max(niveau, 1)].opacite + '"', `fill-opacity="${niveau === 0 ? 0.22 : CRANS[niveau].opacite}"`)}</span>
+        <span>
+          <span class="comp-nom">${echapper(c.name)}</span>
+          ${marques ? `<span class="comp-marques">${marques}</span>` : ''}
+        </span>
+        <span class="comp-palier">${niveau === 0 ? 'À situer' : echapper(etat.referentiel.scale[niveau])}</span>
+      </button>`;
+    }).join('');
+
+    elPanneau.style.setProperty('--teinte-p', teinte);
+    elPanneauTete.innerHTML = `
+      <p class="panneau-fil">${echapper(dimension ? dimension.name : '')} <span>›</span> <b>Thématique</b></p>
+      <h2 class="panneau-titre" id="panneau-titre">${echapper(theme.name)}</h2>
+      ${theme.definition ? `<p class="panneau-def">${echapper(theme.definition)}</p>` : ''}
+    `;
+
+    const horizon = ouverte ? '' : `
+      <section class="panneau-section">
+        <div class="horizon">
+          <span class="horizon-marque">${astreCran(2, '#8d8677')}</span>
+          <p class="horizon-texte">
+            <b>Pas encore ouverte</b>
+            ${echapper(infos.unlock_hint || '')}
+            <br><br>Vous pouvez déjà tout lire ici, vous y situer, et garder une compétence pour plus tard.
+          </p>
+        </div>
+      </section>`;
+
+    elPanneauCorps.innerHTML = horizon + `
+      <section class="panneau-section">
+        <p class="panneau-label">${competences.length} compétence${competences.length > 1 ? 's' : ''}</p>
+        <div class="liste-comp">${items}</div>
+      </section>`;
+    elPanneauCorps.scrollTop = 0;
+
+    elPanneauCorps.querySelectorAll('.comp-item[data-competence]').forEach((btn) => {
+      btn.addEventListener('click', () => ouvrirCompetence(btn.dataset.competence, idDimension));
+    });
+
+    afficherPanneau();
+    document.body.dataset.panneau = 'theme:' + theme.code;
+  }
+
+  function afficherPanneau() {
+    if (elVoile.hidden) {
+      dernierFocus = document.activeElement;
+      elVoile.hidden = false;
+      requestAnimationFrame(() => elVoile.classList.add('visible'));
+      document.body.style.overflow = 'hidden';
+      document.getElementById('panneau-fermer').focus();
+    }
+  }
+
 
   function brancherPanneau(competence) {
     elPanneauCorps.querySelectorAll('.marche[data-niveau]').forEach((btn) => {
@@ -1306,7 +1459,9 @@
   // doit pas être renvoyé en haut à chaque clic sur une marche.
   function rafraichirPanneau(code) {
     if (competenceAffichee && competenceAffichee.code === code) {
+      const origine = themeAffiche;
       ouvrirCompetence(code, competenceAffichee.dimension, true);
+      themeAffiche = origine;
     }
   }
 
@@ -1320,7 +1475,9 @@
     const niveau = brouillon.levels[code] ?? 0;
 
     elPanneau.style.setProperty('--teinte-p', teinte);
+    const retour = themeAffiche && themeAffiche.id === competence.theme;
     elPanneauTete.innerHTML = `
+      ${retour ? `<button type="button" class="panneau-retour" id="panneau-retour">← ${echapper(theme ? theme.name : '')}</button>` : ''}
       <p class="panneau-fil">${echapper(dimension ? dimension.name : '')} <span>›</span> <b>${echapper(theme ? theme.name : '')}</b></p>
       <h2 class="panneau-titre" id="panneau-titre">${echapper(competence.name)}</h2>
       ${competence.definition ? `<p class="panneau-def">${echapper(competence.definition)}</p>` : ''}
@@ -1331,16 +1488,16 @@
     brancherPanneau(competence);
     if (!conserverDefilement) elPanneauCorps.scrollTop = 0;
 
-    dernierFocus = document.activeElement;
-    elVoile.hidden = false;
-    requestAnimationFrame(() => elVoile.classList.add('visible'));
-    document.body.style.overflow = 'hidden';
-    document.getElementById('panneau-fermer').focus();
+    const btnRetour = document.getElementById('panneau-retour');
+    if (btnRetour) btnRetour.addEventListener('click', () => ouvrirTheme(themeAffiche.id, themeAffiche.dimension));
+
+    afficherPanneau();
     document.body.dataset.panneau = code;
   }
 
   function fermerPanneau() {
     competenceAffichee = null;
+    themeAffiche = null;
     elVoile.classList.remove('visible');
     document.body.style.overflow = '';
     delete document.body.dataset.panneau;

@@ -75,15 +75,28 @@ function calculerOuverture({ referentiel, levels = {} }) {
   return themes;
 }
 
-// Phrase affichée sur une thématique verrouillée : elle doit dire quoi faire, et où en
-// est le membre, pas seulement qu'elle est fermée.
+// Phrase affichée sur une thématique verrouillée. Elle mène par ce qu'il RESTE à faire
+// plutôt que par un score : « 1/2 » se lit comme une jauge et transforme le verrou en
+// mur, alors qu'il doit se lire comme un horizon. Quand plusieurs chemins mènent à la
+// même thématique, le « un seul suffit » passe en tête, sinon il se noie entre les
+// conditions.
 function indiceDeDeblocage(details) {
   const palier = ECHELLE_V2[NIVEAU_ACQUIS];
-  const conditions = details.map(
-    (d) => `« ${d.nom} » (${d.atteintes}/${d.seuil} compétence${d.seuil > 1 ? 's' : ''} au palier « ${palier} » ou plus)`
-  );
-  const liste = conditions.length === 1 ? conditions[0] : conditions.join(' ou ');
-  return `Se débloque via ${liste}.`;
+  const reste = (d) => Math.max(0, d.seuil - d.atteintes);
+  const compte = (n) => `${n} compétence${n > 1 ? 's' : ''}`;
+
+  // « dans » plutôt que « de » : évite l'élision devant les noms qui commencent par une
+  // voyelle (« de Émotions » serait fautif) sans avoir à la gérer au cas par cas.
+  if (details.length === 1) {
+    const d = details[0];
+    return `Encore ${compte(reste(d))} dans « ${d.nom} » au palier « ${palier} », et cette thématique s'ouvre.`;
+  }
+
+  // Le palier est sorti de l'énumération pour qu'il porte sur TOUS les chemins, et non
+  // sur le dernier seulement.
+  const nombre = details.length === 2 ? 'Deux' : 'Plusieurs';
+  const chemins = details.map((d, i) => (i === 0 ? compte(reste(d)) : String(reste(d))) + ` dans « ${d.nom} »`).join(', ou ');
+  return `${nombre} chemins mènent ici, un seul suffit : au palier « ${palier} », ${chemins}.`;
 }
 
 // Niveaux complets : toute compétence du référentiel est présente, à 0 par défaut.
