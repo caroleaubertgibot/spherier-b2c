@@ -263,15 +263,25 @@
   }
 
   /* CONSTELLATION */
-  .constellation-zone { margin-top: 18px; }
+  /* Défilement horizontal quand la constellation ne peut pas tenir en largeur sans
+     rendre les libellés illisibles — c'est le cas sur mobile. Sur desktop la largeur
+     minimale reste inférieure au conteneur, donc aucune barre n'apparaît. */
+  .constellation-zone {
+    margin-top: 18px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(240,235,224,0.18) transparent;
+  }
+  .constellation-zone::-webkit-scrollbar { height: 5px; }
+  .constellation-zone::-webkit-scrollbar-thumb { background: rgba(240,235,224,0.18); border-radius: 3px; }
   .constellation {
     display: block;
     width: 100%;
     height: auto;
-    /* La hauteur suit le viewBox, lui-même calculé sur les positions réelles : chaque
-       dimension occupe donc exactement son emprise, sans vide ni écrasement. */
-    max-height: min(78vh, 720px);
-    overflow: visible;
+    /* La hauteur suit le viewBox, lui-même ajusté au contenu réellement dessiné :
+       chaque dimension occupe exactement son emprise, sans vide ni écrasement. */
+    max-height: min(82vh, 860px);
   }
 
   .filiation {
@@ -316,6 +326,10 @@
   .constellation-legende svg { display: block; overflow: hidden; flex-shrink: 0; }
 
   @media (max-width: 640px) {
+    /* Sur mobile la largeur est déjà la contrainte : plafonner aussi la hauteur
+       rapetissait les deux plus grandes constellations sous le seuil de lisibilité.
+       La page défile, une carte haute n'est pas un problème. */
+    .constellation { max-height: none; }
     .app { padding: 0 16px 60px; }
     .dimension-entete { padding: 16px 16px; gap: 14px; grid-template-columns: 28px 1fr auto; }
     .dimension-astre { width: 28px; height: 28px; }
@@ -614,7 +628,13 @@
       const y1 = source.y + uy * TRIM;
       const x2 = cible.x - ux * TRIM;
       const y2 = cible.y - uy * TRIM;
-      const verrouillee = etat.computed.themes[cibleId]?.status !== 'open';
+      // Un chemin n'est plein que s'il est entièrement praticable : partir d'une
+      // thématique verrouillée doit se voir autant qu'aboutir sur une. Sans cela, un
+      // trait plein sortait d'un nœud éteint — cas réel sur Alignement, où Cohérence
+      // de vie s'ouvre par Valeurs pendant que Stress et régulation reste fermée.
+      const sourceFermee = etat.computed.themes[source.id]?.status !== 'open';
+      const cibleFermee = etat.computed.themes[cibleId]?.status !== 'open';
+      const verrouillee = sourceFermee || cibleFermee;
       return `<line class="filiation${verrouillee ? ' filiation-verrouillee' : ''}" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`;
     })).join('');
 
@@ -645,7 +665,33 @@
       </svg>
       ${legendeConstellation(teinte)}
     `;
+    ajusterCadrage(conteneur.querySelector('svg'));
     conteneur.dataset.rendu = 'oui';
+  }
+
+  // Échelle en dessous de laquelle les libellés deviennent illisibles. À 0.85, un
+  // libellé de 13.5 unités s'affiche autour de 11.5 px.
+  const ECHELLE_MINI = 0.85;
+
+  // Deux réglages faits APRÈS le rendu, parce qu'ils dépendent de la largeur réelle
+  // des textes, que seul le navigateur connaît.
+  function ajusterCadrage(svg) {
+    if (!svg) return;
+
+    // 1. La viewBox estimée avant rendu réservait une marge fixe pour les noms de
+    //    thématiques. Un nom long y débordait presque (7 unités de reste sur
+    //    Trajectoire). On la recale sur le contenu réellement dessiné : plus aucun
+    //    risque de coupe, et pas un pixel de vide inutile.
+    const bb = svg.getBBox();
+    const marge = 12;
+    const largeur = bb.width + marge * 2;
+    const hauteur = bb.height + marge * 2;
+    svg.setAttribute('viewBox', `${bb.x - marge} ${bb.y - marge} ${largeur} ${hauteur}`);
+
+    // 2. Sous une certaine largeur d'affichage, la carte devient illisible. On impose
+    //    donc une largeur minimale et on laisse le conteneur défiler : mieux vaut une
+    //    carte que l'on fait glisser qu'une carte que l'on ne peut pas lire.
+    svg.style.minWidth = Math.round(largeur * ECHELLE_MINI) + 'px';
   }
 
   // ============================================================
