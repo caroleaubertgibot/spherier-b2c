@@ -970,7 +970,10 @@
   .ciel-cta.discret:hover { border-color: var(--line); color: var(--paper); }
 
   /* Fil entre les blocs : purement visuel, aucune sémantique d'ouverture. */
-  .ciel-lien { flex: 0 0 auto; width: 96px; display: flex; align-items: center; }
+  /* Le fil est purement décoratif : sa largeur ne porte aucun sens, on peut donc la
+     dépenser. Elle sert à égaliser ce que MONTRE chaque amorce latérale — voir
+     LARGEURS_FIL. */
+  .ciel-lien { flex: 0 0 auto; width: var(--fil, 96px); display: flex; align-items: center; }
   .ciel-lien svg { width: 100%; height: 120px; overflow: visible; }
   .ciel-lien path { fill: none; stroke: var(--paper); stroke-opacity: .13; stroke-width: 1.2; stroke-dasharray: 4 8; }
 
@@ -1491,6 +1494,16 @@
   // libellé de 13.5 unités s'affiche autour de 11.5 px.
   const ECHELLE_MINI = 0.85;
 
+  // Et une échelle AU-DESSUS de laquelle on cesse d'agrandir.
+  //
+  // Une constellation remplit la largeur de son conteneur : plus elle est compacte dans
+  // le référentiel, plus elle est donc grossie à l'écran. Après le resserrement des
+  // positions dans Notion, « Moi » passait à 22 px de libellé et la vue du détail
+  // gagnait 38 % de hauteur — le resserrement produisait l'effet inverse de celui
+  // cherché. À 1.15, un libellé de 13.5 unités s'affiche autour de 15.5 px, ce qui
+  // remet les trois dimensions dans un même ordre de grandeur.
+  const ECHELLE_MAXI = 1.15;
+
   // Deux réglages faits APRÈS le rendu, parce qu'ils dépendent de la largeur réelle
   // des textes, que seul le navigateur connaît.
   function ajusterCadrage(svg) {
@@ -1514,6 +1527,11 @@
     //    donc une largeur minimale et on laisse le conteneur défiler : mieux vaut une
     //    carte que l'on fait glisser qu'une carte que l'on ne peut pas lire.
     svg.style.minWidth = Math.round(largeur * ECHELLE_MINI) + 'px';
+
+    // 3. Et une largeur maximale, pour ne pas gonfler une constellation compacte
+    //    jusqu'à remplir un conteneur large. Elle reste alors centrée dans sa boîte.
+    svg.style.maxWidth = Math.round(largeur * ECHELLE_MAXI) + 'px';
+    svg.style.marginInline = 'auto';
   }
 
   // ============================================================
@@ -2828,11 +2846,29 @@
     return { codes, situees: codes.filter((c) => (brouillon.levels[c] ?? 0) > 0).length };
   }
 
+  // Largeur du fil décoratif, de part et d'autre de « Moi ».
+  //
+  // « Moi » est centré, donc chaque côté dispose de la même place ; mais à place égale
+  // les deux voisines ne montrent PAS la même chose. Le bord droit de « Moi et les
+  // autres » est clairsemé là où le bord gauche de « Moi et le monde » est dense : à
+  // 295 px chacune, on lisait 3 thématiques à gauche contre 7 à droite, ce qui donnait
+  // l'impression fausse d'un sphérier déséquilibré.
+  //
+  // Le fil ne portant aucun sens, sa largeur est le seul réglage libre. On la dépense
+  // pour égaliser ce que révèle chaque amorce : 5 thématiques entières de chaque côté.
+  // Mesuré sur le rendu — il faut 319 px de AUT et 281 px de MON pour en montrer cinq,
+  // et chaque côté dispose de 391 px sur une piste de 1240.
+  const LARGEURS_FIL = { AUT: 72, MON: 110 };
+
   // Fil décoratif entre deux blocs. Il ne dit rien de l'ouverture : la filiation reste
   // interne à chaque dimension. Il est là pour que le ciel se lise comme une carte
   // unique plutôt que comme trois pages côte à côte.
-  function filEntreBlocs() {
-    return `<div class="ciel-lien" aria-hidden="true">
+  //
+  // `voisine` est la dimension située du côté extérieur du fil, c'est-à-dire celle dont
+  // ce fil règle l'amorce.
+  function filEntreBlocs(voisine) {
+    const largeur = LARGEURS_FIL[voisine];
+    return `<div class="ciel-lien" aria-hidden="true"${largeur ? ` style="--fil:${largeur}px"` : ''}>
       <svg viewBox="0 0 100 120" preserveAspectRatio="none">
         <path d="M0,60 C34,26 66,94 100,60"/>
       </svg>
@@ -2881,7 +2917,15 @@
       </section>`;
     });
 
-    elCielPiste.innerHTML = blocs.join(filEntreBlocs());
+    // Chaque fil est réglé par la dimension qu'il borde du côté extérieur : c'est
+    // l'amorce de celle-là qu'il découvre ou qu'il masque.
+    elCielPiste.innerHTML = blocs.reduce((html, bloc, i) => {
+      if (i === 0) return bloc;
+      const a = ordreVisuel[i - 1];
+      const b = ordreVisuel[i];
+      const exterieure = (a.id === 'MOI') ? b.id : a.id;
+      return html + filEntreBlocs(exterieure) + bloc;
+    }, '');
 
     ordreVisuel.forEach((d) => {
       const carte = elCielPiste.querySelector(`[data-ciel-carte="${d.id}"]`);
