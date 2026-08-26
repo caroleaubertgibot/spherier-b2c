@@ -26,6 +26,16 @@ correctement les accents.
   Notion. **Un snapshot v2 n'est donc pas interprétable seul** — il faut le référentiel
   du moment pour en faire sens.
 
+## Purge des comptes de test (27 août 2026)
+
+`comptes-de-test-supprimes-2026-08-27.json` contient les quatre comptes de test
+retirés de Supabase avant la bascule : leurs snapshots et leurs notes, tels quels.
+La table `snapshots` est append-only par principe, mais un `DELETE` reste possible
+avec la clé de service — d'où cette copie prise avant.
+
+Le compte de démonstration `94c97176-…` (29 compétences situées, référentiel v3) est
+conservé : il sert à montrer l'outil.
+
 ## Avant de mettre de vrais membres en production
 
 Ces exports ne contiennent aujourd'hui que des comptes de test. Le jour où de vrais

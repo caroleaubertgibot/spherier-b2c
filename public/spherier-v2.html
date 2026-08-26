@@ -921,6 +921,35 @@
      repères de 20 px qu'on dessine ailleurs dans la carte. */
   .ciel-carte > svg.constellation { width: 100%; height: auto; display: block; }
 
+  /* Repères de position, réservés au mobile.
+     Sur desktop, les trois portes se voient d'un coup : « Moi » entier au centre, une
+     amorce de chaque voisine. Sur mobile, la piste fait moins de 400 px là où le seul
+     bloc « Moi » en réclame 637 pour garder ses libellés lisibles — aucune amorce n'y
+     tient. Plutôt que de tout réduire jusqu'à la bouillie, ces trois points disent la
+     structure radiale : trois dimensions, « Moi » au milieu, et de quel côté sont les
+     autres. Ils servent aussi à y aller directement. */
+  .ciel-reperes { display: none; }
+  @media (max-width: 640px) {
+    .ciel-reperes {
+      display: flex; justify-content: center; align-items: center; gap: 10px;
+      /* Au-dessus de la piste, donc dans le premier écran : sous elle, ils tombaient
+         à sept cents pixels de là, invisibles comme l'était l'invitation. */
+      padding: 2px 0 6px;
+    }
+  }
+  .ciel-repere {
+    -webkit-appearance: none; appearance: none;
+    width: 34px; height: 34px; padding: 0; border: none; background: none;
+    cursor: pointer; display: grid; place-items: center;
+  }
+  .ciel-repere i {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--r); opacity: .3; transition: all .25s ease;
+  }
+  .ciel-repere[aria-selected="true"] i {
+    width: 11px; height: 11px; opacity: 1; box-shadow: 0 0 12px var(--r);
+  }
+
   /* Entrée de bloc : au premier jour, tout est éteint — c'est elle qui doit donner
      envie de commencer plutôt que de laisser face à un vide. Elle est donc placée sous
      le compteur, dans le premier écran : au pied du bloc, elle tombait à neuf cents
@@ -1035,6 +1064,7 @@
   </div>
 
   <div class="ciel" id="ciel" hidden>
+    <div class="ciel-reperes" id="ciel-reperes" role="tablist" aria-label="Les trois dimensions"></div>
     <div class="ciel-piste" id="ciel-piste"></div>
     <p class="ciel-guide" id="ciel-guide"></p>
   </div>
@@ -2381,6 +2411,24 @@
     </button>`;
   }
 
+  // Ordre de lecture du référentiel : dimension canonique, puis thématique, puis rang
+  // de la compétence dans sa thématique. C'est l'ordre dans lequel tout ce qui
+  // s'adresse au membre présente les compétences.
+  function ordreDeLecture(competences) {
+    const rangDimension = new Map(etat.referentiel.dimensions.map((d, i) => [d.name, i]));
+    const rangTheme = new Map();
+    etat.referentiel.themes
+      .slice()
+      .sort((a, b) => (rangDimension.get(a.dimension) ?? 99) - (rangDimension.get(b.dimension) ?? 99)
+        || (a.order ?? 0) - (b.order ?? 0))
+      .forEach((t, i) => rangTheme.set(t.id, i));
+
+    return competences.slice().sort((a, b) =>
+      (rangTheme.get(a.theme) ?? 9999) - (rangTheme.get(b.theme) ?? 9999)
+      || (a.order ?? 0) - (b.order ?? 0)
+      || a.id.localeCompare(b.id));
+  }
+
   function ouvrirSynthese() {
     competenceAffichee = null;
     themeAffiche = null;
@@ -2388,7 +2436,12 @@
     elPanneau.style.setProperty('--teinte-p', '#c9a661');
 
     const retenues = etat.referentiel.competencies.filter(synGarde);
-    const codesRetenus = retenues.map((c) => c.id);
+    // Le parcours doit suivre l'ordre du TABLEAU, pas celui de la liste plate renvoyée
+    // par Notion — qui trie par code et donne donc AUT avant MOI. Un membre qui lit ses
+    // trous de haut en bas puis clique « Me situer sur ces N compétences » attend de
+    // les retrouver dans le même ordre : dimensions en ordre canonique, puis
+    // thématiques dans l'ordre du référentiel.
+    const codesRetenus = ordreDeLecture(retenues).map((c) => c.id);
 
     const chips = Object.entries(FILTRES).map(([cle, f]) => {
       const n = etat.referentiel.competencies.filter(f.garde).length;
@@ -2766,6 +2819,7 @@
   // ============================================================
   const elCiel = document.getElementById('ciel');
   const elCielPiste = document.getElementById('ciel-piste');
+  const elCielReperes = document.getElementById('ciel-reperes');
   const elCielGuide = document.getElementById('ciel-guide');
   const elDetail = document.getElementById('detail');
 
@@ -2785,8 +2839,31 @@
     </div>`;
   }
 
+  // Ordre VISUEL du ciel, délibérément distinct de l'ordre canonique du référentiel.
+  //
+  // « Moi » est le centre du modèle : les deux autres dimensions sont nommées par
+  // rapport à lui. Une disposition radiale dit cette structure ; une disposition
+  // linéaire suggérerait un ordre de lecture qui n'existe pas.
+  //
+  // Cet ordre ne vaut QUE pour le ciel. L'API, la vue d'ensemble, le parcours
+  // « Me situer » et la navigation par dimension gardent l'ordre canonique
+  // Moi · Moi et les autres · Moi et le monde, qui reste porté par
+  // `etat.referentiel.dimensions` et n'est modifié nulle part.
+  const ORDRE_CIEL = ['AUT', 'MOI', 'MON'];
+
+  function dimensionsDuCiel() {
+    const parId = new Map(etat.referentiel.dimensions.map((d) => [d.id, d]));
+    // Une dimension qui ne serait pas dans ORDRE_CIEL reste affichée, à la suite :
+    // le ciel ne doit jamais escamoter une dimension que le référentiel déclare.
+    return [
+      ...ORDRE_CIEL.map((id) => parId.get(id)).filter(Boolean),
+      ...etat.referentiel.dimensions.filter((d) => !ORDRE_CIEL.includes(d.id)),
+    ];
+  }
+
   function rendreCiel() {
-    const blocs = etat.referentiel.dimensions.map((d) => {
+    const ordreVisuel = dimensionsDuCiel();
+    const blocs = ordreVisuel.map((d) => {
       const { codes, situees } = situeesDe(d);
       const teinte = TEINTES_HEX[d.id];
       const vierge = situees === 0;
@@ -2806,7 +2883,7 @@
 
     elCielPiste.innerHTML = blocs.join(filEntreBlocs());
 
-    etat.referentiel.dimensions.forEach((d) => {
+    ordreVisuel.forEach((d) => {
       const carte = elCielPiste.querySelector(`[data-ciel-carte="${d.id}"]`);
       rendreConstellation(d.id, carte, { avecLegende: false });
       // Le bloc doit prendre la largeur de SA constellation. Un SVG en width:100% dans
@@ -2858,17 +2935,94 @@
       ? 'Rien n’est encore allumé. Choisis une dimension et pose un premier repère : chaque étoile s’éclaire à mesure que tu te situes.'
       : `${situeesTotal} étoiles allumées sur ${total}. Touche une thématique pour entrer dedans.`;
 
+    rendreReperes(ordreVisuel);
     centrerCielSurMoi();
   }
 
-  // Le ciel s'ouvre centré sur « Moi », d'où part la lecture.
-  function centrerCielSurMoi() {
-    const bloc = elCielPiste.querySelector('[data-bloc="MOI"]');
+  // Point d'ancrage horizontal d'un bloc dans la piste : le milieu de ses thématiques
+  // RACINES, et non le milieu géométrique de sa boîte. Sur desktop les deux coïncident
+  // presque. Sur mobile, où un bloc est plus large que la piste, c'est la différence
+  // entre s'ouvrir sur les thématiques par lesquelles on peut commencer et s'ouvrir sur
+  // une zone verrouillée. Même raisonnement que pour l'ouverture d'une constellation.
+  function ancreHorizontale(bloc, idDimension) {
+    const centreBoite = bloc.offsetLeft + bloc.offsetWidth / 2;
+    const dimension = etat.referentiel.dimensions.find((d) => d.id === idDimension);
+    const svg = bloc.querySelector('svg.constellation');
+    if (!dimension || !svg) return centreBoite;
+
+    const themes = etat.referentiel.themes.filter((t) => t.dimension === dimension.name);
+    const racines = themes.filter((t) => !themes.some((o) => o.feeds.includes(t.id)));
+    if (racines.length === 0) return centreBoite;
+
+    const vb = svg.viewBox.baseVal;
+    const rSvg = svg.getBoundingClientRect();
+    if (rSvg.width === 0) return centreBoite;
+    const echelle = rSvg.width / vb.width;
+    const centre = racines.reduce((somme, t) => somme + t.x, 0) / racines.length;
+    // Coordonnée dans le repère défilant de la piste, indépendante de l'offsetParent.
+    return (rSvg.left - elCielPiste.getBoundingClientRect().left)
+      + elCielPiste.scrollLeft + (centre - vb.x) * echelle;
+  }
+
+  function centrerCielSur(idDimension, doux = false) {
+    const bloc = elCielPiste.querySelector(`[data-bloc="${idDimension}"]`);
     if (!bloc) return;
-    const x = bloc.offsetLeft + bloc.offsetWidth / 2;
+    const x = ancreHorizontale(bloc, idDimension);
     const cible = Math.max(0, Math.min(x - elCielPiste.clientWidth / 2,
       elCielPiste.scrollWidth - elCielPiste.clientWidth));
-    elCielPiste.scrollLeft = cible;
+    if (doux) elCielPiste.scrollTo({ left: cible, behavior: 'smooth' });
+    else elCielPiste.scrollLeft = cible;
+  }
+
+  // Le ciel s'ouvre centré sur « Moi », qui est le centre du modèle : les deux autres
+  // dimensions sont nommées par rapport à lui. Le défilement part donc du milieu, avec
+  // une amorce de chaque côté, et non d'un bord.
+  function centrerCielSurMoi() {
+    centrerCielSur('MOI');
+    marquerRepereCourant();
+  }
+
+  // Dimension dont le bloc occupe le centre de la piste — c'est elle que le membre
+  // regarde, quel que soit le nombre de blocs entrevus sur les côtés.
+  function dimensionAuCentre() {
+    const milieu = elCielPiste.getBoundingClientRect().left + elCielPiste.clientWidth / 2;
+    let gagnante = null;
+    let ecartMini = Infinity;
+    elCielPiste.querySelectorAll('.ciel-bloc').forEach((bloc) => {
+      const q = bloc.getBoundingClientRect();
+      // Le bloc qui contient le milieu gagne d'office ; sinon, le plus proche.
+      const ecart = (milieu >= q.left && milieu <= q.right)
+        ? 0
+        : Math.min(Math.abs(q.left - milieu), Math.abs(q.right - milieu));
+      if (ecart < ecartMini) { ecartMini = ecart; gagnante = bloc.dataset.bloc; }
+    });
+    return gagnante;
+  }
+
+  function marquerRepereCourant() {
+    const courante = dimensionAuCentre();
+    elCielReperes.querySelectorAll('[data-repere]').forEach((b) => {
+      b.setAttribute('aria-selected', String(b.dataset.repere === courante));
+    });
+  }
+
+  // Le repère suit le doigt. Lecture seule et calée sur le rendu : aucun risque de
+  // boucler avec le défilement qu'on déclenche nous-mêmes.
+  let suiviRepere = null;
+  elCielPiste.addEventListener('scroll', () => {
+    if (suiviRepere) return;
+    suiviRepere = requestAnimationFrame(() => { suiviRepere = null; marquerRepereCourant(); });
+  }, { passive: true });
+
+  function rendreReperes(ordreVisuel) {
+    elCielReperes.innerHTML = ordreVisuel.map((d) => `
+      <button type="button" class="ciel-repere" role="tab" data-repere="${echapper(d.id)}"
+              style="--r:${TEINTES_HEX[d.id]}" aria-selected="false"
+              aria-label="Aller à ${echapper(d.name)}"><i></i></button>`).join('');
+    elCielReperes.querySelectorAll('[data-repere]').forEach((b) => {
+      b.addEventListener('click', () => centrerCielSur(b.dataset.repere, true));
+    });
+    marquerRepereCourant();
   }
 
   // ============================================================
