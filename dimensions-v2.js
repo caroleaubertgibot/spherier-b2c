@@ -1,36 +1,32 @@
-// SOURCE UNIQUE des 5 dimensions du référentiel v2.
+// SOURCE UNIQUE des dimensions du référentiel.
 //
-// Ces définitions n'existent PAS dans Notion (aucune base ne les porte) : elles sont
-// câblées ici, comme prévu au brief. Le `id` sert aussi de préfixe aux codes de
-// compétences (INT-01, ALI-24, …), et l'ordre du tableau est l'ordre d'affichage.
+// Le référentiel est passé de 5 à 3 dimensions (Moi / Moi et les autres / Moi et le
+// monde) : mêmes 40 thématiques et 152 compétences, structure et codes différents.
 //
-// À ne pas confondre avec dimensions.js, qui décrit les 4 anciens axes (Percevoir /
-// Apaiser / Oser / Ancrer) du référentiel v1, encore utilisé par le renderer actuel.
+// Ces définitions n'existent PAS dans Notion : elles sont câblées ici. Le `id` sert
+// aussi de préfixe aux codes de compétences (MOI-01, AUT-58, MON-43), et l'ordre du
+// tableau est l'ordre d'affichage.
+//
+// ⚠ Les définitions ci-dessous sont provisoires : elles décrivent fidèlement le
+// contenu de chaque dimension, mais elles ne sont pas écrites par Cyril. À relire.
 const DIMENSIONS_V2 = [
   {
-    id: 'INT',
-    name: 'Intériorité',
-    definition: "La dimension Intériorité réunit les compétences qui permettent de se connaître de l'intérieur : reconnaître ses émotions, ses besoins et ses croyances, entendre sa voix intérieure et construire une relation juste avec soi-même.",
+    id: 'MOI',
+    name: 'Moi',
+    definition: "La dimension Moi réunit les compétences qui permettent de se connaître et de se tenir : reconnaître ses émotions, ses besoins et ses croyances, écouter son corps, apaiser son stress, faire la paix avec son histoire et construire une relation juste avec soi-même.",
+    couleur: '#d97a4a',
   },
   {
-    id: 'ALI',
-    name: 'Alignement',
-    definition: "La dimension Alignement réunit les compétences qui permettent de vivre en cohérence avec ce qui compte : connaître ses valeurs, affirmer son identité, lire les signaux de son corps et de son énergie, et ajuster sa vie pour que ce que l'on fait reflète ce que l'on est.",
+    id: 'AUT',
+    name: 'Moi et les autres',
+    definition: "La dimension Moi et les autres réunit les compétences qui permettent de tenir le lien : écouter vraiment, dire ce qui compte, poser ses limites, traverser le conflit et le réparer, et faire vivre ses relations d'amitié, de couple et de famille.",
+    couleur: '#7eb0ce',
   },
   {
-    id: 'COM',
-    name: 'Communication',
-    definition: "La dimension Communication réunit les compétences qui permettent de faire passer ce qui compte : écouter vraiment, s'exprimer avec clarté, formuler une demande, un refus ou un retour, et tenir sa parole en public comme en privé.",
-  },
-  {
-    id: 'REL',
-    name: 'Relations',
-    definition: "La dimension Relations réunit les compétences qui permettent de tenir le lien dans la durée : créer la confiance, poser et respecter des limites, traverser le conflit, réparer, et choisir les relations qui nous font grandir.",
-  },
-  {
-    id: 'TRA',
-    name: 'Trajectoire',
-    definition: "La dimension Trajectoire réunit les compétences qui permettent de choisir et d'agir : clarifier ses priorités, décider, passer à l'action, persévérer et piloter ses projets de vie, de travail et d'argent.",
+    id: 'MON',
+    name: 'Moi et le monde',
+    definition: "La dimension Moi et le monde réunit les compétences qui permettent d'agir et de choisir : clarifier ses priorités, décider, passer à l'action, persévérer, et piloter son travail, ses projets et son argent en cohérence avec ce qui compte.",
+    couleur: '#6e9c8f',
   },
 ];
 
@@ -42,7 +38,26 @@ const ECHELLE_V2 = {
   3: "J'incarne",
 };
 
+// Difficulté d'une compétence (propriété `Difficulté` dans Notion).
+// Le vert et l'orange sont sémantiques : ils ne concurrencent ni la teinte de dimension
+// ni le doré de la sélection.
+const DIFFICULTES = {
+  Accessible: { libelle: 'Accessible', couleur: '#7c9c6e' },
+  Exigeant: { libelle: 'Exigeant', couleur: '#d08b3f' },
+};
+
 const NIVEAU_MIN = 0;
 const NIVEAU_MAX = 3;
 
-module.exports = { DIMENSIONS_V2, ECHELLE_V2, NIVEAU_MIN, NIVEAU_MAX };
+// Version du RÉFÉRENTIEL, à ne pas confondre avec le « v2 » des noms de fichiers, qui
+// désigne la réécriture de l'application.
+//
+// Passée à 3 avec le référentiel à 3 dimensions : tous les codes ont changé
+// (INT-01 → MOI-01). Un snapshot en version 2 doit donc être IGNORÉ et non relu — sans
+// ce garde-fou, ses codes seraient tous filtrés comme inconnus et le membre
+// apparaîtrait remis à zéro, sans que rien ne le signale.
+//
+// Définie ici, dans le seul module sans dépendance, pour n'exister qu'à un endroit.
+const VERSION_REFERENTIEL = 3;
+
+module.exports = { DIMENSIONS_V2, ECHELLE_V2, DIFFICULTES, NIVEAU_MIN, NIVEAU_MAX, VERSION_REFERENTIEL };

@@ -1,0 +1,1978 @@
+[
+ {
+  "page_id": "3c6abf02-c476-8109-ba37-c08a9c594127",
+  "Code": "TRA-32",
+  "Name": "Trouver son rythme de travail",
+  "Description": "Organiser mes journées selon mon énergie et mon fonctionnement plutôt que selon un modèle importé.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que mon organisation suit un modèle qui n'est pas le mien.",
+  "Enonce2": "J'ai commencé à organiser mes journées selon mon énergie.",
+  "Enonce3": "Mon organisation suit mon rythme et mon fonctionnement.",
+  "themes": [
+   "3c6abf02-c476-81d4-8622-ffae00f801c7"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-810b-a2d6-d79b9d84f85c",
+  "Code": "TRA-25",
+  "Name": "Comprendre son rapport à l'argent",
+  "Description": "Identifier les croyances et les émotions héritées qui façonnent ma relation à l'argent.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que mon rapport à l'argent est façonné par mon histoire.",
+  "Enonce2": "Je peux nommer une croyance ou une émotion qui influence mon rapport à l'argent.",
+  "Enonce3": "Je connais mes croyances sur l'argent et elles ne décident plus pour moi.",
+  "themes": [
+   "3c6abf02-c476-81a6-b086-c205ff3ce707"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8114-bd22-c2239b39e025",
+  "Code": "TRA-39",
+  "Name": "Traverser un passage",
+  "Description": "Vivre une transition (deuil, séparation, naissance, retraite) en lui laissant le temps qu'elle demande.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une transition demande du temps.",
+  "Enonce2": "Je me donne parfois le temps dont un passage a besoin.",
+  "Enonce3": "Je traverse les passages de ma vie en leur laissant le temps qu'ils demandent.",
+  "themes": [
+   "3c6abf02-c476-8179-a233-f056b7ba0480"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8131-9715-c3fd917b9a54",
+  "Code": "TRA-44",
+  "Name": "Rester curieux",
+  "Description": "Entretenir l'envie d'apprendre et la confrontation à des perspectives différentes.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que la curiosité s'entretient.",
+  "Enonce2": "Je m'expose parfois à des perspectives différentes des miennes.",
+  "Enonce3": "J'entretiens ma curiosité et je me confronte régulièrement à d'autres points de vue.",
+  "themes": [
+   "3c6abf02-c476-8113-8fa2-ce95453e8b37"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8145-a388-e47a70d9506f",
+  "Code": "TRA-37",
+  "Name": "Reconnaître la saison où l'on est",
+  "Description": "Identifier si je suis dans une phase de lancement, de croissance, de plateau ou de fin, dans ma vie ou un projet.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que ma vie et mes projets traversent des saisons.",
+  "Enonce2": "Je peux dire dans quelle phase je suis (lancement, croissance, plateau, fin).",
+  "Enonce3": "Je reconnais la saison où je suis et j'adapte mon rythme en conséquence.",
+  "themes": [
+   "3c6abf02-c476-8179-a233-f056b7ba0480"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-814b-8129-c29523600e02",
+  "Code": "TRA-31",
+  "Name": "Dire non à la dispersion",
+  "Description": "Refuser les sollicitations qui m'éloignent de mon cap.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je dis oui à trop de sollicitations.",
+  "Enonce2": "Je refuse parfois une sollicitation qui m'éloigne de mon cap.",
+  "Enonce3": "Je refuse systématiquement ce qui me disperse.",
+  "themes": [
+   "3c6abf02-c476-81d4-8622-ffae00f801c7"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8159-a867-cb68ade99ed5",
+  "Code": "TRA-35",
+  "Name": "Exposer son projet",
+  "Description": "Partager un projet naissant avec d'autres et accueillir leurs retours sans y renoncer.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que je garde mes projets pour moi par peur des retours.",
+  "Enonce2": "J'ai déjà exposé un projet naissant à d'autres.",
+  "Enonce3": "J'expose mes projets tôt, j'accueille les retours et je ne renonce pas pour autant.",
+  "themes": [
+   "3c6abf02-c476-81b7-896c-e02e70fcb7bd"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-815d-9473-f2e2fda4678a",
+  "Code": "TRA-40",
+  "Name": "Accueillir ce qui commence",
+  "Description": "M'ouvrir à une nouvelle phase sans chercher à reproduire la précédente.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que je cherche à reproduire ce qui précédait.",
+  "Enonce2": "Je m'ouvre parfois à une nouvelle phase sans la comparer à la précédente.",
+  "Enonce3": "J'accueille ce qui commence avec curiosité, sans chercher à reproduire le passé.",
+  "themes": [
+   "3c6abf02-c476-8179-a233-f056b7ba0480"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-816c-9c0e-df64d1fd2138",
+  "Code": "TRA-42",
+  "Name": "Chercher du feedback",
+  "Description": "Solliciter activement des retours sur ce que je fais pour progresser.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que le feedback aide à progresser.",
+  "Enonce2": "Je sollicite parfois des retours sur ce que je fais.",
+  "Enonce3": "Je cherche activement du feedback et j'en tiens compte.",
+  "themes": [
+   "3c6abf02-c476-8113-8fa2-ce95453e8b37"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-816f-a1ad-ca5873efca68",
+  "Code": "TRA-24",
+  "Name": "Traverser une transition professionnelle",
+  "Description": "Gérer l'incertitude et l'identité pendant un changement de poste, de métier ou de statut.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une transition professionnelle touche à l'identité.",
+  "Enonce2": "J'ai traversé une transition professionnelle en gérant l'incertitude.",
+  "Enonce3": "Je traverse les transitions professionnelles avec stabilité.",
+  "themes": [
+   "3c6abf02-c476-81da-bcd8-f4c24dc8f013"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8177-9ac8-d61aa94a9f68",
+  "Code": "TRA-38",
+  "Name": "Accepter qu'un cycle se termine",
+  "Description": "Reconnaître une fin sans la nier ni la précipiter, et faire le deuil de ce qui se clôt.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que quelque chose est en train de se terminer.",
+  "Enonce2": "Je parviens parfois à reconnaître une fin sans la nier ni la précipiter.",
+  "Enonce3": "J'accepte les fins de cycle et je fais le deuil de ce qui se clôt.",
+  "themes": [
+   "3c6abf02-c476-8179-a233-f056b7ba0480"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-818b-84f2-fd736b2eb40f",
+  "Code": "TRA-26",
+  "Name": "Connaître sa situation financière",
+  "Description": "Regarder en face ce que je gagne, dépense, dois et possède, sans évitement.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'évite de regarder ma situation financière.",
+  "Enonce2": "Je connais dans les grandes lignes ce que je gagne, dépense, dois et possède.",
+  "Enonce3": "Je connais précisément ma situation financière et je la regarde régulièrement.",
+  "themes": [
+   "3c6abf02-c476-81a6-b086-c205ff3ce707"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8192-8ba8-ef5dbb2ba8e1",
+  "Code": "TRA-30",
+  "Name": "Réduire sa charge mentale",
+  "Description": "Externaliser, déléguer ou abandonner ce qui encombre mon esprit.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que ma charge mentale est trop lourde.",
+  "Enonce2": "J'ai délégué ou abandonné quelques tâches qui m'encombraient.",
+  "Enonce3": "Je réduis activement ma charge mentale et je la maintiens à un niveau tenable.",
+  "themes": [
+   "3c6abf02-c476-81d4-8622-ffae00f801c7"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ae-a500-ca35b132ec67",
+  "Code": "TRA-33",
+  "Name": "Faire naître un projet",
+  "Description": "Passer d'une envie diffuse à un projet nommé et formulé.",
+  "Difficulte": null,
+  "Enonce1": "J'ai une envie diffuse de créer quelque chose.",
+  "Enonce2": "J'ai nommé et formulé un projet qui me tient à cœur.",
+  "Enonce3": "Je transforme mes envies en projets nommés et formulés.",
+  "themes": [
+   "3c6abf02-c476-81b7-896c-e02e70fcb7bd"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81be-bd0f-da7b5c99b2bd",
+  "Code": "TRA-43",
+  "Name": "Pratiquer délibérément",
+  "Description": "Me fixer un axe de progrès concret et l'exercer intentionnellement.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que progresser demande de l'intention.",
+  "Enonce2": "Je me fixe parfois un axe de progrès concret.",
+  "Enonce3": "Je pratique délibérément un axe de progrès à la fois.",
+  "themes": [
+   "3c6abf02-c476-8113-8fa2-ce95453e8b37"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81bf-b68c-cd36e2d6316f",
+  "Code": "TRA-41",
+  "Name": "Apprendre de ses échecs",
+  "Description": "Tirer un apprentissage précis d'une erreur ou d'un échec, au-delà du jugement.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'un échec contient un apprentissage.",
+  "Enonce2": "Je tire parfois un apprentissage précis d'un échec.",
+  "Enonce3": "Je tire systématiquement un apprentissage de mes erreurs, sans m'y juger.",
+  "themes": [
+   "3c6abf02-c476-8113-8fa2-ce95453e8b37"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81c0-9d26-e65c44936fc3",
+  "Code": "TRA-27",
+  "Name": "Demander ce que l'on vaut",
+  "Description": "Fixer un prix, négocier un salaire ou demander une rémunération juste sans se brader.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'ai tendance à me brader.",
+  "Enonce2": "J'ai déjà fixé un prix ou négocié un salaire à ma juste valeur.",
+  "Enonce3": "Je demande ce que je vaux sans me brader.",
+  "themes": [
+   "3c6abf02-c476-81a6-b086-c205ff3ce707"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81d9-ad95-d95de68bfdff",
+  "Code": "TRA-34",
+  "Name": "Structurer un projet",
+  "Description": "Définir les étapes, les ressources et les premiers jalons d'un projet.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'un projet a besoin d'étapes et de ressources.",
+  "Enonce2": "J'ai structuré au moins un projet en étapes et en jalons.",
+  "Enonce3": "Je structure mes projets avec des étapes, des ressources et des jalons clairs.",
+  "themes": [
+   "3c6abf02-c476-81b7-896c-e02e70fcb7bd"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81e3-be55-d3e05843ec65",
+  "Code": "TRA-28",
+  "Name": "Prendre des décisions financières alignées",
+  "Description": "Faire des choix d'argent cohérents avec mes valeurs et mon cap.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que mes choix d'argent ne sont pas toujours cohérents avec mes valeurs.",
+  "Enonce2": "Je prends parfois une décision financière en lien avec mon cap.",
+  "Enonce3": "Mes décisions financières sont alignées avec mes valeurs et mon cap.",
+  "themes": [
+   "3c6abf02-c476-81a6-b086-c205ff3ce707"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ea-b15f-f96428ca4def",
+  "Code": "TRA-36",
+  "Name": "Mener un projet à son terme",
+  "Description": "Tenir un projet jusqu'à sa réalisation malgré les obstacles et les doutes.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je laisse souvent mes projets inachevés.",
+  "Enonce2": "J'ai mené au moins un projet personnel à son terme.",
+  "Enonce3": "Je mène mes projets à leur terme malgré les obstacles et les doutes.",
+  "themes": [
+   "3c6abf02-c476-81b7-896c-e02e70fcb7bd"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ee-a817-efecd97b9887",
+  "Code": "TRA-29",
+  "Name": "Protéger ses priorités dans son agenda",
+  "Description": "Réserver du temps pour ce qui compte avant que l'urgent ne le dévore.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que l'urgent dévore l'important.",
+  "Enonce2": "Je réserve parfois du temps pour ce qui compte.",
+  "Enonce3": "Mes priorités ont une place protégée dans mon agenda.",
+  "themes": [
+   "3c6abf02-c476-81d4-8622-ffae00f801c7"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8105-98d9-fbc9e5e6e26e",
+  "Code": "TRA-11",
+  "Name": "S'appuyer sur ses réussites passées",
+  "Description": "Me remémorer concrètement ce que j'ai déjà accompli pour aborder un nouveau défi.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'ai déjà accompli des choses.",
+  "Enonce2": "Je me remémore parfois mes réussites avant un défi.",
+  "Enonce3": "Je m'appuie consciemment sur mes réussites passées face à un nouveau défi.",
+  "themes": [
+   "3c6abf02-c476-815e-9265-f814ba340466"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8105-bb1c-d9fe82057574",
+  "Code": "TRA-04",
+  "Name": "Renoncer",
+  "Description": "Lâcher une option, un projet ou une attente pour libérer de l'espace à ce qui compte.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que renoncer libère de l'espace.",
+  "Enonce2": "J'ai déjà lâché une option ou un projet pour me concentrer.",
+  "Enonce3": "Je renonce régulièrement à ce qui m'éloigne de ce qui compte.",
+  "themes": [
+   "3c6abf02-c476-819b-9955-c8133c3b4068"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-811b-95be-f7095ba391c1",
+  "Code": "TRA-17",
+  "Name": "Installer une habitude",
+  "Description": "Mettre en place une pratique régulière et la rendre automatique.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une habitude se construit par la régularité.",
+  "Enonce2": "J'ai déjà installé une habitude qui tient.",
+  "Enonce3": "J'installe de nouvelles habitudes avec méthode et elles tiennent.",
+  "themes": [
+   "3c6abf02-c476-815c-ab23-d57c2a577a06"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8122-9a30-f90f504f595f",
+  "Code": "TRA-01",
+  "Name": "Formuler ce que l'on veut",
+  "Description": "Nommer un désir ou un objectif avec précision, au-delà de « je veux que ça change ».",
+  "Difficulte": null,
+  "Enonce1": "Je sais que « je veux que ça change » ne suffit pas.",
+  "Enonce2": "Je formule parfois un désir avec précision.",
+  "Enonce3": "Je formule ce que je veux avec précision, dans la plupart des domaines de ma vie.",
+  "themes": [
+   "3c6abf02-c476-819b-9955-c8133c3b4068"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8139-98ab-f86c998c5d17",
+  "Code": "TRA-20",
+  "Name": "Entretenir sa motivation",
+  "Description": "Me reconnecter régulièrement au pourquoi d'un engagement pour le nourrir.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que le pourquoi nourrit la motivation.",
+  "Enonce2": "Je me reconnecte parfois au pourquoi d'un engagement.",
+  "Enonce3": "J'entretiens ma motivation en me reconnectant régulièrement à mon pourquoi.",
+  "themes": [
+   "3c6abf02-c476-815c-ab23-d57c2a577a06"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-813b-853f-d783300f2517",
+  "Code": "TRA-06",
+  "Name": "Décider dans l'incertitude",
+  "Description": "Trancher sans avoir toutes les informations, en acceptant le risque de se tromper.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je n'aurai jamais toutes les informations.",
+  "Enonce2": "Je tranche parfois sans tout savoir.",
+  "Enonce3": "Je décide dans l'incertitude en acceptant le risque de me tromper.",
+  "themes": [
+   "3c6abf02-c476-8137-927b-d09138092c33"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8157-bc3c-f622ac7ba08e",
+  "Code": "TRA-15",
+  "Name": "Découper en actions tenables",
+  "Description": "Transformer une intention floue ou intimidante en prochaines étapes concrètes et réalisables.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une intention floue ne passe pas à l'action.",
+  "Enonce2": "Je découpe parfois une intention en étapes concrètes.",
+  "Enonce3": "Je transforme systématiquement une intention en prochaines étapes réalisables.",
+  "themes": [
+   "3c6abf02-c476-818a-8e4a-cf2e22365d73"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-816c-9817-d5150bad4398",
+  "Code": "TRA-21",
+  "Name": "Faire le point sur sa vie professionnelle",
+  "Description": "Évaluer honnêtement ce qui me nourrit et ce qui m'éteint dans mon travail actuel.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une partie de mon travail me nourrit et une autre m'éteint.",
+  "Enonce2": "Je peux nommer ce qui me nourrit et ce qui m'éteint dans mon travail actuel.",
+  "Enonce3": "Je fais régulièrement le point sur ma vie professionnelle avec lucidité.",
+  "themes": [
+   "3c6abf02-c476-81da-bcd8-f4c24dc8f013"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8170-bf1c-e08e7b70a1c5",
+  "Code": "TRA-13",
+  "Name": "Démarrer",
+  "Description": "Faire le premier pas concret d'un projet ou d'un changement, aussi petit soit-il.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que le premier pas est souvent le plus difficile.",
+  "Enonce2": "Je fais parfois un premier pas concret, même petit.",
+  "Enonce3": "Je démarre rapidement ce que je décide.",
+  "themes": [
+   "3c6abf02-c476-818a-8e4a-cf2e22365d73"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8181-a9d6-d21d408bcc55",
+  "Code": "TRA-18",
+  "Name": "Tenir dans la durée",
+  "Description": "Continuer un engagement quand la motivation initiale est retombée.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que la motivation initiale retombe.",
+  "Enonce2": "Je continue parfois quand la motivation est retombée.",
+  "Enonce3": "Je tiens mes engagements dans la durée, même sans motivation.",
+  "themes": [
+   "3c6abf02-c476-815c-ab23-d57c2a577a06"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8187-b187-e92759aa9f09",
+  "Code": "TRA-14",
+  "Name": "Repérer ce qui bloque",
+  "Description": "Identifier la peur, la croyance ou le perfectionnisme qui se cache derrière ma procrastination.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que ma procrastination cache quelque chose.",
+  "Enonce2": "Je peux nommer ce qui me bloque dans une situation donnée.",
+  "Enonce3": "J'identifie mon blocage (peur, croyance, perfectionnisme) et je le traite.",
+  "themes": [
+   "3c6abf02-c476-818a-8e4a-cf2e22365d73"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8191-873b-e94697557e23",
+  "Code": "TRA-08",
+  "Name": "Sortir de l'indécision chronique",
+  "Description": "Reconnaître quand je reporte une décision par peur et m'en donner une échéance.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je reporte certaines décisions par peur.",
+  "Enonce2": "Je me donne parfois une échéance pour une décision qui traîne.",
+  "Enonce3": "Je repère l'indécision par peur et je me fixe une échéance pour trancher.",
+  "themes": [
+   "3c6abf02-c476-8137-927b-d09138092c33"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8191-bc7e-c5c2f2efb653",
+  "Code": "TRA-07",
+  "Name": "Assumer un choix",
+  "Description": "Porter une décision une fois prise, sans la remettre en question à chaque difficulté.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que je remets en question mes décisions à chaque difficulté.",
+  "Enonce2": "Je porte parfois une décision jusqu'au bout malgré les doutes.",
+  "Enonce3": "J'assume mes décisions et je les porte sans revenir dessus à chaque obstacle.",
+  "themes": [
+   "3c6abf02-c476-8137-927b-d09138092c33"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8197-ad19-f358c32a1056",
+  "Code": "TRA-22",
+  "Name": "Formuler son projet professionnel",
+  "Description": "Définir ce que je veux faire, pour qui et dans quel cadre, y compris en cas de reconversion.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je n'ai pas de projet professionnel clair.",
+  "Enonce2": "Je peux formuler les grandes lignes de ce que je veux faire.",
+  "Enonce3": "Mon projet professionnel est clair : quoi, pour qui, dans quel cadre.",
+  "themes": [
+   "3c6abf02-c476-81da-bcd8-f4c24dc8f013"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-819d-960e-e0a312c624c9",
+  "Code": "TRA-03",
+  "Name": "Hiérarchiser ses priorités",
+  "Description": "Choisir ce qui compte le plus maintenant et le distinguer de ce qui peut attendre.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je veux tout et que ça me disperse.",
+  "Enonce2": "Je hiérarchise parfois mes priorités.",
+  "Enonce3": "Je sais à tout moment ce qui compte le plus et ce qui peut attendre.",
+  "themes": [
+   "3c6abf02-c476-819b-9955-c8133c3b4068"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-819f-a841-ea90ca9c7485",
+  "Code": "TRA-19",
+  "Name": "Traverser une rechute",
+  "Description": "Reprendre après un abandon ou un échec sans tout remettre en question.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que j'abandonne tout après une rechute.",
+  "Enonce2": "Je reprends parfois après un abandon.",
+  "Enonce3": "Je traverse les rechutes sans tout remettre en question et je reprends.",
+  "themes": [
+   "3c6abf02-c476-815c-ab23-d57c2a577a06"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81b4-b591-e5a0ee188547",
+  "Code": "TRA-10",
+  "Name": "Repérer le syndrome de l'imposteur à l'œuvre",
+  "Description": "Identifier les moments où je me disqualifie avant même d'essayer.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je me disqualifie parfois avant d'essayer.",
+  "Enonce2": "Je repère après coup les moments où je me suis disqualifié.",
+  "Enonce3": "Je repère le syndrome de l'imposteur en temps réel et je ne le laisse pas décider.",
+  "themes": [
+   "3c6abf02-c476-815e-9265-f814ba340466"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81c2-86ab-e5b5183e028e",
+  "Code": "TRA-12",
+  "Name": "Oser malgré la peur",
+  "Description": "Agir en présence de la peur plutôt que d'attendre qu'elle disparaisse.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que la peur ne disparaît pas avant d'agir.",
+  "Enonce2": "J'agis parfois malgré la peur.",
+  "Enonce3": "J'agis en présence de la peur, régulièrement et sans attendre qu'elle disparaisse.",
+  "themes": [
+   "3c6abf02-c476-815e-9265-f814ba340466"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81c7-beef-d468670ea1dc",
+  "Code": "TRA-05",
+  "Name": "Clarifier les termes d'une décision",
+  "Description": "Poser les options réelles, les critères et les conséquences avant de choisir.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une décision a des options, des critères et des conséquences.",
+  "Enonce2": "Je pose parfois clairement les termes d'une décision avant de choisir.",
+  "Enonce3": "Je clarifie systématiquement les termes d'une décision importante.",
+  "themes": [
+   "3c6abf02-c476-8137-927b-d09138092c33"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81d7-8bbd-c6cf8b3dfc55",
+  "Code": "TRA-02",
+  "Name": "Définir un cap",
+  "Description": "Donner une direction à une période de ma vie, même sans connaître tout le chemin.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'un cap ne demande pas de connaître tout le chemin.",
+  "Enonce2": "J'ai un cap pour la période en cours, même flou.",
+  "Enonce3": "J'ai un cap clair qui oriente mes choix au quotidien.",
+  "themes": [
+   "3c6abf02-c476-819b-9955-c8133c3b4068"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81d9-8dc4-eaa0f4ac4461",
+  "Code": "TRA-09",
+  "Name": "Se sentir autorisé à occuper sa place",
+  "Description": "Reconnaître que j'ai le droit d'être là, de prendre la parole, d'avoir des ambitions.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je me sens parfois illégitime là où je suis.",
+  "Enonce2": "Je me sens parfois autorisé à prendre la parole ou à avoir des ambitions.",
+  "Enonce3": "Je me sens légitime à occuper ma place et à avoir des ambitions.",
+  "themes": [
+   "3c6abf02-c476-815e-9265-f814ba340466"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81eb-b5bc-c01dabcab782",
+  "Code": "TRA-23",
+  "Name": "Négocier sa place et sa progression",
+  "Description": "Demander une évolution, une augmentation ou un changement de rôle.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que ma progression ne viendra pas toute seule.",
+  "Enonce2": "J'ai déjà demandé une évolution ou une augmentation.",
+  "Enonce3": "Je négocie ma place et ma progression de façon régulière.",
+  "themes": [
+   "3c6abf02-c476-81da-bcd8-f4c24dc8f013"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81f9-a03d-cfcb838538f6",
+  "Code": "TRA-16",
+  "Name": "Se mettre en mouvement après une prise de conscience",
+  "Description": "Traduire rapidement un déclic en expérimentation, avant que l'élan retombe.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'un déclic retombe s'il n'est pas suivi d'action.",
+  "Enonce2": "Je traduis parfois une prise de conscience en expérimentation.",
+  "Enonce3": "Je traduis rapidement mes prises de conscience en actions concrètes.",
+  "themes": [
+   "3c6abf02-c476-818a-8e4a-cf2e22365d73"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8101-a6c8-ef672c99f654",
+  "Code": "REL-24",
+  "Name": "Repérer ce qu'on reproduit",
+  "Description": "Identifier les schémas de mon éducation qui se rejouent dans ma parentalité.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je reproduis certains schémas de mon éducation.",
+  "Enonce2": "Je peux nommer un schéma de mon éducation qui se rejoue.",
+  "Enonce3": "Je repère en situation ce que je reproduis et je choisis de faire autrement.",
+  "themes": [
+   "3c6abf02-c476-81f7-9c45-c030f5b8feb5"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8107-a00a-d0c14313a33e",
+  "Code": "REL-35",
+  "Name": "Construire son autonomie affective",
+  "Description": "Ne plus faire dépendre mon équilibre de la présence ou de l'approbation d'une personne.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que mon équilibre dépend parfois trop d'une personne.",
+  "Enonce2": "Je fais parfois des choix sans attendre l'approbation d'une personne clé.",
+  "Enonce3": "Mon équilibre ne dépend plus de la présence ou de l'approbation de quelqu'un.",
+  "themes": [
+   "3c6abf02-c476-81b8-a9bc-eab8e9fc6eb3"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8118-82bb-d014fccdaead",
+  "Code": "REL-25",
+  "Name": "Se pardonner ses erreurs de parent",
+  "Description": "Accueillir mes maladresses sans culpabilité envahissante et réparer avec mon enfant.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je fais des erreurs comme parent.",
+  "Enonce2": "Je parviens parfois à réparer avec mon enfant après une maladresse.",
+  "Enonce3": "Je me pardonne mes erreurs de parent et je répare systématiquement avec mon enfant.",
+  "themes": [
+   "3c6abf02-c476-81f7-9c45-c030f5b8feb5"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-811c-b692-cdad636d89c4",
+  "Code": "REL-26",
+  "Name": "Collaborer avec des profils différents",
+  "Description": "Travailler efficacement avec des personnes dont le style ou les valeurs diffèrent des miennes.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que les styles et les valeurs différents sont une richesse.",
+  "Enonce2": "Je travaille correctement avec des profils différents du mien.",
+  "Enonce3": "Je collabore efficacement avec des personnes très différentes de moi.",
+  "themes": [
+   "3c6abf02-c476-81bd-8f5a-cc3c088cd9d5"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8132-ba36-c1d1b0f8a66f",
+  "Code": "REL-29",
+  "Name": "Composer avec le pouvoir et la politique",
+  "Description": "Lire les jeux d'influence dans une organisation et y tenir ma place sans me compromettre.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que les jeux d'influence existent dans mon organisation.",
+  "Enonce2": "Je lis parfois les enjeux de pouvoir autour de moi.",
+  "Enonce3": "Je compose avec la politique de mon organisation en tenant ma place sans me compromettre.",
+  "themes": [
+   "3c6abf02-c476-81bd-8f5a-cc3c088cd9d5"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8139-bdd0-e681f7e88779",
+  "Code": "REL-36",
+  "Name": "Choisir différemment",
+  "Description": "Répondre autrement à une situation relationnelle qui d'habitude déclenche mon schéma.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'on peut répondre autrement à une situation déclenchante.",
+  "Enonce2": "J'ai déjà répondu différemment à une situation qui d'habitude déclenche mon schéma.",
+  "Enonce3": "Je choisis régulièrement une réponse différente de mon schéma habituel.",
+  "themes": [
+   "3c6abf02-c476-81b8-a9bc-eab8e9fc6eb3"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8145-98a5-f26c1551c8f9",
+  "Code": "REL-21",
+  "Name": "Tenir sa place dans la famille élargie",
+  "Description": "Traverser les réunions, conflits et attentes familiales en restant soi-même.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que les réunions familiales me font perdre mes moyens.",
+  "Enonce2": "Je parviens parfois à rester moi-même lors d'un événement familial.",
+  "Enonce3": "Je tiens ma place dans la famille élargie en restant moi-même.",
+  "themes": [
+   "3c6abf02-c476-810d-b86e-e00c20387221"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8179-95a6-cb7daa6c637a",
+  "Code": "REL-28",
+  "Name": "Faire reconnaître sa contribution",
+  "Description": "Rendre visible ce que j'apporte sans me survendre ni m'effacer.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que ma contribution n'est pas toujours visible.",
+  "Enonce2": "Je rends parfois visible ce que j'apporte.",
+  "Enonce3": "Je fais reconnaître ma contribution sans me survendre ni m'effacer.",
+  "themes": [
+   "3c6abf02-c476-81bd-8f5a-cc3c088cd9d5"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-817c-bfda-d56dea09cd3f",
+  "Code": "REL-20",
+  "Name": "Choisir ce qu'on garde de son héritage",
+  "Description": "Trier ce que j'ai reçu de ma famille et décider de ce que je transmets.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'ai reçu un héritage familial à trier.",
+  "Enonce2": "J'ai commencé à trier ce que je garde et ce que je laisse.",
+  "Enonce3": "J'ai choisi ce que je transmets de mon héritage.",
+  "themes": [
+   "3c6abf02-c476-810d-b86e-e00c20387221"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-818f-9138-f97fd81707f5",
+  "Code": "REL-27",
+  "Name": "Se positionner face à un manager",
+  "Description": "Construire une relation adulte avec mon supérieur, y compris quand il est difficile.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que ma relation avec mon manager me pèse ou m'infantilise.",
+  "Enonce2": "Je parviens parfois à me positionner en adulte face à mon manager.",
+  "Enonce3": "Je construis une relation adulte avec mon manager, y compris quand il est difficile.",
+  "themes": [
+   "3c6abf02-c476-81bd-8f5a-cc3c088cd9d5"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8193-8830-d89800748d47",
+  "Code": "REL-31",
+  "Name": "Cultiver l'amitié",
+  "Description": "Créer et entretenir des amitiés profondes à l'âge adulte.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que l'amitié adulte demande du soin.",
+  "Enonce2": "J'entretiens quelques amitiés de façon régulière.",
+  "Enonce3": "Je crée et je cultive des amitiés profondes.",
+  "themes": [
+   "3c6abf02-c476-81e2-905f-cae9bd96218b"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81c1-b4c2-d8b07341fcb0",
+  "Code": "REL-34",
+  "Name": "Reconnaître un schéma pendant qu'il se rejoue",
+  "Description": "Voir en situation que je suis en train de retomber dans mon scénario habituel.",
+  "Difficulte": null,
+  "Enonce1": "Je reconnais après coup que mon schéma s'est rejoué.",
+  "Enonce2": "Je repère parfois mon schéma pendant qu'il se déroule.",
+  "Enonce3": "Je repère mon schéma en temps réel, avant qu'il prenne le dessus.",
+  "themes": [
+   "3c6abf02-c476-81b8-a9bc-eab8e9fc6eb3"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ce-a0fe-d21309fd2ba5",
+  "Code": "REL-22",
+  "Name": "Tenir une autorité bienveillante",
+  "Description": "Poser un cadre à mon enfant avec fermeté et chaleur, sans autoritarisme ni laxisme.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'un cadre peut être à la fois ferme et chaleureux.",
+  "Enonce2": "Je pose parfois un cadre clair à mon enfant sans crier ni céder.",
+  "Enonce3": "Je tiens une autorité bienveillante avec constance.",
+  "themes": [
+   "3c6abf02-c476-81f7-9c45-c030f5b8feb5"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ce-aa72-c0c337c338ec",
+  "Code": "REL-23",
+  "Name": "Préserver le lien à chaque âge",
+  "Description": "Adapter ma relation à mon enfant au fil de son développement, y compris à l'adolescence.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que mon enfant change et que la relation doit changer avec lui.",
+  "Enonce2": "J'adapte parfois ma façon d'être avec mon enfant à son âge.",
+  "Enonce3": "Je préserve le lien avec mon enfant à chaque étape, y compris les plus difficiles.",
+  "themes": [
+   "3c6abf02-c476-81f7-9c45-c030f5b8feb5"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81d8-a8e2-d935f70b1f1f",
+  "Code": "REL-30",
+  "Name": "Trouver sa place dans un groupe",
+  "Description": "Rejoindre un collectif et y exister sans me dissoudre ni rester à la marge.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que je me dissous ou que je reste à la marge dans un groupe.",
+  "Enonce2": "Je parviens parfois à exister dans un collectif sans me dissoudre.",
+  "Enonce3": "Je trouve ma place dans un groupe en restant moi-même.",
+  "themes": [
+   "3c6abf02-c476-81e2-905f-cae9bd96218b"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81e2-b7ce-d20337f01827",
+  "Code": "REL-32",
+  "Name": "Habiter la solitude",
+  "Description": "Être bien seul sans que la solitude devienne isolement.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que la solitude n'est pas l'isolement.",
+  "Enonce2": "Je suis parfois bien seul.",
+  "Enonce3": "J'habite la solitude avec plaisir sans qu'elle devienne isolement.",
+  "themes": [
+   "3c6abf02-c476-81e2-905f-cae9bd96218b"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81fd-8eb5-e0f07e8dc61c",
+  "Code": "REL-33",
+  "Name": "Repérer son schéma relationnel dominant",
+  "Description": "Identifier le scénario que je rejoue dans mes relations (sauver, fuir, contrôler, dépendre).",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je rejoue souvent le même scénario dans mes relations.",
+  "Enonce2": "Je peux nommer mon schéma relationnel dominant (sauver, fuir, contrôler, dépendre).",
+  "Enonce3": "Je connais mes schémas relationnels et leurs déclencheurs.",
+  "themes": [
+   "3c6abf02-c476-81b8-a9bc-eab8e9fc6eb3"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8108-ba7a-eb5a85a724cb",
+  "Code": "REL-13",
+  "Name": "Clarifier ses attentes dans le couple",
+  "Description": "Nommer ce que j'attends d'une relation amoureuse et le distinguer de ce que j'ai hérité ou vu.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que mes attentes dans le couple viennent en partie de ce que j'ai vu ou hérité.",
+  "Enonce2": "Je peux nommer ce que j'attends vraiment d'une relation amoureuse.",
+  "Enonce3": "Mes attentes sont claires et je les distingue de ce que j'ai hérité.",
+  "themes": [
+   "3c6abf02-c476-81e9-957e-cab41dea7707"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-810f-880b-e139331e1771",
+  "Code": "REL-17",
+  "Name": "Décider de rester ou de partir",
+  "Description": "Évaluer lucidement une relation et assumer la décision de la poursuivre ou de la quitter.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'on peut évaluer lucidement une relation.",
+  "Enonce2": "J'ai déjà fait le point honnêtement sur une relation.",
+  "Enonce3": "Je décide de rester ou de partir en conscience, et j'assume ma décision.",
+  "themes": [
+   "3c6abf02-c476-81e9-957e-cab41dea7707"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8119-accc-f84eff3aba36",
+  "Code": "REL-08",
+  "Name": "Respecter les limites des autres",
+  "Description": "Entendre et accepter un non sans insister ni le prendre pour moi.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'un non de l'autre ne me concerne pas forcément.",
+  "Enonce2": "Je parviens parfois à accepter un non sans insister.",
+  "Enonce3": "Je respecte les limites des autres sans insister ni le prendre personnellement.",
+  "themes": [
+   "3c6abf02-c476-8141-a0df-c22267bebc4d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8119-b840-cef66ba8c735",
+  "Code": "REL-03",
+  "Name": "Choisir les relations qui nourrissent",
+  "Description": "Identifier les relations qui me font grandir et celles qui m'épuisent, et agir en conséquence.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que certaines relations me font grandir et d'autres m'épuisent.",
+  "Enonce2": "Je peux nommer les relations qui me nourrissent et celles qui m'épuisent.",
+  "Enonce3": "J'investis dans les relations qui me font grandir et je prends de la distance avec celles qui m'épuisent.",
+  "themes": [
+   "3c6abf02-c476-816a-8be1-c708d0d087d9"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-811c-ad4e-fc69c735f78e",
+  "Code": "REL-16",
+  "Name": "Entretenir le désir et la complicité",
+  "Description": "Prendre soin de l'intimité dans la durée, au-delà de la logistique du quotidien.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que le désir et la complicité s'entretiennent.",
+  "Enonce2": "Je prends parfois soin de l'intimité au-delà de la logistique.",
+  "Enonce3": "J'entretiens le désir et la complicité dans la durée.",
+  "themes": [
+   "3c6abf02-c476-81e9-957e-cab41dea7707"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-812a-bd93-e05dd1dbcfff",
+  "Code": "REL-05",
+  "Name": "Identifier ses limites",
+  "Description": "Savoir ce que je peux accueillir et ce qui m'abîme, avant d'être dépassé.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'ai des limites même si je les découvre souvent trop tard.",
+  "Enonce2": "Je connais mes principales limites.",
+  "Enonce3": "Je sais ce que je peux accueillir et ce qui m'abîme, avant d'être dépassé.",
+  "themes": [
+   "3c6abf02-c476-8141-a0df-c22267bebc4d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-813f-8d8d-dfb24ac9c9fc",
+  "Code": "REL-06",
+  "Name": "Poser une limite",
+  "Description": "Nommer clairement ce que je n'accepte pas, sans agressivité ni justification excessive.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'on peut poser une limite sans agressivité.",
+  "Enonce2": "Je pose parfois une limite clairement.",
+  "Enonce3": "Je pose mes limites de façon claire et calme, sans justification excessive.",
+  "themes": [
+   "3c6abf02-c476-8141-a0df-c22267bebc4d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-814e-b9e6-debb99043353",
+  "Code": "REL-19",
+  "Name": "Identifier les loyautés invisibles",
+  "Description": "Repérer ce que je fais ou ne fais pas par fidélité inconsciente à ma famille.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je fais ou ne fais pas certaines choses par fidélité familiale.",
+  "Enonce2": "Je peux nommer une loyauté invisible qui me freine.",
+  "Enonce3": "J'ai identifié mes loyautés invisibles et je choisis lesquelles honorer.",
+  "themes": [
+   "3c6abf02-c476-810d-b86e-e00c20387221"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-814f-ad3f-f6e451579321",
+  "Code": "REL-07",
+  "Name": "Tenir une limite dans le temps",
+  "Description": "Maintenir une limite posée quand elle est testée ou oubliée.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que mes limites sont souvent testées ou oubliées.",
+  "Enonce2": "Je maintiens parfois une limite posée quand elle est testée.",
+  "Enonce3": "Je tiens mes limites dans la durée, avec constance.",
+  "themes": [
+   "3c6abf02-c476-8141-a0df-c22267bebc4d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-818d-b5e8-ef192f9b536d",
+  "Code": "REL-02",
+  "Name": "Créer la confiance progressivement",
+  "Description": "Construire une relation par étapes en accordant et en vérifiant la confiance.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que la confiance se construit par étapes.",
+  "Enonce2": "J'accorde la confiance progressivement et je vérifie qu'elle est honorée.",
+  "Enonce3": "Je construis la confiance avec discernement, ni trop vite ni trop méfiant.",
+  "themes": [
+   "3c6abf02-c476-816a-8be1-c708d0d087d9"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8190-86d8-cf47093737f0",
+  "Code": "REL-12",
+  "Name": "Réparer un lien",
+  "Description": "Revenir vers l'autre après une blessure, demander ou offrir le pardon, et reconstruire.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'un lien peut se réparer après une blessure.",
+  "Enonce2": "J'ai déjà fait un pas vers quelqu'un après un conflit.",
+  "Enonce3": "Je répare mes relations après une blessure, en demandant ou en offrant le pardon.",
+  "themes": [
+   "3c6abf02-c476-819a-aa88-e4687561c8bc"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81aa-8fbf-d240899cb27f",
+  "Code": "REL-09",
+  "Name": "Rester en relation dans le désaccord",
+  "Description": "Traverser un conflit sans fuir ni rompre, en gardant l'autre comme partenaire.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que je fuis ou que je romps face au conflit.",
+  "Enonce2": "Je parviens parfois à rester en relation dans un désaccord.",
+  "Enonce3": "Je traverse les conflits sans fuir ni rompre, en gardant l'autre comme partenaire.",
+  "themes": [
+   "3c6abf02-c476-819a-aa88-e4687561c8bc"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ad-b1f8-fc27e5b35b01",
+  "Code": "REL-10",
+  "Name": "Accueillir la colère de l'autre",
+  "Description": "Recevoir une émotion forte dirigée vers moi sans m'effondrer ni contre-attaquer.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que la colère de l'autre ne me définit pas.",
+  "Enonce2": "Je reçois parfois une émotion forte sans m'effondrer ni contre-attaquer.",
+  "Enonce3": "J'accueille la colère de l'autre avec stabilité et je cherche ce qu'elle dit.",
+  "themes": [
+   "3c6abf02-c476-819a-aa88-e4687561c8bc"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81c8-b839-c78470a4c87b",
+  "Code": "REL-11",
+  "Name": "Reconnaître sa part",
+  "Description": "Nommer ma responsabilité dans un conflit, sans tout prendre sur moi.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'ai une part dans la plupart des conflits.",
+  "Enonce2": "Je reconnais parfois ma responsabilité sans tout prendre sur moi.",
+  "Enonce3": "Je nomme ma part avec justesse dans un conflit, ni trop ni trop peu.",
+  "themes": [
+   "3c6abf02-c476-819a-aa88-e4687561c8bc"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81cc-8a8c-eb2cd6a5e00c",
+  "Code": "REL-01",
+  "Name": "Se laisser connaître",
+  "Description": "Partager ce que je suis vraiment, y compris mes fragilités, avec les personnes qui comptent.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je montre peu de mes fragilités.",
+  "Enonce2": "Je me laisse parfois connaître par les personnes qui comptent.",
+  "Enonce3": "Je partage ce que je suis vraiment, y compris mes fragilités, avec mes proches.",
+  "themes": [
+   "3c6abf02-c476-816a-8be1-c708d0d087d9"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81db-a341-e1054a37d1c3",
+  "Code": "REL-14",
+  "Name": "Être vulnérable avec son partenaire",
+  "Description": "Partager mes peurs, mes besoins et mes désirs avec la personne que j'aime.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que je me protège avec la personne que j'aime.",
+  "Enonce2": "Je partage parfois mes peurs ou mes besoins avec mon partenaire.",
+  "Enonce3": "Je suis vulnérable avec mon partenaire et je partage mes désirs comme mes peurs.",
+  "themes": [
+   "3c6abf02-c476-81e9-957e-cab41dea7707"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ec-9c00-dabaac80be2f",
+  "Code": "REL-18",
+  "Name": "Se positionner en adulte face à ses parents",
+  "Description": "Sortir du rôle d'enfant dans la relation avec mes parents, sans rupture ni soumission.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que je redeviens enfant face à mes parents.",
+  "Enonce2": "Je parviens parfois à rester adulte dans la relation avec mes parents.",
+  "Enonce3": "Je me positionne en adulte face à mes parents, sans rupture ni soumission.",
+  "themes": [
+   "3c6abf02-c476-810d-b86e-e00c20387221"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ed-8255-ea6a529ba190",
+  "Code": "REL-15",
+  "Name": "Traverser les crises du couple",
+  "Description": "Reconnaître les étapes normales d'une relation longue et traverser les phases difficiles sans conclure trop vite.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une relation longue traverse des phases difficiles.",
+  "Enonce2": "Je parviens parfois à traverser une crise sans conclure trop vite.",
+  "Enonce3": "Je reconnais les étapes d'une relation et je traverse les crises avec patience.",
+  "themes": [
+   "3c6abf02-c476-81e9-957e-cab41dea7707"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81fc-a89e-d7a892b4314c",
+  "Code": "REL-04",
+  "Name": "Entretenir un lien dans la durée",
+  "Description": "Prendre soin d'une relation au quotidien, pas seulement en cas de crise.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une relation se nourrit au quotidien, pas seulement en cas de crise.",
+  "Enonce2": "Je prends parfois soin d'un lien sans raison particulière.",
+  "Enonce3": "J'entretiens mes relations importantes de façon régulière.",
+  "themes": [
+   "3c6abf02-c476-816a-8be1-c708d0d087d9"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-810f-88cc-c6cba31de75a",
+  "Code": "COM-26",
+  "Name": "Rester présent quand ça chauffe",
+  "Description": "Garder le dialogue ouvert quand l'autre réagit fortement, sans fuir ni attaquer.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que je fuis ou que j'attaque quand l'autre réagit fortement.",
+  "Enonce2": "Je parviens parfois à rester présent quand ça chauffe.",
+  "Enonce3": "Je garde le dialogue ouvert face à une réaction forte, sans fuir ni attaquer.",
+  "themes": [
+   "3c6abf02-c476-8191-aec4-fa26e566bd94"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8114-8d2a-d93235c9a0bb",
+  "Code": "COM-10",
+  "Name": "Tenir sa position sous la pression",
+  "Description": "Maintenir ce que je pense quand on insiste, me culpabilise ou me séduit.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que je cède souvent sous la pression ou la culpabilisation.",
+  "Enonce2": "Je tiens parfois ma position quand on insiste.",
+  "Enonce3": "Je maintiens ce que je pense face à l'insistance, la culpabilisation ou la séduction.",
+  "themes": [
+   "3c6abf02-c476-8194-a00c-c4080a164c19"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8118-a486-caea06ea6cb8",
+  "Code": "COM-14",
+  "Name": "Négocier ce qui compte",
+  "Description": "Défendre mes intérêts tout en cherchant une solution acceptable pour l'autre.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une négociation cherche une solution acceptable pour les deux.",
+  "Enonce2": "J'ai déjà négocié quelque chose qui comptait pour moi.",
+  "Enonce3": "Je négocie ce qui compte en défendant mes intérêts tout en respectant ceux de l'autre.",
+  "themes": [
+   "3c6abf02-c476-81db-afd5-cc6e21dc2103"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-811a-b036-ff02d834dc90",
+  "Code": "COM-24",
+  "Name": "Ouvrir un sujet évité",
+  "Description": "Entamer une conversation que je repousse depuis longtemps.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'il y a des sujets que j'évite depuis longtemps.",
+  "Enonce2": "J'ai déjà ouvert un sujet que je repoussais.",
+  "Enonce3": "J'ouvre les sujets que j'évite sans les laisser s'installer.",
+  "themes": [
+   "3c6abf02-c476-8191-aec4-fa26e566bd94"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-811e-a8c2-f0a29294767c",
+  "Code": "COM-09",
+  "Name": "Dire non clairement",
+  "Description": "Refuser sans justification excessive, sans agressivité et sans revenir dessus.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'ai le droit de dire non.",
+  "Enonce2": "Je dis non dans les situations peu risquées.",
+  "Enonce3": "Je dis non clairement, sans justification excessive, y compris aux personnes qui comptent.",
+  "themes": [
+   "3c6abf02-c476-8194-a00c-c4080a164c19"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8121-898d-f223f1ef890f",
+  "Code": "COM-20",
+  "Name": "Structurer un message",
+  "Description": "Construire une intervention claire avec un début, un message central et une fin.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une intervention a besoin d'un début, d'un message central et d'une fin.",
+  "Enonce2": "Je structure mes interventions quand je les prépare.",
+  "Enonce3": "Je structure spontanément mes interventions, même improvisées.",
+  "themes": [
+   "3c6abf02-c476-8196-a4d7-c7a2e57130c6"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8126-845c-c9c3ca55df9f",
+  "Code": "COM-22",
+  "Name": "Convaincre avec justesse",
+  "Description": "Défendre une idée de manière engageante sans manipulation ni rapport de force.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'on peut convaincre sans manipuler ni forcer.",
+  "Enonce2": "Je défends parfois une idée de manière engageante.",
+  "Enonce3": "Je convaincs avec justesse, en respectant l'autre et sa liberté de penser.",
+  "themes": [
+   "3c6abf02-c476-8196-a4d7-c7a2e57130c6"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8136-b75e-dc02f0479904",
+  "Code": "COM-23",
+  "Name": "Préparer une conversation sensible",
+  "Description": "Clarifier mon intention, mes faits et ce que je veux obtenir avant d'aborder un sujet difficile.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une conversation sensible se prépare.",
+  "Enonce2": "Je clarifie parfois mon intention et mes faits avant d'aborder un sujet difficile.",
+  "Enonce3": "Je prépare systématiquement mes conversations sensibles : intention, faits, ce que je veux obtenir.",
+  "themes": [
+   "3c6abf02-c476-8191-aec4-fa26e566bd94"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-813a-a117-c2527bd1ae12",
+  "Code": "COM-06",
+  "Name": "Formuler une observation sans jugement",
+  "Description": "Décrire des faits plutôt que des interprétations quand j'aborde un sujet avec quelqu'un.",
+  "Difficulte": null,
+  "Enonce1": "Je connais la différence entre un fait et une interprétation.",
+  "Enonce2": "Je parviens parfois à décrire les faits plutôt que mon interprétation.",
+  "Enonce3": "Je commence mes conversations sensibles par une observation factuelle, sans jugement.",
+  "themes": [
+   "3c6abf02-c476-8135-8f22-cbe58d66948c"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8143-b90a-cceb00cb137e",
+  "Code": "COM-12",
+  "Name": "Formuler une demande claire et concrète",
+  "Description": "Demander précisément ce que je veux, à qui, pour quand, de manière négociable.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une demande doit être concrète et négociable.",
+  "Enonce2": "Je formule parfois une demande précise (quoi, à qui, pour quand).",
+  "Enonce3": "Mes demandes sont claires, concrètes et formulées sans détour.",
+  "themes": [
+   "3c6abf02-c476-81db-afd5-cc6e21dc2103"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8167-96f5-c8f263cfed2a",
+  "Code": "COM-16",
+  "Name": "Donner un retour utile",
+  "Description": "Formuler un feedback factuel, précis et orienté vers la suite, positif comme négatif.",
+  "Difficulte": null,
+  "Enonce1": "Je sais ce qui distingue un feedback utile d'un jugement.",
+  "Enonce2": "Je donne parfois un retour factuel et précis.",
+  "Enonce3": "Je donne régulièrement des retours utiles, positifs comme négatifs, orientés vers la suite.",
+  "themes": [
+   "3c6abf02-c476-81c1-8901-e7319947e16c"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-816a-aefd-c58bfffd2884",
+  "Code": "COM-18",
+  "Name": "Exprimer un désaccord",
+  "Description": "Dire que je ne suis pas d'accord en préservant la relation et en restant ouvert.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'on peut être en désaccord sans rompre.",
+  "Enonce2": "J'exprime parfois un désaccord en préservant la relation.",
+  "Enonce3": "J'exprime mes désaccords de façon claire et respectueuse, en restant ouvert.",
+  "themes": [
+   "3c6abf02-c476-81c1-8901-e7319947e16c"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8189-9700-f04c7b91bf01",
+  "Code": "COM-25",
+  "Name": "Annoncer une décision ou une mauvaise nouvelle",
+  "Description": "Dire quelque chose de difficile avec clarté et humanité, sans tourner autour.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une mauvaise nouvelle se dit avec clarté et humanité.",
+  "Enonce2": "J'ai déjà annoncé une décision difficile sans tourner autour.",
+  "Enonce3": "J'annonce les décisions et les mauvaises nouvelles avec clarté et humanité.",
+  "themes": [
+   "3c6abf02-c476-8191-aec4-fa26e566bd94"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8195-ab93-d7722ef72511",
+  "Code": "COM-11",
+  "Name": "Prendre sa place dans un échange",
+  "Description": "Intervenir, me faire entendre et occuper l'espace qui me revient dans une conversation ou un groupe.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que je m'efface dans certains échanges ou groupes.",
+  "Enonce2": "Je prends parfois la parole là où j'aurais eu tendance à me taire.",
+  "Enonce3": "Je prends ma place dans un échange ou un groupe de façon naturelle.",
+  "themes": [
+   "3c6abf02-c476-8194-a00c-c4080a164c19"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81a8-9c53-f9dd9020f0a5",
+  "Code": "COM-13",
+  "Name": "Demander de l'aide",
+  "Description": "Solliciter du soutien sans honte et sans attendre d'être à bout.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque que j'attends souvent d'être à bout pour demander de l'aide.",
+  "Enonce2": "Je demande parfois de l'aide avant d'être à bout.",
+  "Enonce3": "Je demande de l'aide sans honte dès que c'est utile.",
+  "themes": [
+   "3c6abf02-c476-81db-afd5-cc6e21dc2103"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ae-8399-f83bf47cd437",
+  "Code": "COM-07",
+  "Name": "Dire ce que l'on veut",
+  "Description": "Exprimer clairement un souhait ou une attente au lieu d'espérer que l'autre devine.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'attends souvent que l'autre devine ce que je veux.",
+  "Enonce2": "Je dis parfois clairement ce que je souhaite.",
+  "Enonce3": "J'exprime mes attentes clairement et je ne reproche plus aux autres de ne pas deviner.",
+  "themes": [
+   "3c6abf02-c476-8135-8f22-cbe58d66948c"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81b8-8892-e07d5324acb3",
+  "Code": "COM-15",
+  "Name": "Accueillir un refus",
+  "Description": "Recevoir un non sans le vivre comme un rejet de ma personne.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'un non à ma demande n'est pas un rejet de ma personne.",
+  "Enonce2": "Je parviens parfois à recevoir un refus sans le prendre personnellement.",
+  "Enonce3": "J'accueille un refus avec calme et je rebondis.",
+  "themes": [
+   "3c6abf02-c476-81db-afd5-cc6e21dc2103"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81c7-8538-cc31f0792666",
+  "Code": "COM-04",
+  "Name": "Retenir le conseil non demandé",
+  "Description": "Résister au réflexe de résoudre, rassurer ou conseiller quand l'autre a besoin d'être entendu.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque mon réflexe de conseiller ou de rassurer.",
+  "Enonce2": "Je retiens parfois un conseil quand l'autre a juste besoin d'être entendu.",
+  "Enonce3": "Je choisis consciemment entre écouter et conseiller, et je demande à l'autre ce dont il a besoin.",
+  "themes": [
+   "3c6abf02-c476-812c-b853-ef677ff51e04"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81d4-a5d9-fd915a2054b7",
+  "Code": "COM-19",
+  "Name": "Apprivoiser le trac",
+  "Description": "Reconnaître et réguler mon stress avant et pendant une prise de parole.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que le trac est normal et qu'il peut se réguler.",
+  "Enonce2": "J'ai une technique pour apprivoiser mon trac et je l'utilise parfois.",
+  "Enonce3": "Je régule mon trac avant et pendant une prise de parole, et il ne m'empêche plus de m'exprimer.",
+  "themes": [
+   "3c6abf02-c476-8196-a4d7-c7a2e57130c6"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81e0-8326-c99933da9792",
+  "Code": "COM-17",
+  "Name": "Recevoir une critique",
+  "Description": "Écouter un retour difficile sans me défendre immédiatement ni m'effondrer.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque mon réflexe de me défendre ou de m'effondrer face à une critique.",
+  "Enonce2": "Je parviens parfois à écouter une critique sans réagir immédiatement.",
+  "Enonce3": "Je reçois une critique difficile avec ouverture et j'en tire ce qui est utile.",
+  "themes": [
+   "3c6abf02-c476-81c1-8901-e7319947e16c"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81e6-81ca-fb523cf66bb8",
+  "Code": "COM-05",
+  "Name": "Dire ce que l'on ressent",
+  "Description": "Exprimer une émotion à la première personne, sans accuser ni minimiser.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'on peut exprimer une émotion sans accuser.",
+  "Enonce2": "Je dis parfois ce que je ressens à la première personne.",
+  "Enonce3": "J'exprime mes émotions avec justesse, y compris les plus difficiles, sans accuser ni minimiser.",
+  "themes": [
+   "3c6abf02-c476-8135-8f22-cbe58d66948c"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81e9-8435-eed08001e6a4",
+  "Code": "COM-01",
+  "Name": "Écouter sans préparer sa réponse",
+  "Description": "Rester pleinement disponible à ce que l'autre dit, sans chercher ce que je vais répondre.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je prépare souvent ma réponse pendant que l'autre parle.",
+  "Enonce2": "Je parviens parfois à écouter sans préparer ma réponse.",
+  "Enonce3": "J'écoute pleinement, même quand le sujet me touche ou me met en désaccord.",
+  "themes": [
+   "3c6abf02-c476-812c-b853-ef677ff51e04"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ed-957c-c72c5bf1c322",
+  "Code": "COM-21",
+  "Name": "Incarner sa parole",
+  "Description": "Aligner ma voix, mon corps et mon regard avec ce que je dis pour être entendu.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que ma voix, mon corps et mon regard portent mon message.",
+  "Enonce2": "Je fais parfois attention à ma posture et à ma voix quand je parle.",
+  "Enonce3": "Ma voix, mon corps et mon regard sont alignés avec ce que je dis.",
+  "themes": [
+   "3c6abf02-c476-8196-a4d7-c7a2e57130c6"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81f0-a1aa-eafc10070e59",
+  "Code": "COM-02",
+  "Name": "Reformuler pour vérifier sa compréhension",
+  "Description": "Redire ce que j'ai compris avec les mots de l'autre et laisser corriger.",
+  "Difficulte": null,
+  "Enonce1": "Je sais ce qu'est une reformulation.",
+  "Enonce2": "Je reformule parfois ce que j'ai compris avant de répondre.",
+  "Enonce3": "Je reformule spontanément dans les conversations qui comptent et je laisse l'autre me corriger.",
+  "themes": [
+   "3c6abf02-c476-812c-b853-ef677ff51e04"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81f7-890a-db39d7ca3472",
+  "Code": "COM-08",
+  "Name": "Choisir le bon moment et le bon canal",
+  "Description": "Adapter ce que je dis, quand et comment, à la personne et au contexte.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que le moment et le canal comptent autant que le message.",
+  "Enonce2": "Je réfléchis parfois au bon moment avant d'aborder un sujet.",
+  "Enonce3": "J'adapte systématiquement le moment, le canal et la forme à la personne et au contexte.",
+  "themes": [
+   "3c6abf02-c476-8135-8f22-cbe58d66948c"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81fc-b0d1-d1e2f9c237ef",
+  "Code": "COM-03",
+  "Name": "Entendre ce qui n'est pas dit",
+  "Description": "Percevoir l'émotion ou le besoin derrière les mots et le vérifier avec l'autre.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'il y a souvent une émotion ou un besoin derrière les mots.",
+  "Enonce2": "Je perçois parfois ce qui n'est pas dit et je le garde pour moi.",
+  "Enonce3": "Je perçois l'émotion derrière les mots et je la vérifie avec l'autre.",
+  "themes": [
+   "3c6abf02-c476-812c-b853-ef677ff51e04"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-810c-809a-d77567106569",
+  "Code": "ALI-05",
+  "Name": "Repérer quand on joue un rôle",
+  "Description": "Identifier les situations où je me conforme ou je me déguise pour être accepté.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'il m'arrive de jouer un rôle pour être accepté.",
+  "Enonce2": "Je repère après coup les situations où je me suis conformé.",
+  "Enonce3": "Je remarque sur le moment quand je commence à jouer un rôle.",
+  "themes": [
+   "3c6abf02-c476-81a5-a6b4-d5e0c5a6c0ae"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-810e-80d5-f62eb1538f55",
+  "Code": "ALI-11",
+  "Name": "Reconnaître son état de stress",
+  "Description": "Identifier dans le corps et le comportement les signes que je suis en mode alerte, avant que ça déborde.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que le stress se manifeste dans le corps et le comportement.",
+  "Enonce2": "Je reconnais mes signes de stress quand ils sont prononcés.",
+  "Enonce3": "Je repère mes premiers signes de stress, avant que ça déborde.",
+  "themes": [
+   "3c6abf02-c476-812d-bf66-f2f27ccbaf62"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8110-8e86-c100cd50043e",
+  "Code": "ALI-12",
+  "Name": "Revenir au calme par ses propres moyens",
+  "Description": "Utiliser des pratiques simples (respiration, ancrage, mouvement) pour réguler mon système nerveux en situation.",
+  "Difficulte": null,
+  "Enonce1": "Je connais au moins une technique de régulation (respiration, ancrage, mouvement).",
+  "Enonce2": "J'utilise parfois une technique de régulation quand je suis stressé.",
+  "Enonce3": "Je reviens au calme par mes propres moyens en situation, en quelques minutes.",
+  "themes": [
+   "3c6abf02-c476-812d-bf66-f2f27ccbaf62"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-812a-97fc-e33bb03d110c",
+  "Code": "ALI-13",
+  "Name": "Distinguer danger réel et danger perçu",
+  "Description": "Questionner ce que mon anxiété me raconte et le confronter à la réalité.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que mon anxiété surévalue souvent le danger.",
+  "Enonce2": "Je peux après coup distinguer ce qui était un danger réel d'un danger perçu.",
+  "Enonce3": "Je questionne en temps réel ce que mon anxiété me raconte et je le confronte à la réalité.",
+  "themes": [
+   "3c6abf02-c476-812d-bf66-f2f27ccbaf62"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-812a-b53c-d02323fd4231",
+  "Code": "ALI-10",
+  "Name": "Prendre soin de son corps comme d'un allié",
+  "Description": "Tenir des pratiques de sommeil, de mouvement et de récupération qui soutiennent ma vie plutôt que de la subir.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que le sommeil, le mouvement et la récupération comptent.",
+  "Enonce2": "J'ai une ou deux pratiques régulières qui soutiennent mon corps.",
+  "Enonce3": "Je prends soin de mon corps de façon régulière et je le considère comme un allié.",
+  "themes": [
+   "3c6abf02-c476-810f-809f-c5aa71e6f977"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-812e-b4fb-fb5a7f090039",
+  "Code": "ALI-14",
+  "Name": "Construire une hygiène anti-stress durable",
+  "Description": "Installer dans ma vie des espaces de récupération qui évitent l'accumulation.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que le stress s'accumule si je ne récupère pas.",
+  "Enonce2": "J'ai quelques espaces de récupération dans ma semaine.",
+  "Enonce3": "J'ai une hygiène anti-stress durable qui évite l'accumulation.",
+  "themes": [
+   "3c6abf02-c476-812d-bf66-f2f27ccbaf62"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8140-a832-debcf535eb1d",
+  "Code": "ALI-07",
+  "Name": "Écouter les signaux de son corps",
+  "Description": "Percevoir la fatigue, la tension, le plaisir ou le malaise avant qu'ils deviennent des symptômes.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que mon corps m'envoie des signaux avant les symptômes.",
+  "Enonce2": "Je perçois la fatigue ou la tension quand elle est déjà bien installée.",
+  "Enonce3": "Je perçois les signaux de mon corps tôt et j'en tiens compte.",
+  "themes": [
+   "3c6abf02-c476-810f-809f-c5aa71e6f977"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-814e-861d-c6d88f7eb10f",
+  "Code": "ALI-21",
+  "Name": "Formuler ce qui donne du sens à sa vie",
+  "Description": "Nommer ce pour quoi je me lève le matin, au-delà des obligations.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que la question du sens compte pour moi.",
+  "Enonce2": "Je peux dire ce qui me fait me lever le matin, au-delà des obligations.",
+  "Enonce3": "Ce qui donne du sens à ma vie est clair et je le reconnais dans mon quotidien.",
+  "themes": [
+   "3c6abf02-c476-8132-804e-e9a4909ee7f0"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8154-b278-ff35649f7ba8",
+  "Code": "ALI-06",
+  "Name": "Assumer sa singularité",
+  "Description": "Être soi dans un contexte où ce serait plus simple de rentrer dans le moule.",
+  "Difficulte": null,
+  "Enonce1": "J'ai envie d'être plus moi-même dans certains contextes.",
+  "Enonce2": "J'ose parfois être moi-même là où ce serait plus simple de rentrer dans le moule.",
+  "Enonce3": "J'assume ma singularité dans la plupart des contextes, y compris ceux où elle dérange.",
+  "themes": [
+   "3c6abf02-c476-81a5-a6b4-d5e0c5a6c0ae"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8157-bc9a-c6db9640bd31",
+  "Code": "ALI-23",
+  "Name": "Relier son quotidien à une direction",
+  "Description": "Donner une place concrète dans ma semaine à ce qui a du sens pour moi.",
+  "Difficulte": null,
+  "Enonce1": "Je voudrais que mon quotidien reflète davantage ce qui a du sens pour moi.",
+  "Enonce2": "Je donne parfois une place concrète dans ma semaine à ce qui compte.",
+  "Enonce3": "Ce qui a du sens pour moi a une place régulière et protégée dans ma vie.",
+  "themes": [
+   "3c6abf02-c476-8132-804e-e9a4909ee7f0"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8164-b286-f742d48516bd",
+  "Code": "ALI-22",
+  "Name": "Identifier sa manière de contribuer",
+  "Description": "Reconnaître la façon singulière dont j'apporte quelque chose aux autres ou au monde.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'ai une manière singulière d'apporter quelque chose.",
+  "Enonce2": "Je peux nommer ce que j'apporte aux autres ou au monde.",
+  "Enonce3": "Ma manière de contribuer est claire et je la mets en œuvre.",
+  "themes": [
+   "3c6abf02-c476-8132-804e-e9a4909ee7f0"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8165-aaf3-fa7d974b0f98",
+  "Code": "ALI-02",
+  "Name": "Repérer un conflit de valeurs",
+  "Description": "Reconnaître quand un malaise vient d'un écart entre une situation et une de mes valeurs.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'un malaise persistant peut signaler une valeur bafouée.",
+  "Enonce2": "Je peux relier après coup un malaise à une de mes valeurs.",
+  "Enonce3": "J'identifie sur le moment quand une situation entre en conflit avec une de mes valeurs.",
+  "themes": [
+   "3c6abf02-c476-814c-83cf-d27cbbc1ffd7"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8169-b035-ff6e34ba7d28",
+  "Code": "ALI-04",
+  "Name": "Reconnaître ses forces et ses talents",
+  "Description": "Nommer ce que je fais naturellement bien et ce qui me rend différent, sans modestie excessive.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'ai des forces, même si j'ai du mal à les nommer.",
+  "Enonce2": "Je peux citer trois forces ou talents qui me sont propres.",
+  "Enonce3": "Je connais mes forces et je les mobilise consciemment.",
+  "themes": [
+   "3c6abf02-c476-81a5-a6b4-d5e0c5a6c0ae"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-816d-8900-f6a1070049af",
+  "Code": "ALI-01",
+  "Name": "Identifier ses valeurs essentielles",
+  "Description": "Nommer les 3 à 5 valeurs qui comptent vraiment pour moi, au-delà des valeurs attendues ou héritées.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'il existe une différence entre mes valeurs réelles et celles que j'affiche.",
+  "Enonce2": "Je peux nommer mes 3 à 5 valeurs essentielles.",
+  "Enonce3": "Mes valeurs sont claires et je les reconnais à l'œuvre dans mes choix quotidiens.",
+  "themes": [
+   "3c6abf02-c476-814c-83cf-d27cbbc1ffd7"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8176-baf6-f0b6514b5e89",
+  "Code": "ALI-19",
+  "Name": "Identifier ce qui est subi",
+  "Description": "Repérer les situations que je maintiens par habitude, peur ou loyauté plutôt que par choix.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que je maintiens certaines situations par habitude ou par peur.",
+  "Enonce2": "Je peux nommer ce que je subis dans ma vie actuelle.",
+  "Enonce3": "Je distingue clairement ce que je choisis de ce que je subis.",
+  "themes": [
+   "3c6abf02-c476-812d-a87f-fcd92c3e267c"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8190-8118-fd458c7648b9",
+  "Code": "ALI-18",
+  "Name": "Évaluer l'écart entre sa vie et ce qu'on veut",
+  "Description": "Passer en revue les domaines de ma vie et mesurer honnêtement là où je suis aligné et là où je ne le suis pas.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'il y a un écart entre la vie que je mène et celle que je veux.",
+  "Enonce2": "J'ai fait un état des lieux honnête de mes domaines de vie.",
+  "Enonce3": "Je refais régulièrement le point sur mon alignement, domaine par domaine.",
+  "themes": [
+   "3c6abf02-c476-812d-a87f-fcd92c3e267c"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-819a-8419-c41c56cb076a",
+  "Code": "ALI-17",
+  "Name": "Habiter les deux pôles",
+  "Description": "Trouver une posture qui intègre les deux côtés plutôt que de choisir l'un contre l'autre.",
+  "Difficulte": null,
+  "Enonce1": "Je comprends qu'on peut habiter les deux pôles plutôt que choisir.",
+  "Enonce2": "J'ai déjà expérimenté une posture qui intègre les deux côtés d'une polarité.",
+  "Enonce3": "J'habite mes polarités avec souplesse, en passant d'un pôle à l'autre selon ce que la situation demande.",
+  "themes": [
+   "3c6abf02-c476-81b0-8c35-e65a4ed3baeb"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81a7-9524-fe2cb4be79ac",
+  "Code": "ALI-08",
+  "Name": "Connaître ses rythmes et son énergie",
+  "Description": "Identifier ce qui me recharge et ce qui me vide, et organiser mes journées en conséquence.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'il y a des choses qui me rechargent et d'autres qui me vident.",
+  "Enonce2": "Je peux lister ce qui me recharge et ce qui me vide.",
+  "Enonce3": "J'organise mes journées et mes semaines en fonction de mon énergie.",
+  "themes": [
+   "3c6abf02-c476-810f-809f-c5aa71e6f977"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81a7-b002-ccdab9c84394",
+  "Code": "ALI-20",
+  "Name": "Réajuster un domaine de vie",
+  "Description": "Mettre en œuvre un changement concret pour réduire un désalignement identifié.",
+  "Difficulte": null,
+  "Enonce1": "J'ai identifié un domaine de vie que je voudrais réajuster.",
+  "Enonce2": "J'ai engagé un changement concret sur au moins un désalignement.",
+  "Enonce3": "Je réajuste ma vie au fil du temps pour qu'elle me ressemble davantage.",
+  "themes": [
+   "3c6abf02-c476-812d-a87f-fcd92c3e267c"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81b5-8d8d-f3628a1ef712",
+  "Code": "ALI-09",
+  "Name": "Reconnaître les signes d'épuisement",
+  "Description": "Repérer les signaux d'alerte du surmenage et agir avant la rupture.",
+  "Difficulte": null,
+  "Enonce1": "Je connais les signes d'alerte de l'épuisement en théorie.",
+  "Enonce2": "Je reconnais mes propres signes d'alerte quand ils apparaissent.",
+  "Enonce3": "J'agis dès les premiers signes, avant la rupture.",
+  "themes": [
+   "3c6abf02-c476-810f-809f-c5aa71e6f977"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81c4-806e-f6bf8ff72c4d",
+  "Code": "ALI-24",
+  "Name": "Transmettre ce qu'on a reçu",
+  "Description": "Partager ce que j'ai appris ou traversé d'une manière qui sert quelqu'un d'autre.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que ce que j'ai traversé peut servir à d'autres.",
+  "Enonce2": "Je partage parfois ce que j'ai appris d'une manière qui aide quelqu'un.",
+  "Enonce3": "Je transmets ce que j'ai reçu de façon régulière et choisie.",
+  "themes": [
+   "3c6abf02-c476-8132-804e-e9a4909ee7f0"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81db-9f14-de511fd97ed3",
+  "Code": "ALI-03",
+  "Name": "Décider à partir de ses valeurs",
+  "Description": "Utiliser mes valeurs comme boussole dans un choix, y compris quand ce n'est pas l'option la plus confortable.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que mes valeurs peuvent servir de boussole.",
+  "Enonce2": "J'ai déjà pris une décision importante en m'appuyant explicitement sur mes valeurs.",
+  "Enonce3": "Je décide à partir de mes valeurs même quand ce n'est pas l'option la plus confortable.",
+  "themes": [
+   "3c6abf02-c476-814c-83cf-d27cbbc1ffd7"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81de-b285-c06db8330432",
+  "Code": "ALI-16",
+  "Name": "Identifier son pôle de prédilection et son pôle refusé",
+  "Description": "Voir vers quel côté je penche par défaut et ce que je rejette dans l'autre.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'ai un pôle de prédilection et un pôle que je refuse.",
+  "Enonce2": "Je peux dire vers quel côté je penche par défaut et ce que je rejette dans l'autre.",
+  "Enonce3": "Je reconnais la valeur du pôle que je refuse.",
+  "themes": [
+   "3c6abf02-c476-81b0-8c35-e65a4ed3baeb"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81ef-9226-e321be655e87",
+  "Code": "ALI-15",
+  "Name": "Repérer une polarité à l'œuvre",
+  "Description": "Reconnaître quand je suis tiraillé entre deux pôles qui semblent s'exclure (tenir / lâcher, moi / les autres, sécurité / liberté).",
+  "Difficulte": null,
+  "Enonce1": "Je sais que certaines de mes tensions viennent de deux pôles qui semblent s'exclure.",
+  "Enonce2": "Je peux nommer au moins une polarité dans laquelle je suis tiraillé.",
+  "Enonce3": "Je repère en situation quand une polarité est à l'œuvre.",
+  "themes": [
+   "3c6abf02-c476-81b0-8c35-e65a4ed3baeb"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-810d-8cba-d43691bb05a6",
+  "Code": "INT-13",
+  "Name": "Comprendre l'intention d'une part",
+  "Description": "Découvrir ce qu'une part cherche à protéger ou à obtenir, y compris quand son comportement me nuit.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une part qui me nuit cherche malgré tout à me protéger.",
+  "Enonce2": "Je peux dire ce qu'au moins une de mes parts essaie d'obtenir ou d'éviter.",
+  "Enonce3": "Je comprends l'intention positive de mes parts, y compris les plus dérangeantes.",
+  "themes": [
+   "3c6abf02-c476-81e9-a4d4-c9624b793b32"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-810f-84e1-fb58ba36bcc5",
+  "Code": "INT-20",
+  "Name": "Relire son parcours avec lucidité",
+  "Description": "Raconter mon histoire en identifiant les étapes clés, les blessures et ce qu'elles ont construit en moi.",
+  "Difficulte": null,
+  "Enonce1": "Je peux raconter les grandes étapes de mon parcours.",
+  "Enonce2": "Je sais identifier les blessures et les tournants qui m'ont construit.",
+  "Enonce3": "Je raconte mon histoire avec lucidité, sans la subir ni la dramatiser.",
+  "themes": [
+   "3c6abf02-c476-813a-baec-cee68ddb9b28"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8117-bf94-dc30428cc814",
+  "Code": "INT-16",
+  "Name": "Reconnaître sa valeur indépendamment de ses résultats",
+  "Description": "Distinguer ce que je vaux de ce que je produis, et ne plus mesurer mon estime à mes performances.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que ma valeur ne dépend pas de mes résultats, même si je ne le ressens pas toujours.",
+  "Enonce2": "Je distingue parfois ce que je vaux de ce que je produis.",
+  "Enonce3": "Mon estime reste stable face à un échec ou un succès.",
+  "themes": [
+   "3c6abf02-c476-81d5-a1a7-f5e49dd76082"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8130-b5da-d0a8aa0be3f2",
+  "Code": "INT-14",
+  "Name": "Dialoguer avec une part plutôt que la combattre",
+  "Description": "Entrer en relation avec une part critique ou saboteuse sans la faire taire ni lui obéir.",
+  "Difficulte": null,
+  "Enonce1": "Je reconnais mon réflexe de faire taire ou d'obéir à une part critique.",
+  "Enonce2": "J'ai déjà dialogué avec une de mes parts plutôt que de la combattre.",
+  "Enonce3": "J'entre en relation avec mes parts de façon régulière, avec curiosité plutôt qu'avec jugement.",
+  "themes": [
+   "3c6abf02-c476-81e9-a4d4-c9624b793b32"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8141-a98d-f87d7d833589",
+  "Code": "INT-18",
+  "Name": "Accueillir ses limites sans se dévaloriser",
+  "Description": "Reconnaître une faiblesse ou une erreur avec lucidité, sans basculer dans la honte ou l'auto-dévalorisation.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une erreur ne dit rien de ma valeur.",
+  "Enonce2": "Je reconnais une faiblesse ou une erreur sans basculer dans la honte, dans la plupart des cas.",
+  "Enonce3": "J'accueille mes limites avec lucidité et sans me dévaloriser, y compris sous le regard des autres.",
+  "themes": [
+   "3c6abf02-c476-81d5-a1a7-f5e49dd76082"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8177-ad69-c98c54eac434",
+  "Code": "INT-17",
+  "Name": "Se libérer du regard des autres",
+  "Description": "Identifier quand je cherche une validation extérieure et revenir à mon propre jugement.",
+  "Difficulte": null,
+  "Enonce1": "Je repère les moments où je cherche une validation extérieure.",
+  "Enonce2": "Je parviens parfois à revenir à mon propre jugement au lieu d'attendre celui des autres.",
+  "Enonce3": "Je décide et j'agis à partir de mon propre jugement, sans avoir besoin d'être approuvé.",
+  "themes": [
+   "3c6abf02-c476-81d5-a1a7-f5e49dd76082"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8192-bc08-dca686987df4",
+  "Code": "INT-15",
+  "Name": "Revenir à son centre",
+  "Description": "Retrouver une position intérieure calme et curieuse d'où je peux écouter mes parts sans être dirigé par l'une d'elles.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'il existe en moi un espace calme d'où je peux observer mes parts.",
+  "Enonce2": "Je retrouve cet espace quand je suis au calme ou accompagné.",
+  "Enonce3": "Je reviens à mon centre en situation, même quand une part est très activée.",
+  "themes": [
+   "3c6abf02-c476-81e9-a4d4-c9624b793b32"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81c8-a279-e18b9255c246",
+  "Code": "INT-22",
+  "Name": "Faire d'une blessure une ressource",
+  "Description": "Reconnaître ce qu'une épreuve m'a appris et comment elle nourrit aujourd'hui ma manière d'être.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une épreuve peut devenir une ressource.",
+  "Enonce2": "Je peux dire ce qu'au moins une blessure m'a appris.",
+  "Enonce3": "Je m'appuie consciemment sur ce que mes épreuves m'ont donné dans ma manière d'être aujourd'hui.",
+  "themes": [
+   "3c6abf02-c476-813a-baec-cee68ddb9b28"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81dd-9280-cb7bc0f6440d",
+  "Code": "INT-19",
+  "Name": "Se traiter avec bienveillance",
+  "Description": "Me parler comme je parlerais à quelqu'un que j'aime, en particulier dans les moments difficiles.",
+  "Difficulte": null,
+  "Enonce1": "Je remarque quand je me parle durement.",
+  "Enonce2": "Je me parle avec bienveillance dans les moments ordinaires.",
+  "Enonce3": "Je me traite avec bienveillance surtout dans les moments difficiles.",
+  "themes": [
+   "3c6abf02-c476-81d5-a1a7-f5e49dd76082"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81dd-a542-d053fe9a8b2b",
+  "Code": "INT-21",
+  "Name": "Repérer ses héritages",
+  "Description": "Identifier ce que j'ai reçu de ma famille — loyautés, injonctions, modèles — et ce que j'en garde ou non.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que j'ai reçu de ma famille des injonctions et des modèles.",
+  "Enonce2": "Je peux nommer deux ou trois héritages familiaux qui influencent encore ma vie.",
+  "Enonce3": "J'ai trié ce que je garde et ce que je laisse de mes héritages.",
+  "themes": [
+   "3c6abf02-c476-813a-baec-cee68ddb9b28"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81e1-b3f5-e66dea0f1492",
+  "Code": "INT-12",
+  "Name": "Identifier les parts qui s'expriment en soi",
+  "Description": "Reconnaître les différentes voix intérieures (juge, protecteur, saboteur, enfant) et distinguer laquelle parle à un moment donné.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que plusieurs voix cohabitent en moi et qu'elles ne disent pas toutes la même chose.",
+  "Enonce2": "Je peux nommer deux ou trois de mes parts principales (le juge, le protecteur, l'enfant…).",
+  "Enonce3": "J'identifie en situation quelle part est en train de parler.",
+  "themes": [
+   "3c6abf02-c476-81e9-a4d4-c9624b793b32"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8100-a63d-e6e30da530d4",
+  "Code": "INT-09",
+  "Name": "Retracer l'origine d'un schéma",
+  "Description": "Comprendre d'où vient un scénario répétitif et ce qu'il a protégé à une époque.",
+  "Difficulte": null,
+  "Enonce1": "Je sais que mes schémas ont eu une fonction protectrice à une époque.",
+  "Enonce2": "Je peux raconter d'où vient un de mes scénarios répétitifs.",
+  "Enonce3": "Je relie mes schémas actuels à leur origine sans m'y identifier ni m'y enfermer.",
+  "themes": [
+   "3c6abf02-c476-81c1-a601-d2c63d475b8d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-811f-b0c0-ff2d580b9ce1",
+  "Code": "INT-02",
+  "Name": "Décoder le message d'une émotion",
+  "Description": "Comprendre ce qu'une émotion signale sur ma situation ou mes besoins, au lieu de la juger ou de la subir.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une émotion est un signal et pas un défaut.",
+  "Enonce2": "Je peux expliquer après coup ce qu'une émotion m'a indiqué sur ma situation.",
+  "Enonce3": "Je lis le message d'une émotion en temps réel et j'en tiens compte dans ma réaction.",
+  "themes": [
+   "3c6abf02-c476-8103-b72a-fa44a4c0bb2d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8124-9b5f-f0d54dcaec02",
+  "Code": "INT-01",
+  "Name": "Reconnaître et nommer ses émotions",
+  "Description": "Identifier ce que je ressens au moment où je le ressens, et le nommer avec précision plutôt que par « ça va » ou « ça ne va pas ».",
+  "Difficulte": null,
+  "Enonce1": "Je sais distinguer les grandes familles d'émotions (peur, colère, tristesse, joie) quand je les ressens.",
+  "Enonce2": "Je mets un mot précis sur ce que je ressens dans la plupart des situations du quotidien.",
+  "Enonce3": "Je nomme mon émotion au moment même où elle survient, y compris sous pression.",
+  "themes": [
+   "3c6abf02-c476-8103-b72a-fa44a4c0bb2d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8135-ba4a-d0f944bee3b9",
+  "Code": "INT-08",
+  "Name": "Repérer une croyance limitante à l'œuvre",
+  "Description": "Identifier la pensée automatique qui se cache derrière un blocage récurrent et la formuler explicitement.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'un blocage récurrent repose souvent sur une pensée automatique.",
+  "Enonce2": "Je peux formuler au moins une croyance limitante qui me freine.",
+  "Enonce3": "Je repère une croyance à l'œuvre au moment où elle influence mon comportement.",
+  "themes": [
+   "3c6abf02-c476-81c1-a601-d2c63d475b8d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8141-a229-ec5cdc32efcf",
+  "Code": "INT-07",
+  "Name": "Prendre la responsabilité de ses besoins",
+  "Description": "Assumer que mes besoins m'appartiennent et trouver plusieurs manières de les nourrir, sans les déléguer à une seule personne.",
+  "Difficulte": null,
+  "Enonce1": "Je reconnais que mes besoins m'appartiennent et ne sont pas la responsabilité d'une seule personne.",
+  "Enonce2": "J'ai identifié plusieurs manières de nourrir mes besoins principaux.",
+  "Enonce3": "Je prends soin de mes besoins de façon régulière, sans attendre que les autres les devinent.",
+  "themes": [
+   "3c6abf02-c476-8165-8a69-efd398d13748"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-8165-b716-ee5f38f81505",
+  "Code": "INT-10",
+  "Name": "Mettre une croyance à l'épreuve",
+  "Description": "Chercher les faits qui contredisent une croyance et en formuler une plus juste et plus aidante.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une croyance n'est pas un fait.",
+  "Enonce2": "J'ai déjà confronté une de mes croyances aux faits qui la contredisent.",
+  "Enonce3": "Je reformule régulièrement mes croyances limitantes en croyances plus justes et je les mets en pratique.",
+  "themes": [
+   "3c6abf02-c476-81c1-a601-d2c63d475b8d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81be-a341-ced9ef078902",
+  "Code": "INT-05",
+  "Name": "Identifier le besoin derrière une réaction",
+  "Description": "Remonter d'une frustration, d'une envie ou d'une colère jusqu'au besoin profond qu'elle exprime.",
+  "Difficulte": null,
+  "Enonce1": "Je sais qu'une frustration récurrente cache un besoin non satisfait.",
+  "Enonce2": "Je peux remonter d'une réaction forte jusqu'au besoin qu'elle exprime, avec du recul.",
+  "Enonce3": "J'identifie sur le moment le besoin qui se cache derrière ma réaction.",
+  "themes": [
+   "3c6abf02-c476-8165-8a69-efd398d13748"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81e1-a897-fe80c84f7f6c",
+  "Code": "INT-04",
+  "Name": "Réguler une émotion forte",
+  "Description": "Revenir à un état où je peux penser et choisir, quand une émotion me submerge.",
+  "Difficulte": null,
+  "Enonce1": "Je sais repérer les signes que je suis en train d'être submergé.",
+  "Enonce2": "J'ai au moins une pratique qui m'aide à revenir au calme et je l'utilise parfois.",
+  "Enonce3": "Je retrouve ma capacité à penser et à choisir en quelques minutes quand une émotion me submerge.",
+  "themes": [
+   "3c6abf02-c476-8103-b72a-fa44a4c0bb2d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81f6-bef2-e1526222a5b7",
+  "Code": "INT-06",
+  "Name": "Distinguer besoin et stratégie",
+  "Description": "Différencier ce dont j'ai vraiment besoin (reconnaissance, sécurité, lien) des moyens que j'emploie pour l'obtenir.",
+  "Difficulte": null,
+  "Enonce1": "Je comprends la différence entre un besoin (être reconnu) et une stratégie (être félicité par mon manager).",
+  "Enonce2": "Je repère parfois que je m'accroche à une stratégie alors que le besoin pourrait être nourri autrement.",
+  "Enonce3": "Je distingue spontanément besoin et stratégie et j'élargis mes options en situation.",
+  "themes": [
+   "3c6abf02-c476-8165-8a69-efd398d13748"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81fb-bc4d-c5035f34e8b4",
+  "Code": "INT-03",
+  "Name": "Accueillir une émotion sans la fuir ni la déborder",
+  "Description": "Laisser une émotion me traverser, y compris les plus inconfortables, sans l'étouffer, la rationaliser ou exploser.",
+  "Difficulte": null,
+  "Enonce1": "Je reconnais mes stratégies d'évitement (rationaliser, minimiser, m'occuper) quand une émotion monte.",
+  "Enonce2": "Je parviens parfois à rester avec une émotion inconfortable sans la fuir ni la déverser sur les autres.",
+  "Enonce3": "Je laisse une émotion me traverser jusqu'au bout, même forte, sans m'y perdre.",
+  "themes": [
+   "3c6abf02-c476-8103-b72a-fa44a4c0bb2d"
+  ]
+ },
+ {
+  "page_id": "3c6abf02-c476-81fe-8406-e44e5534d81b",
+  "Code": "INT-11",
+  "Name": "Interrompre un schéma en situation",
+  "Description": "Reconnaître un scénario pendant qu'il se rejoue et choisir une réponse différente.",
+  "Difficulte": null,
+  "Enonce1": "Je reconnais après coup quand un schéma s'est rejoué.",
+  "Enonce2": "Je repère parfois un schéma pendant qu'il se déroule.",
+  "Enonce3": "J'interromps un schéma en situation et je choisis une réponse différente.",
+  "themes": [
+   "3c6abf02-c476-81c1-a601-d2c63d475b8d"
+  ]
+ }
+]

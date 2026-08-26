@@ -1,7 +1,9 @@
 const { creerClientServeur, TABLE_SNAPSHOTS } = require('./supabase-client.js');
 const { calculerOuverture, niveauxComplets, normaliserNiveau } = require('./ouverture-v2.js');
+// Importée plutôt que redéfinie : la même constante à deux endroits finit toujours par
+// diverger, et ici la divergence rendrait les snapshots illisibles en silence.
+const { VERSION_REFERENTIEL } = require('./dimensions-v2.js');
 
-const VERSION_REFERENTIEL = 2;
 const MAX_CIBLES_MAINTENANT = 3;
 
 const UUID_V4_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;

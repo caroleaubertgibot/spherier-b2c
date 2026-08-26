@@ -1,9 +1,7 @@
 require('dotenv').config({ quiet: true });
 
 const { Client, collectPaginatedAPI } = require('@notionhq/client');
-const { DIMENSIONS_V2, ECHELLE_V2 } = require('./dimensions-v2.js');
-
-const VERSION_REFERENTIEL = 2;
+const { DIMENSIONS_V2, ECHELLE_V2, VERSION_REFERENTIEL } = require('./dimensions-v2.js');
 
 const { NOTION_TOKEN, DB_THEMES, DB_COMPETENCES, DB_RESSOURCES } = process.env;
 
@@ -160,6 +158,8 @@ async function lireReferentielDepuisNotion() {
           2: texte(p, 'Énoncé N2'),
           3: texte(p, 'Énoncé N3'),
         },
+        // Accessible / Exigeant, pour la pastille de difficulté.
+        difficulty: selection(p, 'Difficulté') || null,
         resources: relations(p, '📋 Ressources').filter((id) => idsRessourcesActives.has(id)),
       };
     })

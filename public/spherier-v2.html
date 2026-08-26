@@ -20,12 +20,13 @@
     --line-faint: rgba(240, 235, 224, 0.08);
     --line: rgba(240, 235, 224, 0.18);
 
-    /* Teintes des 5 dimensions. Le doré reste réservé à la sélection « maintenant ». */
-    --d-int: #d97a4a;
-    --d-ali: #7eb0ce;
-    --d-com: #c4523e;
-    --d-rel: #9c8fd1;
-    --d-tra: #6e9c8f;
+    /* Teintes des 3 dimensions. Le doré reste réservé à la sélection « maintenant ». */
+    --d-moi: #d97a4a;
+    --d-aut: #7eb0ce;
+    --d-mon: #6e9c8f;
+    /* Difficulté : sémantique, distincte des teintes de dimension et du doré. */
+    --diff-accessible: #7c9c6e;
+    --diff-exigeant: #d08b3f;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -95,7 +96,7 @@
     content: '';
     position: absolute;
     inset: 5px;
-    border: 1px solid var(--d-int);
+    border: 1px solid var(--d-moi);
   }
   .brand-text {
     font-family: 'Cormorant Garamond', serif;
@@ -164,7 +165,7 @@
   }
   .message[hidden] { display: none; }
   .message .mark { display: block; font-size: 34px; color: var(--gold); opacity: 0.5; margin-bottom: 16px; }
-  .message.erreur .mark { color: var(--d-com); }
+  .message.erreur .mark { color: #c4523e; }
   .message small {
     display: block;
     margin-top: 12px;
@@ -675,6 +676,19 @@
     padding-top: 13px; border-top: 1px solid var(--line-faint);
     font-family: 'Cormorant Garamond', serif; font-style: italic; }
 
+
+  /* PASTILLE DE DIFFICULTÉ */
+  .pastille-diff {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+    padding: 3px 9px 3px 7px; border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--dc) 45%, transparent);
+    color: var(--dc); white-space: nowrap;
+  }
+  .pastille-diff i { width: 6px; height: 6px; border-radius: 50%; background: var(--dc); flex-shrink: 0; }
+  .panneau-diff { margin-top: 12px; }
+  .comp-item .pastille-diff { font-size: 9px; padding: 2px 7px 2px 6px; }
+
   @media (max-width: 640px) {
     .barre-sauvegarde { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 12px; }
     .barre-actions { justify-content: stretch; }
@@ -796,14 +810,15 @@
 
   // Teinte par dimension : présentation seule, le serveur ne s'en occupe pas.
   const TEINTES = {
-    INT: 'var(--d-int)',
-    ALI: 'var(--d-ali)',
-    COM: 'var(--d-com)',
-    REL: 'var(--d-rel)',
-    TRA: 'var(--d-tra)',
+    MOI: 'var(--d-moi)',
+    AUT: 'var(--d-aut)',
+    MON: 'var(--d-mon)',
   };
-  const TEINTES_HEX = {
-    INT: '#d97a4a', ALI: '#7eb0ce', COM: '#c4523e', REL: '#9c8fd1', TRA: '#6e9c8f',
+  const TEINTES_HEX = { MOI: '#d97a4a', AUT: '#7eb0ce', MON: '#6e9c8f' };
+
+  const DIFFICULTES = {
+    Accessible: { couleur: 'var(--diff-accessible)', hex: '#7c9c6e' },
+    Exigeant: { couleur: 'var(--diff-exigeant)', hex: '#d08b3f' },
   };
 
   // ============================================================
@@ -1058,6 +1073,7 @@
       ${legendeConstellation(teinte)}
     `;
     ajusterCadrage(conteneur.querySelector('svg'));
+    centrerSurLesRacines(conteneur, themes);
 
     conteneur.querySelectorAll('.theme[data-theme]').forEach((g) => {
       const ouvrir = () => ouvrirTheme(g.dataset.theme, idDimension);
@@ -1076,6 +1092,21 @@
     });
 
     conteneur.dataset.rendu = 'oui';
+  }
+
+  // Quand la carte déborde en largeur, elle s'ouvrait sur son bord gauche — donc sur
+  // une feuille arbitraire. On la positionne d'emblée sur ses racines : c'est de là que
+  // part la lecture, et c'est ce que le membre doit voir en premier.
+  function centrerSurLesRacines(conteneur, themes) {
+    if (conteneur.scrollWidth <= conteneur.clientWidth + 1) return;
+    const cibles = themes.filter((t) => !themes.some((o) => o.feeds.includes(t.id)));
+    if (cibles.length === 0) return;
+    const svg = conteneur.querySelector('svg');
+    const vb = svg.viewBox.baseVal;
+    const echelle = svg.getBoundingClientRect().width / vb.width;
+    const centre = cibles.reduce((somme, t) => somme + t.x, 0) / cibles.length;
+    const x = (centre - vb.x) * echelle;
+    conteneur.scrollLeft = Math.max(0, x - conteneur.clientWidth / 2);
   }
 
   // Échelle en dessous de laquelle les libellés deviennent illisibles. À 0.85, un
@@ -1302,6 +1333,12 @@
     </svg>`;
   }
 
+  function pastilleDifficulte(competence, classe = '') {
+    const d = DIFFICULTES[competence.difficulty];
+    if (!d) return '';
+    return `<span class="pastille-diff ${classe}" style="--dc: ${d.couleur}"><i></i>${echapper(competence.difficulty)}</span>`;
+  }
+
   function carteRessource(r) {
     const meta = (r.type || []).join(' · ');
     const lien = r.url && /^https?:\/\//i.test(r.url) ? r.url : null;
@@ -1460,7 +1497,7 @@
           .replace('fill-opacity="' + CRANS[Math.max(niveau, 1)].opacite + '"', `fill-opacity="${niveau === 0 ? 0.22 : CRANS[niveau].opacite}"`)}</span>
         <span>
           <span class="comp-nom">${echapper(c.name)}</span>
-          ${marques ? `<span class="comp-marques">${marques}</span>` : ''}
+          <span class="comp-marques">${pastilleDifficulte(c)}${marques}</span>
         </span>
         <span class="comp-palier">${niveau === 0 ? 'À situer' : echapper(etat.referentiel.scale[niveau])}</span>
       </button>`;
@@ -1703,6 +1740,7 @@
       <p class="panneau-fil">${echapper(dimension ? dimension.name : '')} <span>›</span> <b>${echapper(theme ? theme.name : '')}</b></p>
       <h2 class="panneau-titre" id="panneau-titre">${echapper(competence.name)}</h2>
       ${competence.definition ? `<p class="panneau-def">${echapper(competence.definition)}</p>` : ''}
+      ${pastilleDifficulte(competence, 'panneau-diff')}
     `;
     elPanneauCorps.innerHTML = escalier(competence, niveau, teinte)
       + sectionSelections(competence)
