@@ -749,6 +749,65 @@
   .dimension-situer small { font-style: normal; font-family: 'Inter Tight', sans-serif;
     font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--stone); }
 
+
+  /* NOTE PERSONNELLE
+     Repliée quand elle est vide pour ne pas concurrencer l'escalier, dépliée quand
+     elle existe : ce qui a été écrit doit se relire sans avoir à le chercher. */
+  .note-bloc { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line-faint); }
+  .note-entete {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    background: none; border: none; padding: 0; cursor: pointer;
+    color: var(--stone); font: inherit;
+    font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
+  }
+  .note-entete:hover { color: var(--paper-dim); }
+  .note-entete .chev { margin-left: auto; font-size: 11px; transition: transform .25s ease; letter-spacing: 0; }
+  .note-bloc.ouverte .note-entete .chev { transform: rotate(180deg); }
+  .note-marque {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--teinte-p);
+    flex-shrink: 0; box-shadow: 0 0 7px var(--teinte-p);
+  }
+  .note-corps { display: none; margin-top: 14px; }
+  .note-bloc.ouverte .note-corps { display: block; }
+
+  .note-champ {
+    width: 100%; min-height: 108px; resize: vertical;
+    padding: 13px 15px; border-radius: 11px;
+    border: 1px solid var(--line-faint); background: rgba(240,235,224,.03);
+    color: var(--paper); font-family: 'Inter Tight', sans-serif; font-size: 13.5px; line-height: 1.6;
+    outline: none; transition: border-color .25s ease;
+  }
+  .note-champ::placeholder { color: var(--stone); }
+  .note-champ:focus { border-color: var(--teinte-p); }
+
+  .note-pied { display: flex; align-items: center; gap: 12px; margin-top: 9px; flex-wrap: wrap; }
+  .note-etat {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12.5px;
+    color: var(--stone); display: inline-flex; align-items: center; gap: 7px;
+  }
+  .note-etat.encours { color: var(--paper-dim); }
+  .note-etat.enregistree { color: var(--diff-accessible); }
+  .note-etat.echec { color: #e8a08f; }
+  .note-etat i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+  .note-btn {
+    margin-left: auto; padding: 7px 15px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line-faint); background: rgba(240,235,224,.03); color: var(--paper-dim);
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
+    transition: all .25s ease;
+  }
+  .note-btn:hover:not(:disabled) { border-color: var(--line); color: var(--paper); }
+  .note-btn:disabled { opacity: .4; cursor: default; }
+  .note-compteur { font-size: 11px; color: var(--stone); font-variant-numeric: tabular-nums; }
+
+  /* Signalement d'une compétence annotée, partout où elle apparaît en liste. */
+  .marque-note {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--paper-dim); border: 1px solid var(--line-faint);
+    border-radius: 999px; padding: 1px 8px 1px 6px;
+  }
+  .marque-note::before { content: '✎'; font-size: 10px; letter-spacing: 0; }
+
   @media (max-width: 640px) {
     .barre-sauvegarde { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 12px; }
     .barre-actions { justify-content: stretch; }
@@ -865,6 +924,8 @@
     referentiel: null,
     computed: null,   // { levels, themes } calculés par le serveur
     snapshot: null,
+    notes: {},        // { CODE: { texte, cree_le, maj_le } } — hors snapshots, modifiables
+
     dimensionOuverte: null,
   };
 
@@ -1446,6 +1507,160 @@
     return `<span class="pastille-diff ${classe}" style="--dc: ${d.couleur}"><i></i>${echapper(competence.difficulty)}</span>`;
   }
 
+  // ============================================================
+  // NOTE PERSONNELLE
+  // ============================================================
+  // Une note ne passe PAS par la barre d'enregistrement du sphérier : quelques phrases
+  // écrites sur une conversation difficile ne doivent pas dépendre d'un geste que le
+  // membre pourrait oublier. Elle part donc seule — à la sortie du champ, et après une
+  // pause de frappe — avec un brouillon local en dernier recours.
+  const NOTE_DELAI_MS = 1500;
+  const NOTE_MAX = 4000;
+
+  let noteMinuteur = null;
+  let noteEnVol = null;
+
+  const cleNote = (code) => `spherier-v2-note-${CLIENT_ID}-${code}`;
+
+  function texteNote(code) {
+    return (etat.notes && etat.notes[code] ? etat.notes[code].texte : '') || '';
+  }
+
+  const aUneNote = (code) => texteNote(code).trim() !== '';
+
+  function marqueNote(code) {
+    return aUneNote(code) ? '<span class="marque-note">Note</span>' : '';
+  }
+
+  function blocNote(competence) {
+    const texte = texteNote(competence.id);
+    const brouillonLocal = lireBrouillonNote(competence.id);
+    const valeur = brouillonLocal !== null ? brouillonLocal : texte;
+    const ouvert = valeur.trim() !== '';
+
+    return `<section class="note-bloc${ouvert ? ' ouverte' : ''}" id="note-bloc">
+      <button type="button" class="note-entete" id="note-entete" aria-expanded="${ouvert}">
+        ${ouvert ? '<span class="note-marque"></span>' : ''}
+        <span>Ma note</span>
+        <span class="chev">▾</span>
+      </button>
+      <div class="note-corps">
+        <textarea class="note-champ" id="note-champ" maxlength="${NOTE_MAX}"
+          placeholder="Ce que tu veux garder de cette compétence : une situation, une intention, ce que tu as compris."
+          aria-label="Note personnelle">${echapper(valeur)}</textarea>
+        <div class="note-pied">
+          <span class="note-etat" id="note-etat"></span>
+          <span class="note-compteur" id="note-compteur"></span>
+          <button type="button" class="note-btn" id="note-btn" disabled>Enregistrer</button>
+        </div>
+      </div>
+    </section>`;
+  }
+
+  function lireBrouillonNote(code) {
+    try {
+      const v = localStorage.getItem(cleNote(code));
+      return v === null ? null : v;
+    } catch { return null; }
+  }
+
+  function ecrireBrouillonNote(code, texte) {
+    try {
+      if (texte === texteNote(code)) localStorage.removeItem(cleNote(code));
+      else localStorage.setItem(cleNote(code), texte);
+    } catch { /* stockage indisponible : on continue sans filet */ }
+  }
+
+  function etatNote(message, variante) {
+    const el = document.getElementById('note-etat');
+    if (!el) return;
+    el.className = 'note-etat ' + (variante || '');
+    el.innerHTML = message ? `<i></i>${echapper(message)}` : '';
+  }
+
+  function brancherNote(competence) {
+    const bloc = document.getElementById('note-bloc');
+    const champ = document.getElementById('note-champ');
+    const bouton = document.getElementById('note-btn');
+    const compteur = document.getElementById('note-compteur');
+    if (!bloc || !champ) return;
+
+    document.getElementById('note-entete').addEventListener('click', () => {
+      const ouverte = bloc.classList.toggle('ouverte');
+      document.getElementById('note-entete').setAttribute('aria-expanded', String(ouverte));
+      if (ouverte) champ.focus();
+    });
+
+    const majCompteur = () => {
+      const n = champ.value.length;
+      compteur.textContent = n > NOTE_MAX - 400 ? `${n} / ${NOTE_MAX}` : '';
+    };
+
+    const modifiee = () => champ.value.trim() !== texteNote(competence.id).trim();
+
+    const majBouton = () => {
+      bouton.disabled = !modifiee();
+      if (modifiee()) etatNote('Pas encore enregistrée', '');
+    };
+
+    const enregistrerLaNote = async () => {
+      if (!modifiee()) return;
+      clearTimeout(noteMinuteur);
+      const texte = champ.value;
+      etatNote('Enregistrement…', 'encours');
+      bouton.disabled = true;
+      noteEnVol = competence.id;
+      try {
+        const reponse = await fetch('/api/note', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ uuid: CLIENT_ID, code: competence.id, texte }),
+        });
+        if (!reponse.ok) {
+          const d = await reponse.json().catch(() => ({}));
+          throw new Error(d.erreur || `Le serveur a répondu ${reponse.status}`);
+        }
+        const { note } = await reponse.json();
+        if (!etat.notes) etat.notes = {};
+        if (note.supprimee) delete etat.notes[competence.id];
+        else etat.notes[competence.id] = { texte: note.texte, cree_le: note.cree_le, maj_le: note.maj_le };
+
+        try { localStorage.removeItem(cleNote(competence.id)); } catch {}
+        etatNote('Enregistrée', 'enregistree');
+        bouton.disabled = true;
+        // Le signalement « Note » doit apparaître aussitôt là où la compétence est listée.
+        if (themeAffiche) { /* la liste sera régénérée au retour */ }
+      } catch (err) {
+        // Rien n'est perdu : le texte reste à l'écran et sur l'appareil.
+        etatNote(`Non enregistrée — ${err.message}`, 'echec');
+        bouton.disabled = false;
+      } finally {
+        noteEnVol = null;
+      }
+    };
+
+    champ.addEventListener('input', () => {
+      ecrireBrouillonNote(competence.id, champ.value);
+      majCompteur();
+      majBouton();
+      clearTimeout(noteMinuteur);
+      noteMinuteur = setTimeout(enregistrerLaNote, NOTE_DELAI_MS);
+    });
+    // Sortir du champ enregistre sans attendre la pause : c'est le geste qui signale
+    // que l'on a fini d'écrire.
+    champ.addEventListener('blur', enregistrerLaNote);
+    bouton.addEventListener('click', enregistrerLaNote);
+
+    majCompteur();
+    if (modifiee()) {
+      etatNote('Retrouvée sur cet appareil, pas encore enregistrée', '');
+      bouton.disabled = false;
+    } else if (texteNote(competence.id)) {
+      const d = etat.notes[competence.id].maj_le;
+      etatNote(`Enregistrée le ${new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}`, '');
+    }
+  }
+
   function carteRessource(r) {
     const meta = (r.type || []).join(' · ');
     const lien = r.url && /^https?:\/\//i.test(r.url) ? r.url : null;
@@ -1604,7 +1819,7 @@
           .replace('fill-opacity="' + CRANS[Math.max(niveau, 1)].opacite + '"', `fill-opacity="${niveau === 0 ? 0.22 : CRANS[niveau].opacite}"`)}</span>
         <span>
           <span class="comp-nom">${echapper(c.name)}</span>
-          <span class="comp-marques">${pastilleDifficulte(c)}${marques}</span>
+          <span class="comp-marques">${pastilleDifficulte(c)}${marqueNote(c.id)}${marques}</span>
         </span>
         <span class="comp-palier">${niveau === 0 ? 'À situer' : echapper(etat.referentiel.scale[niveau])}</span>
       </button>`;
@@ -1689,7 +1904,7 @@
 
     return `<div class="sel-item${options.cible ? ' cible' : ''}">
       <button type="button" class="sel-nom" data-aller="${echapper(code)}">
-        ${echapper(c.name)}<small>${echapper(t ? t.name : '')}</small>
+        ${echapper(c.name)}<small>${echapper(t ? t.name : '')}${aUneNote(code) ? ' · note' : ''}</small>
       </button>
       <span class="sel-etat">${etatTexte}</span>
       ${promouvoir}
@@ -2002,8 +2217,10 @@
     `;
     elPanneauCorps.innerHTML = escalier(competence, niveau, teinte)
       + sectionSelections(competence)
-      + sectionRessources(competence);
+      + sectionRessources(competence)
+      + blocNote(competence);
     brancherPanneau(competence);
+    brancherNote(competence);
     if (!conserverDefilement) elPanneauCorps.scrollTop = 0;
 
     const btnRetour = document.getElementById('panneau-retour');
@@ -2235,6 +2452,7 @@
       etat.referentiel = referentiel;
       etat.computed = etatClient.computed;
       etat.snapshot = etatClient.snapshot;
+      etat.notes = etatClient.notes || {};
 
       const sel = etatClient.snapshot?.blob?.selections ?? { current: [], later: [] };
       // Normalisation à la lecture : un snapshot écrit avant que l'exclusion mutuelle
