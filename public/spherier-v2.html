@@ -808,6 +808,80 @@
   }
   .marque-note::before { content: '✎'; font-size: 10px; letter-spacing: 0; }
 
+
+  /* TABLEAU DE SYNTHÈSE
+     Replié par défaut : 152 lignes ouvertes d'un coup sont un mur. Chaque ligne repliée
+     porte sa répartition par niveau, pour que l'état se lise sans rien déplier — c'est
+     ce qui rend le balayage utile avant un coaching. */
+  .syn-filtres { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+  .syn-filtre {
+    padding: 6px 13px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line-faint); background: rgba(240,235,224,.03);
+    color: var(--paper-dim); font: inherit; font-size: 12px;
+    transition: all .2s ease;
+  }
+  .syn-filtre:hover { border-color: var(--line); color: var(--paper); }
+  .syn-filtre.actif { border-color: var(--gold); background: rgba(201,166,97,.14); color: var(--gold-bright); }
+  .syn-filtre .n { color: var(--stone); font-variant-numeric: tabular-nums; margin-left: 5px; }
+  .syn-filtre.actif .n { color: inherit; opacity: .75; }
+
+  .syn-action { margin-top: 12px; }
+  .syn-vide { font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 13.5px; color: var(--stone); padding: 22px 2px; }
+
+  .syn-dim + .syn-dim { margin-top: 10px; }
+  .syn-ligne {
+    display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 10px 12px;
+    width: 100%; padding: 12px 14px; border-radius: 11px; cursor: pointer;
+    background: none; border: 1px solid var(--line-faint); color: inherit; font: inherit;
+    text-align: left; transition: border-color .2s ease;
+  }
+  .syn-ligne:hover { border-color: var(--line); }
+  .syn-dim > .syn-ligne { border-color: color-mix(in srgb, var(--h) 35%, transparent);
+    background: color-mix(in srgb, var(--h) 7%, transparent); }
+  .syn-nom { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 16px; }
+  .syn-dim > .syn-ligne .syn-nom { font-size: 18px; }
+  .syn-compte { font-size: 11.5px; color: var(--stone); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .syn-chev { font-size: 11px; color: var(--stone); transition: transform .25s ease; }
+  .syn-ouvert > .syn-ligne .syn-chev { transform: rotate(180deg); }
+
+  /* Répartition par niveau : quatre segments, du non situé à J'incarne. */
+  .syn-repartition { grid-column: 1 / -1; display: flex; height: 4px; border-radius: 2px; overflow: hidden; background: var(--line-faint); }
+  .syn-repartition i { display: block; height: 100%; }
+  .syn-seg0 { background: rgba(240,235,224,.07); }
+  .syn-seg1 { background: color-mix(in srgb, var(--h) 40%, transparent); }
+  .syn-seg2 { background: color-mix(in srgb, var(--h) 70%, transparent); }
+  .syn-seg3 { background: var(--h); }
+
+  .syn-corps { display: none; padding: 8px 0 4px 14px; }
+  .syn-ouvert > .syn-corps { display: block; }
+  .syn-theme + .syn-theme { margin-top: 6px; }
+  .syn-verrou { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--stone); border: 1px solid var(--line-faint); border-radius: 999px; padding: 1px 7px; }
+
+  .syn-comp {
+    display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center;
+    width: 100%; padding: 10px 13px; margin-bottom: 5px; border-radius: 9px;
+    background: rgba(240,235,224,.02); border: 1px solid transparent;
+    cursor: pointer; color: inherit; font: inherit; text-align: left;
+    transition: border-color .2s ease;
+  }
+  .syn-comp:hover { border-color: var(--line-faint); }
+  .syn-comp-nom { font-size: 13px; line-height: 1.4; }
+  .syn-comp-niveau {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12px;
+    color: var(--stone); white-space: nowrap; text-align: right;
+  }
+  .syn-comp-niveau.situe { color: var(--paper-dim); }
+  .syn-comp-marques { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 5px; }
+
+  @media (max-width: 640px) {
+    .syn-ligne { grid-template-columns: 1fr auto; }
+    .syn-corps { padding-left: 8px; }
+    .syn-comp { grid-template-columns: 1fr; }
+    .syn-comp-niveau { text-align: left; }
+  }
+
   @media (max-width: 640px) {
     .barre-sauvegarde { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 12px; }
     .barre-actions { justify-content: stretch; }
@@ -849,6 +923,7 @@
       </div>
     </div>
     <div class="header-etat" id="header-etat" hidden>
+      <button type="button" class="btn-mois" id="btn-synthese">Vue d'ensemble</button>
       <button type="button" class="btn-mois" id="btn-mois" hidden>
         Mon mois <span class="compte" id="btn-mois-compte"></span>
       </button>
@@ -2146,6 +2221,164 @@
     });
     document.getElementById('situer-fermer').addEventListener('click', fermerPanneau);
   }
+
+  // ============================================================
+  // TABLEAU DE SYNTHÈSE
+  // ============================================================
+  // Raccourci vers la carte, comme « Mon mois » : rien ne s'y modifie. Le clic sur une
+  // ligne ouvre le panneau de compétence — une seule porte pour écrire.
+  const FILTRES = {
+    tout:      { libelle: 'Tout',            garde: () => true },
+    cibles:    { libelle: 'Mes cibles',      garde: (c) => brouillon.current.includes(c.id) || brouillon.later.includes(c.id) },
+    nonSituees:{ libelle: 'Non situées',     garde: (c) => (brouillon.levels[c.id] ?? 0) === 0 },
+    ouvertes:  { libelle: 'Thém. ouvertes',  garde: (c) => estOuverte(c.theme) },
+    accessible:{ libelle: 'Accessibles',     garde: (c) => c.difficulty === 'Accessible' },
+    exigeant:  { libelle: 'Exigeantes',      garde: (c) => c.difficulty === 'Exigeant' },
+  };
+
+  let synFiltres = new Set(['tout']);
+  let synDeplies = new Set();
+
+  // Les filtres se cumulent, sauf « Tout » qui les remplace tous. Croiser « Accessibles »
+  // et « Non situées » est justement le cas qui donne son sens à la pastille.
+  function synGarde(c) {
+    if (synFiltres.has('tout')) return true;
+    return [...synFiltres].every((f) => FILTRES[f].garde(c));
+  }
+
+  function repartition(codes, teinte) {
+    const n = codes.length || 1;
+    const compte = [0, 0, 0, 0];
+    codes.forEach((code) => { compte[brouillon.levels[code] ?? 0] += 1; });
+    return `<span class="syn-repartition" style="--h:${teinte}" aria-hidden="true">
+      ${compte.map((v, i) => v ? `<i class="syn-seg${i}" style="width:${(v / n) * 100}%"></i>` : '').join('')}
+    </span>`;
+  }
+
+  function ligneCompetence(c) {
+    const niveau = brouillon.levels[c.id] ?? 0;
+    const marques = [
+      pastilleDifficulte(c),
+      marqueNote(c.id),
+      brouillon.current.includes(c.id) ? '<span class="comp-marque comp-marque-maintenant">Ce mois</span>' : '',
+      brouillon.later.includes(c.id) ? '<span class="comp-marque comp-marque-plus-tard">Plus tard</span>' : '',
+    ].filter(Boolean).join('');
+    return `<button type="button" class="syn-comp" data-aller="${echapper(c.id)}">
+      <span class="syn-comp-nom">${echapper(c.name)}</span>
+      <span class="syn-comp-niveau${niveau ? ' situe' : ''}">${niveau ? echapper(etat.referentiel.scale[niveau]) : 'À situer'}</span>
+      ${marques ? `<span class="syn-comp-marques">${marques}</span>` : ''}
+    </button>`;
+  }
+
+  function ouvrirSynthese() {
+    competenceAffichee = null;
+    themeAffiche = null;
+    situer = null;
+    elPanneau.style.setProperty('--teinte-p', '#c9a661');
+
+    const retenues = etat.referentiel.competencies.filter(synGarde);
+    const codesRetenus = retenues.map((c) => c.id);
+
+    const chips = Object.entries(FILTRES).map(([cle, f]) => {
+      const n = etat.referentiel.competencies.filter(f.garde).length;
+      return `<button type="button" class="syn-filtre${synFiltres.has(cle) ? ' actif' : ''}" data-filtre="${cle}">
+        ${echapper(f.libelle)}<span class="n">${n}</span></button>`;
+    }).join('');
+
+    elPanneauTete.innerHTML = `
+      <p class="panneau-fil"><b>Vue d'ensemble</b></p>
+      <h2 class="panneau-titre" id="panneau-titre">Où j'en suis</h2>
+      <div class="syn-filtres">${chips}</div>`;
+
+    // Le rattrapage naturel : une fois les trous visibles, on va les combler.
+    const actionSituer = (synFiltres.has('nonSituees') && codesRetenus.length > 0)
+      ? `<div class="syn-action"><button type="button" class="dimension-situer" id="syn-situer" style="--teinte:#c9a661">
+           Me situer sur ces ${codesRetenus.length} compétences
+         </button></div>`
+      : '';
+
+    const corps = etat.referentiel.dimensions.map((d) => {
+      const teinte = TEINTES_HEX[d.id];
+      const themes = etat.referentiel.themes
+        .filter((t) => t.dimension === d.name)
+        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+      const blocsThemes = themes.map((t) => {
+        const comps = retenues.filter((c) => c.theme === t.id);
+        if (comps.length === 0) return '';
+        const codes = comps.map((c) => c.id);
+        const situees = codes.filter((x) => (brouillon.levels[x] ?? 0) > 0).length;
+        const ouverteT = estOuverte(t.id);
+        const cle = 'T:' + t.id;
+        return `<div class="syn-theme${synDeplies.has(cle) ? ' syn-ouvert' : ''}" data-cle="${cle}">
+          <button type="button" class="syn-ligne" data-plier="${cle}">
+            <span class="syn-nom">${echapper(t.name)}</span>
+            <span class="syn-compte">${situees}/${codes.length} situées${ouverteT ? '' : ' · '}</span>
+            ${ouverteT ? '' : '<span class="syn-verrou">à débloquer</span>'}
+            <span class="syn-chev">▾</span>
+            ${repartition(codes, teinte)}
+          </button>
+          <div class="syn-corps">${comps.map(ligneCompetence).join('')}</div>
+        </div>`;
+      }).join('');
+
+      if (!blocsThemes) return '';
+      const codesDim = retenues.filter((c) => themes.some((t) => t.id === c.theme)).map((c) => c.id);
+      const situeesDim = codesDim.filter((x) => (brouillon.levels[x] ?? 0) > 0).length;
+      const cleD = 'D:' + d.id;
+      return `<section class="syn-dim${synDeplies.has(cleD) ? ' syn-ouvert' : ''}" data-cle="${cleD}" style="--h:${teinte}">
+        <button type="button" class="syn-ligne" data-plier="${cleD}">
+          <span class="syn-nom">${echapper(d.name)}</span>
+          <span class="syn-compte">${situeesDim}/${codesDim.length} situées</span>
+          <span class="syn-chev">▾</span>
+          ${repartition(codesDim, teinte)}
+        </button>
+        <div class="syn-corps">${blocsThemes}</div>
+      </section>`;
+    }).join('');
+
+    elPanneauCorps.innerHTML = actionSituer
+      + (corps || `<p class="syn-vide">Aucune compétence ne correspond à ce croisement de filtres.</p>`);
+    elPanneauCorps.scrollTop = 0;
+
+    elPanneauCorps.querySelectorAll('[data-plier]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cle = btn.dataset.plier;
+        if (synDeplies.has(cle)) synDeplies.delete(cle); else synDeplies.add(cle);
+        ouvrirSynthese();
+      });
+    });
+    elPanneauCorps.querySelectorAll('[data-aller]').forEach((btn) => {
+      btn.addEventListener('click', () => allerVersCompetence(btn.dataset.aller));
+    });
+    const btnSituer = document.getElementById('syn-situer');
+    if (btnSituer) btnSituer.addEventListener('click', () => ouvrirMeSituer({
+      codes: codesRetenus, titre: 'Mes compétences non situées', teinte: '#c9a661',
+    }));
+
+    elPanneauTete.querySelectorAll('[data-filtre]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cle = btn.dataset.filtre;
+        if (cle === 'tout') synFiltres = new Set(['tout']);
+        else {
+          synFiltres.delete('tout');
+          if (synFiltres.has(cle)) synFiltres.delete(cle); else synFiltres.add(cle);
+          if (synFiltres.size === 0) synFiltres = new Set(['tout']);
+        }
+        // Un filtre actif sans rien de déplié n'apprend rien : on ouvre les dimensions
+        // qui ont des résultats, sans forcer l'ouverture des thématiques.
+        if (!synFiltres.has('tout')) {
+          etat.referentiel.dimensions.forEach((d) => synDeplies.add('D:' + d.id));
+        }
+        ouvrirSynthese();
+      });
+    });
+
+    afficherPanneau();
+    document.body.dataset.panneau = 'synthese';
+  }
+
+  document.getElementById('btn-synthese').addEventListener('click', ouvrirSynthese);
 
   function afficherPanneau() {
     clearTimeout(minuteurFermeture);
