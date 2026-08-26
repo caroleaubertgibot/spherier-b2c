@@ -689,6 +689,66 @@
   .panneau-diff { margin-top: 12px; }
   .comp-item .pastille-diff { font-size: 9px; padding: 2px 7px 2px 6px; }
 
+
+  /* ME SITUER — parcours compétence par compétence.
+     Personne ne se positionne sur 152 compétences en cliquant étoile par étoile. */
+  .situer { display: flex; flex-direction: column; min-height: 0; }
+  .situer-progres {
+    display: flex; align-items: center; gap: 12px;
+    padding: 0 0 14px; font-size: 12px; color: var(--stone);
+  }
+  .situer-jauge { flex: 1; height: 3px; border-radius: 2px; background: var(--line-faint); overflow: hidden; }
+  .situer-jauge i { display: block; height: 100%; background: var(--teinte-p); transition: width .3s ease; }
+  .situer-compte { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .situer-fil { font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--stone); }
+  .situer-fil b { color: var(--teinte-p); font-weight: 500; }
+  .situer-nom {
+    font-family: 'Cormorant Garamond', serif; font-weight: 500;
+    font-size: 23px; line-height: 1.2; margin: 8px 0 6px; text-wrap: balance;
+  }
+  .situer-def { font-size: 13.5px; line-height: 1.65; color: var(--paper-dim); }
+
+  .situer-pied {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    padding-top: 16px; margin-top: 18px; border-top: 1px solid var(--line-faint);
+  }
+  .situer-btn {
+    padding: 10px 20px; border-radius: 999px; cursor: pointer;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px;
+    border: 1px solid var(--line-faint); background: rgba(240,235,224,.03); color: var(--paper-dim);
+    transition: all .25s ease;
+  }
+  .situer-btn:hover:not(:disabled) { border-color: var(--line); color: var(--paper); }
+  .situer-btn:disabled { opacity: .4; cursor: default; }
+  .situer-passer { margin-left: auto; }
+  .situer-astuce { width: 100%; font-size: 12px; color: var(--stone);
+    font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
+  /* Fin de bloc : le moment où l'on propose d'enregistrer, pour pouvoir s'y reprendre. */
+  .situer-bilan { text-align: center; padding: 12px 0 4px; }
+  .situer-bilan .mark { display: block; font-size: 34px; color: var(--gold); opacity: .55; margin-bottom: 14px; }
+  .situer-bilan h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 21px; margin-bottom: 10px; }
+  .situer-bilan p { font-size: 13.5px; line-height: 1.65; color: var(--paper-dim); max-width: 46ch; margin: 0 auto; }
+  .situer-bilan-chiffres { display: flex; justify-content: center; gap: 28px; margin: 20px 0 6px; }
+  .situer-bilan-chiffres div { text-align: center; }
+  .situer-bilan-chiffres dt { font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--stone); }
+  .situer-bilan-chiffres dd { font-family: 'Cormorant Garamond', serif; font-size: 26px; margin-top: 3px;
+    font-variant-numeric: tabular-nums; }
+
+  /* Bouton d'entrée depuis une dimension. */
+  .dimension-situer {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
+    padding: 9px 18px; border-radius: 999px; cursor: pointer;
+    border: 1px solid color-mix(in srgb, var(--teinte) 45%, transparent);
+    background: color-mix(in srgb, var(--teinte) 10%, transparent);
+    color: var(--paper); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13.5px;
+    transition: all .25s ease;
+  }
+  .dimension-situer:hover { background: color-mix(in srgb, var(--teinte) 20%, transparent); }
+  .dimension-situer small { font-style: normal; font-family: 'Inter Tight', sans-serif;
+    font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--stone); }
+
   @media (max-width: 640px) {
     .barre-sauvegarde { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 12px; }
     .barre-actions { justify-content: stretch; }
@@ -739,14 +799,14 @@
   </header>
 
   <div class="titre">
-    <h1>Votre Sphérier</h1>
-    <p>Cinq dimensions à explorer. Ouvrez celle qui vous appelle pour découvrir ses thématiques et vous y situer.</p>
+    <h1>Ton Sphérier</h1>
+    <p>Trois dimensions à explorer. Ouvre celle qui t'appelle pour découvrir ses thématiques et t'y situer.</p>
     <p class="dernier-point" id="dernier-point" hidden></p>
   </div>
 
   <div class="message chargement" id="message">
     <span class="mark">✧</span>
-    <span id="message-texte">Lecture de votre sphérier…</span>
+    <span id="message-texte">Lecture de ton sphérier…</span>
     <small id="message-detail"></small>
   </div>
 
@@ -870,6 +930,31 @@
   // ============================================================
   // RENDU DES 5 DIMENSIONS
   // ============================================================
+  // Ordre de parcours : celui des thématiques, puis celui des codes. Le membre avance
+  // dans la logique du référentiel, pas dans un ordre arbitraire.
+  function codesDeDimension(dimension) {
+    const themes = etat.referentiel.themes
+      .filter((t) => t.dimension === dimension.name)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    return themes.flatMap((t) => etat.referentiel.competencies
+      .filter((c) => c.theme === t.id)
+      .map((c) => c.id));
+  }
+
+  function premiereNonSituee(codes) {
+    const i = codes.findIndex((c) => (brouillon.levels[c] ?? 0) === 0);
+    return i === -1 ? 0 : i;
+  }
+
+  function majAvancements() {
+    elDimensions.querySelectorAll('[data-avancement]').forEach((el) => {
+      const d = etat.referentiel.dimensions.find((x) => x.id === el.dataset.avancement);
+      const codes = codesDeDimension(d);
+      const situees = codes.filter((c) => (brouillon.levels[c] ?? 0) > 0).length;
+      el.textContent = `${situees} / ${codes.length} situées`;
+    });
+  }
+
   function competencesDeDimension(dimension) {
     const idsThemes = new Set(
       etat.referentiel.themes.filter((t) => t.dimension === dimension.name).map((t) => t.id)
@@ -903,7 +988,11 @@
             <span class="dimension-chevron">▾</span>
           </button>
           <div class="dimension-corps">
-            <p class="dimension-definition">${echapper(d.definition)}</p>
+            <p class="dimension-definition">${echapper(d.definition_ui || d.definition)}</p>
+            <button type="button" class="dimension-situer" data-situer="${echapper(d.id)}">
+              Me situer sur cette dimension
+              <small data-avancement="${echapper(d.id)}"></small>
+            </button>
             <div class="constellation-zone" data-constellation="${echapper(d.id)}"></div>
           </div>
         </section>
@@ -913,6 +1002,23 @@
     elDimensions.querySelectorAll('[data-toggle]').forEach((btn) => {
       btn.addEventListener('click', () => basculerDimension(btn.dataset.toggle));
     });
+
+    elDimensions.querySelectorAll('[data-situer]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const d = etat.referentiel.dimensions.find((x) => x.id === btn.dataset.situer);
+        ouvrirMeSituer({
+          codes: codesDeDimension(d),
+          titre: d.name,
+          teinte: TEINTES_HEX[d.id],
+          // On reprend là où il reste à faire, pas au début : réouvrir le parcours ne
+          // doit pas imposer de repasser sur ce qui est déjà situé.
+          depart: premiereNonSituee(codesDeDimension(d)),
+        });
+      });
+    });
+
+    majAvancements();
   }
 
   // Comportement toggle : ouvrir une dimension referme celle qui l'était, et recliquer
@@ -1256,6 +1362,7 @@
     enregistrerBrouillon();
     majBarre();
     majBoutonMois();
+    majAvancements();
     // Une ouverture qui bascule change les traits, les teintes et les cadenas : on
     // redessine la constellation concernée. Sinon un simple rafraîchissement d'étoiles
     // suffit, et l'animation reste imperceptible.
@@ -1388,20 +1495,20 @@
         <div class="marche-astre">${astreCran(n, teinte)}</div>
         <div>
           <p class="marche-palier">${echapper(etat.referentiel.scale[n])}
-            ${n === niveau ? '<span class="marche-vous">Votre niveau</span>' : ''}</p>
+            ${n === niveau ? '<span class="marche-vous">Ton niveau</span>' : ''}</p>
           <p class="marche-enonce">${echapper(competence.statements[n] || '')}</p>
         </div>
       </button>`;
     }).join('');
 
     const note = niveau === 0
-      ? "Cochez la marche la plus haute qui est vraie pour vous."
+      ? "Coche la marche la plus haute qui est vraie pour toi."
       : (niveau < 3
-        ? `La marche suivante : ${echapper(etat.referentiel.scale[niveau + 1])}. Recliquez sur votre marche pour revenir en arrière.`
-        : 'Vous êtes à la marche la plus haute. Recliquez dessus pour revenir en arrière.');
+        ? `La marche suivante : ${echapper(etat.referentiel.scale[niveau + 1])}. Reclique sur ta marche pour revenir en arrière.`
+        : 'Tu es à la marche la plus haute. Reclique dessus pour revenir en arrière.');
 
     return `<section class="panneau-section">
-      <p class="panneau-label">Où en êtes-vous</p>
+      <p class="panneau-label">Où tu en es</p>
       <div class="escalier">${marches}</div>
       <p class="escalier-note">${note}</p>
     </section>`;
@@ -1416,11 +1523,11 @@
     const plein = brouillon.current.length >= MAX_MAINTENANT && !estMaintenant;
 
     let raison = '';
-    if (!ouverte) raison = "Cette thématique n'est pas encore ouverte : vous pouvez la garder pour plus tard, et la travailler dès qu'elle se débloque.";
-    else if (plein) raison = `Vous travaillez déjà ${MAX_MAINTENANT} compétences ce mois. En choisir une autre vous proposera laquelle remplacer.`;
+    if (!ouverte) raison = "Cette thématique n'est pas encore ouverte : tu peux la garder pour plus tard, et la travailler dès qu'elle se débloque.";
+    else if (plein) raison = `Tu travailles déjà ${MAX_MAINTENANT} compétences ce mois. En choisir une autre te proposera laquelle remplacer.`;
 
     return `<section class="panneau-section">
-      <p class="panneau-label">Votre intention</p>
+      <p class="panneau-label">Ton intention</p>
       <div class="cibles">
         <button type="button" class="cible-btn cible-maintenant${estMaintenant ? ' active' : ''}"
           id="btn-maintenant" ${ouverte ? '' : 'disabled'} aria-pressed="${estMaintenant}">
@@ -1445,7 +1552,7 @@
       .filter(Boolean);
 
     zone.innerHTML = `<div class="remplacement">
-      <p>Vous travaillez déjà trois compétences ce mois. Laquelle <b>${echapper(competence.name)}</b> remplace-t-elle ?</p>
+      <p>Tu travailles déjà trois compétences ce mois. Laquelle <b>${echapper(competence.name)}</b> remplace-t-elle ?</p>
       <div class="remplacement-liste">
         ${actuelles.map((c) => {
           const t = etat.referentiel.themes.find((x) => x.id === c.theme);
@@ -1517,7 +1624,7 @@
           <p class="horizon-texte">
             <b>Pas encore ouverte</b>
             ${echapper(infos.unlock_hint || '')}
-            <br><br>Vous pouvez déjà tout lire ici, vous y situer, et garder une compétence pour plus tard.
+            <br><br>Tu peux déjà tout lire ici, t'y situer, et garder une compétence pour plus tard.
           </p>
         </div>
       </section>`;
@@ -1595,9 +1702,9 @@
     elPanneau.style.setProperty('--teinte-p', '#c9a661');
 
     elPanneauTete.innerHTML = `
-      <p class="panneau-fil"><b>Vos choix</b></p>
+      <p class="panneau-fil"><b>Tes choix</b></p>
       <h2 class="panneau-titre" id="panneau-titre">Mon mois</h2>
-      <p class="panneau-def">Ce que vous travaillez maintenant, et ce que vous gardez pour la suite.</p>`;
+      <p class="panneau-def">Ce que tu travailles maintenant, et ce que tu gardes pour la suite.</p>`;
 
     const cibles = brouillon.current.length
       ? brouillon.current.map((c) => ligneSelection(c, { cible: true })).join('')
@@ -1635,7 +1742,7 @@
         ${plusTard}
       </section>
       <div id="zone-remplacement"></div>
-      <p class="sel-rappel">Touchez une compétence pour la retrouver dans sa constellation.</p>`;
+      <p class="sel-rappel">Touche une compétence pour la retrouver dans sa constellation.</p>`;
     elPanneauCorps.scrollTop = 0;
 
     elPanneauCorps.querySelectorAll('[data-aller]').forEach((btn) => {
@@ -1673,6 +1780,157 @@
   }
 
   elBtnMois.addEventListener('click', ouvrirMois);
+
+  // ============================================================
+  // ME SITUER — défilement compétence par compétence
+  // ============================================================
+  // Prend une LISTE DE CODES en paramètre, jamais une dimension : le même écran sert
+  // au positionnement initial d'une dimension entière et aux 7 compétences du thème du
+  // mois en séance. L'appelant décide ce qu'il y met.
+  //
+  // L'enregistrement est proposé à la fin de chaque bloc, pour qu'un membre puisse s'y
+  // reprendre en plusieurs fois sans rien perdre.
+  const TAILLE_BLOC = 8;
+
+  let situer = null;
+
+  function ouvrirMeSituer({ codes, titre, teinte = '#c9a661', depart = 0 }) {
+    const liste = codes.filter((c) => etat.referentiel.competencies.some((x) => x.id === c));
+    if (liste.length === 0) return;
+
+    situer = {
+      codes: liste,
+      titre,
+      teinte,
+      index: depart,
+      // Position de départ du bloc courant : sert à ne proposer l'enregistrement
+      // qu'au bout d'une portion, et à afficher un bilan de ce qui vient d'être fait.
+      debutBloc: depart,
+      situeesAuDebut: liste.filter((c) => (brouillon.levels[c] ?? 0) > 0).length,
+    };
+    competenceAffichee = null;
+    themeAffiche = null;
+    elPanneau.style.setProperty('--teinte-p', teinte);
+    rendreMeSituer();
+    afficherPanneau();
+    document.body.dataset.panneau = 'situer';
+  }
+
+  function finDeBloc(i) {
+    return i > situer.debutBloc && (i - situer.debutBloc) % TAILLE_BLOC === 0;
+  }
+
+  function rendreMeSituer() {
+    if (!situer) return;
+
+    // Fin de parcours ou fin de bloc : on s'arrête pour proposer d'enregistrer.
+    if (situer.index >= situer.codes.length || finDeBloc(situer.index)) {
+      rendreBilanMeSituer();
+      return;
+    }
+
+    const code = situer.codes[situer.index];
+    const c = etat.referentiel.competencies.find((x) => x.id === code);
+    const theme = etat.referentiel.themes.find((t) => t.id === c.theme);
+    const niveau = brouillon.levels[code] ?? 0;
+    const situees = situer.codes.filter((x) => (brouillon.levels[x] ?? 0) > 0).length;
+
+    elPanneauTete.innerHTML = `
+      <p class="panneau-fil">Me situer <span>›</span> <b>${echapper(situer.titre)}</b></p>
+      <div class="situer-progres">
+        <span class="situer-jauge"><i style="width:${Math.round((situer.index / situer.codes.length) * 100)}%"></i></span>
+        <span class="situer-compte">${situer.index + 1} / ${situer.codes.length}</span>
+      </div>`;
+
+    elPanneauCorps.innerHTML = `
+      <div class="situer">
+        <p class="situer-fil">${echapper(theme ? theme.name : '')}</p>
+        <h2 class="situer-nom" id="panneau-titre">${echapper(c.name)}</h2>
+        ${pastilleDifficulte(c)}
+        ${c.definition ? `<p class="situer-def">${echapper(c.definition)}</p>` : ''}
+        <div style="margin-top:18px">${escalier(c, niveau, situer.teinte)}</div>
+        <div class="situer-pied">
+          <button type="button" class="situer-btn" id="situer-precedent" ${situer.index === 0 ? 'disabled' : ''}>← Précédente</button>
+          <button type="button" class="situer-btn situer-passer" id="situer-passer">
+            ${niveau > 0 ? 'Suivante →' : 'Passer →'}
+          </button>
+          <p class="situer-astuce">${niveau > 0
+            ? `Déjà situé à « ${echapper(etat.referentiel.scale[niveau])} ». Reclique sur ta marche pour l'effacer.`
+            : 'Coche une marche, ou passe : tu pourras y revenir.'}</p>
+        </div>
+      </div>`;
+    elPanneauCorps.scrollTop = 0;
+
+    // Cocher une marche fait avancer tout seul : c'est ce qui rend le parcours fluide.
+    elPanneauCorps.querySelectorAll('.marche[data-niveau]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const n = Number(btn.dataset.niveau);
+        const avant = brouillon.levels[code] ?? 0;
+        definirNiveau(code, n);
+        // Décocher (recliquer sur sa propre marche) ne doit pas faire avancer :
+        // le membre corrige, il ne valide pas.
+        if (avant === n) rendreMeSituer();
+        else avancerMeSituer();
+      });
+    });
+    document.getElementById('situer-passer').addEventListener('click', avancerMeSituer);
+    document.getElementById('situer-precedent').addEventListener('click', () => {
+      situer.index = Math.max(0, situer.index - 1);
+      rendreMeSituer();
+    });
+  }
+
+  function avancerMeSituer() {
+    situer.index += 1;
+    rendreMeSituer();
+  }
+
+  function rendreBilanMeSituer() {
+    const termine = situer.index >= situer.codes.length;
+    const situees = situer.codes.filter((x) => (brouillon.levels[x] ?? 0) > 0).length;
+    const nouvelles = Math.max(0, situees - situer.situeesAuDebut);
+    const restantes = situer.codes.length - situer.index;
+
+    elPanneauTete.innerHTML = `
+      <p class="panneau-fil">Me situer <span>›</span> <b>${echapper(situer.titre)}</b></p>
+      <div class="situer-progres">
+        <span class="situer-jauge"><i style="width:${Math.round((situer.index / situer.codes.length) * 100)}%"></i></span>
+        <span class="situer-compte">${situer.index} / ${situer.codes.length}</span>
+      </div>`;
+
+    elPanneauCorps.innerHTML = `
+      <div class="situer-bilan">
+        <span class="mark">✧</span>
+        <h3>${termine ? 'Tu as parcouru toute la liste.' : 'Une pause ?'}</h3>
+        <p>${termine
+          ? "Rien n'est encore enregistré. Tu peux le faire maintenant, ou continuer à explorer la carte."
+          : `Il te reste ${restantes} compétence${restantes > 1 ? 's' : ''}. Enregistre ce que tu viens de faire, tu reprendras où tu en es.`}</p>
+        <dl class="situer-bilan-chiffres">
+          <div><dt>Situées à l'instant</dt><dd>${nouvelles}</dd></div>
+          <div><dt>Situées en tout</dt><dd>${situees}<span style="color:var(--stone);font-size:15px"> / ${situer.codes.length}</span></dd></div>
+        </dl>
+        <div class="situer-pied" style="justify-content:center">
+          ${termine ? '' : '<button type="button" class="situer-btn" id="situer-continuer">Continuer →</button>'}
+          <button type="button" class="situer-btn" id="situer-enregistrer"
+            style="border-color:var(--gold);background:rgba(201,166,97,.16);color:var(--gold-bright)">Enregistrer</button>
+          <button type="button" class="situer-btn" id="situer-fermer">Revenir à la carte</button>
+        </div>
+      </div>`;
+    elPanneauCorps.scrollTop = 0;
+
+    const continuer = document.getElementById('situer-continuer');
+    if (continuer) continuer.addEventListener('click', () => {
+      situer.debutBloc = situer.index;
+      situer.situeesAuDebut = situer.codes.filter((x) => (brouillon.levels[x] ?? 0) > 0).length;
+      rendreMeSituer();
+    });
+    document.getElementById('situer-enregistrer').addEventListener('click', async () => {
+      await enregistrer();
+      situer.situeesAuDebut = situer.codes.filter((x) => (brouillon.levels[x] ?? 0) > 0).length;
+      rendreBilanMeSituer();
+    });
+    document.getElementById('situer-fermer').addEventListener('click', fermerPanneau);
+  }
 
   function afficherPanneau() {
     clearTimeout(minuteurFermeture);
@@ -1758,6 +2016,7 @@
   function fermerPanneau() {
     competenceAffichee = null;
     themeAffiche = null;
+    situer = null;
     elVoile.classList.remove('visible');
     document.body.style.overflow = '';
     delete document.body.dataset.panneau;
@@ -1850,8 +2109,8 @@
     const c = changements();
     const bouts = [];
     if (c.niveaux.length) bouts.push(`<b>${c.niveaux.length}</b> positionnement${c.niveaux.length > 1 ? 's' : ''}`);
-    if (c.cibles) bouts.push('vos cibles du mois');
-    if (c.plusTard) bouts.push('votre liste « plus tard »');
+    if (c.cibles) bouts.push('tes cibles du mois');
+    if (c.plusTard) bouts.push('ta liste « plus tard »');
     elBarreTexte.innerHTML = `Modifié : ${bouts.join(', ')}. Rien n'est encore enregistré.`;
     elBarre.classList.add('visible');
   }
@@ -1880,7 +2139,9 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           uuid: CLIENT_ID,
-          referential_version: 2,
+          // Reprise de la version que le serveur vient de servir, jamais une constante
+          // écrite en dur : elle avait déjà divergé au passage du référentiel en v3.
+          referential_version: etat.referentiel.version,
           label: elLibelle.value.trim() || null,
           levels: brouillon.levels,
           selections: { current: brouillon.current, later: brouillon.later },
@@ -1907,15 +2168,15 @@
       redessinerConstellations();
       if (competenceAffichee) rafraichirPanneau(competenceAffichee.code);
 
-      bandeau('Votre sphérier est enregistré.',
+      bandeau('Ton sphérier est enregistré.',
         retires > 0
           ? `${retires} cible${retires > 1 ? 's ont' : ' a'} été retirée${retires > 1 ? 's' : ''} : sa thématique s'est refermée.`
-          : 'Vous pouvez fermer cette page.',
+          : 'Tu peux fermer cette page.',
         'succes');
     } catch (err) {
       // Rien n'est perdu : le brouillon local tient, l'écran garde les modifications.
       bandeau("L'enregistrement n'a pas abouti.",
-        `${err.message}. Vos modifications sont conservées sur cet appareil : réessayez quand la connexion revient.`,
+        `${err.message}. Tes modifications sont conservées sur cet appareil : réessaie quand la connexion revient.`,
         'echec', { libelle: 'Réessayer', faire: enregistrer });
     } finally {
       elBtnEnregistrer.disabled = false;
@@ -1955,7 +2216,7 @@
     if (!CLIENT_ID) {
       afficherMessage(
         'Lien invalide ou incomplet',
-        "Ce lien ne permet pas de vous reconnaître. Ouvrez votre sphérier depuis votre espace pour retrouver votre progression.",
+        "Ce lien ne permet pas de te reconnaître. Ouvre ton sphérier depuis ton espace pour retrouver ta progression.",
         'erreur'
       );
       document.body.dataset.lienValide = 'non';
@@ -1998,8 +2259,8 @@
         if (estModifie()) {
           etat.computed.levels = { ...etat.computed.levels, ...brouillon.levels };
           etat.computed.themes = calculerOuvertureLocale(brouillon.levels);
-          bandeau('Vos modifications ont été retrouvées.',
-            "Elles n'avaient pas été enregistrées : elles vous attendaient sur cet appareil.", 'succes');
+          bandeau('Tes modifications ont été retrouvées.',
+            "Elles n'avaient pas été enregistrées : elles t'attendaient sur cet appareil.", 'succes');
         } else {
           try { localStorage.removeItem(cleBrouillon()); } catch {}
         }
@@ -2021,7 +2282,7 @@
       document.body.dataset.snapshotCharge = etat.snapshot ? 'oui' : 'non';
     } catch (err) {
       afficherMessage(
-        'Votre sphérier est momentanément indisponible',
+        'Ton sphérier est momentanément indisponible',
         err.message,
         'erreur'
       );

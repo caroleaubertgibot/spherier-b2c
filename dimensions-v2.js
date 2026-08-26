@@ -7,25 +7,30 @@
 // aussi de préfixe aux codes de compétences (MOI-01, AUT-58, MON-43), et l'ordre du
 // tableau est l'ordre d'affichage.
 //
-// ⚠ Les définitions ci-dessous sont provisoires : elles décrivent fidèlement le
-// contenu de chaque dimension, mais elles ne sont pas écrites par Cyril. À relire.
+// Deux définitions par dimension, toutes deux fournies par Cyril :
+//   definition     — version longue, pour le référentiel (Notion, Excel, documents)
+//   definition_ui  — version courte et au TUTOIEMENT, pour l'interface
+// Le tutoiement est la règle dans tout ce qui s'adresse au membre.
 const DIMENSIONS_V2 = [
   {
     id: 'MOI',
     name: 'Moi',
-    definition: "La dimension Moi réunit les compétences qui permettent de se connaître et de se tenir : reconnaître ses émotions, ses besoins et ses croyances, écouter son corps, apaiser son stress, faire la paix avec son histoire et construire une relation juste avec soi-même.",
+    definition: "La dimension Moi réunit les compétences qui se travaillent à l'intérieur, sans témoin : reconnaître ce que l'on ressent, comprendre ce qui nous meut, prendre soin de son corps et de son énergie, et construire une relation juste avec soi-même.",
+    definition_ui: "Ce qui se travaille à l'intérieur, sans témoin : ce que tu ressens, ce qui te meut, ton corps et ton énergie, et la relation que tu entretiens avec toi-même.",
     couleur: '#d97a4a',
   },
   {
     id: 'AUT',
     name: 'Moi et les autres',
-    definition: "La dimension Moi et les autres réunit les compétences qui permettent de tenir le lien : écouter vraiment, dire ce qui compte, poser ses limites, traverser le conflit et le réparer, et faire vivre ses relations d'amitié, de couple et de famille.",
+    definition: "La dimension Moi et les autres réunit les compétences qui se jouent dans le lien : écouter et se faire entendre, poser ses limites, traverser le conflit et réparer, et tenir sa place aussi bien dans ses relations les plus proches que dans un groupe.",
+    definition_ui: "Ce qui se joue dans le lien : écouter et te faire entendre, poser tes limites, traverser le conflit et réparer, tenir ta place auprès des tiens comme dans un groupe.",
     couleur: '#7eb0ce',
   },
   {
     id: 'MON',
     name: 'Moi et le monde',
-    definition: "La dimension Moi et le monde réunit les compétences qui permettent d'agir et de choisir : clarifier ses priorités, décider, passer à l'action, persévérer, et piloter son travail, ses projets et son argent en cohérence avec ce qui compte.",
+    definition: "La dimension Moi et le monde réunit les compétences qui se jouent dans ce que l'on construit au-dehors : choisir un cap, décider, passer à l'action, piloter son travail, son argent et ses projets, et donner à sa vie une direction qui lui ressemble.",
+    definition_ui: "Ce qui se joue dans ce que tu construis dehors : choisir un cap, décider, agir, piloter ton travail, ton argent et tes projets, et donner à ta vie une direction qui te ressemble.",
     couleur: '#6e9c8f',
   },
 ];
