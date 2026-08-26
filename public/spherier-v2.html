@@ -875,6 +875,96 @@
   .syn-comp-niveau.situe { color: var(--paper-dim); }
   .syn-comp-marques { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 5px; }
 
+
+  /* LE CIEL — page d'arrivée.
+     Les trois constellations d'un coup, reliées visuellement pour se lire comme une
+     seule carte. Le ciel et le détail sont des LIEUX où l'on navigue ; « Mon mois » et
+     « Vue d'ensemble » sont des fenêtres qu'on ouvre. La bascule ne passe donc pas par
+     un bouton d'en-tête. */
+  .ciel { position: relative; }
+  .ciel[hidden], .detail[hidden] { display: none; }
+
+  .ciel-piste {
+    /* La carte n'est pas du texte : elle déborde la colonne de lecture plutôt que
+       d'amputer la dimension la plus large. « Moi et les autres » mesure 973 px, contre
+       892 px de colonne ; la resserrer pour l'y faire entrer ramènerait son plus petit
+       écart entre libellés à 30 unités, là où « Moi », validé tel quel, en garde 53.
+       C'est donc le cadre qui s'élargit, pas la géométrie du référentiel.
+       Débordement symétrique et borné au viewport : la page ne défile jamais de côté. */
+    width: min(1240px, 100vw - 16px);
+    margin-left: calc(50% - min(620px, 50vw - 8px));
+    display: flex; align-items: stretch; gap: 0;
+    overflow-x: auto; overflow-y: hidden;
+    padding-bottom: 10px;
+    scrollbar-width: thin; scrollbar-color: rgba(240,235,224,.18) transparent;
+    scroll-snap-type: x proximity;
+  }
+  .ciel-piste::-webkit-scrollbar { height: 5px; }
+  .ciel-piste::-webkit-scrollbar-thumb { background: rgba(240,235,224,.18); border-radius: 3px; }
+
+  .ciel-bloc { flex: 0 0 auto; scroll-snap-align: center; padding: 0 8px; }
+  .ciel-tete { text-align: center; padding: 4px 0 14px; }
+  .ciel-nom {
+    display: inline-flex; align-items: center; gap: 11px;
+    background: none; border: none; cursor: pointer; padding: 0;
+    font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 24px;
+    color: var(--paper); transition: color .25s ease;
+  }
+  .ciel-nom:hover { color: var(--h); }
+  .ciel-nom i { width: 11px; height: 11px; border-radius: 50%; background: var(--h);
+    box-shadow: 0 0 14px var(--h); flex-shrink: 0; }
+  .ciel-compte {
+    display: block; margin-top: 5px;
+    font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--stone);
+  }
+  /* Visé sur la seule constellation : un `svg` non qualifié étirait aussi les petits
+     repères de 20 px qu'on dessine ailleurs dans la carte. */
+  .ciel-carte > svg.constellation { width: 100%; height: auto; display: block; }
+
+  /* Entrée de bloc : au premier jour, tout est éteint — c'est elle qui doit donner
+     envie de commencer plutôt que de laisser face à un vide. Elle est donc placée sous
+     le compteur, dans le premier écran : au pied du bloc, elle tombait à neuf cents
+     pixels de là, invisible précisément quand elle sert le plus. */
+  .ciel-cta {
+    margin-top: 12px;
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 10px 20px; border-radius: 999px; cursor: pointer;
+    border: 1px solid color-mix(in srgb, var(--h) 50%, transparent);
+    background: color-mix(in srgb, var(--h) 12%, transparent);
+    color: var(--paper); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px;
+    transition: all .25s ease;
+  }
+  .ciel-cta:hover { background: color-mix(in srgb, var(--h) 24%, transparent); }
+  .ciel-cta.discret {
+    border-color: var(--line-faint); background: rgba(240,235,224,.03); color: var(--paper-dim);
+  }
+  .ciel-cta.discret:hover { border-color: var(--line); color: var(--paper); }
+
+  /* Fil entre les blocs : purement visuel, aucune sémantique d'ouverture. */
+  .ciel-lien { flex: 0 0 auto; width: 96px; display: flex; align-items: center; }
+  .ciel-lien svg { width: 100%; height: 120px; overflow: visible; }
+  .ciel-lien path { fill: none; stroke: var(--paper); stroke-opacity: .13; stroke-width: 1.2; stroke-dasharray: 4 8; }
+
+  .ciel-guide {
+    text-align: center; margin-top: 6px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 12.5px; color: var(--stone);
+  }
+
+  /* Retour vers le ciel, dans le détail : une navigation de lieu, pas un bouton d'outil. */
+  .detail-retour {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: none; border: none; padding: 0; cursor: pointer;
+    color: var(--paper-dim); font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 14px; margin-bottom: 20px;
+  }
+  .detail-retour:hover { color: var(--paper); }
+
+  @media (max-width: 640px) {
+    .ciel-lien { width: 54px; }
+    .ciel-nom { font-size: 20px; }
+  }
+
   @media (max-width: 640px) {
     .syn-ligne { grid-template-columns: 1fr auto; }
     .syn-corps { padding-left: 8px; }
@@ -944,7 +1034,15 @@
     <small id="message-detail"></small>
   </div>
 
-  <div class="dimensions" id="dimensions" hidden></div>
+  <div class="ciel" id="ciel" hidden>
+    <div class="ciel-piste" id="ciel-piste"></div>
+    <p class="ciel-guide" id="ciel-guide"></p>
+  </div>
+
+  <div class="detail" id="detail" hidden>
+    <button type="button" class="detail-retour" id="detail-retour">← Revenir au ciel</button>
+    <div class="dimensions" id="dimensions" hidden></div>
+  </div>
 </div>
 
 <div class="barre-sauvegarde" id="barre" aria-live="polite">
@@ -1002,6 +1100,7 @@
     notes: {},        // { CODE: { texte, cree_le, maj_le } } — hors snapshots, modifiables
 
     dimensionOuverte: null,
+    vue: 'ciel',      // 'ciel' (page d'arrivée) ou 'detail' (une dimension dépliée)
   };
 
   // Teinte par dimension : présentation seule, le serveur ne s'en occupe pas.
@@ -1055,6 +1154,8 @@
   function masquerMessage() {
     elMessage.hidden = true;
     elDimensions.hidden = false;
+    // Le ciel est le point d'arrivée par défaut.
+    if (etat.vue !== 'detail') allerAuCiel();
   }
 
   function echapper(str) {
@@ -1251,9 +1352,14 @@
     </div>`;
   }
 
-  function rendreConstellation(idDimension) {
+  // `conteneur` est paramétrable : la même constellation est dessinée dans le détail
+  // d'une dimension et dans son bloc du ciel, sans dupliquer la géométrie.
+  // `avecLegende` : la clé de lecture accompagne la constellation là où l'on lit les
+  // niveaux précisément, dans le détail d'une dimension. Le ciel n'en veut pas — elle y
+  // serait répétée trois fois pour une vue qui ne sert qu'à choisir où aller.
+  function rendreConstellation(idDimension, conteneur = null, { avecLegende = true } = {}) {
     const dimension = etat.referentiel.dimensions.find((d) => d.id === idDimension);
-    const conteneur = elDimensions.querySelector(`[data-constellation="${idDimension}"]`);
+    conteneur = conteneur || elDimensions.querySelector(`[data-constellation="${idDimension}"]`);
     if (!dimension || !conteneur || conteneur.dataset.rendu === 'oui') return;
 
     const teinte = TEINTES_HEX[idDimension] || '#f0ebe0';
@@ -1312,7 +1418,7 @@
         <g class="filiations">${traits}</g>
         <g class="themes">${groupes}</g>
       </svg>
-      ${legendeConstellation(teinte)}
+      ${avecLegende ? legendeConstellation(teinte) : ''}
     `;
     ajusterCadrage(conteneur.querySelector('svg'));
     centrerSurLesRacines(conteneur, themes);
@@ -1359,6 +1465,10 @@
   // des textes, que seul le navigateur connaît.
   function ajusterCadrage(svg) {
     if (!svg) return;
+    // Un SVG dans un conteneur masqué mesure zéro : le recadrer produirait une carte
+    // minuscule, silencieusement. Mieux vaut ne rien toucher et laisser la viewBox
+    // estimée, qui reste juste.
+    if (svg.getBoundingClientRect().width === 0) return;
 
     // 1. La viewBox estimée avant rendu réservait une marge fixe pour les noms de
     //    thématiques. Un nom long y débordait presque (7 unités de reste sur
@@ -1504,6 +1614,7 @@
     // suffit, et l'animation reste imperceptible.
     if (avant !== apres) redessinerConstellations();
     else rafraichirEtoiles();
+    if (etat.vue === 'ciel') rendreCiel();
   }
 
   function definirNiveau(code, niveau) {
@@ -2651,6 +2762,142 @@
   });
 
   // ============================================================
+  // LE CIEL — page d'arrivée
+  // ============================================================
+  const elCiel = document.getElementById('ciel');
+  const elCielPiste = document.getElementById('ciel-piste');
+  const elCielGuide = document.getElementById('ciel-guide');
+  const elDetail = document.getElementById('detail');
+
+  function situeesDe(dimension) {
+    const codes = codesDeDimension(dimension);
+    return { codes, situees: codes.filter((c) => (brouillon.levels[c] ?? 0) > 0).length };
+  }
+
+  // Fil décoratif entre deux blocs. Il ne dit rien de l'ouverture : la filiation reste
+  // interne à chaque dimension. Il est là pour que le ciel se lise comme une carte
+  // unique plutôt que comme trois pages côte à côte.
+  function filEntreBlocs() {
+    return `<div class="ciel-lien" aria-hidden="true">
+      <svg viewBox="0 0 100 120" preserveAspectRatio="none">
+        <path d="M0,60 C34,26 66,94 100,60"/>
+      </svg>
+    </div>`;
+  }
+
+  function rendreCiel() {
+    const blocs = etat.referentiel.dimensions.map((d) => {
+      const { codes, situees } = situeesDe(d);
+      const teinte = TEINTES_HEX[d.id];
+      const vierge = situees === 0;
+      return `<section class="ciel-bloc" data-bloc="${echapper(d.id)}" style="--h:${teinte}">
+        <div class="ciel-tete">
+          <button type="button" class="ciel-nom" data-ouvrir="${echapper(d.id)}">
+            <i></i>${echapper(d.name)}
+          </button>
+          <span class="ciel-compte">${vierge ? `${codes.length} compétences` : `${situees} / ${codes.length} situées`}</span>
+          <button type="button" class="ciel-cta${vierge ? '' : ' discret'}" data-situer-ciel="${echapper(d.id)}">
+            ${vierge ? 'Commencer par ici' : 'Continuer à me situer'}
+          </button>
+        </div>
+        <div class="ciel-carte" data-ciel-carte="${echapper(d.id)}"></div>
+      </section>`;
+    });
+
+    elCielPiste.innerHTML = blocs.join(filEntreBlocs());
+
+    etat.referentiel.dimensions.forEach((d) => {
+      const carte = elCielPiste.querySelector(`[data-ciel-carte="${d.id}"]`);
+      rendreConstellation(d.id, carte, { avecLegende: false });
+      // Le bloc doit prendre la largeur de SA constellation. Un SVG en width:100% dans
+      // un parent de largeur automatique est circulaire : on fixe donc la largeur du
+      // conteneur d'après la géométrie calculée, pour que chaque dimension occupe son
+      // emprise propre et garde ses libellés lisibles.
+      const svg = carte.querySelector('svg');
+      if (svg) {
+        carte.style.width = svg.style.minWidth || `${Math.round(svg.viewBox.baseVal.width * ECHELLE_MINI)}px`;
+        svg.style.minWidth = '';
+      }
+    });
+
+    // Depuis le ciel, une thématique mène au détail de sa dimension plutôt que
+    // d'ouvrir un panneau : on plonge, on ne consulte pas de biais.
+    elCielPiste.querySelectorAll('.theme[data-theme]').forEach((g) => {
+      const bloc = g.closest('[data-bloc]');
+      const nouveau = g.cloneNode(true);
+      g.replaceWith(nouveau);
+      nouveau.addEventListener('click', () => ouvrirDetail(bloc.dataset.bloc, nouveau.dataset.theme));
+    });
+    elCielPiste.querySelectorAll('.etoile[data-competence]').forEach((g) => {
+      const bloc = g.closest('[data-bloc]');
+      const nouveau = g.cloneNode(true);
+      g.replaceWith(nouveau);
+      nouveau.addEventListener('click', (e) => {
+        e.stopPropagation();
+        ouvrirDetail(bloc.dataset.bloc);
+        ouvrirCompetence(nouveau.dataset.competence, bloc.dataset.bloc);
+      });
+    });
+
+    elCielPiste.querySelectorAll('[data-ouvrir]').forEach((btn) => {
+      btn.addEventListener('click', () => ouvrirDetail(btn.dataset.ouvrir));
+    });
+    elCielPiste.querySelectorAll('[data-situer-ciel]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const d = etat.referentiel.dimensions.find((x) => x.id === btn.dataset.situerCiel);
+        const codes = codesDeDimension(d);
+        ouvrirMeSituer({
+          codes, titre: d.name, teinte: TEINTES_HEX[d.id], depart: premiereNonSituee(codes),
+        });
+      });
+    });
+
+    const total = etat.referentiel.competencies.length;
+    const situeesTotal = etat.referentiel.competencies.filter((c) => (brouillon.levels[c.id] ?? 0) > 0).length;
+    elCielGuide.textContent = situeesTotal === 0
+      ? 'Rien n’est encore allumé. Choisis une dimension et pose un premier repère : chaque étoile s’éclaire à mesure que tu te situes.'
+      : `${situeesTotal} étoiles allumées sur ${total}. Touche une thématique pour entrer dedans.`;
+
+    centrerCielSurMoi();
+  }
+
+  // Le ciel s'ouvre centré sur « Moi », d'où part la lecture.
+  function centrerCielSurMoi() {
+    const bloc = elCielPiste.querySelector('[data-bloc="MOI"]');
+    if (!bloc) return;
+    const x = bloc.offsetLeft + bloc.offsetWidth / 2;
+    const cible = Math.max(0, Math.min(x - elCielPiste.clientWidth / 2,
+      elCielPiste.scrollWidth - elCielPiste.clientWidth));
+    elCielPiste.scrollLeft = cible;
+  }
+
+  // ============================================================
+  // NAVIGATION ENTRE LES DEUX LIEUX
+  // ============================================================
+  function allerAuCiel() {
+    etat.vue = 'ciel';
+    elDetail.hidden = true;
+    elCiel.hidden = false;
+    document.body.dataset.vue = 'ciel';
+    requestAnimationFrame(centrerCielSurMoi);
+  }
+
+  function ouvrirDetail(idDimension, idTheme = null) {
+    etat.vue = 'detail';
+    elCiel.hidden = true;
+    elDetail.hidden = false;
+    document.body.dataset.vue = 'detail';
+    if (etat.dimensionOuverte !== idDimension) basculerDimension(idDimension);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    if (idTheme) {
+      // Laisse la constellation se dessiner avant d'ouvrir le panneau de la thématique.
+      requestAnimationFrame(() => ouvrirTheme(idTheme, idDimension));
+    }
+  }
+
+  document.getElementById('detail-retour').addEventListener('click', allerAuCiel);
+
+  // ============================================================
   // CHARGEMENT
   // ============================================================
   async function lireJson(url) {
@@ -2718,7 +2965,10 @@
       }
 
       rendreDimensions();
+      // Afficher AVANT de dessiner : getBBox() renvoie zéro dans un élément masqué, et
+      // le cadrage se calculerait alors sur une boîte vide.
       masquerMessage();
+      rendreCiel();
       majDernierPoint();
       majBarre();
       majBoutonMois();
