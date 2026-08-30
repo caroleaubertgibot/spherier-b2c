@@ -158,7 +158,7 @@ async function lireReferentielDepuisNotion() {
           2: texte(p, 'Énoncé N2'),
           3: texte(p, 'Énoncé N3'),
         },
-        // Accessible / Exigeant, pour la pastille de difficulté.
+        // Débutant / Avancé, pour la pastille de difficulté.
         difficulty: selection(p, 'Difficulté') || null,
         resources: relations(p, '📋 Ressources').filter((id) => idsRessourcesActives.has(id)),
       };

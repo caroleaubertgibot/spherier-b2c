@@ -24,9 +24,11 @@
     --d-moi: #d97a4a;
     --d-aut: #7eb0ce;
     --d-mon: #6e9c8f;
-    /* Difficulté : sémantique, distincte des teintes de dimension et du doré. */
-    --diff-accessible: #7c9c6e;
-    --diff-exigeant: #d08b3f;
+    /* Difficulté : sémantique, distincte des teintes de dimension et du doré.
+       Les paliers ont été renommés (Accessible/Exigeant -> Débutant/Avancé) ; seuls
+       les noms changent, les deux couleurs restent les mêmes. */
+    --diff-debutant: #7c9c6e;
+    --diff-avance: #d08b3f;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -242,6 +244,17 @@
   .dimension.ouverte .dimension-chevron { transform: rotate(180deg); color: var(--teinte); }
   .dimension-entete:hover .dimension-nom { color: var(--paper); }
 
+  /* Entrée visible carte repliée, réservée au mobile.
+     Sur mobile, cet accordéon EST l'accueil : l'entrée doit se voir sans déplier, sinon
+     le premier écran d'un membre au premier jour ne montre que trois titres. Sur
+     desktop l'accordéon est un lieu de second rang — on y arrive depuis le ciel, la
+     dimension déjà dépliée — et une entrée sous chaque carte fermée n'y serait
+     que du bruit. */
+  .dimension-amorce { display: none; }
+  @media (max-width: 640px) {
+    .dimension:not(.ouverte) .dimension-amorce { display: block; padding: 0 16px 16px; }
+  }
+
   .dimension-corps {
     display: none;
     padding: 0 22px 22px;
@@ -297,7 +310,10 @@
   .theme-nom {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
-    font-size: 13.5px;
+    /* 15 unités et non 13.5 : les positions resserrées ont laissé de la marge entre
+       libellés voisins (137 unités au plus juste, sur « Moi et les autres »), qu'on
+       dépense en lisibilité. Ne concerne que la constellation. */
+    font-size: 15px;
     text-anchor: middle;
     fill: var(--paper);
   }
@@ -690,7 +706,7 @@
   .comp-item .pastille-diff { font-size: 9px; padding: 2px 7px 2px 6px; }
 
 
-  /* ME SITUER — parcours compétence par compétence.
+  /* M'ÉVALUER — parcours compétence par compétence.
      Personne ne se positionne sur 152 compétences en cliquant étoile par étoile. */
   .situer { display: flex; flex-direction: column; min-height: 0; }
   .situer-progres {
@@ -786,7 +802,7 @@
     color: var(--stone); display: inline-flex; align-items: center; gap: 7px;
   }
   .note-etat.encours { color: var(--paper-dim); }
-  .note-etat.enregistree { color: var(--diff-accessible); }
+  .note-etat.enregistree { color: var(--diff-debutant); }
   .note-etat.echec { color: #e8a08f; }
   .note-etat i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
   .note-btn {
@@ -845,7 +861,7 @@
   .syn-chev { font-size: 11px; color: var(--stone); transition: transform .25s ease; }
   .syn-ouvert > .syn-ligne .syn-chev { transform: rotate(180deg); }
 
-  /* Répartition par niveau : quatre segments, du non situé à J'incarne. */
+  /* Répartition par niveau : quatre segments, du non évalué à J'incarne. */
   .syn-repartition { grid-column: 1 / -1; display: flex; height: 4px; border-radius: 2px; overflow: hidden; background: var(--line-faint); }
   .syn-repartition i { display: block; height: 100%; }
   .syn-seg0 { background: rgba(240,235,224,.07); }
@@ -921,34 +937,6 @@
      repères de 20 px qu'on dessine ailleurs dans la carte. */
   .ciel-carte > svg.constellation { width: 100%; height: auto; display: block; }
 
-  /* Repères de position, réservés au mobile.
-     Sur desktop, les trois portes se voient d'un coup : « Moi » entier au centre, une
-     amorce de chaque voisine. Sur mobile, la piste fait moins de 400 px là où le seul
-     bloc « Moi » en réclame 637 pour garder ses libellés lisibles — aucune amorce n'y
-     tient. Plutôt que de tout réduire jusqu'à la bouillie, ces trois points disent la
-     structure radiale : trois dimensions, « Moi » au milieu, et de quel côté sont les
-     autres. Ils servent aussi à y aller directement. */
-  .ciel-reperes { display: none; }
-  @media (max-width: 640px) {
-    .ciel-reperes {
-      display: flex; justify-content: center; align-items: center; gap: 10px;
-      /* Au-dessus de la piste, donc dans le premier écran : sous elle, ils tombaient
-         à sept cents pixels de là, invisibles comme l'était l'invitation. */
-      padding: 2px 0 6px;
-    }
-  }
-  .ciel-repere {
-    -webkit-appearance: none; appearance: none;
-    width: 34px; height: 34px; padding: 0; border: none; background: none;
-    cursor: pointer; display: grid; place-items: center;
-  }
-  .ciel-repere i {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--r); opacity: .3; transition: all .25s ease;
-  }
-  .ciel-repere[aria-selected="true"] i {
-    width: 11px; height: 11px; opacity: 1; box-shadow: 0 0 12px var(--r);
-  }
 
   /* Entrée de bloc : au premier jour, tout est éteint — c'est elle qui doit donner
      envie de commencer plutôt que de laisser face à un vide. Elle est donc placée sous
@@ -993,8 +981,10 @@
   .detail-retour:hover { color: var(--paper); }
 
   @media (max-width: 640px) {
-    .ciel-lien { width: 54px; }
-    .ciel-nom { font-size: 20px; }
+    /* Le ciel n'existe pas sur mobile : il n'y a donc nulle part où revenir. L'accueil
+       y est l'accordéon replié, et c'est l'en-tête d'une dimension qui la referme. */
+    .detail-retour { display: none; }
+    .ciel { display: none; }
   }
 
   @media (max-width: 640px) {
@@ -1056,7 +1046,7 @@
 
   <div class="titre">
     <h1>Ton Sphérier</h1>
-    <p>Trois dimensions à explorer. Ouvre celle qui t'appelle pour découvrir ses thématiques et t'y situer.</p>
+    <p>Trois dimensions à explorer. Ouvre celle qui t'appelle pour découvrir ses thématiques et t'y évaluer.</p>
     <p class="dernier-point" id="dernier-point" hidden></p>
   </div>
 
@@ -1067,7 +1057,6 @@
   </div>
 
   <div class="ciel" id="ciel" hidden>
-    <div class="ciel-reperes" id="ciel-reperes" role="tablist" aria-label="Les trois dimensions"></div>
     <div class="ciel-piste" id="ciel-piste"></div>
     <p class="ciel-guide" id="ciel-guide"></p>
   </div>
@@ -1145,8 +1134,8 @@
   const TEINTES_HEX = { MOI: '#d97a4a', AUT: '#7eb0ce', MON: '#6e9c8f' };
 
   const DIFFICULTES = {
-    Accessible: { couleur: 'var(--diff-accessible)', hex: '#7c9c6e' },
-    Exigeant: { couleur: 'var(--diff-exigeant)', hex: '#d08b3f' },
+    'Débutant': { couleur: 'var(--diff-debutant)', hex: '#7c9c6e' },
+    'Avancé': { couleur: 'var(--diff-avance)', hex: '#d08b3f' },
   };
 
   // ============================================================
@@ -1216,12 +1205,21 @@
     return i === -1 ? 0 : i;
   }
 
+  // Une dimension porte DEUX entrées : celle de l'amorce, visible carte repliée sur
+  // mobile, et celle du corps. Elles disent la même chose et se mettent à jour
+  // ensemble — n'actualiser que la première trouvée en laisserait une périmée.
   function majAvancements() {
-    elDimensions.querySelectorAll('[data-avancement]').forEach((el) => {
-      const d = etat.referentiel.dimensions.find((x) => x.id === el.dataset.avancement);
+    etat.referentiel.dimensions.forEach((d) => {
       const codes = codesDeDimension(d);
       const situees = codes.filter((c) => (brouillon.levels[c] ?? 0) > 0).length;
-      el.textContent = `${situees} / ${codes.length} situées`;
+      // Même règle que dans le ciel : au premier jour, un « 0 / 51 » fait constat là
+      // où il faut une invitation. C'est aussi l'accueil du mobile, donc le premier
+      // écran d'un membre qui vient de payer — l'en-tête dit déjà le nombre total.
+      const libelle = situees === 0 ? 'Commencer par ici' : "M'évaluer sur cette dimension";
+      elDimensions.querySelectorAll(`[data-entree="${d.id}"]`)
+        .forEach((el) => { el.textContent = libelle; });
+      elDimensions.querySelectorAll(`[data-avancement="${d.id}"]`)
+        .forEach((el) => { el.textContent = situees === 0 ? '' : `${situees} / ${codes.length} évaluées`; });
     });
   }
 
@@ -1257,10 +1255,16 @@
             </span>
             <span class="dimension-chevron">▾</span>
           </button>
+          <div class="dimension-amorce">
+            <button type="button" class="dimension-situer" data-situer="${echapper(d.id)}">
+              <span data-entree="${echapper(d.id)}">M'évaluer sur cette dimension</span>
+              <small data-avancement="${echapper(d.id)}"></small>
+            </button>
+          </div>
           <div class="dimension-corps">
             <p class="dimension-definition">${echapper(d.definition_ui || d.definition)}</p>
             <button type="button" class="dimension-situer" data-situer="${echapper(d.id)}">
-              Me situer sur cette dimension
+              <span data-entree="${echapper(d.id)}">M'évaluer sur cette dimension</span>
               <small data-avancement="${echapper(d.id)}"></small>
             </button>
             <div class="constellation-zone" data-constellation="${echapper(d.id)}"></div>
@@ -1282,7 +1286,7 @@
           titre: d.name,
           teinte: TEINTES_HEX[d.id],
           // On reprend là où il reste à faire, pas au début : réouvrir le parcours ne
-          // doit pas imposer de repasser sur ce qui est déjà situé.
+          // doit pas imposer de repasser sur ce qui est déjà évalué.
           depart: premiereNonSituee(codesDeDimension(d)),
         });
       });
@@ -1377,7 +1381,7 @@
       return `<span><svg width="20" height="20" viewBox="0 0 20 20">
         ${c.halo ? `<circle cx="10" cy="10" r="${Math.min(c.halo, 9)}" fill="${teinte}" fill-opacity="${c.haloOpacite}"/>` : ''}
         <circle cx="10" cy="10" r="${c.r}" fill="${teinte}" fill-opacity="${c.opacite}"/>
-      </svg>${n === 0 ? 'Non situé' : echapper(etat.referentiel.scale[n])}</span>`;
+      </svg>${n === 0 ? 'Non évalué' : echapper(etat.referentiel.scale[n])}</span>`;
     };
     return `<div class="constellation-legende">
       ${[0, 1, 2, 3].map(cran).join('')}
@@ -1491,7 +1495,7 @@
   }
 
   // Échelle en dessous de laquelle les libellés deviennent illisibles. À 0.85, un
-  // libellé de 13.5 unités s'affiche autour de 11.5 px.
+  // libellé de 15 unités s'affiche autour de 12.8 px.
   const ECHELLE_MINI = 0.85;
 
   // Et une échelle AU-DESSUS de laquelle on cesse d'agrandir.
@@ -1500,8 +1504,8 @@
   // le référentiel, plus elle est donc grossie à l'écran. Après le resserrement des
   // positions dans Notion, « Moi » passait à 22 px de libellé et la vue du détail
   // gagnait 38 % de hauteur — le resserrement produisait l'effet inverse de celui
-  // cherché. À 1.15, un libellé de 13.5 unités s'affiche autour de 15.5 px, ce qui
-  // remet les trois dimensions dans un même ordre de grandeur.
+  // cherché. À 1.15, un libellé de 15 unités s'affiche autour de 17 px, ce qui remet
+  // les trois dimensions dans un même ordre de grandeur.
   const ECHELLE_MAXI = 1.15;
 
   // Deux réglages faits APRÈS le rendu, parce qu'ils dépendent de la largeur réelle
@@ -1548,7 +1552,7 @@
   const cleBrouillon = () => `spherier-v2-brouillon-${CLIENT_ID}`;
 
   // Le brouillon est écrit à chaque modification. La sauvegarde est explicite — un
-  // snapshot doit rester « un moment où je me suis situé », pas une ligne par clic —
+  // snapshot doit rester « un moment où je me suis évalué », pas une ligne par clic —
   // mais rien ne doit être perdu si la page se ferme ou si le réseau lâche.
   function enregistrerBrouillon() {
     try {
@@ -2055,7 +2059,7 @@
           <span class="comp-nom">${echapper(c.name)}</span>
           <span class="comp-marques">${pastilleDifficulte(c)}${marqueNote(c.id)}${marques}</span>
         </span>
-        <span class="comp-palier">${niveau === 0 ? 'À situer' : echapper(etat.referentiel.scale[niveau])}</span>
+        <span class="comp-palier">${niveau === 0 ? 'À évaluer' : echapper(etat.referentiel.scale[niveau])}</span>
       </button>`;
     }).join('');
 
@@ -2073,7 +2077,7 @@
           <p class="horizon-texte">
             <b>Pas encore ouverte</b>
             ${echapper(infos.unlock_hint || '')}
-            <br><br>Tu peux déjà tout lire ici, t'y situer, et garder une compétence pour plus tard.
+            <br><br>Tu peux déjà tout lire ici, t'y évaluer, et garder une compétence pour plus tard.
           </p>
         </div>
       </section>`;
@@ -2125,7 +2129,7 @@
     const niveau = brouillon.levels[code] ?? 0;
     const ouverte = estOuverte(c.theme);
     const etatTexte = options.cible
-      ? (niveau === 0 ? 'À situer' : echapper(etat.referentiel.scale[niveau]))
+      ? (niveau === 0 ? 'À évaluer' : echapper(etat.referentiel.scale[niveau]))
       : (ouverte
           ? `<span>Accessible</span>`
           : `<span class="sel-verrou">Thématique à débloquer</span>`);
@@ -2231,7 +2235,7 @@
   elBtnMois.addEventListener('click', ouvrirMois);
 
   // ============================================================
-  // ME SITUER — défilement compétence par compétence
+  // M'ÉVALUER — défilement compétence par compétence
   // ============================================================
   // Prend une LISTE DE CODES en paramètre, jamais une dimension : le même écran sert
   // au positionnement initial d'une dimension entière et aux 7 compétences du thème du
@@ -2285,7 +2289,7 @@
     const situees = situer.codes.filter((x) => (brouillon.levels[x] ?? 0) > 0).length;
 
     elPanneauTete.innerHTML = `
-      <p class="panneau-fil">Me situer <span>›</span> <b>${echapper(situer.titre)}</b></p>
+      <p class="panneau-fil">M'évaluer <span>›</span> <b>${echapper(situer.titre)}</b></p>
       <div class="situer-progres">
         <span class="situer-jauge"><i style="width:${Math.round((situer.index / situer.codes.length) * 100)}%"></i></span>
         <span class="situer-compte">${situer.index + 1} / ${situer.codes.length}</span>
@@ -2304,7 +2308,7 @@
             ${niveau > 0 ? 'Suivante →' : 'Passer →'}
           </button>
           <p class="situer-astuce">${niveau > 0
-            ? `Déjà situé à « ${echapper(etat.referentiel.scale[niveau])} ». Reclique sur ta marche pour l'effacer.`
+            ? `Déjà évalué à « ${echapper(etat.referentiel.scale[niveau])} ». Reclique sur ta marche pour l'effacer.`
             : 'Coche une marche, ou passe : tu pourras y revenir.'}</p>
         </div>
       </div>`;
@@ -2341,7 +2345,7 @@
     const restantes = situer.codes.length - situer.index;
 
     elPanneauTete.innerHTML = `
-      <p class="panneau-fil">Me situer <span>›</span> <b>${echapper(situer.titre)}</b></p>
+      <p class="panneau-fil">M'évaluer <span>›</span> <b>${echapper(situer.titre)}</b></p>
       <div class="situer-progres">
         <span class="situer-jauge"><i style="width:${Math.round((situer.index / situer.codes.length) * 100)}%"></i></span>
         <span class="situer-compte">${situer.index} / ${situer.codes.length}</span>
@@ -2355,8 +2359,8 @@
           ? "Rien n'est encore enregistré. Tu peux le faire maintenant, ou continuer à explorer la carte."
           : `Il te reste ${restantes} compétence${restantes > 1 ? 's' : ''}. Enregistre ce que tu viens de faire, tu reprendras où tu en es.`}</p>
         <dl class="situer-bilan-chiffres">
-          <div><dt>Situées à l'instant</dt><dd>${nouvelles}</dd></div>
-          <div><dt>Situées en tout</dt><dd>${situees}<span style="color:var(--stone);font-size:15px"> / ${situer.codes.length}</span></dd></div>
+          <div><dt>Évaluées à l'instant</dt><dd>${nouvelles}</dd></div>
+          <div><dt>Évaluées en tout</dt><dd>${situees}<span style="color:var(--stone);font-size:15px"> / ${situer.codes.length}</span></dd></div>
         </dl>
         <div class="situer-pied" style="justify-content:center">
           ${termine ? '' : '<button type="button" class="situer-btn" id="situer-continuer">Continuer →</button>'}
@@ -2389,17 +2393,17 @@
   const FILTRES = {
     tout:      { libelle: 'Tout',            garde: () => true },
     cibles:    { libelle: 'Mes cibles',      garde: (c) => brouillon.current.includes(c.id) || brouillon.later.includes(c.id) },
-    nonSituees:{ libelle: 'Non situées',     garde: (c) => (brouillon.levels[c.id] ?? 0) === 0 },
+    nonSituees:{ libelle: 'Non évaluées',     garde: (c) => (brouillon.levels[c.id] ?? 0) === 0 },
     ouvertes:  { libelle: 'Thém. ouvertes',  garde: (c) => estOuverte(c.theme) },
-    accessible:{ libelle: 'Accessibles',     garde: (c) => c.difficulty === 'Accessible' },
-    exigeant:  { libelle: 'Exigeantes',      garde: (c) => c.difficulty === 'Exigeant' },
+    debutant:  { libelle: 'Débutant',        garde: (c) => c.difficulty === 'Débutant' },
+    avance:    { libelle: 'Avancé',          garde: (c) => c.difficulty === 'Avancé' },
   };
 
   let synFiltres = new Set(['tout']);
   let synDeplies = new Set();
 
-  // Les filtres se cumulent, sauf « Tout » qui les remplace tous. Croiser « Accessibles »
-  // et « Non situées » est justement le cas qui donne son sens à la pastille.
+  // Les filtres se cumulent, sauf « Tout » qui les remplace tous. Croiser « Débutant »
+  // et « Non évaluées » est justement le cas qui donne son sens à la pastille.
   function synGarde(c) {
     if (synFiltres.has('tout')) return true;
     return [...synFiltres].every((f) => FILTRES[f].garde(c));
@@ -2424,7 +2428,7 @@
     ].filter(Boolean).join('');
     return `<button type="button" class="syn-comp" data-aller="${echapper(c.id)}">
       <span class="syn-comp-nom">${echapper(c.name)}</span>
-      <span class="syn-comp-niveau${niveau ? ' situe' : ''}">${niveau ? echapper(etat.referentiel.scale[niveau]) : 'À situer'}</span>
+      <span class="syn-comp-niveau${niveau ? ' situe' : ''}">${niveau ? echapper(etat.referentiel.scale[niveau]) : 'À évaluer'}</span>
       ${marques ? `<span class="syn-comp-marques">${marques}</span>` : ''}
     </button>`;
   }
@@ -2456,7 +2460,7 @@
     const retenues = etat.referentiel.competencies.filter(synGarde);
     // Le parcours doit suivre l'ordre du TABLEAU, pas celui de la liste plate renvoyée
     // par Notion — qui trie par code et donne donc AUT avant MOI. Un membre qui lit ses
-    // trous de haut en bas puis clique « Me situer sur ces N compétences » attend de
+    // trous de haut en bas puis clique « M'évaluer sur ces N compétences » attend de
     // les retrouver dans le même ordre : dimensions en ordre canonique, puis
     // thématiques dans l'ordre du référentiel.
     const codesRetenus = ordreDeLecture(retenues).map((c) => c.id);
@@ -2475,7 +2479,7 @@
     // Le rattrapage naturel : une fois les trous visibles, on va les combler.
     const actionSituer = (synFiltres.has('nonSituees') && codesRetenus.length > 0)
       ? `<div class="syn-action"><button type="button" class="dimension-situer" id="syn-situer" style="--teinte:#c9a661">
-           Me situer sur ces ${codesRetenus.length} compétences
+           M'évaluer sur ces ${codesRetenus.length} compétences
          </button></div>`
       : '';
 
@@ -2495,7 +2499,7 @@
         return `<div class="syn-theme${synDeplies.has(cle) ? ' syn-ouvert' : ''}" data-cle="${cle}">
           <button type="button" class="syn-ligne" data-plier="${cle}">
             <span class="syn-nom">${echapper(t.name)}</span>
-            <span class="syn-compte">${situees}/${codes.length} situées${ouverteT ? '' : ' · '}</span>
+            <span class="syn-compte">${situees}/${codes.length} évaluées${ouverteT ? '' : ' · '}</span>
             ${ouverteT ? '' : '<span class="syn-verrou">à débloquer</span>'}
             <span class="syn-chev">▾</span>
             ${repartition(codes, teinte)}
@@ -2511,7 +2515,7 @@
       return `<section class="syn-dim${synDeplies.has(cleD) ? ' syn-ouvert' : ''}" data-cle="${cleD}" style="--h:${teinte}">
         <button type="button" class="syn-ligne" data-plier="${cleD}">
           <span class="syn-nom">${echapper(d.name)}</span>
-          <span class="syn-compte">${situeesDim}/${codesDim.length} situées</span>
+          <span class="syn-compte">${situeesDim}/${codesDim.length} évaluées</span>
           <span class="syn-chev">▾</span>
           ${repartition(codesDim, teinte)}
         </button>
@@ -2535,7 +2539,7 @@
     });
     const btnSituer = document.getElementById('syn-situer');
     if (btnSituer) btnSituer.addEventListener('click', () => ouvrirMeSituer({
-      codes: codesRetenus, titre: 'Mes compétences non situées', teinte: '#c9a661',
+      codes: codesRetenus, titre: 'Mes compétences non évaluées', teinte: '#c9a661',
     }));
 
     elPanneauTete.querySelectorAll('[data-filtre]').forEach((btn) => {
@@ -2837,7 +2841,6 @@
   // ============================================================
   const elCiel = document.getElementById('ciel');
   const elCielPiste = document.getElementById('ciel-piste');
-  const elCielReperes = document.getElementById('ciel-reperes');
   const elCielGuide = document.getElementById('ciel-guide');
   const elDetail = document.getElementById('detail');
 
@@ -2856,9 +2859,10 @@
   //
   // Le fil ne portant aucun sens, sa largeur est le seul réglage libre. On la dépense
   // pour égaliser ce que révèle chaque amorce : 5 thématiques entières de chaque côté.
-  // Mesuré sur le rendu — il faut 319 px de AUT et 281 px de MON pour en montrer cinq,
-  // et chaque côté dispose de 391 px sur une piste de 1240.
-  const LARGEURS_FIL = { AUT: 72, MON: 110 };
+  // Mesuré sur le rendu — il faut 328 px de AUT et 292 px de MON pour en montrer cinq,
+  // et chaque côté dispose de 388 px sur une piste de 1240. À refaire si la police de
+  // la constellation ou les positions changent : ces largeurs en dépendent.
+  const LARGEURS_FIL = { AUT: 60, MON: 96 };
 
   // Fil décoratif entre deux blocs. Il ne dit rien de l'ouverture : la filiation reste
   // interne à chaque dimension. Il est là pour que le ciel se lise comme une carte
@@ -2882,7 +2886,7 @@
   // linéaire suggérerait un ordre de lecture qui n'existe pas.
   //
   // Cet ordre ne vaut QUE pour le ciel. L'API, la vue d'ensemble, le parcours
-  // « Me situer » et la navigation par dimension gardent l'ordre canonique
+  // « M'évaluer » et la navigation par dimension gardent l'ordre canonique
   // Moi · Moi et les autres · Moi et le monde, qui reste porté par
   // `etat.referentiel.dimensions` et n'est modifié nulle part.
   const ORDRE_CIEL = ['AUT', 'MOI', 'MON'];
@@ -2898,6 +2902,11 @@
   }
 
   function rendreCiel() {
+    // Sur mobile le ciel n'est jamais affiché : trois constellations dessinées pour
+    // rien coûteraient un temps de rendu sensible sur téléphone. Il sera dessiné si
+    // l'écran s'élargit — voir l'écoute de `requeteMobile`.
+    if (surMobile()) return;
+
     const ordreVisuel = dimensionsDuCiel();
     const blocs = ordreVisuel.map((d) => {
       const { codes, situees } = situeesDe(d);
@@ -2908,9 +2917,9 @@
           <button type="button" class="ciel-nom" data-ouvrir="${echapper(d.id)}">
             <i></i>${echapper(d.name)}
           </button>
-          <span class="ciel-compte">${vierge ? `${codes.length} compétences` : `${situees} / ${codes.length} situées`}</span>
+          <span class="ciel-compte">${vierge ? `${codes.length} compétences` : `${situees} / ${codes.length} évaluées`}</span>
           <button type="button" class="ciel-cta${vierge ? '' : ' discret'}" data-situer-ciel="${echapper(d.id)}">
-            ${vierge ? 'Commencer par ici' : 'Continuer à me situer'}
+            ${vierge ? 'Commencer par ici' : "Continuer à m'évaluer"}
           </button>
         </div>
         <div class="ciel-carte" data-ciel-carte="${echapper(d.id)}"></div>
@@ -2976,10 +2985,9 @@
     const total = etat.referentiel.competencies.length;
     const situeesTotal = etat.referentiel.competencies.filter((c) => (brouillon.levels[c.id] ?? 0) > 0).length;
     elCielGuide.textContent = situeesTotal === 0
-      ? 'Rien n’est encore allumé. Choisis une dimension et pose un premier repère : chaque étoile s’éclaire à mesure que tu te situes.'
+      ? 'Rien n’est encore allumé. Choisis une dimension et pose un premier repère : chaque étoile s’éclaire à mesure que tu t’évalues.'
       : `${situeesTotal} étoiles allumées sur ${total}. Touche une thématique pour entrer dedans.`;
 
-    rendreReperes(ordreVisuel);
     centrerCielSurMoi();
   }
 
@@ -3008,77 +3016,59 @@
       + elCielPiste.scrollLeft + (centre - vb.x) * echelle;
   }
 
-  function centrerCielSur(idDimension, doux = false) {
-    const bloc = elCielPiste.querySelector(`[data-bloc="${idDimension}"]`);
-    if (!bloc) return;
-    const x = ancreHorizontale(bloc, idDimension);
-    const cible = Math.max(0, Math.min(x - elCielPiste.clientWidth / 2,
-      elCielPiste.scrollWidth - elCielPiste.clientWidth));
-    if (doux) elCielPiste.scrollTo({ left: cible, behavior: 'smooth' });
-    else elCielPiste.scrollLeft = cible;
-  }
-
   // Le ciel s'ouvre centré sur « Moi », qui est le centre du modèle : les deux autres
   // dimensions sont nommées par rapport à lui. Le défilement part donc du milieu, avec
   // une amorce de chaque côté, et non d'un bord.
   function centrerCielSurMoi() {
-    centrerCielSur('MOI');
-    marquerRepereCourant();
+    const bloc = elCielPiste.querySelector('[data-bloc="MOI"]');
+    if (!bloc) return;
+    const x = ancreHorizontale(bloc, 'MOI');
+    elCielPiste.scrollLeft = Math.max(0, Math.min(x - elCielPiste.clientWidth / 2,
+      elCielPiste.scrollWidth - elCielPiste.clientWidth));
   }
 
-  // Dimension dont le bloc occupe le centre de la piste — c'est elle que le membre
-  // regarde, quel que soit le nombre de blocs entrevus sur les côtés.
-  function dimensionAuCentre() {
-    const milieu = elCielPiste.getBoundingClientRect().left + elCielPiste.clientWidth / 2;
-    let gagnante = null;
-    let ecartMini = Infinity;
-    elCielPiste.querySelectorAll('.ciel-bloc').forEach((bloc) => {
-      const q = bloc.getBoundingClientRect();
-      // Le bloc qui contient le milieu gagne d'office ; sinon, le plus proche.
-      const ecart = (milieu >= q.left && milieu <= q.right)
-        ? 0
-        : Math.min(Math.abs(q.left - milieu), Math.abs(q.right - milieu));
-      if (ecart < ecartMini) { ecartMini = ecart; gagnante = bloc.dataset.bloc; }
-    });
-    return gagnante;
-  }
-
-  function marquerRepereCourant() {
-    const courante = dimensionAuCentre();
-    elCielReperes.querySelectorAll('[data-repere]').forEach((b) => {
-      b.setAttribute('aria-selected', String(b.dataset.repere === courante));
-    });
-  }
-
-  // Le repère suit le doigt. Lecture seule et calée sur le rendu : aucun risque de
-  // boucler avec le défilement qu'on déclenche nous-mêmes.
-  let suiviRepere = null;
-  elCielPiste.addEventListener('scroll', () => {
-    if (suiviRepere) return;
-    suiviRepere = requestAnimationFrame(() => { suiviRepere = null; marquerRepereCourant(); });
-  }, { passive: true });
-
-  function rendreReperes(ordreVisuel) {
-    elCielReperes.innerHTML = ordreVisuel.map((d) => `
-      <button type="button" class="ciel-repere" role="tab" data-repere="${echapper(d.id)}"
-              style="--r:${TEINTES_HEX[d.id]}" aria-selected="false"
-              aria-label="Aller à ${echapper(d.name)}"><i></i></button>`).join('');
-    elCielReperes.querySelectorAll('[data-repere]').forEach((b) => {
-      b.addEventListener('click', () => centrerCielSur(b.dataset.repere, true));
-    });
-    marquerRepereCourant();
-  }
 
   // ============================================================
   // NAVIGATION ENTRE LES DEUX LIEUX
   // ============================================================
+  // Le ciel est une vue DESKTOP, et seulement celle-là.
+  //
+  // Sur téléphone la piste fait moins de 400 px là où le seul bloc « Moi » en réclame
+  // 464 pour garder ses libellés lisibles : aucune amorce latérale n'y tient, ni trois
+  // ni deux, et la disposition radiale ne dit donc rien qu'on puisse voir. L'accueil
+  // mobile est la navigation par dimension, accordéon entièrement replié : les trois
+  // portes l'une sous l'autre, chacune avec son nom, son compte et son entrée.
+  //
+  // Les deux accueils restent la même VUE (`etat.vue === 'ciel'`) : c'est le lieu où
+  // l'on revient, quel que soit l'écran qui le dessine.
+  const requeteMobile = window.matchMedia('(max-width: 640px)');
+  const surMobile = () => requeteMobile.matches;
+
   function allerAuCiel() {
     etat.vue = 'ciel';
+    document.body.dataset.vue = 'ciel';
+
+    if (surMobile()) {
+      elCiel.hidden = true;
+      elDetail.hidden = false;
+      // Replier ce qui était ouvert : l'accueil, c'est le choix encore entier.
+      if (etat.dimensionOuverte) basculerDimension(etat.dimensionOuverte);
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      return;
+    }
+
     elDetail.hidden = true;
     elCiel.hidden = false;
-    document.body.dataset.vue = 'ciel';
     requestAnimationFrame(centrerCielSurMoi);
   }
+
+  // Passer d'un format à l'autre — rotation, fenêtre redimensionnée — doit redessiner
+  // l'accueil dans sa forme, sans sortir le membre de là où il était.
+  requeteMobile.addEventListener('change', () => {
+    if (etat.vue !== 'ciel' || !etat.referentiel) return;
+    if (!surMobile()) rendreCiel();
+    allerAuCiel();
+  });
 
   function ouvrirDetail(idDimension, idTheme = null) {
     etat.vue = 'detail';

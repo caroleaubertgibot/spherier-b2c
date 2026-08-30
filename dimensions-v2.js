@@ -47,8 +47,8 @@ const ECHELLE_V2 = {
 // Le vert et l'orange sont sémantiques : ils ne concurrencent ni la teinte de dimension
 // ni le doré de la sélection.
 const DIFFICULTES = {
-  Accessible: { libelle: 'Accessible', couleur: '#7c9c6e' },
-  Exigeant: { libelle: 'Exigeant', couleur: '#d08b3f' },
+  'Débutant': { libelle: 'Débutant', couleur: '#7c9c6e' },
+  'Avancé': { libelle: 'Avancé', couleur: '#d08b3f' },
 };
 
 const NIVEAU_MIN = 0;
