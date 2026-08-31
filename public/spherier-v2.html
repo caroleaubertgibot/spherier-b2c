@@ -1190,8 +1190,10 @@
   // ============================================================
   // RENDU DES 5 DIMENSIONS
   // ============================================================
-  // Ordre de parcours : celui des thématiques, puis celui des codes. Le membre avance
-  // dans la logique du référentiel, pas dans un ordre arbitraire.
+  // Ordre de parcours : celui des thématiques, puis l'`Ordre` des compétences à
+  // l'intérieur de chacune. Le membre avance dans la logique du référentiel, pas dans un
+  // ordre arbitraire. Le tri des compétences est déjà fait à la lecture du référentiel :
+  // il suffit ici de suivre l'ordre du tableau.
   function codesDeDimension(dimension) {
     const themes = etat.referentiel.themes
       .filter((t) => t.dimension === dimension.name)
@@ -2446,9 +2448,12 @@
         || (a.order ?? 0) - (b.order ?? 0))
       .forEach((t, i) => rangTheme.set(t.id, i));
 
+    // `Ordre` vide = à la fin de sa thématique, jamais en tête : c'est le cas normal
+    // d'une compétence qu'on vient d'ajouter dans Notion. Même règle que côté serveur.
+    const rangComp = (c) => c.order ?? Number.MAX_SAFE_INTEGER;
     return competences.slice().sort((a, b) =>
       (rangTheme.get(a.theme) ?? 9999) - (rangTheme.get(b.theme) ?? 9999)
-      || (a.order ?? 0) - (b.order ?? 0)
+      || rangComp(a) - rangComp(b)
       || a.id.localeCompare(b.id));
   }
 

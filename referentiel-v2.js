@@ -30,6 +30,12 @@ function selection(page, nom) {
   return page.properties[nom]?.select?.name ?? '';
 }
 
+// Rang d'une compétence dans sa thématique. `Ordre` vide vaut « à la fin » : on ne
+// renvoie pas Infinity, dont la différence avec elle-même donne NaN et casserait le tri.
+function rangCompetence(competence) {
+  return competence.order ?? Number.MAX_SAFE_INTEGER;
+}
+
 function multiSelection(page, nom) {
   return (page.properties[nom]?.multi_select ?? []).map((o) => o.name);
 }
@@ -160,12 +166,21 @@ async function lireReferentielDepuisNotion() {
         },
         // Fondamental / Avancé, pour la pastille de difficulté.
         difficulty: selection(p, 'Difficulté') || null,
+        // Rang d'affichage DANS la thématique. Les codes restent des identifiants
+        // permanents : on insère une compétence en lui donnant un rang intermédiaire,
+        // jamais en renumérotant les codes.
+        order: nombre(p, 'Ordre'),
         resources: relations(p, '📋 Ressources').filter((id) => idsRessourcesActives.has(id)),
       };
     })
     // Une compétence sans code n'est pas identifiable dans un snapshot : on l'écarte.
     .filter((c) => c.id)
-    .sort((a, b) => a.id.localeCompare(b.id, 'fr'));
+    // L'ordre est fixé ICI, une fois : tout ce qui consomme la liste la filtre par
+    // thématique et suit l'ordre du tableau. Une compétence sans `Ordre` passe en FIN
+    // de sa thématique — c'est le cas normal d'une compétence qu'on vient d'ajouter
+    // dans Notion, et elle ne doit jamais se retrouver en tête par accident. Deux
+    // compétences sans rang restent départagées par leur code, pour un ordre stable.
+    .sort((a, b) => rangCompetence(a) - rangCompetence(b) || a.id.localeCompare(b.id, 'fr'));
 
   return {
     version: VERSION_REFERENTIEL,
