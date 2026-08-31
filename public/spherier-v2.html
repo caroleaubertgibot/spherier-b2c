@@ -25,9 +25,10 @@
     --d-aut: #7eb0ce;
     --d-mon: #6e9c8f;
     /* Difficulté : sémantique, distincte des teintes de dimension et du doré.
-       Les paliers ont été renommés (Accessible/Exigeant -> Débutant/Avancé) ; seuls
-       les noms changent, les deux couleurs restent les mêmes. */
-    --diff-debutant: #7c9c6e;
+       Le palier vert a changé de nom deux fois (Accessible, puis Débutant, puis
+       Fondamental) sans jamais changer de couleur : le mot qualifie la compétence,
+       pas la personne. */
+    --diff-fondamental: #7c9c6e;
     --diff-avance: #d08b3f;
   }
 
@@ -802,7 +803,7 @@
     color: var(--stone); display: inline-flex; align-items: center; gap: 7px;
   }
   .note-etat.encours { color: var(--paper-dim); }
-  .note-etat.enregistree { color: var(--diff-debutant); }
+  .note-etat.enregistree { color: var(--diff-fondamental); }
   .note-etat.echec { color: #e8a08f; }
   .note-etat i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
   .note-btn {
@@ -1134,7 +1135,7 @@
   const TEINTES_HEX = { MOI: '#d97a4a', AUT: '#7eb0ce', MON: '#6e9c8f' };
 
   const DIFFICULTES = {
-    'Débutant': { couleur: 'var(--diff-debutant)', hex: '#7c9c6e' },
+    'Fondamental': { couleur: 'var(--diff-fondamental)', hex: '#7c9c6e' },
     'Avancé': { couleur: 'var(--diff-avance)', hex: '#d08b3f' },
   };
 
@@ -2395,14 +2396,14 @@
     cibles:    { libelle: 'Mes cibles',      garde: (c) => brouillon.current.includes(c.id) || brouillon.later.includes(c.id) },
     nonSituees:{ libelle: 'Non évaluées',     garde: (c) => (brouillon.levels[c.id] ?? 0) === 0 },
     ouvertes:  { libelle: 'Thém. ouvertes',  garde: (c) => estOuverte(c.theme) },
-    debutant:  { libelle: 'Débutant',        garde: (c) => c.difficulty === 'Débutant' },
+    fondamental:{ libelle: 'Fondamental',    garde: (c) => c.difficulty === 'Fondamental' },
     avance:    { libelle: 'Avancé',          garde: (c) => c.difficulty === 'Avancé' },
   };
 
   let synFiltres = new Set(['tout']);
   let synDeplies = new Set();
 
-  // Les filtres se cumulent, sauf « Tout » qui les remplace tous. Croiser « Débutant »
+  // Les filtres se cumulent, sauf « Tout » qui les remplace tous. Croiser « Fondamental »
   // et « Non évaluées » est justement le cas qui donne son sens à la pastille.
   function synGarde(c) {
     if (synFiltres.has('tout')) return true;

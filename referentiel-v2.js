@@ -30,6 +30,26 @@ function selection(page, nom) {
   return page.properties[nom]?.select?.name ?? '';
 }
 
+// TOLÉRANCE TEMPORAIRE — renommage de l'option Notion « Débutant » -> « Fondamental ».
+//
+// L'ordre est : déployer d'abord un code qui accepte les deux noms, renommer ensuite
+// dans Notion, retirer la tolérance en dernier. Sans cela, il existe un instant — entre
+// le renommage et le déploiement — où Notion renvoie un nom que le code ne connaît pas :
+// la pastille disparaît et les filtres de difficulté renvoient zéro. C'est exactement ce
+// qui s'est produit lors du renommage précédent.
+//
+// La normalisation est faite ICI, au seul endroit où le référentiel entre dans
+// l'application : tout ce qui est en aval ne connaît que « Fondamental ».
+//
+// À RETIRER une fois le renommage Notion fait et vérifié.
+const ALIAS_DIFFICULTE = { 'Débutant': 'Fondamental' };
+
+function difficulte(page) {
+  const brut = selection(page, 'Difficulté');
+  if (!brut) return null;
+  return ALIAS_DIFFICULTE[brut] ?? brut;
+}
+
 function multiSelection(page, nom) {
   return (page.properties[nom]?.multi_select ?? []).map((o) => o.name);
 }
@@ -158,8 +178,8 @@ async function lireReferentielDepuisNotion() {
           2: texte(p, 'Énoncé N2'),
           3: texte(p, 'Énoncé N3'),
         },
-        // Débutant / Avancé, pour la pastille de difficulté.
-        difficulty: selection(p, 'Difficulté') || null,
+        // Fondamental / Avancé, pour la pastille de difficulté.
+        difficulty: difficulte(p),
         resources: relations(p, '📋 Ressources').filter((id) => idsRessourcesActives.has(id)),
       };
     })

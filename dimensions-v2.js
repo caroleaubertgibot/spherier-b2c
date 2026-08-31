@@ -46,8 +46,12 @@ const ECHELLE_V2 = {
 // Difficulté d'une compétence (propriété `Difficulté` dans Notion).
 // Le vert et l'orange sont sémantiques : ils ne concurrencent ni la teinte de dimension
 // ni le doré de la sélection.
+//
+// « Fondamental » et non « Débutant » : le mot qualifie la COMPÉTENCE, pas la personne.
+// Un membre à « J'incarne » sur une compétence dite « Débutant » y aurait lu une
+// contradiction avec l'échelle Je découvre / J'expérimente / J'incarne.
 const DIFFICULTES = {
-  'Débutant': { libelle: 'Débutant', couleur: '#7c9c6e' },
+  'Fondamental': { libelle: 'Fondamental', couleur: '#7c9c6e' },
   'Avancé': { libelle: 'Avancé', couleur: '#d08b3f' },
 };
 
