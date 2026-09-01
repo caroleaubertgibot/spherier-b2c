@@ -1,7 +1,8 @@
 require('dotenv').config({ quiet: true });
 
 const { Client, collectPaginatedAPI } = require('@notionhq/client');
-const { DIMENSIONS_V2, ECHELLE_V2, VERSION_REFERENTIEL } = require('./dimensions-v2.js');
+const { DIMENSIONS, ECHELLE, VERSION_REFERENTIEL, DIFFICULTES, CIEL,
+        MAX_CIBLES_MAINTENANT, NIVEAU_ACQUIS, CLUB, verifierClub } = require('./club.config.js');
 
 const { NOTION_TOKEN, DB_THEMES, DB_COMPETENCES, DB_RESSOURCES } = process.env;
 
@@ -183,12 +184,21 @@ async function lireReferentielDepuisNotion() {
     .sort((a, b) => rangCompetence(a) - rangCompetence(b) || a.id.localeCompare(b.id, 'fr'));
 
   return {
+    // Le club voyage avec le référentiel : c'est le garde-fou contre une configuration
+    // croisée entre les deux instances, visible d'un coup d'œil dans la réponse.
+    club: verifierClub(),
     version: VERSION_REFERENTIEL,
-    dimensions: DIMENSIONS_V2,
+    // Réglages de club envoyés au navigateur, pour qu'il n'en tienne aucune copie :
+    // teintes, libellés de difficulté, plafonds, ordre du ciel. Ajouter une dimension
+    // ou renommer un palier ne demande alors de toucher qu'à club.config.js.
+    difficulties: DIFFICULTES,
+    limites: { maxCiblesMaintenant: MAX_CIBLES_MAINTENANT, niveauAcquis: NIVEAU_ACQUIS },
+    ciel: CIEL,
+    dimensions: DIMENSIONS,
     themes,
     competencies,
     resources,
-    scale: ECHELLE_V2,
+    scale: ECHELLE,
   };
 }
 

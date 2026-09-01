@@ -20,16 +20,15 @@
     --line-faint: rgba(240, 235, 224, 0.08);
     --line: rgba(240, 235, 224, 0.18);
 
-    /* Teintes des 3 dimensions. Le doré reste réservé à la sélection « maintenant ». */
-    --d-moi: #d97a4a;
-    --d-aut: #7eb0ce;
-    --d-mon: #6e9c8f;
-    /* Difficulté : sémantique, distincte des teintes de dimension et du doré.
-       Le palier vert a changé de nom deux fois (Accessible, puis Débutant, puis
-       Fondamental) sans jamais changer de couleur : le mot qualifie la compétence,
-       pas la personne. */
-    --diff-fondamental: #7c9c6e;
-    --diff-avance: #d08b3f;
+    /* Teintes de club, RÉÉCRITES au chargement d'après /api/referential : une teinte
+       de dimension et une couleur de difficulté sont des réglages de club, elles
+       vivent dans club.config.js. Les valeurs ci-dessous ne servent qu'avant la
+       réponse du serveur, le temps que la page ne soit pas encore peinte.
+       Le doré reste réservé à la sélection « maintenant ».
+       `--d-accent` est la teinte de la première dimension, utilisée par le logo. */
+    --d-accent: #d97a4a;
+    --diff-1: #7c9c6e;
+    --diff-2: #d08b3f;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -99,7 +98,7 @@
     content: '';
     position: absolute;
     inset: 5px;
-    border: 1px solid var(--d-moi);
+    border: 1px solid var(--d-accent);
   }
   .brand-text {
     font-family: 'Cormorant Garamond', serif;
@@ -803,7 +802,7 @@
     color: var(--stone); display: inline-flex; align-items: center; gap: 7px;
   }
   .note-etat.encours { color: var(--paper-dim); }
-  .note-etat.enregistree { color: var(--diff-fondamental); }
+  .note-etat.enregistree { color: var(--diff-1); }
   .note-etat.echec { color: #e8a08f; }
   .note-etat i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
   .note-btn {
@@ -1047,7 +1046,7 @@
 
   <div class="titre">
     <h1>Ton Sphérier</h1>
-    <p>Trois dimensions à explorer. Ouvre celle qui t'appelle pour découvrir ses thématiques et t'y évaluer.</p>
+    <p id="titre-intro">Ouvre la dimension qui t'appelle pour découvrir ses thématiques et t'y évaluer.</p>
     <p class="dernier-point" id="dernier-point" hidden></p>
   </div>
 
@@ -1126,18 +1125,68 @@
     vue: 'ciel',      // 'ciel' (page d'arrivée) ou 'detail' (une dimension dépliée)
   };
 
-  // Teinte par dimension : présentation seule, le serveur ne s'en occupe pas.
-  const TEINTES = {
-    MOI: 'var(--d-moi)',
-    AUT: 'var(--d-aut)',
-    MON: 'var(--d-mon)',
-  };
-  const TEINTES_HEX = { MOI: '#d97a4a', AUT: '#7eb0ce', MON: '#6e9c8f' };
+  // Réglages de club. Vides au départ, remplis par `appliquerConfigClub()` d'après la
+  // réponse de /api/referential : aucune dimension, aucun libellé de difficulté et
+  // aucun plafond n'est écrit en dur ici. Une instance qui change de dimensions ne
+  // touche qu'à club.config.js.
+  const TEINTES = {};
+  const TEINTES_HEX = {};
+  const DIFFICULTES = {};
+  let MAX_MAINTENANT = 3;
+  let NIVEAU_ACQUIS = 2;
+  let ORDRE_CIEL = null;
+  let CIEL_CENTRE = null;
+  let LARGEURS_FIL = {};
 
-  const DIFFICULTES = {
-    'Fondamental': { couleur: 'var(--diff-fondamental)', hex: '#7c9c6e' },
-    'Avancé': { couleur: 'var(--diff-avance)', hex: '#d08b3f' },
-  };
+  function appliquerConfigClub(referentiel) {
+    const racine = document.documentElement;
+
+    // Teintes de dimension : une variable CSS par dimension, fabriquée d'après son id.
+    referentiel.dimensions.forEach((d, i) => {
+      const cle = `--d-${d.id.toLowerCase()}`;
+      racine.style.setProperty(cle, d.couleur);
+      TEINTES[d.id] = `var(${cle})`;
+      TEINTES_HEX[d.id] = d.couleur;
+      // Le logo emprunte la teinte de la première dimension.
+      if (i === 0) racine.style.setProperty('--d-accent', d.couleur);
+    });
+
+    // Difficultés : l'ordre du tableau donne le numéro de la variable CSS.
+    (referentiel.difficulties || []).forEach((d, i) => {
+      const cle = `--diff-${i + 1}`;
+      racine.style.setProperty(cle, d.couleur);
+      DIFFICULTES[d.nom] = { couleur: `var(${cle})`, hex: d.couleur };
+    });
+
+    // La phrase d'accueil annonce le nombre de dimensions : elle ne peut pas dire
+    // « Trois » en dur, une autre instance n'en aura pas trois.
+    const intro = document.getElementById('titre-intro');
+    const combien = referentiel.dimensions.length;
+    const enLettres = { 1: 'Une', 2: 'Deux', 3: 'Trois', 4: 'Quatre', 5: 'Cinq', 6: 'Six' }[combien] || String(combien);
+    if (intro) {
+      intro.textContent = combien === 1
+        ? "Une dimension à explorer. Ouvre-la pour découvrir ses thématiques et t'y évaluer."
+        : `${enLettres} dimensions à explorer. Ouvre celle qui t'appelle pour découvrir ses thématiques et t'y évaluer.`;
+    }
+
+    MAX_MAINTENANT = referentiel.limites?.maxCiblesMaintenant ?? MAX_MAINTENANT;
+    NIVEAU_ACQUIS = referentiel.limites?.niveauAcquis ?? NIVEAU_ACQUIS;
+
+    // Ciel : ordre visuel et bloc centré. Sans configuration, on retombe sur l'ordre
+    // canonique et le premier bloc — ce qui reste juste pour une instance qui n'aurait
+    // pas trois dimensions disposées autour d'un centre.
+    ORDRE_CIEL = referentiel.ciel?.ordre ?? null;
+    CIEL_CENTRE = referentiel.ciel?.centre ?? referentiel.dimensions[0]?.id ?? null;
+    LARGEURS_FIL = referentiel.ciel?.largeursFil ?? {};
+
+    // Les filtres de difficulté de la vue d'ensemble sont eux aussi engendrés.
+    (referentiel.difficulties || []).forEach((d) => {
+      FILTRES['diff:' + d.nom] = {
+        libelle: d.nom,
+        garde: (c) => c.difficulty === d.nom,
+      };
+    });
+  }
 
   // ============================================================
   // FOND ÉTOILÉ
@@ -1544,8 +1593,6 @@
   // ============================================================
   // ÉTAT MODIFIABLE ET BROUILLON
   // ============================================================
-  const MAX_MAINTENANT = 3;
-  const NIVEAU_ACQUIS = 2;
 
   // Travail en cours. `reference` est l'état tel que le serveur l'a renvoyé : il sert à
   // savoir ce qui a changé, et à revenir en arrière.
@@ -2398,8 +2445,8 @@
     cibles:    { libelle: 'Mes cibles',      garde: (c) => brouillon.current.includes(c.id) || brouillon.later.includes(c.id) },
     nonSituees:{ libelle: 'Non évaluées',     garde: (c) => (brouillon.levels[c.id] ?? 0) === 0 },
     ouvertes:  { libelle: 'Thém. ouvertes',  garde: (c) => estOuverte(c.theme) },
-    fondamental:{ libelle: 'Fondamental',    garde: (c) => c.difficulty === 'Fondamental' },
-    avance:    { libelle: 'Avancé',          garde: (c) => c.difficulty === 'Avancé' },
+    // Les filtres de difficulté sont ajoutés par appliquerConfigClub() : leurs libellés
+    // sont des réglages de club, pas des constantes d'interface.
   };
 
   let synFiltres = new Set(['tout']);
@@ -2868,8 +2915,6 @@
   // Mesuré sur le rendu — il faut 328 px de AUT et 292 px de MON pour en montrer cinq,
   // et chaque côté dispose de 388 px sur une piste de 1240. À refaire si la police de
   // la constellation ou les positions changent : ces largeurs en dépendent.
-  const LARGEURS_FIL = { AUT: 60, MON: 96 };
-
   // Fil décoratif entre deux blocs. Il ne dit rien de l'ouverture : la filiation reste
   // interne à chaque dimension. Il est là pour que le ciel se lise comme une carte
   // unique plutôt que comme trois pages côte à côte.
@@ -2895,11 +2940,11 @@
   // « M'évaluer » et la navigation par dimension gardent l'ordre canonique
   // Moi · Moi et les autres · Moi et le monde, qui reste porté par
   // `etat.referentiel.dimensions` et n'est modifié nulle part.
-  const ORDRE_CIEL = ['AUT', 'MOI', 'MON'];
-
   function dimensionsDuCiel() {
+    // Sans ordre visuel configuré, le ciel suit l'ordre canonique.
+    if (!ORDRE_CIEL) return etat.referentiel.dimensions.slice();
     const parId = new Map(etat.referentiel.dimensions.map((d) => [d.id, d]));
-    // Une dimension qui ne serait pas dans ORDRE_CIEL reste affichée, à la suite :
+    // Une dimension qui ne serait pas dans l'ordre du ciel reste affichée, à la suite :
     // le ciel ne doit jamais escamoter une dimension que le référentiel déclare.
     return [
       ...ORDRE_CIEL.map((id) => parId.get(id)).filter(Boolean),
@@ -2938,7 +2983,7 @@
       if (i === 0) return bloc;
       const a = ordreVisuel[i - 1];
       const b = ordreVisuel[i];
-      const exterieure = (a.id === 'MOI') ? b.id : a.id;
+      const exterieure = (a.id === CIEL_CENTRE) ? b.id : a.id;
       return html + filEntreBlocs(exterieure) + bloc;
     }, '');
 
@@ -3026,9 +3071,10 @@
   // dimensions sont nommées par rapport à lui. Le défilement part donc du milieu, avec
   // une amorce de chaque côté, et non d'un bord.
   function centrerCielSurMoi() {
-    const bloc = elCielPiste.querySelector('[data-bloc="MOI"]');
+    if (!CIEL_CENTRE) return;
+    const bloc = elCielPiste.querySelector(`[data-bloc="${CIEL_CENTRE}"]`);
     if (!bloc) return;
-    const x = ancreHorizontale(bloc, 'MOI');
+    const x = ancreHorizontale(bloc, CIEL_CENTRE);
     elCielPiste.scrollLeft = Math.max(0, Math.min(x - elCielPiste.clientWidth / 2,
       elCielPiste.scrollWidth - elCielPiste.clientWidth));
   }
@@ -3124,6 +3170,9 @@
       ]);
 
       etat.referentiel = referentiel;
+      // AVANT tout rendu : teintes, difficultés, plafonds et ordre du ciel viennent du
+      // serveur. Rien ne doit être dessiné tant que la page ignore de quel club il s'agit.
+      appliquerConfigClub(referentiel);
       etat.computed = etatClient.computed;
       etat.snapshot = etatClient.snapshot;
       etat.notes = etatClient.notes || {};

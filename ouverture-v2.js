@@ -1,18 +1,9 @@
-const { ECHELLE_V2 } = require('./dimensions-v2.js');
+// Le palier d'acquisition et le seuil d'ouverture sont des réglages de club : ils
+// vivent dans club.config.js. Le plancher à 1 du seuil y est expliqué — sans lui, une
+// thématique très courte ouvrirait ses suites sans que rien n'ait été travaillé.
+const { ECHELLE, NIVEAU_ACQUIS, seuilDOuverture } = require('./club.config.js');
 
-// Niveau à partir duquel une compétence compte pour débloquer les thématiques suivantes.
-const NIVEAU_ACQUIS = 2;
-
-// Combien de compétences d'une thématique doivent être acquises pour qu'elle débloque
-// ses suites : la moitié, arrondie à l'inférieur.
-//
-// Le plancher à 1 est une garde : floor(n/2) vaut 0 dès qu'une thématique compte 0 ou 1
-// compétence, ce qui ouvrirait ses cibles sans que rien n'ait été travaillé. Aucune
-// thématique n'est dans ce cas aujourd'hui (toutes en ont 3 à 5), mais en ajouter une
-// très courte provoquerait autrement une régression silencieuse.
-function seuilDOuverture(nombreDeCompetences) {
-  return Math.max(1, Math.floor(nombreDeCompetences / 2));
-}
+const ECHELLE_V2 = ECHELLE;
 
 // Calcul de l'ouverture des thématiques.
 //
