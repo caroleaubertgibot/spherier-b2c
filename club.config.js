@@ -187,12 +187,25 @@ function seuilDOuverture(nombreDeCompetences, seuilImpose = null) {
 // MESURÉES sur le rendu réel, et à remesurer si la police de la constellation ou les
 // positions changent.
 //
+// Remesurées sur le référentiel V7, où « Moi » est devenu le bloc le plus large —
+// 569 px contre 362 et 457 — ce qui laisse 336 px de chaque côté sur une piste de 1240.
+// Il faut 168 px d'amorce à gauche et 228 px à droite pour montrer quatre thématiques
+// entières de chaque côté.
+//
+// UN ARBITRAGE À CONNAÎTRE avant d'y toucher. L'en-tête d'un bloc est CENTRÉ sur lui :
+// le rendre lisible depuis le côté demande une amorce PROFONDE, donc un fil ÉTROIT, ce
+// qui montre du même coup beaucoup plus de thématiques. Les deux exigences tirent en
+// sens inverse. Mesuré : l'en-tête de « Moi et les autres » n'est entier qu'à partir
+// d'un fil de 67 px — soit huit thématiques visibles — et celui de « Moi et le monde »
+// qu'à partir de 20 px, ce qui n'est plus un fil. Montrer quatre thématiques de chaque
+// côté coûte donc les deux en-têtes ; les garder lisibles coûte l'équilibre des comptes.
+//
 // Une instance qui n'aurait pas trois dimensions laisse `ordre` et `centre` à null :
 // le ciel retombe alors sur l'ordre canonique et centre le premier bloc.
 const CIEL = {
   ordre: ['AUT', 'MOI', 'MON'],
   centre: 'MOI',
-  largeursFil: { AUT: 60, MON: 96 },
+  largeursFil: { AUT: 168, MON: 108 },
 };
 
 // --- Journal de démarrage ---------------------------------------------------------
