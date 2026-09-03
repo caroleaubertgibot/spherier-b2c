@@ -57,7 +57,12 @@ function verifierClub() {
 // remis à zéro sans que rien ne le signale.
 //
 // À incrémenter à chaque changement de codes. Une instance neuve part de 1.
-const VERSION_REFERENTIEL = 3;
+//
+// Passée à 4 avec la refonte V7 : les codes CHANGENT DE SENS. MOI-01 existe en V3
+// comme en V7 et ne désigne pas la même compétence. Un snapshot V3 relu avec le
+// référentiel V7 ne planterait pas — il afficherait des niveaux sur les mauvaises
+// compétences, en silence. C'est la seule chose qui l'en empêche.
+const VERSION_REFERENTIEL = 4;
 
 // --- Les dimensions ---------------------------------------------------------------
 //
@@ -133,16 +138,36 @@ const DIFFICULTES = [
 // pédagogique, appliquée par le SERVEUR autant que par l'interface.
 //
 // seuilDOuverture : combien de compétences d'une thématique source doivent atteindre
-// NIVEAU_ACQUIS pour ouvrir ce qu'elle nourrit. `max(1, floor(n/2))` — la moitié, et
-// jamais zéro. Conséquence à connaître : enrichir fortement une thématique la rend
-// mécaniquement plus lente à ouvrir.
+// NIVEAU_ACQUIS pour ouvrir ce qu'elle nourrit.
+//
+//     min(SEUIL_MAXI, max(1, floor(n / 2)))
+//
+// La moitié, jamais zéro, jamais plus de SEUIL_MAXI. Le plancher évite qu'une
+// thématique très courte ouvre ses suites sans que rien n'ait été travaillé. Le
+// plafond répond au problème inverse, apparu avec le référentiel V7 : « Gestions des
+// conflits » compte 14 compétences, soit un seuil automatique de 7 — il aurait fallu
+// en acquérir sept pour ouvrir « Couple ».
+//
+// Le plafond touche CINQ thématiques du V7, et non deux comme envisagé au départ :
+// Gestions des conflits (7 → 4), puis les quatre à dix compétences — Croyances,
+// Polarités, Écoute, Parentalité (5 → 4).
+//
+// Une thématique peut en outre porter une propriété `Seuil` dans Notion, qui SURCHARGE
+// entièrement ce calcul. Le pilote du club ajuste ainsi une thématique sans
+// déploiement, comme il le fait déjà pour tout le reste du référentiel.
 const NIVEAU_MIN = 0;
 const NIVEAU_MAX = 3;
 const NIVEAU_ACQUIS = 2;
 const MAX_CIBLES_MAINTENANT = 3;
 
-function seuilDOuverture(nombreDeCompetences) {
-  return Math.max(1, Math.floor(nombreDeCompetences / 2));
+const SEUIL_MAXI = 4;
+
+function seuilDOuverture(nombreDeCompetences, seuilImpose = null) {
+  // `Seuil` renseigné dans Notion : il fait foi, plafond compris — c'est le sens même
+  // d'une surcharge. Un zéro ou un négatif serait une faute de saisie qui ouvrirait
+  // tout : on garde le plancher à 1.
+  if (Number.isFinite(seuilImpose)) return Math.max(1, Math.round(seuilImpose));
+  return Math.min(SEUIL_MAXI, Math.max(1, Math.floor(nombreDeCompetences / 2)));
 }
 
 // --- Le ciel (page d'accueil desktop) ---------------------------------------------
@@ -195,6 +220,7 @@ module.exports = {
   NIVEAU_MAX,
   NIVEAU_ACQUIS,
   MAX_CIBLES_MAINTENANT,
+  SEUIL_MAXI,
   seuilDOuverture,
   CIEL,
 };

@@ -131,6 +131,8 @@ async function lireReferentielDepuisNotion() {
       x: nombre(p, 'Position X'),
       y: nombre(p, 'Position Y'),
       order: nombre(p, 'Ordre'),
+      // Surcharge facultative du seuil d'ouverture. Vide = calcul automatique.
+      seuil: nombre(p, 'Seuil'),
     }))
     .sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity));
 

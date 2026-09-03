@@ -13,8 +13,9 @@ const ECHELLE_V2 = ECHELLE;
 // rouvre ou referme les thématiques sans migration de données.
 //
 // - Une thématique racine (que rien ne nourrit) est toujours ouverte.
-// - Une thématique non racine est ouverte dès qu'AU MOINS UNE de ses sources a la
-//   moitié de ses compétences (arrondi inférieur) au niveau 2 ou plus.
+// - Une thématique non racine est ouverte dès qu'AU MOINS UNE de ses sources atteint
+//   son seuil : la moitié de ses compétences au niveau 2 ou plus, plafonnée, ou la
+//   valeur imposée par sa propriété `Seuil` dans Notion.
 function calculerOuverture({ referentiel, levels = {} }) {
   const competencesParTheme = new Map();
   referentiel.competencies.forEach((c) => {
@@ -38,7 +39,9 @@ function calculerOuverture({ referentiel, levels = {} }) {
   function progression(themeId) {
     const codes = competencesParTheme.get(themeId) ?? [];
     const atteintes = codes.filter((code) => (levels[code] ?? 0) >= NIVEAU_ACQUIS).length;
-    return { atteintes, seuil: seuilDOuverture(codes.length), total: codes.length };
+    // Le `Seuil` de la thématique, s'il est renseigné dans Notion, remplace le calcul.
+    const impose = themeParId.get(themeId)?.seuil ?? null;
+    return { atteintes, seuil: seuilDOuverture(codes.length, impose), total: codes.length };
   }
 
   const themes = {};
