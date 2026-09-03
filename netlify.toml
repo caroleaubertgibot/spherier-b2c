@@ -35,20 +35,13 @@
   to = "/.netlify/functions/snapshot"
   status = 200
 
-# Contrats v1, conservés tant que le renderer actuel n'est pas remplacé (phase 3).
-[[redirects]]
-  from = "/api/snapshot-latest"
-  to = "/.netlify/functions/snapshot-latest"
-  status = 200
-
-[[redirects]]
-  from = "/api/snapshot-save"
-  to = "/.netlify/functions/snapshot-save"
-  status = 200
-
 # La racine sert le sphérier sans redirection visible : https://<site>/?c=<uuid>
-# fonctionne donc aussi bien que /spherier.html?c=<uuid>.
+# fonctionne donc aussi bien que /spherier-v2.html?c=<uuid>.
+#
+# Le nom de fichier garde son suffixe `-v2` alors que le v1 n'existe plus : les liens
+# déjà transmis aux membres le portent, et un lien de sphérier doit survivre à nos
+# renommages. La racine est de toute façon l'adresse à donner désormais.
 [[redirects]]
   from = "/"
-  to = "/spherier.html"
+  to = "/spherier-v2.html"
   status = 200

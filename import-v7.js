@@ -210,6 +210,46 @@ async function importer({ dsT, dsC }) {
   console.log(`  ${c} compétences créées, énoncés compris`);
 }
 
+// --- Reprise : compléter un import interrompu -------------------------------
+//
+// Ne purge rien et ne recrée pas ce qui existe : on relit les codes présents et on ne
+// crée que les absents. Utilisable autant de fois que nécessaire sans rien dupliquer.
+async function reprendre({ dsT, dsC }) {
+  const src = JSON.parse(fs.readFileSync(SOURCE, 'utf8'));
+  const [pagesT, pagesC] = await Promise.all([toutes(dsT), toutes(dsC)]);
+
+  const idParNom = new Map(pagesT.map((p) => [txt(p, 'Name'), p.id]));
+  const presents = new Set(pagesC.map((p) => txt(p, 'Code')));
+  const manquantes = src.competences.filter((c) => !presents.has(c.code));
+
+  console.log(`présentes : ${presents.size} · manquantes : ${manquantes.length}`);
+  if (manquantes.length === 0) { console.log('  rien à reprendre'); return; }
+  if (SIMULATION) { console.log(`[simulation] création de ${manquantes.length} compétences`); return; }
+
+  let n = 0;
+  for (const comp of manquantes) {
+    const idTheme = idParNom.get(comp.theme);
+    if (!idTheme) throw new Error(`compétence ${comp.code} : thématique « ${comp.theme} » introuvable`);
+    const e = src.enonces[comp.code] || {};
+    await avecReprise(() => notion.pages.create({
+      parent: { type: 'data_source_id', data_source_id: dsC },
+      properties: {
+        Name: ti(comp.name),
+        Code: rt(comp.code),
+        Description: rt(comp.definition),
+        'Difficulté': { select: { name: comp.difficulte } },
+        Ordre: { number: comp.ordre },
+        Actif: { checkbox: true },
+        '📚 Thèmes': { relation: [{ id: idTheme }] },
+        'Énoncé N1': rt(e['1']), 'Énoncé N2': rt(e['2']), 'Énoncé N3': rt(e['3']),
+      },
+    }));
+    await dormir(PAUSE_MS);
+    if (++n % 20 === 0) console.log(`  ${n} / ${manquantes.length}…`);
+  }
+  console.log(`  ${n} compétences créées`);
+}
+
 // --- Phase 4 : vérification par relecture ----------------------------------
 async function verifier({ dsT, dsC }) {
   const src = JSON.parse(fs.readFileSync(SOURCE, 'utf8'));
@@ -293,14 +333,27 @@ async function verifier({ dsT, dsC }) {
   return A.every((l) => l.startsWith('  OK'));
 }
 
-(async () => {
+// GARDE-FOU. Ce script PURGE et RÉIMPORTE : il ne doit s'exécuter que lancé
+// explicitement, jamais parce qu'un outil l'a chargé. Sans cette condition, un simple
+// `require('./import-v7.js')` — une boucle de vérification qui charge tous les fichiers
+// du dossier, par exemple — déclenche la purge complète du référentiel. C'est arrivé.
+async function principal() {
   const ds = await dataSources();
   console.log(SIMULATION ? '=== SIMULATION — aucune écriture ===\n' : '=== REFONTE V7 ===\n');
   if (PHASE === '2' || PHASE === 'tout') { console.log('--- Phase 2 : sauvegarde et purge ---'); await purger(ds); console.log(); }
   if (PHASE === '3' || PHASE === 'tout') { console.log('--- Phase 3 : import ---'); await importer(ds); console.log(); }
+  if (PHASE === 'reprise') { console.log('--- Reprise : compétences manquantes seulement ---'); await reprendre(ds); console.log(); }
   if (PHASE === '4' || PHASE === 'tout') {
     if (SIMULATION) { console.log('--- Phase 4 : vérification (ignorée en simulation) ---'); return; }
     console.log('--- Phase 4 : vérification par relecture de Notion ---');
     process.exitCode = (await verifier(ds)) ? 0 : 1;
   }
-})().catch((err) => { console.error('ÉCHEC :', err.message); process.exit(1); });
+}
+
+if (require.main === module) {
+  principal().catch((err) => { console.error('ÉCHEC :', err.message); process.exit(1); });
+} else {
+  console.error('import-v7.js chargé sans être lancé : rien n\'est exécuté.');
+}
+
+module.exports = { principal };
