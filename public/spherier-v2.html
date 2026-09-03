@@ -920,6 +920,22 @@
 
   .ciel-bloc { flex: 0 0 auto; scroll-snap-align: center; padding: 0 8px; }
   .ciel-tete { text-align: center; padding: 4px 0 14px; }
+
+  /* En-tête collant, dans la piste qui défile.
+     Un en-tête est CENTRÉ sur son bloc : d'une voisine dont on ne voit qu'un bord, il
+     tombe donc hors champ. Sans cela il fallait choisir entre montrer quatre
+     thématiques de chaque côté et pouvoir lire le nom des voisines — l'amorce profonde
+     que réclame le second contredit le fil large que réclame le premier.
+     Collé, l'en-tête vient au bord tant que son bloc est à cheval, et retrouve sa place
+     dès qu'il est entièrement visible : le bloc central, lui, ne bouge jamais.
+     `left` ET `right` : la voisine de gauche se cale à gauche, celle de droite à
+     droite, sans avoir à savoir laquelle est laquelle. */
+  .ciel-tete-contenu {
+    display: inline-block;
+    position: sticky;
+    left: 14px;
+    right: 14px;
+  }
   .ciel-nom {
     display: inline-flex; align-items: center; gap: 11px;
     background: none; border: none; cursor: pointer; padding: 0;
@@ -2965,13 +2981,15 @@
       const vierge = situees === 0;
       return `<section class="ciel-bloc" data-bloc="${echapper(d.id)}" style="--h:${teinte}">
         <div class="ciel-tete">
-          <button type="button" class="ciel-nom" data-ouvrir="${echapper(d.id)}">
-            <i></i>${echapper(d.name)}
-          </button>
-          <span class="ciel-compte">${vierge ? `${codes.length} compétences` : `${situees} / ${codes.length} évaluées`}</span>
-          <button type="button" class="ciel-cta${vierge ? '' : ' discret'}" data-situer-ciel="${echapper(d.id)}">
-            ${vierge ? 'Commencer par ici' : "Continuer à m'évaluer"}
-          </button>
+          <div class="ciel-tete-contenu">
+            <button type="button" class="ciel-nom" data-ouvrir="${echapper(d.id)}">
+              <i></i>${echapper(d.name)}
+            </button>
+            <span class="ciel-compte">${vierge ? `${codes.length} compétences` : `${situees} / ${codes.length} évaluées`}</span>
+            <button type="button" class="ciel-cta${vierge ? '' : ' discret'}" data-situer-ciel="${echapper(d.id)}">
+              ${vierge ? 'Commencer par ici' : "Continuer à m'évaluer"}
+            </button>
+          </div>
         </div>
         <div class="ciel-carte" data-ciel-carte="${echapper(d.id)}"></div>
       </section>`;

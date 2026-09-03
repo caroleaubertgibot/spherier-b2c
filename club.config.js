@@ -189,23 +189,26 @@ function seuilDOuverture(nombreDeCompetences, seuilImpose = null) {
 //
 // Remesurées sur le référentiel V7, où « Moi » est devenu le bloc le plus large —
 // 569 px contre 362 et 457 — ce qui laisse 336 px de chaque côté sur une piste de 1240.
-// Il faut 168 px d'amorce à gauche et 228 px à droite pour montrer quatre thématiques
-// entières de chaque côté.
 //
-// UN ARBITRAGE À CONNAÎTRE avant d'y toucher. L'en-tête d'un bloc est CENTRÉ sur lui :
-// le rendre lisible depuis le côté demande une amorce PROFONDE, donc un fil ÉTROIT, ce
-// qui montre du même coup beaucoup plus de thématiques. Les deux exigences tirent en
-// sens inverse. Mesuré : l'en-tête de « Moi et les autres » n'est entier qu'à partir
-// d'un fil de 67 px — soit huit thématiques visibles — et celui de « Moi et le monde »
-// qu'à partir de 20 px, ce qui n'est plus un fil. Montrer quatre thématiques de chaque
-// côté coûte donc les deux en-têtes ; les garder lisibles coûte l'équilibre des comptes.
+// CE QUI CONTRAINT CES VALEURS. L'en-tête d'un bloc est désormais COLLANT : d'une
+// voisine à cheval, il vient se caler au bord au lieu de sortir du champ. Mais il ne
+// peut pas être plus étroit que lui-même — il mesure 176 px et réclame donc 204 px
+// d'amorce, marges comprises. En deçà, il est tronqué malgré le collage.
+//
+// Ce plancher fixe le plafond du fil : 132 px à gauche, où les positions du V7 ne
+// laissent aucun palier entre quatre thématiques (146 px d'amorce) et six (193 px).
+// Montrer l'en-tête de « Moi et les autres » impose donc d'en montrer six.
+//
+// D'où 130 / 90 : six thématiques à gauche, cinq à droite, et les trois noms lisibles
+// d'un coup. C'est le meilleur compromis mesuré entre la cible de quatre ou cinq
+// thématiques par côté et la lisibilité des voisines.
 //
 // Une instance qui n'aurait pas trois dimensions laisse `ordre` et `centre` à null :
 // le ciel retombe alors sur l'ordre canonique et centre le premier bloc.
 const CIEL = {
   ordre: ['AUT', 'MOI', 'MON'],
   centre: 'MOI',
-  largeursFil: { AUT: 168, MON: 108 },
+  largeursFil: { AUT: 130, MON: 90 },
 };
 
 // --- Journal de démarrage ---------------------------------------------------------
