@@ -12,6 +12,27 @@ mots de passe partagé, ou saisies directement dans Netlify pendant la séance.
 
 ---
 
+## Une règle qui s'applique à toutes les étapes : nommer `spherier-b2c`
+
+Cette migration ne concerne que le **club de dev perso**. Le club de coachs migrera plus
+tard, après le lancement des deux clubs — mais il migrera. On ouvre donc les comptes
+Pyxis en le prévoyant dès maintenant : cela ne coûte rien aujourd'hui et évite un
+renommage général quand la seconde instance arrivera.
+
+**Tout se nomme `spherier-b2c`, jamais « spherier » tout court** — dépôt, projet
+Supabase, site Netlify. Un nom générique se paie deux fois : au moment où il devient
+ambigu, et au moment où il faut le changer.
+
+Et les comptes se structurent pour qu'un second projet Supabase et un second site
+Netlify puissent s'ajouter **sans réorganisation** : une organisation Supabase qui
+accueille plusieurs projets, une équipe Netlify qui accueille plusieurs sites. Pas un
+compte par instance.
+
+> Chez Netlify, le nom du site **est** son sous-domaine : le renommer change l'URL des
+> membres. C'est là que la règle compte le plus.
+
+---
+
 ## Vue d'ensemble
 
 | # | Étape | Qui | Ce qu'on en rapporte |
@@ -75,9 +96,12 @@ Sur la page de l'intégration, onglet `Configuration` → **Internal Integration
 ## 3 · Supabase — le projet et son schéma
 
 **À faire en séance**
-1. Créer l'**organisation** (si elle n'existe pas) puis le **projet**. Nom suggéré :
-   `spherier`. Région : **Europe (eu-west-1 ou eu-central-1)** — les membres sont en
-   France, et les données restent dans l'UE.
+1. Créer l'**organisation** (si elle n'existe pas) puis le **projet**.
+   - Organisation : un nom générique — `Pyxis` ou `Sphérier` — car elle accueillera
+     aussi le projet du club de coachs plus tard.
+   - Projet : **`spherier-b2c`**, explicitement. Pas `spherier`.
+   - Région : **Europe (eu-west-1 ou eu-central-1)** — les membres sont en France, et
+     les données restent dans l'UE.
 2. Choisir un mot de passe de base de données et le ranger dans le gestionnaire de mots
    de passe. Il ne servira pas au sphérier, mais il est irrécupérable ensuite.
 3. Attendre que le projet soit prêt (une à deux minutes).
@@ -104,6 +128,7 @@ Sur la page de l'intégration, onglet `Configuration` → **Internal Integration
 
 **À faire en séance**
 1. Créer le dépôt, **privé**, sous le compte ou l'organisation Pyxis.
+   Nom : **`spherier-b2c`**.
 2. M'y donner accès en écriture (`Settings` → `Collaborators`), ou à Cyril.
 
 **À rapporter**
@@ -116,7 +141,9 @@ Sur la page de l'intégration, onglet `Configuration` → **Internal Integration
 ## 5 · Netlify — l'équipe et le site
 
 **À faire en séance**
-1. Créer ou identifier l'**équipe** Netlify qui hébergera le site.
+1. Créer ou identifier l'**équipe** Netlify qui hébergera le site. Elle accueillera
+   aussi le site des coachs plus tard : lui donner un nom générique, pas un nom
+   d'instance.
 2. Créer le site depuis le dépôt GitHub de l'étape 4. Netlify demandera d'installer son
    application GitHub sur l'organisation : **autoriser au moins ce dépôt**.
 3. Réglages de build : **aucune commande de build**, dossier publié `public`, dossier de
@@ -126,9 +153,10 @@ Sur la page de l'intégration, onglet `Configuration` → **Internal Integration
 
 - Le **nom d'équipe** (visible dans l'URL d'administration :
   `app.netlify.com/teams/<nom-equipe>/…`).
-- Le **nom du site**, qui est aussi son sous-domaine : `<nom-du-site>.netlify.app`.
-  ⚠️ Chez Netlify **le nom du site EST le sous-domaine** : le renommer change l'URL.
-  Choisir donc un nom qu'on ne voudra pas changer.
+- Le **nom du site** : **`spherier-b2c`**, qui est aussi son sous-domaine —
+  `spherier-b2c.netlify.app`.
+  ⚠️ Chez Netlify **le nom du site EST le sous-domaine** : le renommer change l'URL que
+  les membres ont entre les mains. C'est la raison d'être de la règle de nommage.
 - **Qui pose les variables d'environnement.** Sur les offres gratuites, l'API refuse de
   les écrire : il faut passer par l'interface, donc quelqu'un ayant accès à l'équipe.
   À décider en séance, pas après.
