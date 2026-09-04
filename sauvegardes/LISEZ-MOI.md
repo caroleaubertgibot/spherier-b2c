@@ -28,13 +28,41 @@ correctement les accents.
 
 ## Purge des comptes de test (27 août 2026)
 
-`comptes-de-test-supprimes-2026-08-27.json` contient les quatre comptes de test
-retirés de Supabase avant la bascule : leurs snapshots et leurs notes, tels quels.
-La table `snapshots` est append-only par principe, mais un `DELETE` reste possible
-avec la clé de service — d'où cette copie prise avant.
+Les quatre comptes de test ont été retirés de Supabase avant la bascule, après copie
+de leurs snapshots et de leurs notes. La table `snapshots` est append-only par
+principe, mais un `DELETE` reste possible avec la clé de service — d'où cette copie.
 
-Le compte de démonstration `94c97176-…` (29 compétences situées, référentiel v3) est
-conservé : il sert à montrer l'outil.
+Ce fichier **n'est plus dans le dépôt** : il porte des données de membres. Voir la
+section suivante.
+
+## Ce que ce dossier contient, et ce qu'il ne contient plus (4 septembre 2026)
+
+Séparation faite à l'occasion du gel avant migration Pyxis.
+
+**Versionné ici** — sauvegardes de RÉFÉRENTIEL, sans aucune donnée personnelle :
+
+- `export-notion-2026-09-04.json` — l'état complet de Notion, relations par `Code`
+- `referentiel-v3-avant-refonte-v7.json` — l'état V3, juste avant la refonte
+- `competences-avant-migration-v3-2026-08-26.json`
+- `difficulte-avant-renommage-fondamental.json` — ses trois UUID sont des
+  identifiants d'options Notion, pas des membres
+- `ordre-competences-initial.json`
+
+**Sorti du dépôt** — tout ce qui porte des données de membres :
+
+- les exports de `snapshots` (`snapshots-*.csv`)
+- `comptes-de-test-supprimes-*.json`
+- la section Clients de l'export Notion, désormais dans un fichier séparé
+
+Le `.gitignore` porte les motifs correspondants : ces fichiers ne peuvent plus
+revenir par inadvertance.
+
+**Ce qui reste dans l'HISTORIQUE.** Les exports de snapshots et le fichier des
+comptes supprimés ont été versionnés avant cette décision : ils demeurent dans
+l'historique Git, qu'une suppression ne réécrit pas. Ce sont exclusivement des
+comptes de test, tous purgés de Supabase depuis. Le dépôt étant recréé sans
+historique à la migration Pyxis, la question s'éteindra d'elle-même — mais il ne
+faut plus rien y ajouter d'ici là.
 
 ## Avant de mettre de vrais membres en production
 

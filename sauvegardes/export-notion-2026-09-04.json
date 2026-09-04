@@ -1,0 +1,4024 @@
+{
+ "exporte_le": "2026-09-04T11:54:34.757Z",
+ "source": "Espace Notion du club b2c (Les Sommets), avant migration Pyxis",
+ "principe": "Toutes les relations sont exprimées par Code, jamais par identifiant de page.",
+ "referentiel_version": 4,
+ "themes": [
+  {
+   "name": "Écoute",
+   "code": "ECOUTE",
+   "definition": "Capacité à écouter pleinement sans préparer sa réponse, reformuler et faire sentir à l'autre qu'il est compris.",
+   "dimension": "Moi et les autres",
+   "ordre": 1,
+   "position_x": 185,
+   "position_y": 80,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "FORMULER_DEMANDES"
+   ]
+  },
+  {
+   "name": "Émotions",
+   "code": "EMOTIONS",
+   "definition": "Capacité à reconnaître, nommer et accueillir ses émotions, comprendre ce qu'elles signalent et les laisser traverser sans les subir ni les étouffer.",
+   "dimension": "Moi",
+   "ordre": 1,
+   "position_x": 250,
+   "position_y": 80,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "BESOINS",
+    "PARTS_SOI"
+   ]
+  },
+  {
+   "name": "Rêves",
+   "code": "REVES",
+   "definition": "Capacité à laisser exister ce que l'on désire vraiment, à le formuler sans le censurer, et à en faire une direction plutôt qu'une rêverie.",
+   "dimension": "Moi et le monde",
+   "ordre": 1,
+   "position_x": 315,
+   "position_y": 80,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "CHOIX",
+    "SENS_CONTRIBUTION"
+   ]
+  },
+  {
+   "name": "Choix",
+   "code": "CHOIX",
+   "definition": "Capacité à décider en situation d'incertitude, assumer ses choix, renoncer à ce qu'ils écartent et sortir de l'indécision.",
+   "dimension": "Moi et le monde",
+   "ordre": 2,
+   "position_x": 250,
+   "position_y": 245,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "PASSAGE_L_ACTION",
+    "GESTION_TEMPS",
+    "TRAVAIL_CARRIERE"
+   ]
+  },
+  {
+   "name": "Corps et énergie",
+   "code": "CORPS_ENERGIE",
+   "definition": "Capacité à écouter les signaux de son corps, gérer son énergie, son sommeil et ses rythmes, et reconnaître l'épuisement comme un message.",
+   "dimension": "Moi",
+   "ordre": 2,
+   "position_x": 380,
+   "position_y": 122,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "STRESS_REGULATION"
+   ]
+  },
+  {
+   "name": "Lien",
+   "code": "LIEN",
+   "definition": "Capacité à créer la confiance, s'ouvrir, se laisser connaître et construire des relations qui nourrissent dans la durée.",
+   "dimension": "Moi et les autres",
+   "ordre": 2,
+   "position_x": 315,
+   "position_y": 122,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "AMITIE",
+    "PATTERNS"
+   ]
+  },
+  {
+   "name": "Formuler des demandes",
+   "code": "FORMULER_DEMANDES",
+   "definition": "Capacité à formuler une demande claire, négocier ce qui compte et demander de l'aide sans culpabilité.",
+   "dimension": "Moi et les autres",
+   "ordre": 3,
+   "position_x": 120,
+   "position_y": 245,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "DIRE_NON"
+   ]
+  },
+  {
+   "name": "Sens et contribution",
+   "code": "SENS_CONTRIBUTION",
+   "definition": "Capacité à relier sa vie à quelque chose de plus grand que soi, identifier sa manière de contribuer et donner une direction à son existence.",
+   "dimension": "Moi et le monde",
+   "ordre": 3,
+   "position_x": 380,
+   "position_y": 287,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "SPIRITUALITE"
+   ]
+  },
+  {
+   "name": "Valeurs",
+   "code": "VALEURS",
+   "definition": "Capacité à identifier ce qui compte vraiment pour soi et à s'en servir comme boussole dans ses choix et ses engagements.",
+   "dimension": "Moi",
+   "ordre": 3,
+   "position_x": 510,
+   "position_y": 80,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "ASSUMER_MES_TALENTS",
+    "CYCLES_VIE"
+   ]
+  },
+  {
+   "name": "Amitié",
+   "code": "AMITIE",
+   "definition": "Capacité à créer et entretenir des amitiés profondes à l'âge adulte, à trouver sa place dans un groupe et à habiter la solitude.",
+   "dimension": "Moi et les autres",
+   "ordre": 4,
+   "position_x": 250,
+   "position_y": 287,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  },
+  {
+   "name": "Besoins",
+   "code": "BESOINS",
+   "definition": "Capacité à identifier les besoins profonds derrière ses réactions et ses envies, et à les distinguer des stratégies utilisées pour les satisfaire.",
+   "dimension": "Moi",
+   "ordre": 4,
+   "position_x": 120,
+   "position_y": 245,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "CROYANCES"
+   ]
+  },
+  {
+   "name": "Gestion du temps",
+   "code": "GESTION_TEMPS",
+   "definition": "Capacité à protéger ses priorités, réduire sa charge mentale, refuser la dispersion et organiser son temps selon son énergie.",
+   "dimension": "Moi et le monde",
+   "ordre": 4,
+   "position_x": 120,
+   "position_y": 410,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "PERSEVERANCE_HABITUDES"
+   ]
+  },
+  {
+   "name": "Parts de soi",
+   "code": "PARTS_SOI",
+   "definition": "Capacité à reconnaître les différentes parts qui cohabitent en soi, à dialoguer avec elles et à les réintégrer plutôt qu'à les combattre.",
+   "dimension": "Moi",
+   "ordre": 5,
+   "position_x": 250,
+   "position_y": 287,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "JUGE_INTERIEUR"
+   ]
+  },
+  {
+   "name": "Passage à l'action",
+   "code": "PASSAGE_L_ACTION",
+   "definition": "Capacité à démarrer, dépasser la procrastination, la peur de l'échec et le perfectionnisme qui empêche d'avancer.",
+   "dimension": "Moi et le monde",
+   "ordre": 5,
+   "position_x": 250,
+   "position_y": 452,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "PERSEVERANCE_HABITUDES",
+    "PROJETS_CREATION"
+   ]
+  },
+  {
+   "name": "Patterns",
+   "code": "PATTERNS",
+   "definition": "Capacité à repérer les scénarios relationnels qui se rejouent, à comprendre ce qu'ils protègent et à choisir une réponse différente.",
+   "dimension": "Moi et les autres",
+   "ordre": 5,
+   "position_x": 380,
+   "position_y": 245,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "FAMILLE",
+    "GESTIONS_CONFLITS"
+   ]
+  },
+  {
+   "name": "Dire \"non\"",
+   "code": "DIRE_NON",
+   "definition": "Capacité à refuser clairement, poser ses limites et les tenir dans le temps, sans agressivité ni justification excessive.",
+   "dimension": "Moi et les autres",
+   "ordre": 6,
+   "position_x": 185,
+   "position_y": 410,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "GESTIONS_CONFLITS"
+   ]
+  },
+  {
+   "name": "Stress et régulation",
+   "code": "STRESS_REGULATION",
+   "definition": "Capacité à reconnaître ses états de stress et d'anxiété, les réguler et revenir au calme par ses propres moyens.",
+   "dimension": "Moi",
+   "ordre": 6,
+   "position_x": 380,
+   "position_y": 245,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "POLARITES"
+   ]
+  },
+  {
+   "name": "Travail et carrière",
+   "code": "TRAVAIL_CARRIERE",
+   "definition": "Capacité à piloter sa vie professionnelle : évolution, reconversion, posture, ambition et négociation de sa place.",
+   "dimension": "Moi et le monde",
+   "ordre": 6,
+   "position_x": 380,
+   "position_y": 410,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "ARGENT"
+   ]
+  },
+  {
+   "name": "Assumer mes talents",
+   "code": "ASSUMER_MES_TALENTS",
+   "definition": "Capacité à reconnaître ce que l'on fait naturellement bien, à le nommer sans se diminuer ni se survendre, et à s'appuyer dessus.",
+   "dimension": "Moi",
+   "ordre": 7,
+   "position_x": 510,
+   "position_y": 287,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "CONFIANCE_SOI"
+   ]
+  },
+  {
+   "name": "Famille",
+   "code": "FAMILLE",
+   "definition": "Capacité à se positionner en adulte face à ses parents et sa fratrie, et à sortir des loyautés invisibles héritées.",
+   "dimension": "Moi et les autres",
+   "ordre": 7,
+   "position_x": 315,
+   "position_y": 452,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "PARENTALITE"
+   ]
+  },
+  {
+   "name": "Spiritualité",
+   "code": "SPIRITUALITE",
+   "definition": "Capacité à cultiver un rapport à plus grand que soi — quelle qu'en soit la forme — et à y puiser du sens, de l'apaisement et de la perspective.",
+   "dimension": "Moi et le monde",
+   "ordre": 7,
+   "position_x": 510,
+   "position_y": 452,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  },
+  {
+   "name": "Cycles de vie",
+   "code": "CYCLES_VIE",
+   "definition": "Capacité à reconnaître les saisons de sa vie — ce qui naît, ce qui grandit, ce qui plafonne, ce qui se termine — et à traverser les passages sans les nier ni les précipiter.",
+   "dimension": "Moi",
+   "ordre": 8,
+   "position_x": 640,
+   "position_y": 245,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "OPPORTUNITES"
+   ]
+  },
+  {
+   "name": "Gestions des conflits",
+   "code": "GESTIONS_CONFLITS",
+   "definition": "Capacité à traverser un désaccord sans fuir ni rompre, accueillir la colère de l'autre, reconnaître sa part et réparer le lien.",
+   "dimension": "Moi et les autres",
+   "ordre": 8,
+   "position_x": 185,
+   "position_y": 575,
+   "seuil": 4,
+   "actif": true,
+   "nourrit": [
+    "COUPLE"
+   ]
+  },
+  {
+   "name": "Persévérance et habitudes",
+   "code": "PERSEVERANCE_HABITUDES",
+   "definition": "Capacité à tenir dans la durée, installer des pratiques qui incarnent ses priorités, traverser les rechutes et rester engagé malgré les obstacles.",
+   "dimension": "Moi et le monde",
+   "ordre": 8,
+   "position_x": 185,
+   "position_y": 575,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  },
+  {
+   "name": "Croyances",
+   "code": "CROYANCES",
+   "definition": "Capacité à repérer les croyances qui gouvernent ses réactions, en comprendre l'origine et le coût, et les mettre à l'épreuve des faits.",
+   "dimension": "Moi",
+   "ordre": 9,
+   "position_x": 250,
+   "position_y": 410,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "NUANCE",
+    "GROWTH_MINDSET"
+   ]
+  },
+  {
+   "name": "Parentalité",
+   "code": "PARENTALITE",
+   "definition": "Capacité à accompagner ses enfants avec justesse, tenir une autorité bienveillante et préserver le lien à chaque âge.",
+   "dimension": "Moi et les autres",
+   "ordre": 9,
+   "position_x": 315,
+   "position_y": 617,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  },
+  {
+   "name": "Projets et création",
+   "code": "PROJETS_CREATION",
+   "definition": "Capacité à faire naître un projet — entreprise, œuvre, engagement — le structurer et le mener jusqu'à sa réalisation.",
+   "dimension": "Moi et le monde",
+   "ordre": 9,
+   "position_x": 315,
+   "position_y": 617,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  },
+  {
+   "name": "Argent",
+   "code": "ARGENT",
+   "definition": "Capacité à comprendre son rapport à l'argent, le gagner, le demander, le gérer et sortir des croyances qui le bloquent.",
+   "dimension": "Moi et le monde",
+   "ordre": 10,
+   "position_x": 445,
+   "position_y": 575,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  },
+  {
+   "name": "Couple",
+   "code": "COUPLE",
+   "definition": "Capacité à construire et entretenir une relation amoureuse : attentes, vulnérabilité, désir, engagement, traversée des crises.",
+   "dimension": "Moi et les autres",
+   "ordre": 10,
+   "position_x": 250,
+   "position_y": 740,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  },
+  {
+   "name": "Juge intérieur",
+   "code": "JUGE_INTERIEUR",
+   "definition": "Capacité à reconnaître la voix qui critique et disqualifie, à comprendre ce qu'elle protège, et à ne plus la laisser décider à sa place.",
+   "dimension": "Moi",
+   "ordre": 10,
+   "position_x": 380,
+   "position_y": 452,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "CONFIANCE_SOI"
+   ]
+  },
+  {
+   "name": "Polarités",
+   "code": "POLARITES",
+   "definition": "Capacité à reconnaître les tensions entre deux pôles qui semblent s'exclure et à sortir du soit/soit pour habiter les deux.",
+   "dimension": "Moi",
+   "ordre": 11,
+   "position_x": 510,
+   "position_y": 410,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  },
+  {
+   "name": "Nuance",
+   "code": "NUANCE",
+   "definition": "Capacité à sortir du tout ou rien, à tenir plusieurs vérités à la fois et à habiter la complexité sans avoir besoin de trancher.",
+   "dimension": "Moi",
+   "ordre": 12,
+   "position_x": 250,
+   "position_y": 575,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  },
+  {
+   "name": "Growth mindset",
+   "code": "GROWTH_MINDSET",
+   "definition": "Capacité à considérer ses capacités comme évolutives plutôt que fixées, à faire de l'effort et de l'échec des matériaux de progression.",
+   "dimension": "Moi",
+   "ordre": 13,
+   "position_x": 380,
+   "position_y": 617,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "OPPORTUNITES"
+   ]
+  },
+  {
+   "name": "Confiance en soi",
+   "code": "CONFIANCE_SOI",
+   "definition": "Capacité à s'appuyer sur soi dans l'incertitude, à tenir ses engagements envers soi-même et à agir sans attendre d'être sûr.",
+   "dimension": "Moi",
+   "ordre": 14,
+   "position_x": 510,
+   "position_y": 575,
+   "seuil": null,
+   "actif": true,
+   "nourrit": [
+    "REGARD_AUTRES"
+   ]
+  },
+  {
+   "name": "Regard des autres",
+   "code": "REGARD_AUTRES",
+   "definition": "Capacité à identifier le poids que le regard des autres exerce sur ses choix, à distinguer les avis qui comptent de ceux qui pèsent, et à revenir à son propre jugement.",
+   "dimension": "Moi",
+   "ordre": 15,
+   "position_x": 315,
+   "position_y": 740,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  },
+  {
+   "name": "Opportunités",
+   "code": "OPPORTUNITES",
+   "definition": "Capacité à repérer les occasions qui se présentent, à distinguer celles qui servent son cap de celles qui l'en éloignent, et à les saisir.",
+   "dimension": "Moi",
+   "ordre": 16,
+   "position_x": 445,
+   "position_y": 782,
+   "seuil": null,
+   "actif": true,
+   "nourrit": []
+  }
+ ],
+ "competences": [
+  {
+   "name": "Écouter sans préparer sa réponse",
+   "code": "AUT-01",
+   "description": "Je reste pleinement disponible à ce que l'autre dit, sans chercher ce que je vais répondre.",
+   "enonces": {
+    "1": "Je sais que je prépare souvent ma réponse pendant que l'autre parle.",
+    "2": "Je parviens parfois à écouter sans préparer ma réponse.",
+    "3": "J'écoute pleinement, même quand le sujet me touche ou me met en désaccord."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "ECOUTE"
+  },
+  {
+   "name": "Repérer si je suis en état d'écouter",
+   "code": "AUT-02",
+   "description": "Je sais dire avant une conversation si je suis vraiment disponible",
+   "enonces": {
+    "1": "Je sais qu'écouter demande d'être disponible.",
+    "2": "Je remarque après coup quand je n'étais pas en état d'écouter.",
+    "3": "Je sais dire avant une conversation si je suis vraiment disponible."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "ECOUTE"
+  },
+  {
+   "name": "Créer les conditions matérielles",
+   "code": "AUT-03",
+   "description": "J'écarte ce qui capte mon attention quand quelqu'un me parle",
+   "enonces": {
+    "1": "Je sais que mon attention se disperse quand on me parle.",
+    "2": "J'écarte parfois ce qui capte mon attention pendant une conversation.",
+    "3": "J'écarte systématiquement ce qui capte mon attention quand quelqu'un me parle."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "ECOUTE"
+  },
+  {
+   "name": "Reporter une écoute que je ne peux pas donner",
+   "code": "AUT-04",
+   "description": "J'ai déjà dit « pas maintenant, mais à tel moment » plutôt que d'écouter à moitié",
+   "enonces": {
+    "1": "Je sais qu'écouter à moitié ne rend service à personne.",
+    "2": "J'ai déjà reporté une écoute que je ne pouvais pas donner.",
+    "3": "Je dis « pas maintenant, mais à tel moment » plutôt que d'écouter à moitié."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "ECOUTE"
+  },
+  {
+   "name": "Résister à l'envie de raconter mon histoire semblable",
+   "code": "AUT-05",
+   "description": "Je ne ramène pas la conversation à moi",
+   "enonces": {
+    "1": "Je remarque que je ramène souvent la conversation à moi.",
+    "2": "Je retiens parfois mon histoire semblable pour laisser la place.",
+    "3": "Je ne ramène pas la conversation à moi, même quand l'histoire me parle."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "ECOUTE"
+  },
+  {
+   "name": "Supporter un silence",
+   "code": "AUT-06",
+   "description": "Je laisse passer plusieurs secondes sans les remplir",
+   "enonces": {
+    "1": "Je remarque que je remplis les silences.",
+    "2": "Je laisse parfois passer un silence sans le combler.",
+    "3": "Je laisse passer plusieurs secondes sans les remplir."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "ECOUTE"
+  },
+  {
+   "name": "Reformuler pour vérifier sa compréhension",
+   "code": "AUT-07",
+   "description": "Je redis ce que j'ai compris avec les mots de l'autre et je laisse corriger.",
+   "enonces": {
+    "1": "Je sais ce qu'est une reformulation.",
+    "2": "Je reformule parfois ce que j'ai compris avant de répondre.",
+    "3": "Je reformule spontanément dans les conversations qui comptent et je laisse l'autre me corriger."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 70,
+   "actif": true,
+   "theme": "ECOUTE"
+  },
+  {
+   "name": "Entendre ce qui n'est pas dit",
+   "code": "AUT-08",
+   "description": "Je perçois l'émotion ou le besoin derrière les mots et je le vérifie avec l'autre.",
+   "enonces": {
+    "1": "Je sais qu'il y a souvent une émotion ou un besoin derrière les mots.",
+    "2": "Je perçois parfois ce qui n'est pas dit et je le garde pour moi.",
+    "3": "Je perçois l'émotion derrière les mots et je la vérifie avec l'autre."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "ECOUTE"
+  },
+  {
+   "name": "Avoir plusieurs niveaux d'écoute",
+   "code": "AUT-09",
+   "description": "Je sais écouter à plusieurs niveaux: ce que l'autre me dit, ce qu'il ne me dit pas, ce que je ressens en l'écoutant, etc.",
+   "enonces": {
+    "1": "Je sais qu'on peut écouter à plusieurs niveaux.",
+    "2": "Je perçois parfois ce que l'autre ne dit pas.",
+    "3": "J'écoute à plusieurs niveaux : ce qui est dit, ce qui ne l'est pas, ce que je ressens en écoutant."
+   },
+   "difficulte": "Avancé",
+   "ordre": 90,
+   "actif": true,
+   "theme": "ECOUTE"
+  },
+  {
+   "name": "Retenir le conseil non demandé",
+   "code": "AUT-10",
+   "description": "Je résiste au réflexe de résoudre, rassurer ou conseiller quand l'autre a besoin d'être entendu.",
+   "enonces": {
+    "1": "Je remarque mon réflexe de conseiller ou de rassurer.",
+    "2": "Je retiens parfois un conseil quand l'autre a juste besoin d'être entendu.",
+    "3": "Je choisis consciemment entre écouter et conseiller, et je demande à l'autre ce dont il a besoin."
+   },
+   "difficulte": "Avancé",
+   "ordre": 100,
+   "actif": true,
+   "theme": "ECOUTE"
+  },
+  {
+   "name": "Faire l'inventaire de mes liens actuels",
+   "code": "AUT-11",
+   "description": "Je sais citer les personnes qui comptent aujourd'hui, pas celles qui comptaient il y a dix ans",
+   "enonces": {
+    "1": "Je sais que mes liens ont changé sans que j'y prête attention.",
+    "2": "Je peux citer les personnes qui comptent aujourd'hui.",
+    "3": "Je connais mes liens actuels et je les distingue de ceux d'il y a dix ans."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "LIEN"
+  },
+  {
+   "name": "Repérer les liens qui s'éteignent par défaut",
+   "code": "AUT-12",
+   "description": "Je sais dire à qui je n'ai pas parlé depuis trop longtemps sans l'avoir décidé",
+   "enonces": {
+    "1": "Je sais que certains liens s'éteignent sans que je l'aie décidé.",
+    "2": "Je peux dire à qui je n'ai pas parlé depuis trop longtemps.",
+    "3": "Je repère les liens qui s'éteignent par défaut, et je décide de les nourrir ou de les laisser."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "LIEN"
+  },
+  {
+   "name": "Nommer ce que je cherche dans un lien",
+   "code": "AUT-13",
+   "description": "Je sais dire ce dont j'ai besoin dans une relation aujourd'hui",
+   "enonces": {
+    "1": "Je sais que je n'ai pas clarifié ce que je cherche dans mes relations.",
+    "2": "Je peux dire ce dont j'ai besoin dans une relation aujourd'hui.",
+    "3": "Je nomme ce que je cherche dans un lien, et je le dis à la personne concernée."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "LIEN"
+  },
+  {
+   "name": "Poser des questions au-delà des nouvelles",
+   "code": "AUT-14",
+   "description": "Mes conversations ne s'arrêtent pas au travail et à l'actualité",
+   "enonces": {
+    "1": "Je remarque que mes conversations restent en surface.",
+    "2": "Je pose parfois une question qui va au-delà des nouvelles.",
+    "3": "Mes conversations ne s'arrêtent pas au travail et à l'actualité."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "LIEN"
+  },
+  {
+   "name": "Se laisser connaître",
+   "code": "AUT-15",
+   "description": "Je partage ce que je suis vraiment, y compris mes fragilités, avec les personnes qui comptent.",
+   "enonces": {
+    "1": "Je sais que je montre peu de mes fragilités.",
+    "2": "Je me laisse parfois connaître par les personnes qui comptent.",
+    "3": "Je partage ce que je suis vraiment, y compris mes fragilités, avec mes proches."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "LIEN"
+  },
+  {
+   "name": "Choisir les relations qui nourrissent",
+   "code": "AUT-16",
+   "description": "J'identifie les relations qui me font grandir et celles qui m'épuisent, et j'agis en conséquence.",
+   "enonces": {
+    "1": "Je sais que certaines relations me font grandir et d'autres m'épuisent.",
+    "2": "Je peux nommer les relations qui me nourrissent et celles qui m'épuisent.",
+    "3": "J'investis dans les relations qui me font grandir et je prends de la distance avec celles qui m'épuisent."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "LIEN"
+  },
+  {
+   "name": "Entretenir un lien dans la durée",
+   "code": "AUT-17",
+   "description": "Je prends soin d'une relation au quotidien, pas seulement en cas de crise.",
+   "enonces": {
+    "1": "Je sais qu'une relation se nourrit au quotidien, pas seulement en cas de crise.",
+    "2": "Je prends parfois soin d'un lien sans raison particulière.",
+    "3": "J'entretiens mes relations importantes de façon régulière."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 70,
+   "actif": true,
+   "theme": "LIEN"
+  },
+  {
+   "name": "Repérer ce que je regrette d'avoir accepté",
+   "code": "AUT-18",
+   "description": "Je sais citer trois oui que je n'aurais pas dû dire",
+   "enonces": {
+    "1": "Je sais que j'accepte des choses que je regrette ensuite.",
+    "2": "Je peux citer un oui que je n'aurais pas dû dire.",
+    "3": "J'en cite trois, et je vois ce qu'ils ont en commun."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "DIRE_NON"
+  },
+  {
+   "name": "Identifier les demandes qui m'emportent à chaque fois",
+   "code": "AUT-19",
+   "description": "Je sais dire qui, ou quel type de demande, me fait céder systématiquement",
+   "enonces": {
+    "1": "Je sais que je cède plus facilement à certaines personnes.",
+    "2": "Je peux dire qui, ou quel type de demande, me fait céder.",
+    "3": "Je repère la demande qui m'emporte au moment où elle arrive."
+   },
+   "difficulte": "Avancé",
+   "ordre": 20,
+   "actif": true,
+   "theme": "DIRE_NON"
+  },
+  {
+   "name": "Connaître mes critères du moment",
+   "code": "AUT-20",
+   "description": "Je sais dire à quoi je réponds oui en ce moment, et à quoi non",
+   "enonces": {
+    "1": "Je sais qu'un refus est plus simple quand on a des critères.",
+    "2": "Je peux dire à quoi je réponds oui en ce moment.",
+    "3": "Je connais mes critères du moment, et je m'y réfère pour trancher."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "DIRE_NON"
+  },
+  {
+   "name": "Ne pas répondre dans l'instant",
+   "code": "AUT-21",
+   "description": "Je dis « je te réponds demain » au lieu d'un oui réflexe",
+   "enonces": {
+    "1": "Je sais que mon oui réflexe part avant que j'aie réfléchi.",
+    "2": "Je diffère parfois ma réponse au lieu de dire oui tout de suite.",
+    "3": "Je dis « je te réponds demain » au lieu d'un oui réflexe."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "DIRE_NON"
+  },
+  {
+   "name": "Repérer mon oui automatique avant qu'il sorte",
+   "code": "AUT-22",
+   "description": "Je sens le mouvement d'acceptation en train de se faire",
+   "enonces": {
+    "1": "Je sais que mon oui automatique a des signes avant-coureurs.",
+    "2": "Je reconnais après coup le moment où il est parti.",
+    "3": "Je sens le mouvement d'acceptation en train de se faire, avant qu'il sorte."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "DIRE_NON"
+  },
+  {
+   "name": "Dire non clairement",
+   "code": "AUT-23",
+   "description": "Ma réponse contient un non clair, sans nuance ou justification",
+   "enonces": {
+    "1": "Je sais qu'un non n'a pas besoin d'être justifié longuement.",
+    "2": "Je dis non clairement dans les situations peu risquées.",
+    "3": "Ma réponse contient un non clair, sans nuance ni justification."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "DIRE_NON"
+  },
+  {
+   "name": "Distinguer refuser la demande et rejeter la personne",
+   "code": "AUT-24",
+   "description": "Je dis non en marquant que le lien tient",
+   "enonces": {
+    "1": "Je sais que refuser une demande n'est pas rejeter la personne.",
+    "2": "Je parviens parfois à dire non en préservant le lien.",
+    "3": "Je dis non en marquant explicitement que le lien tient."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "DIRE_NON"
+  },
+  {
+   "name": "Reconnaître les rôles différents de mes amis",
+   "code": "AUT-25",
+   "description": "Je sais qui j'appelle pour quoi",
+   "enonces": {
+    "1": "Je sais que mes amis ne jouent pas tous le même rôle.",
+    "2": "Je peux dire qui j'appelle pour quoi.",
+    "3": "Je connais le rôle de chacun et je sollicite la bonne personne."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "AMITIE"
+  },
+  {
+   "name": "Nommer ce que j'attends d'une amitié aujourd'hui",
+   "code": "AUT-26",
+   "description": "Je sais dire ce que je cherche, et en quoi ça a changé avec les années",
+   "enonces": {
+    "1": "Je sais que mes attentes en amitié ont changé.",
+    "2": "Je peux dire ce que je cherche dans une amitié aujourd'hui.",
+    "3": "Je le dis, et j'explique en quoi ça a changé avec les années."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "AMITIE"
+  },
+  {
+   "name": "Assumer l'amitié comme un besoin",
+   "code": "AUT-27",
+   "description": "Je peux dire que j'ai besoin de mes amis sans en faire une faiblesse",
+   "enonces": {
+    "1": "Je sais que l'amitié est un besoin, pas un supplément.",
+    "2": "Je peux dire que j'ai besoin de mes amis.",
+    "3": "Je le dis sans en faire une faiblesse."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "AMITIE"
+  },
+  {
+   "name": "Réserver du temps à mes amis",
+   "code": "AUT-28",
+   "description": "Il y a des moments d'amitié dans mon agenda, pas seulement dans mes intentions",
+   "enonces": {
+    "1": "Je sais que mes amitiés passent après le reste.",
+    "2": "Je réserve parfois du temps à un ami.",
+    "3": "Il y a des moments d'amitié dans mon agenda, pas seulement dans mes intentions."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "AMITIE"
+  },
+  {
+   "name": "Demander de l'aide à un ami",
+   "code": "AUT-29",
+   "description": "J'ai sollicité un ami sur quelque chose de difficile",
+   "enonces": {
+    "1": "Je sais que je sollicite rarement mes amis sur ce qui est difficile.",
+    "2": "J'ai déjà demandé de l'aide à un ami.",
+    "3": "J'ai sollicité un ami sur quelque chose de difficile, récemment."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "AMITIE"
+  },
+  {
+   "name": "Dire à un ami ce qu'il représente pour moi",
+   "code": "AUT-30",
+   "description": "Je le lui ai dit, pas seulement pensé",
+   "enonces": {
+    "1": "Je sais que je pense à mes amis plus que je ne le leur dis.",
+    "2": "J'ai déjà dit à un ami ce qu'il représente pour moi.",
+    "3": "Je le lui ai dit, pas seulement pensé."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "AMITIE"
+  },
+  {
+   "name": "Accepter qu'une amitié change de forme",
+   "code": "AUT-31",
+   "description": "Un ami proche devenu lointain n'est pas pour moi un échec",
+   "enonces": {
+    "1": "Je sais qu'une amitié peut changer de forme sans mourir.",
+    "2": "Je vis parfois l'éloignement d'un ami sans le vivre comme un échec.",
+    "3": "Un ami proche devenu lointain n'est pas pour moi un échec."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "AMITIE"
+  },
+  {
+   "name": "Reconnaître qu'une situation revient",
+   "code": "AUT-32",
+   "description": "Je sais citer une situation qui se reproduit dans ma vie sous des formes différentes",
+   "enonces": {
+    "1": "Je reconnais après coup que mon schéma s'est rejoué.",
+    "2": "Je repère parfois mon schéma pendant qu'il se déroule.",
+    "3": "Je repère mon schéma en temps réel, avant qu'il prenne le dessus."
+   },
+   "difficulte": "Avancé",
+   "ordre": 10,
+   "actif": true,
+   "theme": "PATTERNS"
+  },
+  {
+   "name": "Repérer ce qu'on me dit depuis des années",
+   "code": "AUT-33",
+   "description": "Je sais citer une remarque que mon entourage me fait depuis longtemps",
+   "enonces": {
+    "1": "Je sais que mon entourage me renvoie certaines choses depuis longtemps.",
+    "2": "Je peux citer une remarque qu'on me fait depuis des années.",
+    "3": "Je prends cette remarque au sérieux plutôt que de la balayer."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "PATTERNS"
+  },
+  {
+   "name": "Voir le point commun entre des épisodes sans rapport apparent",
+   "code": "AUT-34",
+   "description": "Je sais dire ce que trois histoires différentes ont en commun",
+   "enonces": {
+    "1": "Je sais que des histoires différentes peuvent cacher le même schéma.",
+    "2": "Je peux rapprocher deux épisodes sans rapport apparent.",
+    "3": "Je dis ce que trois histoires différentes ont en commun."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "PATTERNS"
+  },
+  {
+   "name": "Décrire la séquence complète",
+   "code": "AUT-35",
+   "description": "Je sais dire le déclencheur, ce que je fais, et ce que ça produit",
+   "enonces": {
+    "1": "Je sais que mon équilibre dépend parfois trop d'une personne.",
+    "2": "Je fais parfois des choix sans attendre l'approbation d'une personne clé.",
+    "3": "Mon équilibre ne dépend plus de la présence ou de l'approbation de quelqu'un."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "PATTERNS"
+  },
+  {
+   "name": "Identifier le déclencheur précis",
+   "code": "AUT-36",
+   "description": "Je nomme le signal qui met la séquence en route, pas la situation en général",
+   "enonces": {
+    "1": "Je sais qu'un schéma démarre sur un signal précis.",
+    "2": "Je peux nommer la situation générale qui met la séquence en route.",
+    "3": "Je nomme le signal exact qui déclenche la séquence."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 50,
+   "actif": true,
+   "theme": "PATTERNS"
+  },
+  {
+   "name": "Choisir un comportement de remplacement précis",
+   "code": "AUT-37",
+   "description": "Je sais dire ce que je fais à la place, pas seulement ce que je ne fais plus",
+   "enonces": {
+    "1": "Je sais qu'arrêter un comportement ne suffit pas, il faut le remplacer.",
+    "2": "Je peux dire ce que je ne veux plus faire.",
+    "3": "Je dis ce que je fais à la place, précisément."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "PATTERNS"
+  },
+  {
+   "name": "Formuler une demande claire et concrète",
+   "code": "AUT-38",
+   "description": "Je demande précisément ce que je veux, à qui, pour quand, de manière négociable.",
+   "enonces": {
+    "1": "Je sais qu'une demande doit être concrète et négociable.",
+    "2": "Je formule parfois une demande précise (quoi, à qui, pour quand).",
+    "3": "Mes demandes sont claires, concrètes et formulées sans détour."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "FORMULER_DEMANDES"
+  },
+  {
+   "name": "Demander explicitement",
+   "code": "AUT-39",
+   "description": "Ma demande est une demande, pas une remarque, un soupir ou une allusion. Ma demande dit quoi, quand et combien",
+   "enonces": {
+    "1": "Je sais qu'une remarque ou un soupir ne sont pas une demande.",
+    "2": "Je formule parfois une demande explicite.",
+    "3": "Ma demande dit quoi, quand et combien — ce n'est ni une allusion ni un reproche."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "FORMULER_DEMANDES"
+  },
+  {
+   "name": "Demander de l'aide",
+   "code": "AUT-40",
+   "description": "Je sollicite du soutien sans honte et sans attendre d'être à bout.",
+   "enonces": {
+    "1": "Je remarque que j'attends souvent d'être à bout pour demander de l'aide.",
+    "2": "Je demande parfois de l'aide avant d'être à bout.",
+    "3": "Je demande de l'aide sans honte dès que c'est utile."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "FORMULER_DEMANDES"
+  },
+  {
+   "name": "Accueillir un refus",
+   "code": "AUT-41",
+   "description": "Je reçois un non sans le vivre comme un rejet de ma personne mais comme étant une conséquence possible de ma demande",
+   "enonces": {
+    "1": "Je sais qu'un non à ma demande n'est pas un rejet de ma personne.",
+    "2": "Je parviens parfois à recevoir un refus sans le prendre personnellement.",
+    "3": "J'accueille un refus avec calme et je rebondis."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "FORMULER_DEMANDES"
+  },
+  {
+   "name": "Reconnaître qu'il y a conflit",
+   "code": "AUT-42",
+   "description": "Je nomme une tension en cours au lieu de la traiter comme un simple malentendu",
+   "enonces": {
+    "1": "Je sais que j'appelle malentendu ce qui est un conflit.",
+    "2": "Je peux nommer une tension en cours.",
+    "3": "Je la nomme comme un conflit, et je l'ouvre plutôt que de la laisser filer."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Repérer ma posture par défaut",
+   "code": "AUT-43",
+   "description": "Je sais dire si je fuis, j'attaque, je cède ou je me fige",
+   "enonces": {
+    "1": "Je sais que j'ai une réaction par défaut face au conflit.",
+    "2": "Je peux dire si je fuis, j'attaque, je cède ou je me fige.",
+    "3": "Je repère ma posture au moment où elle s'installe."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Repérer ce qui se joue derrière l'objet du confit",
+   "code": "AUT-44",
+   "description": "Je sais dire si on se dispute sur le sujet ou sur tout autre chose",
+   "enonces": {
+    "1": "Je sais qu'on se dispute rarement sur ce dont on parle.",
+    "2": "Je peux dire, après coup, ce qui se jouait vraiment.",
+    "3": "Je repère pendant la dispute si l'objet est le vrai sujet."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Interrompre avant l'irréparable",
+   "code": "AUT-45",
+   "description": "J'ai déjà demandé une pause au milieu d'une dispute",
+   "enonces": {
+    "1": "Je sais qu'une dispute peut aller trop loin.",
+    "2": "J'ai déjà demandé une pause au milieu d'une dispute.",
+    "3": "Je demande la pause avant l'irréparable, et je sais la formuler."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Revenir après la pause",
+   "code": "AUT-46",
+   "description": "Ma pause n'est pas devenue un évitement",
+   "enonces": {
+    "1": "Je sais qu'une pause peut devenir un évitement.",
+    "2": "Je reviens parfois vers l'autre après une pause.",
+    "3": "Je reviens systématiquement : ma pause n'est jamais un évitement."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Choisir le moment et le cadre",
+   "code": "AUT-47",
+   "description": "Je connai le contexte approprié pour moi pour avoir une conversation difficile",
+   "enonces": {
+    "1": "Je sais que le cadre compte autant que le contenu.",
+    "2": "Je choisis parfois le moment d'une conversation difficile.",
+    "3": "Je connais le contexte qui me convient pour ces conversations, et je le crée."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 60,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Annoncer mon intention",
+   "code": "AUT-48",
+   "description": "Je dis pourquoi je veux parler et ce que je cherche au début de la conversation",
+   "enonces": {
+    "1": "Je sais qu'annoncer son intention désamorce une part de la tension.",
+    "2": "J'ai déjà dit pourquoi je voulais parler.",
+    "3": "Je dis mon intention et ce que je cherche dès le début de la conversation."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 70,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Commencer par les faits, pas par les reproches ou jugements",
+   "code": "AUT-49",
+   "description": "Ma première phrase décrit une situation, pas un défaut de l'autre",
+   "enonces": {
+    "1": "Je sais qu'un reproche ferme la conversation.",
+    "2": "Je parviens parfois à commencer par les faits.",
+    "3": "Ma première phrase décrit une situation, jamais un défaut de l'autre."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 80,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Ne pas céder pour faire retomber la tension",
+   "code": "AUT-50",
+   "description": "Mon dernier accord n'était pas un abandon déguisé",
+   "enonces": {
+    "1": "Je sais que je cède parfois juste pour que ça s'arrête.",
+    "2": "Je repère après coup mes accords de façade.",
+    "3": "Mon dernier accord n'était pas un abandon déguisé."
+   },
+   "difficulte": "Avancé",
+   "ordre": 90,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Supporter que le désaccord persiste",
+   "code": "AUT-51",
+   "description": "Je peux sortir sans accord et rester en lien",
+   "enonces": {
+    "1": "Je sais qu'on peut rester en lien sans être d'accord.",
+    "2": "Je parviens parfois à sortir d'un échange sans accord.",
+    "3": "Je peux sortir sans accord et rester en lien."
+   },
+   "difficulte": "Avancé",
+   "ordre": 100,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Reconnaître qu'il n'y a pas d'accord possible",
+   "code": "AUT-52",
+   "description": "J'ai su dire qu'on n'y arriverait pas, et organiser la suite",
+   "enonces": {
+    "1": "Je sais que certains désaccords n'ont pas de solution.",
+    "2": "Je peux reconnaître, après coup, qu'un accord était impossible.",
+    "3": "J'ai su le dire pendant l'échange, et organiser la suite."
+   },
+   "difficulte": "Avancé",
+   "ordre": 110,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Accueillir la colère de l'autre",
+   "code": "AUT-53",
+   "description": "Je reçois une émotion forte dirigée vers moi sans m'effondrer ni contre-attaquer.",
+   "enonces": {
+    "1": "Je sais que la colère de l'autre ne me définit pas.",
+    "2": "Je reçois parfois une émotion forte sans m'effondrer ni contre-attaquer.",
+    "3": "J'accueille la colère de l'autre avec stabilité et je cherche ce qu'elle dit."
+   },
+   "difficulte": "Avancé",
+   "ordre": 120,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Reconnaître sa part",
+   "code": "AUT-54",
+   "description": "Je nomme ma responsabilité dans un conflit, sans tout prendre sur moi.",
+   "enonces": {
+    "1": "Je sais que j'ai une part dans la plupart des conflits.",
+    "2": "Je reconnais parfois ma responsabilité sans tout prendre sur moi.",
+    "3": "Je nomme ma part avec justesse dans un conflit, ni trop ni trop peu."
+   },
+   "difficulte": "Avancé",
+   "ordre": 130,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Réparer un lien",
+   "code": "AUT-55",
+   "description": "Je reviens vers l'autre après une blessure, je demande ou j'offre le pardon, et je reconstruis.",
+   "enonces": {
+    "1": "Je sais qu'un lien peut se réparer après une blessure.",
+    "2": "J'ai déjà fait un pas vers quelqu'un après un conflit.",
+    "3": "Je répare mes relations après une blessure, en demandant ou en offrant le pardon."
+   },
+   "difficulte": "Avancé",
+   "ordre": 140,
+   "actif": true,
+   "theme": "GESTIONS_CONFLITS"
+  },
+  {
+   "name": "Clarifier ses attentes dans le couple",
+   "code": "AUT-56",
+   "description": "Je nomme ce que j'attends d'une relation amoureuse et je le distingue de ce que j'ai hérité ou vu.",
+   "enonces": {
+    "1": "Je sais que mes attentes dans le couple viennent en partie de ce que j'ai vu ou hérité.",
+    "2": "Je peux nommer ce que j'attends vraiment d'une relation amoureuse.",
+    "3": "Mes attentes sont claires et je les distingue de ce que j'ai hérité."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "COUPLE"
+  },
+  {
+   "name": "Clarifier les besoins nourris par le couple",
+   "code": "AUT-57",
+   "description": "J'ai clarifié avec mon / ma partenaire les besoins que nous souhaitions nourrir dans le couple et ceux nourris en dehors",
+   "enonces": {
+    "1": "Je sais que le couple ne nourrit pas tous mes besoins.",
+    "2": "Je peux dire quels besoins je cherche à nourrir dans mon couple.",
+    "3": "Nous avons clarifié ensemble ce que le couple nourrit et ce qui se nourrit ailleurs."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "COUPLE"
+  },
+  {
+   "name": "Sacraliser des temps de couple",
+   "code": "AUT-58",
+   "description": "J'ai des temps dédiés à prendre soin de mon couple (activités, discussions, travail, etc.)",
+   "enonces": {
+    "1": "Je sais qu'un couple s'entretient et ne va pas de soi.",
+    "2": "Nous avons parfois des temps dédiés au couple.",
+    "3": "Ces temps existent régulièrement : activités, discussions, travail sur nous."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "COUPLE"
+  },
+  {
+   "name": "Ne pas attendre que l'autre comble tout",
+   "code": "AUT-59",
+   "description": "Je ne demande pas à mon conjoint d'être aussi mon meilleur ami, mon coach et ma famille",
+   "enonces": {
+    "1": "Je sais que je demande beaucoup à mon partenaire.",
+    "2": "Je repère quand j'attends de lui ce qu'il ne peut pas donner.",
+    "3": "Je ne lui demande pas d'être aussi mon meilleur ami, mon coach et ma famille."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "COUPLE"
+  },
+  {
+   "name": "Renoncer consciemment à avoir raison",
+   "code": "AUT-60",
+   "description": "J'ai lâché récemment un point que j'aurais pu gagner au profit de la relation",
+   "enonces": {
+    "1": "Je sais qu'avoir raison coûte parfois plus que ça ne rapporte.",
+    "2": "J'ai déjà lâché un point pour préserver la relation.",
+    "3": "J'ai lâché récemment un point que j'aurais pu gagner, au profit de la relation."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "COUPLE"
+  },
+  {
+   "name": "Tenir ma part sans qu'on me la rappelle",
+   "code": "AUT-61",
+   "description": "Ce qui m'incombe se fait sans qu'on ait à me le demander",
+   "enonces": {
+    "1": "Je sais qu'on me rappelle certaines de mes obligations.",
+    "2": "Je tiens ma part quand on me la rappelle.",
+    "3": "Ce qui m'incombe se fait sans qu'on ait à me le demander."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 60,
+   "actif": true,
+   "theme": "COUPLE"
+  },
+  {
+   "name": "Traverser les phases creuses et accepter que l'autre change",
+   "code": "AUT-62",
+   "description": "Je peux dire en quoi il n'est plus la personne rencontrée sans le vivre comme une trahison",
+   "enonces": {
+    "1": "Je sais qu'un couple traverse des phases creuses.",
+    "2": "Je parviens parfois à traverser une phase creuse sans conclure.",
+    "3": "Je peux dire en quoi il n'est plus la personne rencontrée, sans le vivre comme une trahison."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "COUPLE"
+  },
+  {
+   "name": "Être vulnérable avec son partenaire",
+   "code": "AUT-63",
+   "description": "Je partage mes peurs, mes besoins et mes désirs avec la personne que j'aime.",
+   "enonces": {
+    "1": "Je remarque que je me protège avec la personne que j'aime.",
+    "2": "Je partage parfois mes peurs ou mes besoins avec mon partenaire.",
+    "3": "Je suis vulnérable avec mon partenaire et je partage mes désirs comme mes peurs."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "COUPLE"
+  },
+  {
+   "name": "Se positionner en adulte face à ses parents",
+   "code": "AUT-64",
+   "description": "Je sors du rôle d'enfant dans la relation avec mes parents, sans rupture ni soumission.",
+   "enonces": {
+    "1": "Je remarque que je redeviens enfant face à mes parents.",
+    "2": "Je parviens parfois à rester adulte dans la relation avec mes parents.",
+    "3": "Je me positionne en adulte face à mes parents, sans rupture ni soumission."
+   },
+   "difficulte": "Avancé",
+   "ordre": 10,
+   "actif": true,
+   "theme": "FAMILLE"
+  },
+  {
+   "name": "Accueillir une émotion forte sans la faire taire",
+   "code": "AUT-65",
+   "description": "Je ne dis pas « c'est rien » quand ce n'est pas rien pour lui",
+   "enonces": {
+    "1": "Je sais que minimiser une émotion la fait taire sans la régler.",
+    "2": "Je parviens parfois à accueillir une émotion forte de mon enfant.",
+    "3": "Je ne dis pas « c'est rien » quand ce n'est pas rien pour lui."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "PARENTALITE"
+  },
+  {
+   "name": "Nommer mes propres émotions devant eux",
+   "code": "AUT-66",
+   "description": "Je dis quand je suis fatigué ou inquiet sans les en rendre responsables",
+   "enonces": {
+    "1": "Je sais que cacher mes émotions ne les rend pas invisibles.",
+    "2": "Je nomme parfois ce que je ressens devant mes enfants.",
+    "3": "Je dis quand je suis fatigué ou inquiet, sans les en rendre responsables."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "PARENTALITE"
+  },
+  {
+   "name": "Avoir un temps propre avec chacun",
+   "code": "AUT-67",
+   "description": "Chaque enfant a des moments seul avec moi",
+   "enonces": {
+    "1": "Je sais que chaque enfant a besoin d'un temps qui lui est propre.",
+    "2": "J'ai parfois des moments seul avec chacun.",
+    "3": "Chaque enfant a des moments seul avec moi, régulièrement."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "PARENTALITE"
+  },
+  {
+   "name": "Assumer d'être impopulaire",
+   "code": "AUT-68",
+   "description": "J'ai maintenu une décision que mon enfant a très mal prise",
+   "enonces": {
+    "1": "Je sais qu'être parent suppose d'être parfois impopulaire.",
+    "2": "J'ai déjà maintenu une décision malgré la contestation.",
+    "3": "J'ai maintenu une décision que mon enfant a très mal prise."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "PARENTALITE"
+  },
+  {
+   "name": "Distinguer fermeté et dureté",
+   "code": "AUT-69",
+   "description": "Je dis non fermement d'une voix calme",
+   "enonces": {
+    "1": "Je sais qu'on peut être ferme sans être dur.",
+    "2": "Je parviens parfois à dire non fermement sans hausser le ton.",
+    "3": "Je dis non fermement d'une voix calme."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 50,
+   "actif": true,
+   "theme": "PARENTALITE"
+  },
+  {
+   "name": "M'accorder avec l'autre parent",
+   "code": "AUT-70",
+   "description": "Nous avons parlé récemment de notre vision de l'éducation",
+   "enonces": {
+    "1": "Je sais que nos visions éducatives peuvent diverger.",
+    "2": "Nous avons déjà parlé de notre vision de l'éducation.",
+    "3": "Nous en parlons régulièrement, et nous nous accordons avant d'agir."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 60,
+   "actif": true,
+   "theme": "PARENTALITE"
+  },
+  {
+   "name": "Repérer ce que je rejoue de mon éducation",
+   "code": "AUT-71",
+   "description": "Je sais citer un geste ou une phrase de mes parents que je reproduis",
+   "enonces": {
+    "1": "Je sais que je reproduis des choses de mon éducation.",
+    "2": "Je peux citer un geste ou une phrase de mes parents que je reproduis.",
+    "3": "Je le repère au moment où je le fais, et je peux choisir autrement."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "PARENTALITE"
+  },
+  {
+   "name": "Nommer ce que je veux transmettre",
+   "code": "AUT-72",
+   "description": "Je sais dire ce que je voudrais qu'ils gardent de moi",
+   "enonces": {
+    "1": "Je sais que je transmets quelque chose, voulu ou non.",
+    "2": "Je peux dire ce que je voudrais qu'ils gardent de moi.",
+    "3": "Je le nomme clairement, et mes choix éducatifs y correspondent."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "PARENTALITE"
+  },
+  {
+   "name": "Exister en dehors de mon rôle de parent",
+   "code": "AUT-73",
+   "description": "J'ai des choses à moi qui ne dépendent pas d'eux",
+   "enonces": {
+    "1": "Je sais que mon rôle de parent a pris beaucoup de place.",
+    "2": "J'ai quelques activités qui ne dépendent pas d'eux.",
+    "3": "J'ai des choses à moi, tenues dans la durée, qui ne dépendent pas d'eux."
+   },
+   "difficulte": "Avancé",
+   "ordre": 90,
+   "actif": true,
+   "theme": "PARENTALITE"
+  },
+  {
+   "name": "Ne pas me comparer",
+   "code": "AUT-74",
+   "description": "Je repère quand je juge ma parentalité à l'aune de celle des autres",
+   "enonces": {
+    "1": "Je sais que je me compare aux autres parents.",
+    "2": "Je repère après coup quand je me suis comparé.",
+    "3": "Je repère la comparaison au moment où elle arrive, et je m'en détache."
+   },
+   "difficulte": "Avancé",
+   "ordre": 100,
+   "actif": true,
+   "theme": "PARENTALITE"
+  },
+  {
+   "name": "Régler la fréquence des contacts",
+   "code": "AUT-75",
+   "description": "Les visites et les appels correspondent à ce qui me convient",
+   "enonces": {
+    "1": "Je sais que la fréquence des contacts familiaux n'est pas une fatalité.",
+    "2": "J'ai déjà ajusté un rythme de visite ou d'appel.",
+    "3": "Les visites et les appels correspondent à ce qui me convient."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "FAMILLE"
+  },
+  {
+   "name": "Accepter mes parents tels qu'ils sont",
+   "code": "AUT-76",
+   "description": "Je ne cherche plus à les faire changer",
+   "enonces": {
+    "1": "Je sais que je cherche encore à faire changer mes parents.",
+    "2": "Je renonce parfois à vouloir les faire changer.",
+    "3": "Je ne cherche plus à les faire changer, et la relation en est allégée."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "FAMILLE"
+  },
+  {
+   "name": "Assumer des choix qui déplaisent",
+   "code": "AUT-77",
+   "description": "J'ai maintenu une décision malgré la désapprobation familiale",
+   "enonces": {
+    "1": "Je sais que certains de mes choix déplaisent à ma famille.",
+    "2": "J'ai déjà tenu un choix malgré une réserve familiale.",
+    "3": "J'ai maintenu une décision malgré la désapprobation familiale."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "FAMILLE"
+  },
+  {
+   "name": "Choisir ce qu'on garde de son héritage",
+   "code": "AUT-78",
+   "description": "Je trie ce que j'ai reçu de ma famille et je décide de ce que je transmets.",
+   "enonces": {
+    "1": "Je sais que j'ai reçu un héritage familial à trier.",
+    "2": "J'ai commencé à trier ce que je garde et ce que je laisse.",
+    "3": "J'ai choisi ce que je transmets de mon héritage."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "FAMILLE"
+  },
+  {
+   "name": "Reconnaître et nommer ses émotions",
+   "code": "MOI-01",
+   "description": "J'identifie ce que je ressens au moment où je le ressens, et je le nomme avec précision plutôt que par « ça va » ou « ça ne va pas ».",
+   "enonces": {
+    "1": "Je sais distinguer les grandes familles d'émotions quand je les ressens.",
+    "2": "Je mets un mot précis sur ce que je ressens dans la plupart des situations du quotidien.",
+    "3": "Je nomme mon émotion au moment même où elle survient, y compris sous pression."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "EMOTIONS"
+  },
+  {
+   "name": "Décoder le message d'une émotion",
+   "code": "MOI-02",
+   "description": "Je comprends ce qu'une émotion signale sur ma situation ou mes besoins, au lieu de la juger ou de la subir.",
+   "enonces": {
+    "1": "Je sais qu'une émotion est un signal et pas un défaut.",
+    "2": "Je peux expliquer après coup ce qu'une émotion m'a indiqué sur ma situation.",
+    "3": "Je lis le message d'une émotion en temps réel et j'en tiens compte dans ma réaction."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "EMOTIONS"
+  },
+  {
+   "name": "Décoder une situation à travers le prisme des émotions",
+   "code": "MOI-03",
+   "description": "Je sais parler d'une situation en parlant de mes émotions plutôt que de la retranscrire par un jugement.",
+   "enonces": {
+    "1": "Je sais qu'on peut raconter une situation par ce qu'on a ressenti plutôt que par un jugement.",
+    "2": "Je parviens parfois à décrire une situation par mes émotions plutôt que par mon avis.",
+    "3": "Je parle d'une situation en partant de mes émotions, y compris quand elle me met en colère."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "EMOTIONS"
+  },
+  {
+   "name": "Accueillir une émotion sans la fuir",
+   "code": "MOI-04",
+   "description": "Je laisse une émotion me traverser, y compris les plus inconfortables, sans l'étouffer, la rationaliser ou exploser.",
+   "enonces": {
+    "1": "Je reconnais mes stratégies d'évitement (rationaliser, minimiser, m'occuper) quand une émotion monte.",
+    "2": "Je parviens parfois à rester avec une émotion inconfortable sans la fuir ni la déverser sur les autres.",
+    "3": "Je laisse une émotion me traverser jusqu'au bout, même forte, sans m'y perdre."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "EMOTIONS"
+  },
+  {
+   "name": "Être l'allié de ses émotions",
+   "code": "MOI-05",
+   "description": "Je sais utiliser mes émotions comme des alliés pour guider mes choix et mes actions",
+   "enonces": {
+    "1": "Je sais que mes émotions portent une information utile.",
+    "2": "Je m'appuie parfois sur ce que je ressens pour orienter un choix.",
+    "3": "Mes émotions guident mes choix et mes actions, je les traite comme des alliées."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "EMOTIONS"
+  },
+  {
+   "name": "Mettre de la curiosité envers mes émotions",
+   "code": "MOI-06",
+   "description": "Je sais être curieux de mes émotions plutôt que de les juger ou les refouler.",
+   "enonces": {
+    "1": "Je remarque que je juge ou j'écarte certaines de mes émotions.",
+    "2": "Je m'intéresse parfois à ce qu'une émotion vient me dire au lieu de la repousser.",
+    "3": "J'accueille mes émotions avec curiosité, y compris celles que je n'aime pas."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 60,
+   "actif": true,
+   "theme": "EMOTIONS"
+  },
+  {
+   "name": "Réguler une émotion forte",
+   "code": "MOI-07",
+   "description": "Je reviens à un état où je peux penser et choisir, quand une émotion me submerge.",
+   "enonces": {
+    "1": "Je sais repérer les signes que je suis en train d'être submergé.",
+    "2": "J'ai au moins une pratique qui m'aide à revenir au calme et je l'utilise parfois.",
+    "3": "Je retrouve ma capacité à penser et à choisir en quelques minutes quand une émotion me submerge."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "EMOTIONS"
+  },
+  {
+   "name": "Écouter les signaux de son corps",
+   "code": "MOI-08",
+   "description": "Je perçois la fatigue, la tension, le plaisir ou le malaise avant qu'ils deviennent des symptômes.",
+   "enonces": {
+    "1": "Je sais que mon corps m'envoie des signaux avant les symptômes.",
+    "2": "Je perçois la fatigue ou la tension quand elle est déjà bien installée.",
+    "3": "Je perçois les signaux de mon corps tôt et j'en tiens compte."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "CORPS_ENERGIE"
+  },
+  {
+   "name": "Connaître ses rythmes et son énergie",
+   "code": "MOI-09",
+   "description": "J'identifie ce qui me recharge et ce qui me vide, et j'organise mes journées en conséquence.",
+   "enonces": {
+    "1": "Je sais qu'il y a des choses qui me rechargent et d'autres qui me vident.",
+    "2": "Je peux lister ce qui me recharge et ce qui me vide.",
+    "3": "J'organise mes journées et mes semaines en fonction de mon énergie."
+   },
+   "difficulte": "Avancé",
+   "ordre": 20,
+   "actif": true,
+   "theme": "CORPS_ENERGIE"
+  },
+  {
+   "name": "Reconnaître les signes d'épuisement",
+   "code": "MOI-10",
+   "description": "Je repère les signaux d'alerte du surmenage et j'agis avant la rupture.",
+   "enonces": {
+    "1": "Je connais les signes d'alerte de l'épuisement en théorie.",
+    "2": "Je reconnais mes propres signes d'alerte quand ils apparaissent.",
+    "3": "J'agis dès les premiers signes, avant la rupture."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "CORPS_ENERGIE"
+  },
+  {
+   "name": "Reconnaître la fin d'un cycle quand elle arrive",
+   "code": "MOI-100",
+   "description": "Je reconnais une fin sans la nier ni la précipiter, et je fais le deuil de ce qui se clôt.",
+   "enonces": {
+    "1": "Je sais que quelque chose est en train de se terminer.",
+    "2": "Je parviens parfois à reconnaître une fin sans la nier ni la précipiter.",
+    "3": "J'accepte les fins de cycle et je fais le deuil de ce qui se clôt."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "CYCLES_VIE"
+  },
+  {
+   "name": "Faire le deuil de ce que le cycle m'apportait",
+   "code": "MOI-101",
+   "description": "Je peux nommer ce que je perds, pas seulement ce que je gagne",
+   "enonces": {
+    "1": "Je sais qu'une transition demande du temps.",
+    "2": "Je me donne parfois le temps dont un passage a besoin.",
+    "3": "Je traverse les passages de ma vie en leur laissant le temps qu'ils demandent."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "CYCLES_VIE"
+  },
+  {
+   "name": "Accueillir ce qui commence",
+   "code": "MOI-102",
+   "description": "Je m'ouvre à une nouvelle phase sans chercher à reproduire la précédente.",
+   "enonces": {
+    "1": "Je remarque que je cherche à reproduire ce qui précédait.",
+    "2": "Je m'ouvre parfois à une nouvelle phase sans la comparer à la précédente.",
+    "3": "J'accueille ce qui commence avec curiosité, sans chercher à reproduire le passé."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 90,
+   "actif": true,
+   "theme": "CYCLES_VIE"
+  },
+  {
+   "name": "Repérer ma réaction spontanée face à l'inattendu",
+   "code": "MOI-103",
+   "description": "Je sais dire si ma première pensée est « problème » ou « et si ? »",
+   "enonces": {
+    "1": "Je sais que j'ai un réflexe face à l'imprévu.",
+    "2": "Je peux dire si ma première pensée est « problème » ou « et si ? ».",
+    "3": "Je repère ce réflexe au moment où il se produit."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "OPPORTUNITES"
+  },
+  {
+   "name": "Produire plusieurs lectures d'une même situation",
+   "code": "MOI-104",
+   "description": "Je sais formuler trois interprétations d'un même événement",
+   "enonces": {
+    "1": "Je sais qu'un même événement se lit de plusieurs façons.",
+    "2": "Je peux formuler deux interprétations d'un même événement.",
+    "3": "J'en formule trois, et je choisis celle qui m'est le plus utile."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "OPPORTUNITES"
+  },
+  {
+   "name": "Chercher ce qu'une contrainte rend possible",
+   "code": "MOI-105",
+   "description": "Je sais dire ce qu'une limite récente a ouvert",
+   "enonces": {
+    "1": "Je sais qu'une contrainte peut ouvrir quelque chose.",
+    "2": "Je peux dire ce qu'une limite récente a rendu possible.",
+    "3": "Je cherche systématiquement ce qu'une contrainte ouvre."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "OPPORTUNITES"
+  },
+  {
+   "name": "Repérer une occasion dans ce qui me dérange",
+   "code": "MOI-106",
+   "description": "J'ai trouvé récemment quelque chose d'utile dans un contretemps",
+   "enonces": {
+    "1": "Je sais qu'un contretemps peut contenir une occasion.",
+    "2": "J'ai trouvé récemment quelque chose d'utile dans un contretemps.",
+    "3": "Je cherche l'occasion dans ce qui me dérange, sur le moment."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "OPPORTUNITES"
+  },
+  {
+   "name": "Repérer mes formulations d'identité figée",
+   "code": "MOI-107",
+   "description": "Je remarque quand je dis « je suis nul en… », « c'est pas moi », « je suis comme ça »",
+   "enonces": {
+    "1": "Je sais que « je suis nul en… » fige une capacité.",
+    "2": "Je repère ces formulations après coup.",
+    "3": "Je les entends au moment où je les dis, et je les reformule."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "GROWTH_MINDSET"
+  },
+  {
+   "name": "Repérer ce qui me fait basculer en mode fixe",
+   "code": "MOI-108",
+   "description": "Je sais dire ce qui déclenche le « je ne peux pas » : la comparaison, le public, l'enjeu",
+   "enonces": {
+    "1": "Je sais que certaines situations me font dire « je ne peux pas ».",
+    "2": "Je peux nommer ce qui déclenche ce basculement.",
+    "3": "Je repère le déclencheur en situation, avant qu'il m'arrête."
+   },
+   "difficulte": "Avancé",
+   "ordre": 20,
+   "actif": true,
+   "theme": "GROWTH_MINDSET"
+  },
+  {
+   "name": "Traiter une erreur comme une information",
+   "code": "MOI-109",
+   "description": "Je sais dire précisément ce qu'une erreur récente m'a appris",
+   "enonces": {
+    "1": "Je sais qu'une erreur contient une information.",
+    "2": "Je peux dire ce qu'une erreur récente m'a appris.",
+    "3": "Je traite mes erreurs comme des informations, sur le moment."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "GROWTH_MINDSET"
+  },
+  {
+   "name": "Prendre soin de son corps comme d'un allié",
+   "code": "MOI-11",
+   "description": "Je tiens des pratiques de sommeil, de mouvement et de récupération qui soutiennent ma vie plutôt que de la subir.",
+   "enonces": {
+    "1": "Je sais que le sommeil, le mouvement et la récupération comptent.",
+    "2": "J'ai une ou deux pratiques régulières qui soutiennent mon corps.",
+    "3": "Je prends soin de mon corps de façon régulière et je le considère comme un allié."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "CORPS_ENERGIE"
+  },
+  {
+   "name": "Différence entre Fixed Mindset & growth mindset",
+   "code": "MOI-110",
+   "description": "Je comprends la différence d'une personne ayant un mindset fixé d'un mindset de croissance",
+   "enonces": {
+    "1": "J'ai entendu parler de la différence entre mindset fixe et mindset de croissance.",
+    "2": "Je comprends ce qui distingue les deux.",
+    "3": "Je reconnais lequel des deux m'anime dans une situation donnée."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "GROWTH_MINDSET"
+  },
+  {
+   "name": "Employer le « pas encore »",
+   "code": "MOI-111",
+   "description": "Je dis « je ne sais pas encore », et ça change ce que je fais ensuite",
+   "enonces": {
+    "1": "Je sais que « pas encore » ouvre là où « je ne sais pas » ferme.",
+    "2": "J'emploie parfois le « pas encore ».",
+    "3": "Je dis « je ne sais pas encore », et ça change ce que je fais ensuite."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 50,
+   "actif": true,
+   "theme": "GROWTH_MINDSET"
+  },
+  {
+   "name": "Chercher le retour qui fait progresser plutôt que celui qui rassure",
+   "code": "MOI-112",
+   "description": "Je demande à des gens plus compétents que moi, pas à ceux qui vont me valider",
+   "enonces": {
+    "1": "Je sais que le feedback aide à progresser.",
+    "2": "Je sollicite parfois des retours sur ce que je fais.",
+    "3": "Je cherche activement du feedback et j'en tiens compte."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 60,
+   "actif": true,
+   "theme": "GROWTH_MINDSET"
+  },
+  {
+   "name": "Pratiquer délibérément",
+   "code": "MOI-113",
+   "description": "Je me fixe un axe de progrès concret et je l'exerce intentionnellement.",
+   "enonces": {
+    "1": "Je sais que progresser demande de l'intention.",
+    "2": "Je me fixe parfois un axe de progrès concret.",
+    "3": "Je pratique délibérément un axe de progrès à la fois."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 70,
+   "actif": true,
+   "theme": "GROWTH_MINDSET"
+  },
+  {
+   "name": "Rester curieux",
+   "code": "MOI-114",
+   "description": "J'entretiens l'envie d'apprendre et la confrontation à des perspectives différentes.",
+   "enonces": {
+    "1": "Je sais que la curiosité s'entretient.",
+    "2": "Je m'expose parfois à des perspectives différentes des miennes.",
+    "3": "J'entretiens ma curiosité et je me confronte régulièrement à d'autres points de vue."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 80,
+   "actif": true,
+   "theme": "GROWTH_MINDSET"
+  },
+  {
+   "name": "Identifier ses valeurs essentielles",
+   "code": "MOI-12",
+   "description": "Je nomme les 3 à 5 valeurs qui comptent vraiment pour moi, au-delà des valeurs attendues ou héritées.",
+   "enonces": {
+    "1": "Je sais qu'il existe une différence entre mes valeurs réelles et celles que j'affiche.",
+    "2": "Je peux nommer mes 3 à 5 valeurs essentielles.",
+    "3": "Mes valeurs sont claires et je les reconnais à l'œuvre dans mes choix quotidiens."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "VALEURS"
+  },
+  {
+   "name": "Repérer un conflit de valeurs",
+   "code": "MOI-13",
+   "description": "Je reconnais quand un malaise vient d'un écart entre une situation et une de mes valeurs.",
+   "enonces": {
+    "1": "Je sais qu'un malaise persistant peut signaler une valeur bafouée.",
+    "2": "Je peux relier après coup un malaise à une de mes valeurs.",
+    "3": "J'identifie sur le moment quand une situation entre en conflit avec une de mes valeurs."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "VALEURS"
+  },
+  {
+   "name": "Décider à partir de ses valeurs",
+   "code": "MOI-14",
+   "description": "J'utilise mes valeurs comme boussole dans un choix, y compris quand ce n'est pas l'option la plus confortable.",
+   "enonces": {
+    "1": "Je sais que mes valeurs peuvent servir de boussole.",
+    "2": "J'ai déjà pris une décision importante en m'appuyant explicitement sur mes valeurs.",
+    "3": "Je décide à partir de mes valeurs même quand ce n'est pas l'option la plus confortable."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "VALEURS"
+  },
+  {
+   "name": "Comprendre l'impact des valeurs sur mes domaines de vie",
+   "code": "MOI-15",
+   "description": "Je sais voir les domaines de ma vie où mes valeurs sont comblées / non comblées",
+   "enonces": {
+    "1": "Je sais que mes valeurs se jouent différemment selon les domaines de ma vie.",
+    "2": "Je peux dire dans quel domaine une de mes valeurs est le plus respectée, et dans lequel elle l'est le moins.",
+    "3": "Je passe en revue mes domaines de vie à la lumière de mes valeurs, et j'agis là où l'écart est le plus grand."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "VALEURS"
+  },
+  {
+   "name": "Agir en fonction de ses valeurs",
+   "code": "MOI-16",
+   "description": "Je sais agir en consequence",
+   "enonces": {
+    "1": "Je sais que mes valeurs peuvent guider mes décisions.",
+    "2": "J'ai déjà pris une décision en m'appuyant explicitement sur une de mes valeurs.",
+    "3": "J'agis en fonction de mes valeurs même quand ce n'est pas l'option la plus confortable."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "VALEURS"
+  },
+  {
+   "name": "Identifier les besoins qui régissent mon quotidien",
+   "code": "MOI-17",
+   "description": "Je sais identifier et nommer précisément mes propres besoins",
+   "enonces": {
+    "1": "Je sais que mes journées sont gouvernées par des besoins que je ne nomme pas.",
+    "2": "Je peux nommer deux ou trois besoins qui reviennent dans mon quotidien.",
+    "3": "Je nomme précisément mes besoins, et je reconnais lequel agit dans une situation donnée."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "BESOINS"
+  },
+  {
+   "name": "Comprendre l'impact des besoins sur mes domaines de vie",
+   "code": "MOI-18",
+   "description": "",
+   "enonces": {
+    "1": "Je sais que mes besoins non nourris se manifestent dans plusieurs domaines de ma vie.",
+    "2": "Je peux relier un besoin non nourri à une difficulté dans un domaine précis.",
+    "3": "Je vois comment chaque besoin irrigue mes domaines de vie, et j'ajuste là où ça manque."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "BESOINS"
+  },
+  {
+   "name": "Prendre la responsabilité de ses propres besoins",
+   "code": "MOI-19",
+   "description": "Je ne mets pas la responsabilité de mes propres besoins sur l'autre. J'assume ma responsabilité à nourrir mes besoins",
+   "enonces": {
+    "1": "Je sais que mes besoins m'appartiennent et ne sont pas à la charge des autres.",
+    "2": "J'ai identifié plusieurs manières de nourrir mes besoins par moi-même.",
+    "3": "Je n'attends plus des autres qu'ils nourrissent mes besoins : j'assume de m'en occuper."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "BESOINS"
+  },
+  {
+   "name": "Comprendre les besoins des autres derrière une réaction ou une émotion",
+   "code": "MOI-20",
+   "description": "Je sais identifier chez l'autre les besoins qu'il a des difficultés à nommer lui-même, et adapter ma réaction en conséquence",
+   "enonces": {
+    "1": "Je sais qu'une réaction forte chez l'autre exprime un besoin qu'il ne nomme pas.",
+    "2": "Je peux, après coup, deviner le besoin derrière la réaction de quelqu'un.",
+    "3": "J'identifie le besoin de l'autre pendant l'échange, et j'adapte ma réaction."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "BESOINS"
+  },
+  {
+   "name": "Identifier le besoin derrière une réaction",
+   "code": "MOI-21",
+   "description": "Je remonte d'une frustration, d'une envie ou d'une colère jusqu'au besoin profond qu'elle exprime.",
+   "enonces": {
+    "1": "Je sais qu'une frustration récurrente cache un besoin non satisfait.",
+    "2": "Je peux remonter d'une réaction forte jusqu'au besoin qu'elle exprime, avec du recul.",
+    "3": "J'identifie sur le moment le besoin qui se cache derrière ma réaction."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 50,
+   "actif": true,
+   "theme": "BESOINS"
+  },
+  {
+   "name": "Distinguer besoin et stratégie",
+   "code": "MOI-22",
+   "description": "Je différencie ce dont j'ai vraiment besoin (reconnaissance, sécurité, lien) des moyens que j'emploie pour l'obtenir.",
+   "enonces": {
+    "1": "Je comprends la différence entre un besoin (être reconnu) et une stratégie (être félicité par mon manager).",
+    "2": "Je repère parfois que je m'accroche à une stratégie alors que le besoin pourrait être nourri autrement.",
+    "3": "Je distingue spontanément besoin et stratégie et j'élargis mes options en situation."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 60,
+   "actif": true,
+   "theme": "BESOINS"
+  },
+  {
+   "name": "Prendre la responsabilité de ses besoins",
+   "code": "MOI-23",
+   "description": "J'assume que mes besoins m'appartiennent et je trouve plusieurs stratégies de les nourrir, sans les déléguer à une seule personne.",
+   "enonces": {
+    "1": "Je reconnais que mes besoins m'appartiennent et ne sont pas la responsabilité d'une seule personne.",
+    "2": "J'ai identifié plusieurs manières de nourrir mes besoins principaux.",
+    "3": "Je prends soin de mes besoins de façon régulière, sans attendre que les autres les devinent."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 70,
+   "actif": true,
+   "theme": "BESOINS"
+  },
+  {
+   "name": "Comprendre ce que sont les parts de soi",
+   "code": "MOI-24",
+   "description": "Je comprends ce que sont les parts de moi, leurs origines, leur utilité",
+   "enonces": {
+    "1": "Je sais que plusieurs voix cohabitent en moi et ne disent pas la même chose.",
+    "2": "Je comprends d'où viennent mes parts et à quoi elles servent.",
+    "3": "Je m'appuie sur cette lecture pour comprendre mes contradictions au quotidien."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "PARTS_SOI"
+  },
+  {
+   "name": "Identifier les parts qui s'expriment en soi",
+   "code": "MOI-25",
+   "description": "Je reconnais les différentes voix intérieures (juge, protecteur, saboteur, enfant) et je distingue laquelle parle à un moment donné.",
+   "enonces": {
+    "1": "Je sais que plusieurs voix cohabitent en moi et qu'elles ne disent pas toutes la même chose.",
+    "2": "Je peux nommer deux ou trois de mes parts principales (le juge, le protecteur, l'enfant…).",
+    "3": "J'identifie en situation quelle part est en train de parler."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "PARTS_SOI"
+  },
+  {
+   "name": "Comprendre l'intention d'une part",
+   "code": "MOI-26",
+   "description": "Je découvre ce qu'une part cherche à protéger ou à obtenir, y compris quand son comportement me nuit.",
+   "enonces": {
+    "1": "Je sais qu'une part qui me nuit cherche malgré tout à me protéger.",
+    "2": "Je peux dire ce qu'au moins une de mes parts essaie d'obtenir ou d'éviter.",
+    "3": "Je comprends l'intention positive de mes parts, y compris les plus dérangeantes."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "PARTS_SOI"
+  },
+  {
+   "name": "Dialoguer avec une part plutôt que la combattre",
+   "code": "MOI-27",
+   "description": "J'entre en relation avec une part critique ou saboteuse sans la faire taire ni lui obéir.",
+   "enonces": {
+    "1": "Je reconnais mon réflexe de faire taire ou d'obéir à une part critique.",
+    "2": "J'ai déjà dialogué avec une de mes parts plutôt que de la combattre.",
+    "3": "J'entre en relation avec mes parts de façon régulière, avec curiosité plutôt qu'avec jugement."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "PARTS_SOI"
+  },
+  {
+   "name": "Revenir à son centre",
+   "code": "MOI-28",
+   "description": "Je retrouve une position intérieure calme et curieuse d'où je peux écouter mes parts sans être dirigé par l'une d'elles.",
+   "enonces": {
+    "1": "Je sais qu'il existe en moi un espace calme d'où je peux observer mes parts.",
+    "2": "Je retrouve cet espace quand je suis au calme ou accompagné.",
+    "3": "Je reviens à mon centre en situation, même quand une part est très activée."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "PARTS_SOI"
+  },
+  {
+   "name": "Separer Moi et Mes Parts",
+   "code": "MOI-29",
+   "description": "Je comprends les différences entre moi et les parts de moi",
+   "enonces": {
+    "1": "Je sais qu'une part de moi n'est pas moi tout entier.",
+    "2": "Je comprends la différence entre moi et les parts de moi.",
+    "3": "Je garde cette distinction en situation, même quand une part est très activée."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "PARTS_SOI"
+  },
+  {
+   "name": "Equilibrer mon regard sur le stress",
+   "code": "MOI-30",
+   "description": "Je sais changer mon rapport au stress en comprenant ce qu'il permet ou ce sur quoi il m'informe dans ma vie",
+   "enonces": {
+    "1": "Je sais que le stress n'est pas seulement un ennemi.",
+    "2": "Je peux dire ce que mon stress m'apporte ou m'indique.",
+    "3": "Mon rapport au stress est équilibré : je l'utilise autant que je le régule."
+   },
+   "difficulte": "Avancé",
+   "ordre": 10,
+   "actif": true,
+   "theme": "STRESS_REGULATION"
+  },
+  {
+   "name": "Reconnaître son état de stress",
+   "code": "MOI-31",
+   "description": "J'identifie dans mon corps les signes que je suis en mode alerte, avant que ça déborde.",
+   "enonces": {
+    "1": "Je sais que le stress se manifeste dans le corps et le comportement.",
+    "2": "Je reconnais mes signes de stress quand ils sont prononcés.",
+    "3": "Je repère mes premiers signes de stress, avant que ça déborde."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "STRESS_REGULATION"
+  },
+  {
+   "name": "Identiifer ses déclecheurs de stress",
+   "code": "MOI-32",
+   "description": "Je connais les situations, les comportements qui ont le pouvoir de déclencher du stress.",
+   "enonces": {
+    "1": "Je sais que certaines situations déclenchent mon stress plus que d'autres.",
+    "2": "Je peux nommer deux ou trois de mes déclencheurs.",
+    "3": "Je connais mes déclencheurs — situations et comportements — et je les repère quand ils arrivent."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "STRESS_REGULATION"
+  },
+  {
+   "name": "Avoir des stratégies pour ne pas activer le stress",
+   "code": "MOI-33",
+   "description": "J'ai des stratégies proactives qui permettent de ne pas activer mes déclencheurs de stress connus",
+   "enonces": {
+    "1": "Je sais qu'on peut prévenir le stress et pas seulement le subir.",
+    "2": "J'ai une ou deux stratégies pour éviter mes déclencheurs connus.",
+    "3": "Mes stratégies préventives font partie de mon organisation, et elles tiennent."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "STRESS_REGULATION"
+  },
+  {
+   "name": "Revenir au calme par ses propres moyens",
+   "code": "MOI-34",
+   "description": "J'utilise des pratiques simples (respiration, ancrage, mouvement) pour réguler mon système nerveux en situation.",
+   "enonces": {
+    "1": "Je connais au moins une technique de régulation (respiration, ancrage, mouvement).",
+    "2": "J'utilise parfois une technique de régulation quand je suis stressé.",
+    "3": "Je reviens au calme par mes propres moyens en situation, en quelques minutes."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "STRESS_REGULATION"
+  },
+  {
+   "name": "Distinguer danger réel et danger perçu",
+   "code": "MOI-35",
+   "description": "Je questionne ce que mon anxiété me raconte et je le confronte à la réalité.",
+   "enonces": {
+    "1": "Je sais que mon anxiété surévalue souvent le danger.",
+    "2": "Je peux après coup distinguer ce qui était un danger réel d'un danger perçu.",
+    "3": "Je questionne en temps réel ce que mon anxiété me raconte et je le confronte à la réalité."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 60,
+   "actif": true,
+   "theme": "STRESS_REGULATION"
+  },
+  {
+   "name": "Construire une hygiène anti-stress durable",
+   "code": "MOI-36",
+   "description": "J'installe dans ma vie des espaces de récupération qui évitent l'accumulation.",
+   "enonces": {
+    "1": "Je sais que le stress s'accumule si je ne récupère pas.",
+    "2": "J'ai quelques espaces de récupération dans ma semaine.",
+    "3": "J'ai une hygiène anti-stress durable qui évite l'accumulation."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 70,
+   "actif": true,
+   "theme": "STRESS_REGULATION"
+  },
+  {
+   "name": "Connaître les impacts du regard des autres dans ma vie",
+   "code": "MOI-37",
+   "description": "Je sais citer trois décisions concrètes que j'ai prises, ou renoncé à prendre, à cause du regard des autres",
+   "enonces": {
+    "1": "Je sais que le regard des autres a pesé sur certaines de mes décisions.",
+    "2": "Je peux citer une ou deux décisions que le regard des autres a orientées.",
+    "3": "Je cite trois décisions concrètes, prises ou évitées à cause du regard des autres, et j'en mesure le coût."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "REGARD_AUTRES"
+  },
+  {
+   "name": "Identifier les situations où le regard pèse le plus fort chez moi",
+   "code": "MOI-38",
+   "description": "Je sais nommer mes situations les plus exposantes et dire ce qu'elles ont en commun",
+   "enonces": {
+    "1": "Je sais que certaines situations m'exposent plus que d'autres.",
+    "2": "Je peux nommer les situations où le regard des autres pèse le plus sur moi.",
+    "3": "Je nomme ces situations et je dis ce qu'elles ont en commun."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "REGARD_AUTRES"
+  },
+  {
+   "name": "M'évaluer moi-même avant d'aller chercher un retour",
+   "code": "MOI-39",
+   "description": "Je suis capable de dire ce que je pense de mon travail avant que quiconque m'en parle, et mon avis tient encore après avoir entendu le leur",
+   "enonces": {
+    "1": "Je remarque que j'attends l'avis des autres avant de me faire le mien.",
+    "2": "Je formule parfois mon propre jugement avant de demander un retour.",
+    "3": "Mon avis sur mon travail est posé avant tout retour, et il tient encore après."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "REGARD_AUTRES"
+  },
+  {
+   "name": "Nommer les personnes dont le regard compte réellement pour moi",
+   "code": "MOI-40",
+   "description": "Je sais citer nommément les rares personnes dont l'avis pèse vraiment, et expliquer pourquoi je leur ai donné cette place",
+   "enonces": {
+    "1": "Je sais que tous les avis n'ont pas le même poids pour moi.",
+    "2": "Je peux citer les quelques personnes dont l'avis compte vraiment.",
+    "3": "Je les cite, j'explique pourquoi je leur ai donné cette place, et je m'y tiens."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "REGARD_AUTRES"
+  },
+  {
+   "name": "Repérer en temps réel l'instant où je bascule dans le regard de l'autre",
+   "code": "MOI-41",
+   "description": "Je repère pendant l'échange, et non le soir en y repensant, le moment où je commence à me voir avec les yeux de l'autre",
+   "enonces": {
+    "1": "Je reconnais après coup les moments où je me suis vu avec les yeux de l'autre.",
+    "2": "Je repère parfois ce basculement peu après qu'il s'est produit.",
+    "3": "Je le repère pendant l'échange, au moment où il se produit."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "REGARD_AUTRES"
+  },
+  {
+   "name": "Vérifier une interprétation en allant la confronter à la personne",
+   "code": "MOI-42",
+   "description": "J'ai posé la question directement à quelqu'un dans les dernières semaines, au lieu de rester avec ma version",
+   "enonces": {
+    "1": "Je sais que je reste souvent avec ma version sans la vérifier.",
+    "2": "J'ai déjà posé la question directement plutôt que d'interpréter.",
+    "3": "Je vérifie mes interprétations auprès des personnes concernées, régulièrement."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "REGARD_AUTRES"
+  },
+  {
+   "name": "Identifier les croyances qui relient ma valeur à l'approbation",
+   "code": "MOI-43",
+   "description": "Je sais énoncer dans mes mots la règle intérieure qui conditionne ma valeur (« je vaux quelque chose si… »)",
+   "enonces": {
+    "1": "Je sais que ma valeur me semble parfois dépendre de l'approbation des autres.",
+    "2": "Je peux énoncer dans mes mots la règle intérieure qui conditionne ma valeur.",
+    "3": "Je repère cette règle quand elle s'active, et elle ne décide plus pour moi."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "REGARD_AUTRES"
+  },
+  {
+   "name": "Accepter que je ne saurai jamais vraiment ce que l'autre pense de moi",
+   "code": "MOI-44",
+   "description": "Je sais quitter une situation sans avoir la réponse, et ne pas y revenir mentalement le soir",
+   "enonces": {
+    "1": "Je sais que je ne saurai jamais avec certitude ce que l'autre pense de moi.",
+    "2": "Je parviens parfois à quitter une situation sans avoir la réponse.",
+    "3": "Je quitte la situation sans la réponse, et je n'y reviens pas le soir."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "REGARD_AUTRES"
+  },
+  {
+   "name": "Nommer mes talents avec des mots précis",
+   "code": "MOI-45",
+   "description": "Je sais énoncer trois de mes talents en une phrase chacun, sans les diluer dans des généralités",
+   "enonces": {
+    "1": "Je sais que j'ai des forces, même si j'ai du mal à les nommer.",
+    "2": "Je peux citer trois forces ou talents qui me sont propres.",
+    "3": "Je connais mes forces et je les mobilise consciemment."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "ASSUMER_MES_TALENTS"
+  },
+  {
+   "name": "Identifier les talents que je n'ai pas",
+   "code": "MOI-46",
+   "description": "Je sais nommer un domaine où je suis moyen, et le dire sans me dévaloriser",
+   "enonces": {
+    "1": "Je sais que je ne suis pas bon partout.",
+    "2": "Je peux nommer un domaine où je suis moyen.",
+    "3": "Je nomme mes zones faibles sans me dévaloriser ni m'en excuser."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "ASSUMER_MES_TALENTS"
+  },
+  {
+   "name": "Cesser de minimiser ce que je sais faire",
+   "code": "MOI-47",
+   "description": "Je repère quand je dis « c'est rien » ou « n'importe qui ferait ça », et je peux m'en abstenir",
+   "enonces": {
+    "1": "Je remarque que je minimise ce que je réussis.",
+    "2": "Je repère mes « c'est rien » et « n'importe qui ferait ça » après coup.",
+    "3": "Je les repère au moment où ils sortent, et je m'en abstiens."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "ASSUMER_MES_TALENTS"
+  },
+  {
+   "name": "Repérer ce qui m'est facile et qui est difficile aux autres",
+   "code": "MOI-48",
+   "description": "Je sais citer une chose que je fais sans effort et pour laquelle on vient me chercher",
+   "enonces": {
+    "1": "Je sais qu'il m'arrive de jouer un rôle pour être accepté.",
+    "2": "Je repère après coup les situations où je me suis conformé.",
+    "3": "Je remarque sur le moment quand je commence à jouer un rôle."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "ASSUMER_MES_TALENTS"
+  },
+  {
+   "name": "Accepter le plaisir d'être bon",
+   "code": "MOI-49",
+   "description": "Je ressens de la fierté sans la corriger aussitôt par une réserve",
+   "enonces": {
+    "1": "Je remarque que je corrige aussitôt ma fierté par une réserve.",
+    "2": "Je laisse parfois exister ma fierté quelques instants.",
+    "3": "Je ressens de la fierté sans la corriger, et je peux la laisser se voir."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "ASSUMER_MES_TALENTS"
+  },
+  {
+   "name": "Énoncer mon talent à voix haute devant quelqu'un",
+   "code": "MOI-50",
+   "description": "Je sais dire « je suis bon à… » sans plaisanter, sans m'excuser et sans compenser derrière",
+   "enonces": {
+    "1": "Je sais que je n'arrive pas à dire simplement ce que je fais bien.",
+    "2": "J'ai déjà dit « je suis bon à… » à quelqu'un, même maladroitement.",
+    "3": "Je le dis sans plaisanter, sans m'excuser et sans compenser derrière."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "ASSUMER_MES_TALENTS"
+  },
+  {
+   "name": "Distinguer un fait, une interprétation et une croyance",
+   "code": "MOI-51",
+   "description": "Je sais reprendre une situation récente et séparer ce qui s'est passé de ce que j'en ai conclu",
+   "enonces": {
+    "1": "Je sais que ce que je conclus d'une situation n'est pas la situation.",
+    "2": "Je peux, sur une situation récente, séparer les faits de mes conclusions.",
+    "3": "Je fais cette distinction en situation, avant de réagir."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "CROYANCES"
+  },
+  {
+   "name": "Repérer mes formulations absolues",
+   "code": "MOI-52",
+   "description": "Je remarque quand je dis « toujours », « jamais », « il faut », « je suis comme ça »",
+   "enonces": {
+    "1": "Je sais que « toujours », « jamais », « il faut » signalent une croyance.",
+    "2": "Je repère ces formulations après coup dans ce que j'ai dit.",
+    "3": "Je les entends au moment où je les prononce."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "CROYANCES"
+  },
+  {
+   "name": "Énoncer une croyance sous forme de règle complète",
+   "code": "MOI-53",
+   "description": "Je sais formuler mes croyances en « si… alors… »",
+   "enonces": {
+    "1": "Je sais qu'une croyance se formule comme une règle.",
+    "2": "Je peux formuler une de mes croyances en « si… alors… ».",
+    "3": "Je formule mes croyances en règles complètes, ce qui les rend discutables."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "CROYANCES"
+  },
+  {
+   "name": "Repérer une croyance limitante à l'œuvre",
+   "code": "MOI-54",
+   "description": "J'identifie la pensée automatique qui se cache derrière un blocage récurrent et je la formule explicitement.",
+   "enonces": {
+    "1": "Je sais qu'un blocage récurrent repose souvent sur une pensée automatique.",
+    "2": "Je peux formuler au moins une croyance limitante qui me freine.",
+    "3": "Je repère une croyance à l'œuvre au moment où elle influence mon comportement."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "CROYANCES"
+  },
+  {
+   "name": "Retracer l'origine d'une croyance",
+   "code": "MOI-55",
+   "description": "Je sais dire qui, dans mon histoire, aurait pu prononcer cette phrase",
+   "enonces": {
+    "1": "Je sais que mes schémas ont eu une fonction protectrice à une époque.",
+    "2": "Je peux raconter d'où vient un de mes scénarios répétitifs.",
+    "3": "Je relie mes schémas actuels à leur origine sans m'y identifier ni m'y enfermer."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 50,
+   "actif": true,
+   "theme": "CROYANCES"
+  },
+  {
+   "name": "Mesurer ce qu'elle me coûte aujourd'hui",
+   "code": "MOI-56",
+   "description": "Je sais citer trois conséquences concrètes de cette croyance dans mon quotidien",
+   "enonces": {
+    "1": "Je sais que mes croyances ont un coût.",
+    "2": "Je peux citer une conséquence concrète d'une croyance dans mon quotidien.",
+    "3": "J'en cite trois, et je mesure ce qu'elles m'ont fait manquer."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "CROYANCES"
+  },
+  {
+   "name": "Mettre une croyance à l'épreuve",
+   "code": "MOI-57",
+   "description": "Je cherche les faits qui contredisent une croyance et j'en formule une plus juste et plus aidante.",
+   "enonces": {
+    "1": "Je sais qu'une croyance n'est pas un fait.",
+    "2": "J'ai déjà confronté une de mes croyances aux faits qui la contredisent.",
+    "3": "Je reformule régulièrement mes croyances limitantes en croyances plus justes et je les mets en pratique."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "CROYANCES"
+  },
+  {
+   "name": "Equilibrer mes croyances",
+   "code": "MOI-58",
+   "description": "Je sais citer au moins une situation où ma croyance ne s'est pas vérifiée",
+   "enonces": {
+    "1": "Je sais qu'une croyance n'est pas toujours vérifiée.",
+    "2": "Je peux citer une situation où ma croyance ne s'est pas vérifiée.",
+    "3": "Je cherche systématiquement les contre-exemples, et ma croyance perd son évidence."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "CROYANCES"
+  },
+  {
+   "name": "Développer des croyances soutenantes alignées avec mes objectifs",
+   "code": "MOI-59",
+   "description": "Je sais citer deux croyances qui m'ont fait avancer",
+   "enonces": {
+    "1": "Je sais que certaines croyances me font avancer.",
+    "2": "Je peux citer deux croyances qui m'ont fait avancer.",
+    "3": "Je choisis et j'entretiens les croyances qui servent mes objectifs."
+   },
+   "difficulte": "Avancé",
+   "ordre": 90,
+   "actif": true,
+   "theme": "CROYANCES"
+  },
+  {
+   "name": "Interrompre une croyance en situation",
+   "code": "MOI-60",
+   "description": "Je reconnais un scénario pendant qu'il se rejoue et je choisis une réponse différente.",
+   "enonces": {
+    "1": "Je reconnais après coup quand un schéma s'est rejoué.",
+    "2": "Je repère parfois un schéma pendant qu'il se déroule.",
+    "3": "J'interromps un schéma en situation et je choisis une réponse différente."
+   },
+   "difficulte": "Avancé",
+   "ordre": 100,
+   "actif": true,
+   "theme": "CROYANCES"
+  },
+  {
+   "name": "Identifier les domaines où j'ai déjà confiance",
+   "code": "MOI-61",
+   "description": "Je sais citer trois activités où je n'ai aucun doute sur ma capacité",
+   "enonces": {
+    "1": "Je sais que ma confiance n'est pas la même partout.",
+    "2": "Je peux citer trois activités où je n'ai aucun doute sur ma capacité.",
+    "3": "Je m'appuie sur ces domaines pour aborder ceux où je doute."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "CONFIANCE_SOI"
+  },
+  {
+   "name": "Nommer les situations où ma confiance chute",
+   "code": "MOI-62",
+   "description": "Je sais décire des contexte précis où je ressens un manque de confiance plutôt que de porter un jugement global \"je n'ai pas confiance en moi\"",
+   "enonces": {
+    "1": "Je remarque que je dis « je n'ai pas confiance en moi » de façon globale.",
+    "2": "Je peux décrire un contexte précis où ma confiance chute.",
+    "3": "Je décris précisément mes contextes de doute, sans jugement global sur moi."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "CONFIANCE_SOI"
+  },
+  {
+   "name": "Mobiliser une exprience ressource  au moment où je doute",
+   "code": "MOI-63",
+   "description": "Avant une échéance, je me rappelle une situation comparable que j'ai tenue",
+   "enonces": {
+    "1": "Je sais que j'ai déjà tenu des situations comparables.",
+    "2": "Je me remémore parfois une réussite passée avant une échéance.",
+    "3": "Avant une échéance, je mobilise une situation comparable que j'ai tenue."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "CONFIANCE_SOI"
+  },
+  {
+   "name": "Reconnaître sa valeur indépendamment de ses résultats",
+   "code": "MOI-64",
+   "description": "Je distingue ce que je vaux de ce que je produis, et ne plus mesurer mon estime à mes performances.",
+   "enonces": {
+    "1": "Je sais que ma valeur ne dépend pas de mes résultats, même si je ne le ressens pas toujours.",
+    "2": "Je distingue parfois ce que je vaux de ce que je produis.",
+    "3": "Mon estime reste stable face à un échec ou un succès."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "CONFIANCE_SOI"
+  },
+  {
+   "name": "Accueillir ses limites sans se dévaloriser",
+   "code": "MOI-65",
+   "description": "Je reconnais une faiblesse ou une erreur avec lucidité, sans basculer dans la honte ou l'auto-dévalorisation.",
+   "enonces": {
+    "1": "Je sais qu'une erreur ne dit rien de ma valeur.",
+    "2": "Je reconnais une faiblesse ou une erreur sans basculer dans la honte, dans la plupart des cas.",
+    "3": "J'accueille mes limites avec lucidité et sans me dévaloriser, y compris sous le regard des autres."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "CONFIANCE_SOI"
+  },
+  {
+   "name": "Se traiter avec bienveillance",
+   "code": "MOI-66",
+   "description": "Je me parle comme je parlerais à quelqu'un que j'aime, en particulier dans les moments difficiles.",
+   "enonces": {
+    "1": "Je remarque quand je me parle durement.",
+    "2": "Je me parle avec bienveillance dans les moments ordinaires.",
+    "3": "Je me traite avec bienveillance surtout dans les moments difficiles."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 60,
+   "actif": true,
+   "theme": "CONFIANCE_SOI"
+  },
+  {
+   "name": "Connaître les piliers de ma confiance",
+   "code": "MOI-67",
+   "description": "Je sais citer plusieurs activités, situations, rôles ou domaines de vie où je n'ai aucun doute sur ma capacité",
+   "enonces": {
+    "1": "Je sais que ma confiance repose sur quelques appuis.",
+    "2": "Je peux citer plusieurs domaines ou rôles où je n'ai aucun doute.",
+    "3": "Je connais mes piliers et je les entretiens."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 70,
+   "actif": true,
+   "theme": "CONFIANCE_SOI"
+  },
+  {
+   "name": "Analyser un échec sans me condamner",
+   "code": "MOI-68",
+   "description": "Je sais tirer deux enseignements d'un échec récent",
+   "enonces": {
+    "1": "Je sais qu'un échec contient des enseignements.",
+    "2": "Je peux tirer un enseignement d'un échec récent.",
+    "3": "J'en tire deux, sans me condamner au passage."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "CONFIANCE_SOI"
+  },
+  {
+   "name": "Avoir une vision juste de ce qu'est la confiance",
+   "code": "MOI-69",
+   "description": "Je sais faire la différence entre confiance dans ma capacité à faire ce qui est juste et le résultat",
+   "enonces": {
+    "1": "Je sais que la confiance n'est pas la certitude du résultat.",
+    "2": "Je distingue ma capacité à faire ce qui est juste du résultat obtenu.",
+    "3": "Cette distinction tient quand le résultat n'est pas là."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 90,
+   "actif": true,
+   "theme": "CONFIANCE_SOI"
+  },
+  {
+   "name": "Nommer une polarité avec ses deux pôles positifs",
+   "code": "MOI-70",
+   "description": "Je formule mes tensions en deux termes qui ont chacun leur valeur, pas en bien contre mal",
+   "enonces": {
+    "1": "Je sais que certaines de mes tensions viennent de deux pôles qui semblent s'exclure.",
+    "2": "Je peux nommer au moins une polarité dans laquelle je suis tiraillé.",
+    "3": "Je repère en situation quand une polarité est à l'œuvre."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "POLARITES"
+  },
+  {
+   "name": "Identifier mes polarités récurrentes",
+   "code": "MOI-71",
+   "description": "Je sais citer deux tensions qui reviennent dans ma vie depuis des années",
+   "enonces": {
+    "1": "Je sais que certaines tensions reviennent dans ma vie.",
+    "2": "Je peux citer deux tensions qui reviennent depuis des années.",
+    "3": "Je reconnais mes polarités récurrentes dès qu'elles se réactivent."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "POLARITES"
+  },
+  {
+   "name": "Identifier son pôle de prédilection et son pôle refusé",
+   "code": "MOI-72",
+   "description": "Je vois vers quel côté je penche par défaut et ce que je rejette dans l'autre.",
+   "enonces": {
+    "1": "Je sais que j'ai un pôle de prédilection et un pôle que je refuse.",
+    "2": "Je peux dire vers quel côté je penche par défaut et ce que je rejette dans l'autre.",
+    "3": "Je reconnais la valeur du pôle que je refuse."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "POLARITES"
+  },
+  {
+   "name": "Savoir distinguer un problème d'une polarité",
+   "code": "MOI-73",
+   "description": "Je sais dire, d'une difficulté récente, si elle avait une solution ou si elle demandait un équilibre à tenir",
+   "enonces": {
+    "1": "Je sais qu'un problème se résout et qu'une polarité se tient.",
+    "2": "Je peux dire, d'une difficulté passée, si elle avait une solution ou demandait un équilibre.",
+    "3": "Je fais ce tri au moment où la difficulté se présente."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "POLARITES"
+  },
+  {
+   "name": "Identifier le pôle vers lequel je penche spontanément",
+   "code": "MOI-74",
+   "description": "Je sais dire lequel des deux je choisis par défaut quand la pression monte",
+   "enonces": {
+    "1": "Je sais que je penche d'un côté par défaut.",
+    "2": "Je peux dire lequel des deux je choisis quand la pression monte.",
+    "3": "Je repère ce réflexe en situation, avant qu'il décide pour moi."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "POLARITES"
+  },
+  {
+   "name": "Reconnaître la valeur du pôle que j'évite",
+   "code": "MOI-75",
+   "description": "Je peux formuler ce que ce pôle apporte.",
+   "enonces": {
+    "1": "Je sais que le pôle que je rejette a sa raison d'être.",
+    "2": "Je peux formuler ce que ce pôle apporte.",
+    "3": "Je m'appuie sur ce pôle quand la situation le demande."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "POLARITES"
+  },
+  {
+   "name": "Savoir créer une carte d'une de mes polarités",
+   "code": "MOI-76",
+   "description": "Je sais observer une polarité dans son ensemble au travers d'une carte",
+   "enonces": {
+    "1": "Je sais qu'une polarité peut se représenter avec ses deux pôles et leurs excès.",
+    "2": "J'ai déjà cartographié une de mes polarités.",
+    "3": "Je cartographie mes polarités et je m'en sers pour décider."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "POLARITES"
+  },
+  {
+   "name": "Mettre du \"ET\" plutôt que du \"OU\"",
+   "code": "MOI-77",
+   "description": "J'ai trois exemples de situations récentes où j'ai agi pour mettre du \"et\" là où avant je mettais du \"ou\"",
+   "enonces": {
+    "1": "Je sais qu'on peut tenir les deux pôles plutôt que choisir.",
+    "2": "J'ai déjà agi une fois en « et » là où je mettais un « ou ».",
+    "3": "J'ai trois exemples récents où j'ai mis du « et » là où je mettais du « ou »."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "POLARITES"
+  },
+  {
+   "name": "Percevoir les polarités des autres pour mieux interragir avec eux",
+   "code": "MOI-78",
+   "description": "Je sais dire quel pôle défend la personne en face, et pourquoi elle a raison de le défendre",
+   "enonces": {
+    "1": "Je sais que l'autre défend souvent le pôle que je néglige.",
+    "2": "Je peux dire, après coup, quel pôle défendait la personne en face.",
+    "3": "Je le repère pendant l'échange, et je reconnais pourquoi elle a raison de le défendre."
+   },
+   "difficulte": "Avancé",
+   "ordre": 90,
+   "actif": true,
+   "theme": "POLARITES"
+  },
+  {
+   "name": "Habiter les deux pôles",
+   "code": "MOI-79",
+   "description": "Je trouve une posture qui intègre les deux côtés plutôt que de choisir l'un contre l'autre.",
+   "enonces": {
+    "1": "Je comprends qu'on peut habiter les deux pôles plutôt que choisir.",
+    "2": "J'ai déjà expérimenté une posture qui intègre les deux côtés d'une polarité.",
+    "3": "J'habite mes polarités avec souplesse, en passant d'un pôle à l'autre selon ce que la situation demande."
+   },
+   "difficulte": "Avancé",
+   "ordre": 100,
+   "actif": true,
+   "theme": "POLARITES"
+  },
+  {
+   "name": "Reconnaître sa voix quand elle parle",
+   "code": "MOI-80",
+   "description": "Je repère dans la journée le moment où c'est lui qui parle, et non moi",
+   "enonces": {
+    "1": "Je sais qu'une voix critique s'exprime en moi, distincte de moi.",
+    "2": "Je reconnais après coup les moments où c'est elle qui parlait.",
+    "3": "Je repère dans la journée l'instant où c'est lui qui parle, et non moi."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "JUGE_INTERIEUR"
+  },
+  {
+   "name": "Identifier ses formules récurrentes",
+   "code": "MOI-81",
+   "description": "Je sais citer les phrases exactes qu'il me répète",
+   "enonces": {
+    "1": "Je sais qu'il me répète toujours à peu près les mêmes choses.",
+    "2": "Je peux citer une ou deux de ses phrases.",
+    "3": "Je cite ses formules exactes et je les reconnais dès les premiers mots."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "JUGE_INTERIEUR"
+  },
+  {
+   "name": "Identifier les situations qui le réveillent",
+   "code": "MOI-82",
+   "description": "Je sais dire dans quels contextes il monte en volume",
+   "enonces": {
+    "1": "Je sais qu'il est plus fort dans certaines situations.",
+    "2": "Je peux nommer deux ou trois contextes où il monte en volume.",
+    "3": "Je connais ses déclencheurs et je les anticipe."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "JUGE_INTERIEUR"
+  },
+  {
+   "name": "Reconnaître ce qu'il me coûte",
+   "code": "MOI-83",
+   "description": "Je sais citer trois conséquences concrètes de sa présence dans ma vie",
+   "enonces": {
+    "1": "Je sais qu'il me coûte quelque chose.",
+    "2": "Je peux citer une conséquence concrète de sa présence dans ma vie.",
+    "3": "J'en cite trois, et je mesure ce qu'elles m'ont fait manquer."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "JUGE_INTERIEUR"
+  },
+  {
+   "name": "Reconnaître ce que je continue d'y gagner",
+   "code": "MOI-84",
+   "description": "Je sais dire ce que je n'ai pas à risquer tant que je l'écoute",
+   "enonces": {
+    "1": "Je sais qu'il me protège de quelque chose.",
+    "2": "Je peux dire ce que je n'ai pas à risquer tant que je l'écoute.",
+    "3": "Je reconnais ce bénéfice en situation, et je choisis quand même le risque."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "JUGE_INTERIEUR"
+  },
+  {
+   "name": "Le nommer au lieu de le croire",
+   "code": "MOI-85",
+   "description": "Je peux dire « voilà mon juge » plutôt que « c'est vrai »",
+   "enonces": {
+    "1": "Je sais que ce qu'il dit n'est pas la vérité.",
+    "2": "Je parviens parfois à dire « voilà mon juge » plutôt que « c'est vrai ».",
+    "3": "Je le nomme au moment où il parle, sans avoir à me convaincre."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "JUGE_INTERIEUR"
+  },
+  {
+   "name": "Cesser de discuter avec lui",
+   "code": "MOI-86",
+   "description": "Je n'essaie plus de lui prouver que j'ai de la valeur en mettant en place des stratégies prédéfinies",
+   "enonces": {
+    "1": "Je remarque que je cherche à lui prouver que j'ai de la valeur.",
+    "2": "Je repère mes stratégies pour lui donner tort, et je m'en abstiens parfois.",
+    "3": "Je ne discute plus avec lui : je le laisse parler et j'agis quand même."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "JUGE_INTERIEUR"
+  },
+  {
+   "name": "Me parler comme je parlerais à un proche",
+   "code": "MOI-87",
+   "description": "Je sais reformuler sa phrase dans les termes que j'emploierais pour quelqu'un que j'aime",
+   "enonces": {
+    "1": "Je remarque que je me parle plus durement que je ne parlerais à un proche.",
+    "2": "Je reformule parfois sa phrase dans les termes que j'emploierais pour quelqu'un que j'aime.",
+    "3": "Je me parle avec cette bienveillance dans les moments difficiles, pas seulement à froid."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "JUGE_INTERIEUR"
+  },
+  {
+   "name": "Repérer mes formulations en tout ou rien",
+   "code": "MOI-88",
+   "description": "Je remarque quand je dis « tout », « rien », « toujours », « complètement raté »",
+   "enonces": {
+    "1": "Je sais que « tout », « rien », « complètement raté » sont des raccourcis.",
+    "2": "Je repère ces formulations après coup.",
+    "3": "Je les entends au moment où je les prononce."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "NUANCE"
+  },
+  {
+   "name": "Identifier les domaines où je pense en deux cases",
+   "code": "MOI-89",
+   "description": "Je sais citer un sujet sur lequel je n'ai que deux positions possibles",
+   "enonces": {
+    "1": "Je sais que sur certains sujets je n'ai que deux positions.",
+    "2": "Je peux citer un sujet sur lequel je pense en deux cases.",
+    "3": "Je repère ce fonctionnement quand il s'active, et je cherche la troisième position."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "NUANCE"
+  },
+  {
+   "name": "Reconnaître ce que le binaire me simplifie",
+   "code": "MOI-90",
+   "description": "Je sais dire ce que je m'épargne en rangeant les choses en deux camps",
+   "enonces": {
+    "1": "Je sais que ranger les choses en deux camps m'épargne quelque chose.",
+    "2": "Je peux dire ce que je m'épargne en pensant en binaire.",
+    "3": "Je reconnais ce confort en situation, et je choisis quand même la complexité."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "NUANCE"
+  },
+  {
+   "name": "Tenir deux vérités à la fois",
+   "code": "MOI-91",
+   "description": "Je sais prendre en compte un grand nombre de paramètres pour tenir des propos comme \"je suis content pour toi ET cela me rend triste\"",
+   "enonces": {
+    "1": "Je sais que deux choses contradictoires peuvent être vraies en même temps.",
+    "2": "Je parviens parfois à dire « ceci ET cela » plutôt que de trancher.",
+    "3": "Je tiens plusieurs vérités à la fois, y compris quand elles me mettent mal à l'aise."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "NUANCE"
+  },
+  {
+   "name": "Situer une situation sur un curseur plutôt que dans un camp",
+   "code": "MOI-92",
+   "description": "Je sais dire à quel degré j'adhère, et pourquoi ni plus ni moins",
+   "enonces": {
+    "1": "Je sais qu'un avis peut se situer sur un curseur.",
+    "2": "Je peux dire à quel degré j'adhère à quelque chose.",
+    "3": "Je dis à quel degré j'adhère, et pourquoi ni plus ni moins."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "NUANCE"
+  },
+  {
+   "name": "Nuancer sans affaiblir mon propos",
+   "code": "MOI-93",
+   "description": "Ma nuance précise ce que je pense au lieu de le diluer",
+   "enonces": {
+    "1": "Je sais que nuancer n'est pas se dédire.",
+    "2": "Ma nuance précise parfois ma pensée au lieu de la diluer.",
+    "3": "Je nuance en précisant, et mon propos en sort plus clair."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "NUANCE"
+  },
+  {
+   "name": "Découper mon parcours en périodes",
+   "code": "MOI-94",
+   "description": "Je sais raconter ma vie en nommant ses grandes saisons plutôt qu'en un fil continu",
+   "enonces": {
+    "1": "Je sais que ma vie a connu des saisons distinctes.",
+    "2": "Je peux nommer les grandes périodes de mon parcours.",
+    "3": "Je raconte ma vie par ses saisons, et j'y lis une cohérence."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "CYCLES_VIE"
+  },
+  {
+   "name": "Repérer les cycles courts qui rythment mon quotidien",
+   "code": "MOI-95",
+   "description": "Je sais quand, dans ma journée, ma semaine ou mon année, je suis en creux ou en plein",
+   "enonces": {
+    "1": "Je sais que mon énergie varie selon des rythmes réguliers.",
+    "2": "Je repère mes creux et mes pleins sur une journée ou une semaine.",
+    "3": "Je connais mes cycles courts et j'organise mon temps avec eux."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "CYCLES_VIE"
+  },
+  {
+   "name": "Identifier le besoin auquel répondait la période précédente",
+   "code": "MOI-96",
+   "description": "Je sais dire ce que je cherchais vraiment dans le cycle d'avant",
+   "enonces": {
+    "1": "Je sais que chaque période de ma vie répondait à un besoin.",
+    "2": "Je peux dire ce que je cherchais dans le cycle précédent.",
+    "3": "Je relis mes périodes par les besoins qu'elles nourrissaient."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "CYCLES_VIE"
+  },
+  {
+   "name": "Nommer le besoin dominant de ma période actuelle",
+   "code": "MOI-97",
+   "description": "Je sais dire ce dont j'ai besoin maintenant, et en quoi c'est différent d'avant",
+   "enonces": {
+    "1": "Je sais que mes besoins d'aujourd'hui ne sont plus ceux d'hier.",
+    "2": "Je peux dire ce dont j'ai besoin en ce moment.",
+    "3": "Je nomme mon besoin dominant actuel et en quoi il diffère du précédent."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "CYCLES_VIE"
+  },
+  {
+   "name": "Reconnaître qu'un besoin s'est éteint",
+   "code": "MOI-98",
+   "description": "Je sais citer quelque chose qui comptait énormément et qui ne me manque plus",
+   "enonces": {
+    "1": "Je sais que certains besoins finissent par s'éteindre.",
+    "2": "Je peux citer quelque chose qui comptait et qui ne me manque plus.",
+    "3": "Je reconnais un besoin éteint sans le regretter ni le forcer."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "CYCLES_VIE"
+  },
+  {
+   "name": "Nommer le cycle dans lequel je suis aujourd'hui",
+   "code": "MOI-99",
+   "description": "J'identifie si je suis dans une phase de lancement, de croissance, de plateau ou de fin, dans ma vie ou un projet.",
+   "enonces": {
+    "1": "Je sais que ma vie et mes projets traversent des saisons.",
+    "2": "Je peux dire dans quelle phase je suis (lancement, croissance, plateau, fin).",
+    "3": "Je reconnais la saison où je suis et j'adapte mon rythme en conséquence."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 60,
+   "actif": true,
+   "theme": "CYCLES_VIE"
+  },
+  {
+   "name": "Me donner le droit de rêver",
+   "code": "MON-01",
+   "description": "Je m'accorde du temps pour ça, pas seulement quand tout le reste est fait",
+   "enonces": {
+    "1": "Je sais que je remets le fait de rêver à plus tard.",
+    "2": "Je m'accorde parfois du temps pour rêver.",
+    "3": "Je m'accorde ce temps régulièrement, pas seulement quand tout le reste est fait."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "REVES"
+  },
+  {
+   "name": "Le formuler comme un résultat, pas comme un thème",
+   "code": "MON-02",
+   "description": "Ma formulation est une phrase complète, pas un mot",
+   "enonces": {
+    "1": "Je sais qu'un thème n'est pas un rêve.",
+    "2": "Je formule parfois mon rêve en phrase complète.",
+    "3": "Ma formulation est un résultat précis, pas un mot ni un domaine."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "REVES"
+  },
+  {
+   "name": "Assumer mon rêve dans sa version la plus ambitieuse",
+   "code": "MON-03",
+   "description": "Ce que j'ai nommé n'est pas la version raisonnable de mon rêve. C'est celle qui m'anime vraiment.",
+   "enonces": {
+    "1": "Je sais que je présente souvent la version raisonnable de mon rêve.",
+    "2": "Je repère l'écart entre ce que je dis vouloir et ce qui m'anime.",
+    "3": "Ce que j'ai nommé est la version qui m'anime vraiment, pas la version acceptable."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "REVES"
+  },
+  {
+   "name": "Le dire à voix haute à quelqu'un",
+   "code": "MON-04",
+   "description": "Je l'ai formulé devant une autre personne",
+   "enonces": {
+    "1": "Je sais que dire son rêve à voix haute l'engage.",
+    "2": "J'ai déjà évoqué mon rêve devant quelqu'un.",
+    "3": "Je l'ai formulé entièrement devant une autre personne."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "REVES"
+  },
+  {
+   "name": "Comprendre que le rêve est une stratégie",
+   "code": "MON-05",
+   "description": "Je sais nommer les besoins auxquels mon rêve répond",
+   "enonces": {
+    "1": "Je sais qu'un rêve répond à des besoins plus profonds que lui.",
+    "2": "Je peux nommer un besoin auquel mon rêve répond.",
+    "3": "Je nomme les besoins derrière mon rêve, et je vois qu'il existe d'autres voies."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "REVES"
+  },
+  {
+   "name": "Côtoyer mes peurs",
+   "code": "MON-06",
+   "description": "J'accepte les peurs causées par mon rêve comme des marqueurs normaux de ma sortie de zone de confort",
+   "enonces": {
+    "1": "Je sais que la peur accompagne ce qui compte.",
+    "2": "J'identifie les peurs que mon rêve fait remonter.",
+    "3": "J'accepte ces peurs comme les marqueurs normaux de ma sortie de zone de confort."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "REVES"
+  },
+  {
+   "name": "Définir ce que serait un véritable échec",
+   "code": "MON-07",
+   "description": "Je sais dire ce qui serait un échec, et donc tout ce qui n'en est pas un",
+   "enonces": {
+    "1": "Je sais que je n'ai pas défini ce que serait un échec.",
+    "2": "Je peux dire ce qui serait un véritable échec.",
+    "3": "Je le dis, et j'en déduis tout ce qui n'en est pas un."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "REVES"
+  },
+  {
+   "name": "Identifier ce qui me sert et ce qui m'éloigne de mon rêve",
+   "code": "MON-08",
+   "description": "Je nomme les personnes ressources avec le sujet précis de chacune\nJe sais dire quelles relations me détournent, et dans quel domaine",
+   "enonces": {
+    "1": "Je sais que mon entourage me porte ou me freine.",
+    "2": "Je peux citer une personne ressource pour mon rêve.",
+    "3": "Je nomme mes personnes ressources avec le sujet de chacune, et je dis qui me détourne."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "REVES"
+  },
+  {
+   "name": "Faire de mon rêve un projet",
+   "code": "MON-09",
+   "description": "J'ai un processus qui soutient l'avancée de mon rêve",
+   "enonces": {
+    "1": "Je sais qu'un rêve sans processus reste une rêverie.",
+    "2": "J'ai posé les premières étapes de mon rêve.",
+    "3": "J'ai un processus qui soutient son avancée, et je le tiens."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 90,
+   "actif": true,
+   "theme": "REVES"
+  },
+  {
+   "name": "Nommer le choix en attente",
+   "code": "MON-10",
+   "description": "Je sais citer un choix que je repousse en ce moment",
+   "enonces": {
+    "1": "Je sais qu'une décision a des options, des critères et des conséquences.",
+    "2": "Je pose parfois clairement les termes d'une décision avant de choisir.",
+    "3": "Je clarifie systématiquement les termes d'une décision importante."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "CHOIX"
+  },
+  {
+   "name": "Trancher vite les petites choses",
+   "code": "MON-11",
+   "description": "Je choisis les sujets mineurs sans y revenir trois fois",
+   "enonces": {
+    "1": "Je sais que je n'aurai jamais toutes les informations.",
+    "2": "Je tranche parfois sans tout savoir.",
+    "3": "Je décide dans l'incertitude en acceptant le risque de me tromper."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "CHOIX"
+  },
+  {
+   "name": "Voir quand je fais face à un choix",
+   "code": "MON-12",
+   "description": "Je vois les choix là où avant je voyais une fatalité ou un élément subi",
+   "enonces": {
+    "1": "Je remarque que je remets en question mes décisions à chaque difficulté.",
+    "2": "Je porte parfois une décision jusqu'au bout malgré les doutes.",
+    "3": "J'assume mes décisions et je les porte sans revenir dessus à chaque obstacle."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "CHOIX"
+  },
+  {
+   "name": "Maîtriser les deux pans d'un choix",
+   "code": "MON-13",
+   "description": "Je sais choisir pour l'option retenue et faire le deuil de l'option non retenue.",
+   "enonces": {
+    "1": "Je sais que choisir c'est aussi renoncer.",
+    "2": "Je choisis, mais le renoncement me travaille encore.",
+    "3": "Je choisis pour l'option retenue et je fais le deuil de celle que j'écarte."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "CHOIX"
+  },
+  {
+   "name": "Choisir avec mes ressentis et mon intuition",
+   "code": "MON-14",
+   "description": "Je sais me baser sur mon corps pour m'aider à avancer dans mes choix",
+   "enonces": {
+    "1": "Je sais que mon corps réagit avant que je décide.",
+    "2": "Je consulte parfois mon ressenti avant de trancher.",
+    "3": "Je m'appuie sur mon corps et mon intuition pour avancer dans mes choix."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "CHOIX"
+  },
+  {
+   "name": "Sortir de l'indécision chronique",
+   "code": "MON-15",
+   "description": "Je reconnais quand je reporte une décision par peur et m'en donner une échéance.",
+   "enonces": {
+    "1": "Je sais que je reporte certaines décisions par peur.",
+    "2": "Je me donne parfois une échéance pour une décision qui traîne.",
+    "3": "Je repère l'indécision par peur et je me fixe une échéance pour trancher."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "CHOIX"
+  },
+  {
+   "name": "Distinguer occupé et utile",
+   "code": "MON-16",
+   "description": "Je sais dire ce qui a compté dans ma semaine, pas seulement ce qui l'a remplie",
+   "enonces": {
+    "1": "Je sais que l'urgent dévore l'important.",
+    "2": "Je réserve parfois du temps pour ce qui compte.",
+    "3": "Mes priorités ont une place protégée dans mon agenda."
+   },
+   "difficulte": "Avancé",
+   "ordre": 10,
+   "actif": true,
+   "theme": "GESTION_TEMPS"
+  },
+  {
+   "name": "Repérer mes fuites",
+   "code": "MON-17",
+   "description": "Je sais citer ce qui me mange du temps sans que je l'aie décidé",
+   "enonces": {
+    "1": "Je sais que ma charge mentale est trop lourde.",
+    "2": "J'ai délégué ou abandonné quelques tâches qui m'encombraient.",
+    "3": "Je réduis activement ma charge mentale et je la maintiens à un niveau tenable."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "GESTION_TEMPS"
+  },
+  {
+   "name": "Dire non à la dispersion",
+   "code": "MON-18",
+   "description": "Je refuse les sollicitations qui m'éloignent de mon cap.",
+   "enonces": {
+    "1": "Je sais que je dis oui à trop de sollicitations.",
+    "2": "Je refuse parfois une sollicitation qui m'éloigne de mon cap.",
+    "3": "Je refuse systématiquement ce qui me disperse."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "GESTION_TEMPS"
+  },
+  {
+   "name": "Nommer mes trois priorités du moment",
+   "code": "MON-19",
+   "description": "Je peux les citer sans avoir à réfléchir",
+   "enonces": {
+    "1": "Je sais que mon organisation suit un modèle qui n'est pas le mien.",
+    "2": "J'ai commencé à organiser mes journées selon mon énergie.",
+    "3": "Mon organisation suit mon rythme et mon fonctionnement."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "GESTION_TEMPS"
+  },
+  {
+   "name": "Vérifier que mon agenda leur ressemble",
+   "code": "MON-20",
+   "description": "Mes priorités occupent une place visible dans mon temps réel",
+   "enonces": {
+    "1": "Je sais que mon agenda ne reflète pas mes priorités.",
+    "2": "J'ai déjà réservé du temps pour ce qui compte.",
+    "3": "Mes priorités occupent une place visible dans mon temps réel."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "GESTION_TEMPS"
+  },
+  {
+   "name": "Laisser du vide",
+   "code": "MON-21",
+   "description": "Il reste des espaces non remplis dans ma semaine, volontairement",
+   "enonces": {
+    "1": "Je sais que je remplis tout mon temps.",
+    "2": "Je laisse parfois un espace non rempli.",
+    "3": "Il reste des espaces vides dans ma semaine, volontairement."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "GESTION_TEMPS"
+  },
+  {
+   "name": "Connaître mes heures de haute énergie",
+   "code": "MON-22",
+   "description": "Je sais quand je suis bon, et quand je ne le suis pas",
+   "enonces": {
+    "1": "Je sais que mon énergie varie selon les heures.",
+    "2": "Je repère mes moments de haute et de basse énergie.",
+    "3": "Je sais quand je suis bon, et j'y place ce qui le mérite."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 70,
+   "actif": true,
+   "theme": "GESTION_TEMPS"
+  },
+  {
+   "name": "Distinguer un problème de temps d'un problème de choix",
+   "code": "MON-23",
+   "description": "Je sais quand « je n'ai pas le temps » veut dire « ce n'est pas ma priorité »",
+   "enonces": {
+    "1": "Je sais que « je n'ai pas le temps » cache souvent autre chose.",
+    "2": "Je repère après coup quand c'était un problème de choix.",
+    "3": "Je sais reconnaître, sur le moment, quand « je n'ai pas le temps » veut dire « ce n'est pas ma priorité »."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "GESTION_TEMPS"
+  },
+  {
+   "name": "Démarrer",
+   "code": "MON-24",
+   "description": "Je fais le premier pas concret d'un projet ou d'un changement, aussi petit soit-il.",
+   "enonces": {
+    "1": "Je sais que le premier pas est souvent le plus difficile.",
+    "2": "Je fais parfois un premier pas concret, même petit.",
+    "3": "Je démarre rapidement ce que je décide."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "PASSAGE_L_ACTION"
+  },
+  {
+   "name": "Repérer ce qui bloque",
+   "code": "MON-25",
+   "description": "J'identifie la peur, la croyance ou le perfectionnisme qui se cache derrière ma procrastination.",
+   "enonces": {
+    "1": "Je sais que ma procrastination cache quelque chose.",
+    "2": "Je peux nommer ce qui me bloque dans une situation donnée.",
+    "3": "J'identifie mon blocage (peur, croyance, perfectionnisme) et je le traite."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "PASSAGE_L_ACTION"
+  },
+  {
+   "name": "Découper en actions tenables",
+   "code": "MON-26",
+   "description": "Je transforme une intention floue ou intimidante en prochaines étapes concrètes et réalisables.",
+   "enonces": {
+    "1": "Je sais qu'une intention floue ne passe pas à l'action.",
+    "2": "Je découpe parfois une intention en étapes concrètes.",
+    "3": "Je transforme systématiquement une intention en prochaines étapes réalisables."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "PASSAGE_L_ACTION"
+  },
+  {
+   "name": "Se mettre en mouvement après une prise de conscience",
+   "code": "MON-27",
+   "description": "Je traduis rapidement un déclic en expérimentation, avant que l'élan retombe.",
+   "enonces": {
+    "1": "Je sais qu'un déclic retombe s'il n'est pas suivi d'action.",
+    "2": "Je traduis parfois une prise de conscience en expérimentation.",
+    "3": "Je traduis rapidement mes prises de conscience en actions concrètes."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "PASSAGE_L_ACTION"
+  },
+  {
+   "name": "Faire le point sur sa vie professionnelle",
+   "code": "MON-28",
+   "description": "J'évalue honnêtement ce qui me nourrit et ce qui m'éteint dans mon travail actuel.",
+   "enonces": {
+    "1": "Je sais qu'une partie de mon travail me nourrit et une autre m'éteint.",
+    "2": "Je peux nommer ce qui me nourrit et ce qui m'éteint dans mon travail actuel.",
+    "3": "Je fais régulièrement le point sur ma vie professionnelle avec lucidité."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "TRAVAIL_CARRIERE"
+  },
+  {
+   "name": "Formuler son projet professionnel",
+   "code": "MON-29",
+   "description": "Je définis ce que je veux faire, pour qui et dans quel cadre, y compris en cas de reconversion.",
+   "enonces": {
+    "1": "Je sais que je n'ai pas de projet professionnel clair.",
+    "2": "Je peux formuler les grandes lignes de ce que je veux faire.",
+    "3": "Mon projet professionnel est clair : quoi, pour qui, dans quel cadre."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "TRAVAIL_CARRIERE"
+  },
+  {
+   "name": "Négocier sa place et sa progression",
+   "code": "MON-30",
+   "description": "Je demande une évolution, une augmentation ou un changement de rôle.",
+   "enonces": {
+    "1": "Je sais que ma progression ne viendra pas toute seule.",
+    "2": "J'ai déjà demandé une évolution ou une augmentation.",
+    "3": "Je négocie ma place et ma progression de façon régulière."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "TRAVAIL_CARRIERE"
+  },
+  {
+   "name": "Traverser une transition professionnelle",
+   "code": "MON-31",
+   "description": "Je gère l'incertitude et l'identité pendant un changement de poste, de métier ou de statut.",
+   "enonces": {
+    "1": "Je sais qu'une transition professionnelle touche à l'identité.",
+    "2": "J'ai traversé une transition professionnelle en gérant l'incertitude.",
+    "3": "Je traverse les transitions professionnelles avec stabilité."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "TRAVAIL_CARRIERE"
+  },
+  {
+   "name": "Formuler ce qui donne du sens à sa vie",
+   "code": "MON-32",
+   "description": "Je nomme ce pour quoi je me lève le matin, au-delà des obligations.",
+   "enonces": {
+    "1": "Je sais que la question du sens compte pour moi.",
+    "2": "Je peux dire ce qui me fait me lever le matin, au-delà des obligations.",
+    "3": "Ce qui donne du sens à ma vie est clair et je le reconnais dans mon quotidien."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "SENS_CONTRIBUTION"
+  },
+  {
+   "name": "Identifier sa manière de contribuer",
+   "code": "MON-33",
+   "description": "Je reconnais la façon singulière dont j'apporte quelque chose aux autres ou au monde.",
+   "enonces": {
+    "1": "Je sais que j'ai une manière singulière d'apporter quelque chose.",
+    "2": "Je peux nommer ce que j'apporte aux autres ou au monde.",
+    "3": "Ma manière de contribuer est claire et je la mets en œuvre."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "SENS_CONTRIBUTION"
+  },
+  {
+   "name": "Relier son quotidien à une direction",
+   "code": "MON-34",
+   "description": "Je donne une place concrète dans ma semaine à ce qui a du sens pour moi.",
+   "enonces": {
+    "1": "Je voudrais que mon quotidien reflète davantage ce qui a du sens pour moi.",
+    "2": "Je donne parfois une place concrète dans ma semaine à ce qui compte.",
+    "3": "Ce qui a du sens pour moi a une place régulière et protégée dans ma vie."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "SENS_CONTRIBUTION"
+  },
+  {
+   "name": "Transmettre ce qu'on a reçu",
+   "code": "MON-35",
+   "description": "Je partage ce que j'ai appris ou traversé d'une manière qui sert quelqu'un d'autre.",
+   "enonces": {
+    "1": "Je sais que ce que j'ai traversé peut servir à d'autres.",
+    "2": "Je partage parfois ce que j'ai appris d'une manière qui aide quelqu'un.",
+    "3": "Je transmets ce que j'ai reçu de façon régulière et choisie."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "SENS_CONTRIBUTION"
+  },
+  {
+   "name": "Installer une habitude",
+   "code": "MON-36",
+   "description": "Je mets en place une pratique régulière et je la rends automatique.",
+   "enonces": {
+    "1": "Je sais qu'une habitude se construit par la régularité.",
+    "2": "J'ai déjà installé une habitude qui tient.",
+    "3": "J'installe de nouvelles habitudes avec méthode et elles tiennent."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "PERSEVERANCE_HABITUDES"
+  },
+  {
+   "name": "Tenir dans la durée",
+   "code": "MON-37",
+   "description": "Je continue un engagement quand la motivation initiale est retombée.",
+   "enonces": {
+    "1": "Je sais que la motivation initiale retombe.",
+    "2": "Je continue parfois quand la motivation est retombée.",
+    "3": "Je tiens mes engagements dans la durée, même sans motivation."
+   },
+   "difficulte": "Avancé",
+   "ordre": 20,
+   "actif": true,
+   "theme": "PERSEVERANCE_HABITUDES"
+  },
+  {
+   "name": "Traverser une rechute",
+   "code": "MON-38",
+   "description": "Je reprends après un abandon ou un échec sans tout remettre en question.",
+   "enonces": {
+    "1": "Je remarque que j'abandonne tout après une rechute.",
+    "2": "Je reprends parfois après un abandon.",
+    "3": "Je traverse les rechutes sans tout remettre en question et je reprends."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "PERSEVERANCE_HABITUDES"
+  },
+  {
+   "name": "Entretenir sa motivation",
+   "code": "MON-39",
+   "description": "Je me reconnecte régulièrement au pourquoi d'un engagement pour le nourrir.",
+   "enonces": {
+    "1": "Je sais que le pourquoi nourrit la motivation.",
+    "2": "Je me reconnecte parfois au pourquoi d'un engagement.",
+    "3": "J'entretiens ma motivation en me reconnectant régulièrement à mon pourquoi."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 40,
+   "actif": true,
+   "theme": "PERSEVERANCE_HABITUDES"
+  },
+  {
+   "name": "Faire naître un projet",
+   "code": "MON-40",
+   "description": "Je passe d'une envie diffuse à un projet nommé et formulé.",
+   "enonces": {
+    "1": "J'ai une envie diffuse de créer quelque chose.",
+    "2": "J'ai nommé et formulé un projet qui me tient à cœur.",
+    "3": "Je transforme mes envies en projets nommés et formulés."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "PROJETS_CREATION"
+  },
+  {
+   "name": "Structurer un projet",
+   "code": "MON-41",
+   "description": "Je définis les étapes, les ressources et les premiers jalons d'un projet.",
+   "enonces": {
+    "1": "Je sais qu'un projet a besoin d'étapes et de ressources.",
+    "2": "J'ai structuré au moins un projet en étapes et en jalons.",
+    "3": "Je structure mes projets avec des étapes, des ressources et des jalons clairs."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "PROJETS_CREATION"
+  },
+  {
+   "name": "Exposer son projet",
+   "code": "MON-42",
+   "description": "Je partage un projet naissant avec d'autres et j'accueille leurs retours sans y renoncer.",
+   "enonces": {
+    "1": "Je remarque que je garde mes projets pour moi par peur des retours.",
+    "2": "J'ai déjà exposé un projet naissant à d'autres.",
+    "3": "J'expose mes projets tôt, j'accueille les retours et je ne renonce pas pour autant."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 30,
+   "actif": true,
+   "theme": "PROJETS_CREATION"
+  },
+  {
+   "name": "Mener un projet à son terme",
+   "code": "MON-43",
+   "description": "Je tiens un projet jusqu'à sa réalisation malgré les obstacles et les doutes.",
+   "enonces": {
+    "1": "Je sais que je laisse souvent mes projets inachevés.",
+    "2": "J'ai mené au moins un projet personnel à son terme.",
+    "3": "Je mène mes projets à leur terme malgré les obstacles et les doutes."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "PROJETS_CREATION"
+  },
+  {
+   "name": "Comprendre son rapport à l'argent",
+   "code": "MON-44",
+   "description": "J'identifie les croyances et les émotions héritées qui façonnent ma relation à l'argent.",
+   "enonces": {
+    "1": "Je sais que mon rapport à l'argent est façonné par mon histoire.",
+    "2": "Je peux nommer une croyance ou une émotion qui influence mon rapport à l'argent.",
+    "3": "Je connais mes croyances sur l'argent et elles ne décident plus pour moi."
+   },
+   "difficulte": "Avancé",
+   "ordre": 10,
+   "actif": true,
+   "theme": "ARGENT"
+  },
+  {
+   "name": "Connaître sa situation financière",
+   "code": "MON-45",
+   "description": "Je regarde en face ce que je gagne, dépense, dois et possède, sans évitement.",
+   "enonces": {
+    "1": "Je sais que j'évite de regarder ma situation financière.",
+    "2": "Je connais dans les grandes lignes ce que je gagne, dépense, dois et possède.",
+    "3": "Je connais précisément ma situation financière et je la regarde régulièrement."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "ARGENT"
+  },
+  {
+   "name": "Demander ce que l'on vaut",
+   "code": "MON-46",
+   "description": "Je fixe un prix, négocier un salaire ou demander une rémunération juste sans se brader.",
+   "enonces": {
+    "1": "Je sais que j'ai tendance à me brader.",
+    "2": "J'ai déjà fixé un prix ou négocié un salaire à ma juste valeur.",
+    "3": "Je demande ce que je vaux sans me brader."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "ARGENT"
+  },
+  {
+   "name": "Aborder le sujet sans détour",
+   "code": "MON-47",
+   "description": "Je sais aborder le sujet de l'argent comme n'importe quel sujet lié à ma vie, sans charge émotionnelle particulière",
+   "enonces": {
+    "1": "Je remarque que le sujet de l'argent me met mal à l'aise.",
+    "2": "Je parviens parfois à en parler sans détour.",
+    "3": "J'aborde l'argent comme n'importe quel autre sujet, sans charge particulière."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "ARGENT"
+  },
+  {
+   "name": "Nommer mes croyances actuelles",
+   "code": "MON-48",
+   "description": "Je sais énoncer ce que je crois sur l'argent, sur ceux qui en ont et ceux qui n'en ont pas",
+   "enonces": {
+    "1": "Je sais que j'ai des croyances sur l'argent.",
+    "2": "Je peux énoncer une de mes croyances sur l'argent.",
+    "3": "J'énonce ce que je crois sur l'argent et sur ceux qui en ont ou n'en ont pas."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "ARGENT"
+  },
+  {
+   "name": "Distinguer l'argent de ma valeur",
+   "code": "MON-49",
+   "description": "Ce que je gagne ne me dit pas ce que je vaux",
+   "enonces": {
+    "1": "Je sais que ce que je gagne ne dit pas ce que je vaux.",
+    "2": "Je distingue parfois les deux quand je me compare.",
+    "3": "Cette distinction tient, y compris quand mes revenus baissent."
+   },
+   "difficulte": "Avancé",
+   "ordre": 60,
+   "actif": true,
+   "theme": "ARGENT"
+  },
+  {
+   "name": "Savoir ce qui me suffit",
+   "code": "MON-50",
+   "description": "Je sais quel niveau me convient, et je le sais autrement que par la peur d'en manquer",
+   "enonces": {
+    "1": "Je sais que je n'ai pas défini ce qui me suffit.",
+    "2": "Je peux dire quel niveau me conviendrait.",
+    "3": "Je sais ce qui me suffit, et je le sais autrement que par la peur d'en manquer."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 70,
+   "actif": true,
+   "theme": "ARGENT"
+  },
+  {
+   "name": "Prendre des décisions financières alignées",
+   "code": "MON-51",
+   "description": "Je fais des choix d'argent cohérents avec mes valeurs et mon cap.",
+   "enonces": {
+    "1": "Je sais que mes choix d'argent ne sont pas toujours cohérents avec mes valeurs.",
+    "2": "Je prends parfois une décision financière en lien avec mon cap.",
+    "3": "Mes décisions financières sont alignées avec mes valeurs et mon cap."
+   },
+   "difficulte": "Avancé",
+   "ordre": 80,
+   "actif": true,
+   "theme": "ARGENT"
+  },
+  {
+   "name": "Dire ce que le mot recouvre pour moi",
+   "code": "MON-52",
+   "description": "Je sais dire ce que je mets sous ce mot, avec mes mots et pas ceux d'un livre",
+   "enonces": {
+    "1": "Je sais que le mot spiritualité recouvre des choses très différentes.",
+    "2": "Je peux dire approximativement ce que je mets sous ce mot.",
+    "3": "Je le dis avec mes mots, pas ceux d'un livre ou d'une tradition."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 10,
+   "actif": true,
+   "theme": "SPIRITUALITE"
+  },
+  {
+   "name": "Reconnaître ce que je vais chercher dans la spiritualité",
+   "code": "MON-53",
+   "description": "Je sais dire si je cherche du sens, de la paix, de l'appartenance ou une explication ou autre",
+   "enonces": {
+    "1": "Je sais que je cherche quelque chose dans la spiritualité.",
+    "2": "Je peux dire ce que j'y cherche.",
+    "3": "Je dis si je cherche du sens, de la paix, de l'appartenance ou une explication."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 20,
+   "actif": true,
+   "theme": "SPIRITUALITE"
+  },
+  {
+   "name": "Reconnaître ce qui me dépasse",
+   "code": "MON-54",
+   "description": "Je sais citer des moments où je me suis senti tout petit, ou relié à plus grand",
+   "enonces": {
+    "1": "Je sais qu'il existe des expériences qui me dépassent.",
+    "2": "Je peux citer un moment où je me suis senti relié à plus grand.",
+    "3": "J'en cite plusieurs, et je sais ce qui les provoque chez moi."
+   },
+   "difficulte": "Avancé",
+   "ordre": 30,
+   "actif": true,
+   "theme": "SPIRITUALITE"
+  },
+  {
+   "name": "Aborder les questions sans réponse",
+   "code": "MON-55",
+   "description": "Je peux rester sur les questions de fond sans les fuir ni les refermer trop vite",
+   "enonces": {
+    "1": "Je sais que certaines questions n'ont pas de réponse.",
+    "2": "Je reste parfois avec une question sans la refermer.",
+    "3": "Je peux tenir les questions de fond sans les fuir ni les refermer trop vite."
+   },
+   "difficulte": "Avancé",
+   "ordre": 40,
+   "actif": true,
+   "theme": "SPIRITUALITE"
+  },
+  {
+   "name": "Regarder la finitude",
+   "code": "MON-56",
+   "description": "J'ai déjà pensé à la mort autrement que comme une abstraction",
+   "enonces": {
+    "1": "Je sais que la mort est une abstraction pour moi.",
+    "2": "J'y ai déjà pensé concrètement, au moins une fois.",
+    "3": "J'ai regardé ma finitude autrement que comme une idée, et ça a changé mes priorités."
+   },
+   "difficulte": "Avancé",
+   "ordre": 50,
+   "actif": true,
+   "theme": "SPIRITUALITE"
+  },
+  {
+   "name": "Avoir une pratique régulière",
+   "code": "MON-57",
+   "description": "Il y a quelque chose que je fais, à une fréquence que je peux nommer, pour répondre à mon besoin de spiritualité",
+   "enonces": {
+    "1": "Je sais qu'une pratique demande de la régularité.",
+    "2": "J'ai une pratique, mais irrégulière.",
+    "3": "J'ai une pratique tenue à une fréquence que je peux nommer."
+   },
+   "difficulte": "Fondamental",
+   "ordre": 60,
+   "actif": true,
+   "theme": "SPIRITUALITE"
+  },
+  {
+   "name": "Servir plus grand que moi",
+   "code": "MON-58",
+   "description": "Je consacre du temps ou des moyens à autre chose qu'à moi",
+   "enonces": {
+    "1": "Je sais que je consacre peu de temps à autre chose qu'à moi.",
+    "2": "Je consacre parfois du temps ou des moyens à plus grand que moi.",
+    "3": "Je le fais régulièrement, et c'est inscrit dans ma vie."
+   },
+   "difficulte": "Avancé",
+   "ordre": 70,
+   "actif": true,
+   "theme": "SPIRITUALITE"
+  }
+ ],
+ "ressources": [
+  {
+   "name": "Ressource 1",
+   "type": [
+    "Film"
+   ],
+   "url": "https://www.youtube.com/watch?v=usiZcRzIlyQ",
+   "actif": true,
+   "themes": [],
+   "competences": []
+  },
+  {
+   "name": "test ressource",
+   "type": [
+    "Podcast"
+   ],
+   "url": "https://www.youtube.com/watch?v=usiZcRzIlyQ",
+   "actif": true,
+   "themes": [],
+   "competences": []
+  }
+ ],
+ "clients_exclus": "Les clients (Name, UUID) sont volontairement absents de ce fichier versionné : un UUID est le seul secret protégeant les données d un membre, et l historique Git conserve tout indéfiniment. Ils vivent dans un fichier séparé, hors dépôt."
+}
