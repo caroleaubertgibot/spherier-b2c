@@ -15,6 +15,15 @@
   to = "/.netlify/functions/referential"
   status = 200
 
+# Diagnostic protégé par le REFRESH_TOKEN : il dit quelle variable manque et ce que
+# Notion répond, sans jamais divulguer de valeur. Les autres fonctions renvoient un
+# message générique — nécessaire pour une API publique, mais qui rend une panne
+# indiagnosticable sans accès aux journaux.
+[[redirects]]
+  from = "/api/diagnostic"
+  to = "/.netlify/functions/diagnostic"
+  status = 200
+
 [[redirects]]
   from = "/api/refresh"
   to = "/.netlify/functions/refresh"
