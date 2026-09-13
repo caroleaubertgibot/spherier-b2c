@@ -1424,7 +1424,13 @@
   const R_ANNEAU = 38;   // rayon sur lequel les étoiles se répartissent
   const R_NOYAU = 17;    // rayon du noyau de la thématique
   const TRIM = 50;       // les traits de filiation s'arrêtent avant l'anneau d'étoiles
-  const DECALAGE_NOM = 56;
+  // Haut du nom de thématique, sous l'anneau. Le nom est accroché par son HAUT
+  // (dominant-baseline: hanging) et non par sa ligne de base : sa taille varie selon le
+  // lieu (20, 17 ou 17,5 unités, voir .theme-nom), et une ligne de base fixe faisait
+  // remonter les noms les plus grands. Dans le ciel, 14 noms touchaient leur étoile du
+  // bas dès qu'elle atteignait « J'incarne ». Ici : anneau (38) + plus grande étoile
+  // (5,8) + 5 d'air, quelle que soit la taille du texte.
+  const DECALAGE_NOM = 49;
 
   // Luminosité d'une étoile selon le niveau : 4 crans, de l'étoile éteinte (0) à
   // l'étoile pleine (3). Le niveau 0 n'est pas un palier nommé, c'est l'absence.
@@ -1546,7 +1552,7 @@
         <circle class="theme-noyau" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU}" fill="var(--night-deep)" stroke="${teinte}" stroke-opacity="${l.noyau}"/>
         <circle class="theme-lumiere" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU - 2.5}" fill="${teinte}" fill-opacity="${l.coeur}"/>
         ${etoiles}
-        <text class="theme-nom" x="${theme.x}" y="${theme.y + DECALAGE_NOM}">${echapper(theme.name)}</text>
+        <text class="theme-nom" dominant-baseline="hanging" x="${theme.x}" y="${theme.y + DECALAGE_NOM}">${echapper(theme.name)}</text>
       </g>`;
     }).join('');
 
