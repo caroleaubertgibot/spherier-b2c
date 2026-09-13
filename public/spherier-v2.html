@@ -966,7 +966,12 @@
   }
   /* Visé sur la seule constellation : un `svg` non qualifié étirait aussi les petits
      repères de 20 px qu'on dessine ailleurs dans la carte. */
-  .ciel-carte > svg.constellation { width: 100%; height: auto; display: block; }
+  /* `max-height: none` : le plafond de hauteur de .constellation (82vh) rétrécissait
+     les blocs les plus hauts dès que l'écran l'était peu — « Moi », 16 thématiques,
+     tombait à 15 px de libellé en 1366 × 768 quand « Moi et le monde » gardait 17 px.
+     Dans le ciel la largeur de chaque bloc est fixée d'après sa géométrie : sans ce
+     plafond les trois blocs dessinent à la même échelle, donc à la même taille. */
+  .ciel-carte > svg.constellation { width: 100%; height: auto; display: block; max-height: none; }
 
 
   /* Entrée de bloc : au premier jour, tout est éteint — c'est elle qui doit donner
