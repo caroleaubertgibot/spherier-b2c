@@ -130,45 +130,17 @@ const DIFFICULTES = [
 
 // --- Règles de progression --------------------------------------------------------
 //
-// NIVEAU_ACQUIS : le palier à partir duquel une compétence compte pour ouvrir la
-// thématique suivante. « J'expérimente », pas « J'incarne » : ouvrir doit rester
-// atteignable.
-//
 // MAX_CIBLES_MAINTENANT : plafond des compétences travaillées « ce mois ». Contrainte
-// pédagogique, appliquée par le SERVEUR autant que par l'interface.
+// pédagogique, appliquée par le SERVEUR autant que par l'interface. « Plus tard » n'a
+// pas de plafond.
 //
-// seuilDOuverture : combien de compétences d'une thématique source doivent atteindre
-// NIVEAU_ACQUIS pour ouvrir ce qu'elle nourrit.
-//
-//     min(SEUIL_MAXI, max(1, floor(n / 2)))
-//
-// La moitié, jamais zéro, jamais plus de SEUIL_MAXI. Le plancher évite qu'une
-// thématique très courte ouvre ses suites sans que rien n'ait été travaillé. Le
-// plafond répond au problème inverse, apparu avec le référentiel V7 : « Gestions des
-// conflits » compte 14 compétences, soit un seuil automatique de 7 — il aurait fallu
-// en acquérir sept pour ouvrir « Couple ».
-//
-// Le plafond touche CINQ thématiques du V7, et non deux comme envisagé au départ :
-// Gestions des conflits (7 → 4), puis les quatre à dix compétences — Croyances,
-// Polarités, Écoute, Parentalité (5 → 4).
-//
-// Une thématique peut en outre porter une propriété `Seuil` dans Notion, qui SURCHARGE
-// entièrement ce calcul. Le pilote du club ajuste ainsi une thématique sans
-// déploiement, comme il le fait déjà pour tout le reste du référentiel.
+// Il n'y a plus de règle d'ouverture : toute thématique est accessible dès le premier
+// jour. La lumière d'une thématique se calcule à partir de NIVEAU_MAX — voir
+// illumination-v2.js. Les propriétés Notion `Nourrit`, `Nourri par` et `Seuil` restent
+// en base ; `Seuil` n'est plus lu.
 const NIVEAU_MIN = 0;
 const NIVEAU_MAX = 3;
-const NIVEAU_ACQUIS = 2;
 const MAX_CIBLES_MAINTENANT = 3;
-
-const SEUIL_MAXI = 4;
-
-function seuilDOuverture(nombreDeCompetences, seuilImpose = null) {
-  // `Seuil` renseigné dans Notion : il fait foi, plafond compris — c'est le sens même
-  // d'une surcharge. Un zéro ou un négatif serait une faute de saisie qui ouvrirait
-  // tout : on garde le plancher à 1.
-  if (Number.isFinite(seuilImpose)) return Math.max(1, Math.round(seuilImpose));
-  return Math.min(SEUIL_MAXI, Math.max(1, Math.floor(nombreDeCompetences / 2)));
-}
 
 // --- Le ciel (page d'accueil desktop) ---------------------------------------------
 //
@@ -234,9 +206,6 @@ module.exports = {
   DIFFICULTES,
   NIVEAU_MIN,
   NIVEAU_MAX,
-  NIVEAU_ACQUIS,
   MAX_CIBLES_MAINTENANT,
-  SEUIL_MAXI,
-  seuilDOuverture,
   CIEL,
 };

@@ -12,8 +12,8 @@ function reponse(statusCode, payload) {
 
 // GET /api/state?uuid=<uuid v4>
 // Renvoie le dernier snapshot v2 du membre ET l'état calculé (niveaux complets et
-// ouverture des thématiques). Sans snapshot, `snapshot` vaut null et l'état calculé
-// décrit le point de départ : tout à 0, seules les racines ouvertes.
+// illumination des thématiques). Sans snapshot, `snapshot` vaut null et l'état
+// calculé décrit le point de départ : tout à 0, toutes les thématiques accessibles.
 exports.handler = async (event) => {
   if (event.httpMethod !== 'GET') {
     return reponse(405, { erreur: 'Méthode non autorisée, utilisez GET.' });
@@ -26,7 +26,7 @@ exports.handler = async (event) => {
 
   try {
     // Le référentiel est relu à chaque appel : c'est lui qui porte la structure, jamais
-    // le snapshot. L'ouverture se recalcule donc toujours sur le graphe à jour.
+    // le snapshot. L'illumination se recalcule donc toujours sur le référentiel à jour.
     // Les notes voyagent avec l'état : elles vivent hors des snapshots, mais le
     // navigateur en a besoin dès l'ouverture pour signaler les compétences annotées.
     const [referentiel, snapshot, notes] = await Promise.all([
