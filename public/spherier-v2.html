@@ -634,9 +634,9 @@
   .comp-nom { font-size: 17.5px; line-height: 1.4; }
   .comp-palier { font-family: 'Cormorant Garamond', serif; font-style: italic;
     font-size: 15.5px; color: var(--stone); white-space: nowrap; }
-  .comp-marques { display: flex; gap: 5px; align-items: center; margin-top: 3px; }
+  .comp-marques { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; margin-top: 3px; }
   .comp-marque { font-size: 12.5px; letter-spacing: .13em; text-transform: uppercase;
-    padding: 1px 7px; border-radius: 999px; border: 1px solid currentColor; }
+    padding: 1px 7px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
   .comp-marque-maintenant { color: var(--gold); }
   .comp-marque-plus-tard { color: var(--paper-dim); border-style: dashed; }
 
@@ -712,7 +712,7 @@
 
   /* PASTILLE DE DIFFICULTÉ */
   .pastille-diff {
-    display: inline-flex; align-items: center; gap: 6px;
+    display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
     font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
     padding: 3px 9px 3px 7px; border-radius: 999px;
     border: 1px solid color-mix(in srgb, var(--dc) 45%, transparent);
