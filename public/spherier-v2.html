@@ -297,8 +297,12 @@
     width: 100%;
     height: auto;
     /* La hauteur suit le viewBox, lui-même ajusté au contenu réellement dessiné :
-       chaque dimension occupe exactement son emprise, sans vide ni écrasement. */
-    max-height: min(82vh, 860px);
+       chaque dimension occupe exactement son emprise, sans vide ni écrasement.
+       AUCUN plafond de hauteur, nulle part. Un `max-height` en vh rétrécit les
+       dimensions les plus hautes sur les écrans peu hauts, et pas les autres : en
+       1366 × 768, « Moi » tombait à 12,8 px de libellé dans le détail contre 15,9 px
+       pour « Moi et le monde ». La taille est bornée par la LARGEUR (ECHELLE_MAXI) ;
+       une constellation plus haute que l'écran se lit en faisant défiler la page. */
   }
 
   .filiation {
@@ -966,12 +970,9 @@
   }
   /* Visé sur la seule constellation : un `svg` non qualifié étirait aussi les petits
      repères de 20 px qu'on dessine ailleurs dans la carte. */
-  /* `max-height: none` : le plafond de hauteur de .constellation (82vh) rétrécissait
-     les blocs les plus hauts dès que l'écran l'était peu — « Moi », 16 thématiques,
-     tombait à 15 px de libellé en 1366 × 768 quand « Moi et le monde » gardait 17 px.
-     Dans le ciel la largeur de chaque bloc est fixée d'après sa géométrie : sans ce
-     plafond les trois blocs dessinent à la même échelle, donc à la même taille. */
-  .ciel-carte > svg.constellation { width: 100%; height: auto; display: block; max-height: none; }
+  /* Sans plafond de hauteur (voir .constellation), les trois blocs dessinent à la même
+     échelle, donc à la même taille de libellé, quelle que soit la hauteur d'écran. */
+  .ciel-carte > svg.constellation { width: 100%; height: auto; display: block; }
 
 
   /* Entrée de bloc : au premier jour, tout est éteint — c'est elle qui doit donner
@@ -1037,10 +1038,6 @@
   }
 
   @media (max-width: 640px) {
-    /* Sur mobile la largeur est déjà la contrainte : plafonner aussi la hauteur
-       rapetissait les deux plus grandes constellations sous le seuil de lisibilité.
-       La page défile, une carte haute n'est pas un problème. */
-    .constellation { max-height: none; }
     .app { padding: 0 16px 60px; }
     .dimension-entete { padding: 16px 16px; gap: 14px; grid-template-columns: 28px 1fr auto; }
     .dimension-astre { width: 28px; height: 28px; }
