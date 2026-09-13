@@ -130,45 +130,17 @@ const DIFFICULTES = [
 
 // --- Règles de progression --------------------------------------------------------
 //
-// NIVEAU_ACQUIS : le palier à partir duquel une compétence compte pour ouvrir la
-// thématique suivante. « J'expérimente », pas « J'incarne » : ouvrir doit rester
-// atteignable.
-//
 // MAX_CIBLES_MAINTENANT : plafond des compétences travaillées « ce mois ». Contrainte
-// pédagogique, appliquée par le SERVEUR autant que par l'interface.
+// pédagogique, appliquée par le SERVEUR autant que par l'interface. « Plus tard » n'a
+// pas de plafond.
 //
-// seuilDOuverture : combien de compétences d'une thématique source doivent atteindre
-// NIVEAU_ACQUIS pour ouvrir ce qu'elle nourrit.
-//
-//     min(SEUIL_MAXI, max(1, floor(n / 2)))
-//
-// La moitié, jamais zéro, jamais plus de SEUIL_MAXI. Le plancher évite qu'une
-// thématique très courte ouvre ses suites sans que rien n'ait été travaillé. Le
-// plafond répond au problème inverse, apparu avec le référentiel V7 : « Gestions des
-// conflits » compte 14 compétences, soit un seuil automatique de 7 — il aurait fallu
-// en acquérir sept pour ouvrir « Couple ».
-//
-// Le plafond touche CINQ thématiques du V7, et non deux comme envisagé au départ :
-// Gestions des conflits (7 → 4), puis les quatre à dix compétences — Croyances,
-// Polarités, Écoute, Parentalité (5 → 4).
-//
-// Une thématique peut en outre porter une propriété `Seuil` dans Notion, qui SURCHARGE
-// entièrement ce calcul. Le pilote du club ajuste ainsi une thématique sans
-// déploiement, comme il le fait déjà pour tout le reste du référentiel.
+// Il n'y a plus de règle d'ouverture : toute thématique est accessible dès le premier
+// jour. La lumière d'une thématique se calcule à partir de NIVEAU_MAX — voir
+// illumination-v2.js. Les propriétés Notion `Nourrit`, `Nourri par` et `Seuil` restent
+// en base ; `Seuil` n'est plus lu.
 const NIVEAU_MIN = 0;
 const NIVEAU_MAX = 3;
-const NIVEAU_ACQUIS = 2;
 const MAX_CIBLES_MAINTENANT = 3;
-
-const SEUIL_MAXI = 4;
-
-function seuilDOuverture(nombreDeCompetences, seuilImpose = null) {
-  // `Seuil` renseigné dans Notion : il fait foi, plafond compris — c'est le sens même
-  // d'une surcharge. Un zéro ou un négatif serait une faute de saisie qui ouvrirait
-  // tout : on garde le plancher à 1.
-  if (Number.isFinite(seuilImpose)) return Math.max(1, Math.round(seuilImpose));
-  return Math.min(SEUIL_MAXI, Math.max(1, Math.floor(nombreDeCompetences / 2)));
-}
 
 // --- Le ciel (page d'accueil desktop) ---------------------------------------------
 //
@@ -187,28 +159,28 @@ function seuilDOuverture(nombreDeCompetences, seuilImpose = null) {
 // MESURÉES sur le rendu réel, et à remesurer si la police de la constellation ou les
 // positions changent.
 //
-// Remesurées sur le référentiel V7, où « Moi » est devenu le bloc le plus large —
-// 569 px contre 362 et 457 — ce qui laisse 336 px de chaque côté sur une piste de 1240.
+// Remesurées après l'agrandissement de la police (libellés du ciel de 12,7 à 17 px,
+// en-têtes de 24 à 27,5 px), sur le référentiel V7 et une piste de 1240 px.
 //
-// CE QUI CONTRAINT CES VALEURS. L'en-tête d'un bloc est désormais COLLANT : d'une
-// voisine à cheval, il vient se caler au bord au lieu de sortir du champ. Mais il ne
-// peut pas être plus étroit que lui-même — il mesure 176 px et réclame donc 204 px
-// d'amorce, marges comprises. En deçà, il est tronqué malgré le collage.
+// CE QUI CONTRAINT CES VALEURS. L'en-tête d'un bloc est COLLANT : d'une voisine à
+// cheval, il vient se caler au bord au lieu de sortir du champ. Mais il ne peut pas
+// être plus étroit que lui-même — il mesure désormais 198 px. Avec 130 px de fil à
+// gauche, l'amorce de « Moi et les autres » tombait à 205 px et son en-tête était
+// tronqué.
 //
-// Ce plancher fixe le plafond du fil : 132 px à gauche, où les positions du V7 ne
-// laissent aucun palier entre quatre thématiques (146 px d'amorce) et six (193 px).
-// Montrer l'en-tête de « Moi et les autres » impose donc d'en montrer six.
-//
-// D'où 130 / 90 : six thématiques à gauche, cinq à droite, et les trois noms lisibles
-// d'un coup. C'est le meilleur compromis mesuré entre la cible de quatre ou cinq
-// thématiques par côté et la lisibilité des voisines.
+// Balayage mesuré de toutes les paires, de 5 en 5 px, en exigeant les trois en-têtes
+// entiers et « Moi » entier :
+//   à gauche, six thématiques entières pour un fil de 85 à 125 px ;
+//   à droite, cinq thématiques entières pour un fil de 40 à 65 px.
+// D'où 105 / 55, le milieu de chaque plage : 6 · 16 · 5, les trois noms lisibles, et
+// une marge de 20 px de part et d'autre avant de perdre ou gagner une thématique.
 //
 // Une instance qui n'aurait pas trois dimensions laisse `ordre` et `centre` à null :
 // le ciel retombe alors sur l'ordre canonique et centre le premier bloc.
 const CIEL = {
   ordre: ['AUT', 'MOI', 'MON'],
   centre: 'MOI',
-  largeursFil: { AUT: 130, MON: 90 },
+  largeursFil: { AUT: 105, MON: 55 },
 };
 
 // --- Journal de démarrage ---------------------------------------------------------
@@ -234,9 +206,6 @@ module.exports = {
   DIFFICULTES,
   NIVEAU_MIN,
   NIVEAU_MAX,
-  NIVEAU_ACQUIS,
   MAX_CIBLES_MAINTENANT,
-  SEUIL_MAXI,
-  seuilDOuverture,
   CIEL,
 };

@@ -102,14 +102,14 @@
   }
   .brand-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 17px;
+    font-size: 19.5px;
     font-style: italic;
     letter-spacing: 0.12em;
     line-height: 1.1;
   }
   .brand-text small {
     display: block;
-    font-size: 9px;
+    font-size: 11.5px;
     color: var(--stone);
     margin-top: 4px;
     letter-spacing: 0.4em;
@@ -119,12 +119,15 @@
   .header-etat {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 13px;
+    font-size: 17px;
     color: var(--paper-dim);
     display: flex;
     align-items: center;
     gap: 10px;
   }
+  /* La pastille et son texte forment un seul bloc : sur mobile, où l'en-tête passe
+     à la ligne, la pastille restait sinon seule au bout des boutons. */
+  .header-statut { display: inline-flex; align-items: center; gap: 10px; }
   .header-etat .puce {
     width: 8px; height: 8px; border-radius: 50%;
     background: var(--gold);
@@ -138,7 +141,7 @@
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-style: italic;
-    font-size: clamp(24px, 4vw, 32px);
+    font-size: clamp(28px, 4.6vw, 37px);
     letter-spacing: 0.04em;
   }
   .titre h1::before, .titre h1::after {
@@ -149,7 +152,7 @@
     vertical-align: middle;
   }
   .titre p {
-    font-size: 13.5px;
+    font-size: 17.5px;
     color: var(--paper-dim);
     max-width: 520px;
     margin: 14px auto 0;
@@ -162,18 +165,18 @@
     padding: 50px 20px;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 15px;
+    font-size: 19.5px;
     color: var(--paper-dim);
   }
   .message[hidden] { display: none; }
-  .message .mark { display: block; font-size: 34px; color: var(--gold); opacity: 0.5; margin-bottom: 16px; }
+  .message .mark { display: block; font-size: 39px; color: var(--gold); opacity: 0.5; margin-bottom: 16px; }
   .message.erreur .mark { color: #c4523e; }
   .message small {
     display: block;
     margin-top: 12px;
     font-family: 'Inter Tight', sans-serif;
     font-style: normal;
-    font-size: 12.5px;
+    font-size: 16.5px;
     color: var(--stone);
     max-width: 420px;
     margin-left: auto;
@@ -223,21 +226,21 @@
   .dimension-nom {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
-    font-size: 21px;
+    font-size: 24px;
     letter-spacing: 0.02em;
     color: var(--paper);
   }
   .dimension-compte {
     display: block;
     font-family: 'Inter Tight', sans-serif;
-    font-size: 10.5px;
+    font-size: 13.5px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--stone);
     margin-top: 5px;
   }
   .dimension-chevron {
-    font-size: 12px;
+    font-size: 15.5px;
     color: var(--stone);
     transition: transform 0.3s ease, color 0.3s ease;
   }
@@ -269,7 +272,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
   .dimension-definition {
-    font-size: 13.5px;
+    font-size: 17.5px;
     line-height: 1.7;
     color: var(--paper-dim);
     padding-top: 18px;
@@ -294,32 +297,43 @@
     width: 100%;
     height: auto;
     /* La hauteur suit le viewBox, lui-même ajusté au contenu réellement dessiné :
-       chaque dimension occupe exactement son emprise, sans vide ni écrasement. */
-    max-height: min(82vh, 860px);
+       chaque dimension occupe exactement son emprise, sans vide ni écrasement.
+       AUCUN plafond de hauteur, nulle part. Un `max-height` en vh rétrécit les
+       dimensions les plus hautes sur les écrans peu hauts, et pas les autres : en
+       1366 × 768, « Moi » tombait à 12,8 px de libellé dans le détail contre 15,9 px
+       pour « Moi et le monde ». La taille est bornée par la LARGEUR (ECHELLE_MAXI) ;
+       une constellation plus haute que l'écran se lit en faisant défiler la page. */
   }
 
+  /* L'opacité d'un trait est posée en attribut par le rendu (voir opaciteTrait) : pas
+     de stroke-opacity ici, une règle CSS l'emporterait sur l'attribut. */
   .filiation {
     stroke: var(--paper);
-    stroke-opacity: 0.20;
     stroke-width: 1.2;
   }
-  .filiation-verrouillee { stroke-opacity: 0.09; stroke-dasharray: 3 6; }
 
-  .theme-halo { pointer-events: none; }
+  .theme-halo, .theme-lumiere { pointer-events: none; }
   .theme-noyau { stroke-width: 1.6; }
   .theme-nom {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
-    /* 15 unités et non 13.5 : les positions resserrées ont laissé de la marge entre
-       libellés voisins (137 unités au plus juste, sur « Moi et les autres »), qu'on
-       dépense en lisibilité. Ne concerne que la constellation. */
-    font-size: 15px;
+    /* Taille en UNITÉS du SVG : à l'écran elle est multipliée par l'échelle de la
+       carte, qui n'est pas la même partout. Le ciel et le mobile dessinent à 0.85
+       (ECHELLE_MINI), le détail desktop plafonne à 1.15 (ECHELLE_MAXI). Une seule
+       valeur donnait donc 12.7 px dans le ciel et 17.2 px dans le détail.
+       On règle chaque lieu pour sa taille d'écran visée :
+         ciel desktop    20 u × 0.85 ≈ 17 px
+         détail desktop  17 u × 1.15 ≈ 19.5 px
+         mobile        17.5 u × 0.85 ≈ 15 px
+       Ces tailles pèsent sur la largeur des constellations, donc sur LARGEURS_FIL. */
+    font-size: 20px;
     text-anchor: middle;
     fill: var(--paper);
   }
-  .theme-verrouille .theme-nom { fill: var(--stone); }
-  .theme-verrouille .theme-noyau { stroke-dasharray: 3 3; }
-  .theme-cadenas { font-size: 10px; text-anchor: middle; fill: var(--stone); }
+  .constellation-zone .theme-nom { font-size: 17px; }
+  @media (max-width: 640px) {
+    .constellation-zone .theme-nom { font-size: 17.5px; }
+  }
 
   .etoile { pointer-events: none; }
 
@@ -332,7 +346,7 @@
     margin-top: 6px;
     padding-top: 14px;
     border-top: 1px solid var(--line-faint);
-    font-size: 11.5px;
+    font-size: 15px;
     color: var(--stone);
   }
   .constellation-legende span {
@@ -382,22 +396,22 @@
   .panneau-tete { padding: 18px 26px 16px; border-bottom: 1px solid var(--line-faint); flex-shrink: 0; }
   .panneau-fil {
     display: flex; align-items: center; gap: 8px;
-    font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-size: 13.5px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--stone); margin-bottom: 10px;
   }
   .panneau-fil b { color: var(--teinte-p); font-weight: 500; }
   .panneau-titre {
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 500; font-size: 24px; line-height: 1.2;
+    font-weight: 500; font-size: 27.5px; line-height: 1.2;
     text-wrap: balance;
   }
-  .panneau-def { font-size: 13.5px; line-height: 1.65; color: var(--paper-dim); margin-top: 8px; }
+  .panneau-def { font-size: 17.5px; line-height: 1.65; color: var(--paper-dim); margin-top: 8px; }
 
   .panneau-fermer {
     position: absolute; top: 14px; right: 18px;
     width: 34px; height: 34px; border-radius: 50%;
     border: 1px solid var(--line-faint); background: rgba(240,235,224,0.04);
-    color: var(--paper-dim); font-size: 15px; line-height: 1; cursor: pointer;
+    color: var(--paper-dim); font-size: 19.5px; line-height: 1; cursor: pointer;
     transition: all 0.25s ease;
   }
   .panneau-fermer:hover { border-color: var(--line); color: var(--paper); }
@@ -405,7 +419,7 @@
   .panneau-corps { overflow-y: auto; padding: 20px 26px 30px; -webkit-overflow-scrolling: touch; }
   .panneau-section + .panneau-section { margin-top: 26px; }
   .panneau-label {
-    font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase;
+    font-size: 13px; letter-spacing: 0.26em; text-transform: uppercase;
     color: var(--stone); margin-bottom: 14px;
   }
 
@@ -435,23 +449,23 @@
   .marche-astre svg { display: block; overflow: visible; }
   .marche-palier {
     font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 14px;
+    font-style: italic; font-size: 18px;
     color: var(--paper-dim);
     display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap;
   }
   .marche-actuelle .marche-palier { color: var(--paper); }
   .marche-vous {
     font-family: 'Inter Tight', sans-serif; font-style: normal;
-    font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--teinte-p);
     border: 1px solid color-mix(in srgb, var(--teinte-p) 45%, transparent);
     border-radius: 999px; padding: 2px 8px;
   }
-  .marche-enonce { font-size: 13.5px; line-height: 1.6; color: var(--paper-dim); margin-top: 6px; }
+  .marche-enonce { font-size: 17.5px; line-height: 1.6; color: var(--paper-dim); margin-top: 6px; }
   .marche-actuelle .marche-enonce { color: var(--paper); }
 
   .escalier-note {
-    margin-top: 12px; font-size: 12.5px; line-height: 1.6; color: var(--stone);
+    margin-top: 12px; font-size: 16.5px; line-height: 1.6; color: var(--stone);
     font-family: 'Cormorant Garamond', serif; font-style: italic;
   }
 
@@ -466,14 +480,14 @@
     transition: border-color 0.25s ease;
   }
   .ressource:hover { border-color: var(--teinte-p); }
-  .ressource-titre { font-size: 14px; font-weight: 500; }
+  .ressource-titre { font-size: 18px; font-weight: 500; }
   .ressource-meta {
-    font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 13.5px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--stone); margin-top: 4px;
   }
   .ressources-groupe + .ressources-groupe { margin-top: 18px; }
   .ressources-sous-label {
-    font-size: 11.5px; color: var(--stone); margin-bottom: 10px;
+    font-size: 15px; color: var(--stone); margin-bottom: 10px;
     font-family: 'Cormorant Garamond', serif; font-style: italic;
   }
 
@@ -492,7 +506,9 @@
 
 
   /* ACTIONS DU PANNEAU */
-  .marche { text-align: left; width: 100%; font: inherit; color: inherit; cursor: pointer;
+  /* Pas de `width: 100%` : ajouté au retrait des marches 2 et 3, il poussait la
+     troisième hors du panneau sur téléphone. L'étirement de la colonne flex suffit. */
+  .marche { text-align: left; font: inherit; color: inherit; cursor: pointer;
     transition: border-color .2s ease, background .2s ease; }
   .marche:hover { border-color: var(--line); }
   .marche:focus-visible { outline: 2px solid var(--teinte-p); outline-offset: 2px; }
@@ -503,7 +519,7 @@
     flex: 1 1 180px;
     display: flex; align-items: center; justify-content: center; gap: 9px;
     padding: 13px 16px; border-radius: 11px; cursor: pointer;
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14.5px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px;
     border: 1px solid var(--line-faint);
     background: rgba(240,235,224,.03); color: var(--paper-dim);
     transition: all .25s ease;
@@ -519,26 +535,26 @@
     border-color: var(--paper-dim); background: rgba(240,235,224,.07); color: var(--paper);
   }
   .cible-plus-tard.active .pastille { border-style: dashed; }
-  .cible-raison { font-size: 12.5px; color: var(--stone); margin-top: 10px; line-height: 1.55;
+  .cible-raison { font-size: 16.5px; color: var(--stone); margin-top: 10px; line-height: 1.55;
     font-family: 'Cormorant Garamond', serif; font-style: italic; }
 
   /* REMPLACEMENT D'UNE CIBLE */
   .remplacement { margin-top: 12px; padding: 15px 16px; border: 1px solid var(--gold);
     border-radius: 12px; background: rgba(201,166,97,.07); }
-  .remplacement p { font-size: 13px; line-height: 1.6; color: var(--paper-dim); margin-bottom: 12px; }
+  .remplacement p { font-size: 17px; line-height: 1.6; color: var(--paper-dim); margin-bottom: 12px; }
   .remplacement p b { color: var(--paper); font-weight: 500; }
   .remplacement-liste { display: flex; flex-direction: column; gap: 7px; }
   .remplacement-item {
     display: block; width: 100%; text-align: left; cursor: pointer;
     padding: 11px 14px; border-radius: 9px;
     border: 1px solid var(--line-faint); background: rgba(240,235,224,.03);
-    color: var(--paper); font: inherit; font-size: 13.5px;
+    color: var(--paper); font: inherit; font-size: 17.5px;
     transition: all .2s ease;
   }
   .remplacement-item:hover { border-color: var(--gold); }
-  .remplacement-item span { display: block; font-size: 11px; color: var(--stone); margin-top: 3px; }
+  .remplacement-item span { display: block; font-size: 14.5px; color: var(--stone); margin-top: 3px; }
   .remplacement-annuler { margin-top: 10px; background: none; border: none; cursor: pointer;
-    color: var(--stone); font: inherit; font-size: 12.5px; text-decoration: underline; padding: 0; }
+    color: var(--stone); font: inherit; font-size: 16.5px; text-decoration: underline; padding: 0; }
 
   /* BARRE DE SAUVEGARDE */
   .barre-sauvegarde {
@@ -550,13 +566,13 @@
     transform: translateY(110%); transition: transform .3s cubic-bezier(.2,.8,.2,1);
   }
   .barre-sauvegarde.visible { transform: translateY(0); }
-  .barre-texte { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13.5px;
+  .barre-texte { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17.5px;
     color: var(--paper-dim); min-width: 0; }
   .barre-texte b { color: var(--paper); font-weight: 500; font-style: normal; }
   .barre-actions { display: flex; gap: 9px; flex-shrink: 0; }
   .btn-annuler, .btn-enregistrer {
     padding: 9px 18px; border-radius: 999px; cursor: pointer;
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13.5px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17.5px;
     transition: all .25s ease;
   }
   .btn-annuler { border: 1px solid var(--line-faint); background: none; color: var(--paper-dim); }
@@ -570,7 +586,7 @@
     top: 14px; z-index: 60; max-width: min(560px, calc(100vw - 28px));
     padding: 12px 20px; border-radius: 12px;
     background: #0d1320; border: 1px solid var(--line);
-    font-size: 13px; line-height: 1.55; color: var(--paper-dim);
+    font-size: 17px; line-height: 1.55; color: var(--paper-dim);
     opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease;
     box-shadow: 0 14px 40px rgba(0,0,0,.5);
   }
@@ -579,27 +595,29 @@
   .bandeau.echec { border-color: #c4523e; color: #e8a08f; }
   .bandeau b { display: block; color: inherit; margin-bottom: 3px; font-weight: 500; }
   .bandeau button { margin-top: 9px; background: none; border: 1px solid currentColor;
-    color: inherit; font: inherit; font-size: 12.5px; padding: 5px 13px; border-radius: 999px; cursor: pointer; }
+    color: inherit; font: inherit; font-size: 16.5px; padding: 5px 13px; border-radius: 999px; cursor: pointer; }
 
 
-  /* THÉMATIQUE : cliquable, verrouillée comprise — c'est ce qui fait du verrou un
-     horizon plutôt qu'un mur. */
+  /* THÉMATIQUE : toujours cliquable, toujours accessible. */
   .theme { cursor: pointer; }
   .theme:focus-visible { outline: none; }
   .theme:focus-visible .theme-noyau { stroke: var(--gold-bright); stroke-width: 2.4; }
   .theme:hover .theme-noyau { stroke-width: 2.4; }
 
-  /* CONDITION D'OUVERTURE */
-  .horizon {
-    display: flex; gap: 13px; align-items: flex-start;
-    padding: 15px 17px; margin-top: 4px;
-    border: 1px solid rgba(240,235,224,.16); border-radius: 12px;
-    background: rgba(240,235,224,.035);
+  /* LUMIÈRE ET PARCOURS D'UNE THÉMATIQUE
+     La jauge dit la même chose que le cœur du nœud dans la carte, sans chiffre : un
+     pourcentage se lirait comme une note. Le parcours reprend les traits `Nourrit`
+     en mots — une indication, plus une condition. */
+  .eclat-jauge {
+    height: 6px; border-radius: 3px; overflow: hidden;
+    background: rgba(240,235,224,.07); border: 1px solid var(--line-faint);
   }
-  .horizon-marque { flex-shrink: 0; margin-top: 1px; }
-  .horizon-texte { font-size: 13.5px; line-height: 1.65; color: var(--paper-dim); }
-  .horizon-texte b { display: block; color: var(--paper); font-weight: 500;
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; margin-bottom: 5px; }
+  .eclat-jauge i { display: block; height: 100%; border-radius: 3px;
+    background: var(--teinte-p); box-shadow: 0 0 10px var(--teinte-p); }
+  .eclat-texte { margin-top: 9px; font-size: 16.5px; line-height: 1.55; color: var(--stone);
+    font-family: 'Cormorant Garamond', serif; font-style: italic; }
+  .eclat-parcours { margin-top: 12px; font-size: 16.5px; line-height: 1.6; color: var(--paper-dim); }
+  .eclat-parcours b { color: var(--paper); font-weight: 500; }
 
   /* LISTE DES COMPÉTENCES D'UNE THÉMATIQUE */
   .liste-comp { display: flex; flex-direction: column; gap: 7px; }
@@ -613,18 +631,18 @@
   .comp-item:hover { border-color: var(--line); }
   .comp-item:focus-visible { outline: 2px solid var(--teinte-p); outline-offset: 2px; }
   .comp-astre { display: flex; align-items: center; justify-content: center; }
-  .comp-nom { font-size: 13.5px; line-height: 1.4; }
+  .comp-nom { font-size: 17.5px; line-height: 1.4; }
   .comp-palier { font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 12px; color: var(--stone); white-space: nowrap; }
-  .comp-marques { display: flex; gap: 5px; align-items: center; margin-top: 3px; }
-  .comp-marque { font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase;
-    padding: 1px 7px; border-radius: 999px; border: 1px solid currentColor; }
+    font-size: 15.5px; color: var(--stone); white-space: nowrap; }
+  .comp-marques { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; margin-top: 3px; }
+  .comp-marque { font-size: 12.5px; letter-spacing: .13em; text-transform: uppercase;
+    padding: 1px 7px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
   .comp-marque-maintenant { color: var(--gold); }
   .comp-marque-plus-tard { color: var(--paper-dim); border-style: dashed; }
 
   .panneau-retour {
     background: none; border: none; cursor: pointer; padding: 0;
-    color: var(--teinte-p); font: inherit; font-size: 12.5px;
+    color: var(--teinte-p); font: inherit; font-size: 16.5px;
     display: inline-flex; align-items: center; gap: 7px; margin-bottom: 11px;
   }
   .panneau-retour:hover { text-decoration: underline; }
@@ -634,7 +652,7 @@
     flex: 1 1 240px; min-width: 0;
     padding: 9px 15px; border-radius: 999px;
     border: 1px solid var(--line-faint); background: rgba(240,235,224,.04);
-    color: var(--paper); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13.5px;
+    color: var(--paper); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17.5px;
     outline: none; transition: border-color .25s ease;
   }
   .barre-libelle::placeholder { color: var(--stone); }
@@ -642,7 +660,7 @@
   .dernier-point {
     text-align: center; margin-top: 10px;
     font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 12.5px; color: var(--stone);
+    font-size: 16.5px; color: var(--stone);
   }
   .dernier-point[hidden] { display: none; }
 
@@ -652,18 +670,18 @@
     display: inline-flex; align-items: center; gap: 9px;
     padding: 8px 16px; border-radius: 999px; cursor: pointer;
     border: 1px solid var(--line-faint); background: rgba(240,235,224,.04);
-    color: var(--paper-dim); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
+    color: var(--paper-dim); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px;
     transition: all .25s ease;
   }
   .btn-mois:hover { border-color: var(--gold); color: var(--gold-bright); }
   .btn-mois .compte { font-style: normal; font-family: 'Inter Tight', sans-serif;
-    font-size: 10.5px; letter-spacing: .08em; color: var(--gold);
+    font-size: 13.5px; letter-spacing: .08em; color: var(--gold);
     border: 1px solid rgba(201,166,97,.45); border-radius: 999px; padding: 1px 8px; }
   .btn-mois[hidden] { display: none; }
 
   /* PANNEAU DES SÉLECTIONS */
   .sel-groupe + .sel-groupe { margin-top: 22px; }
-  .sel-dim { font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  .sel-dim { font-size: 13px; letter-spacing: .2em; text-transform: uppercase;
     color: var(--stone); margin: 16px 0 9px; display: flex; align-items: center; gap: 8px; }
   .sel-dim i { width: 8px; height: 8px; border-radius: 50%; background: var(--h); flex-shrink: 0; }
   .sel-item {
@@ -673,37 +691,36 @@
   }
   .sel-item.cible { border-color: rgba(201,166,97,.4); background: rgba(201,166,97,.06); }
   .sel-nom { background: none; border: none; padding: 0; cursor: pointer; text-align: left;
-    font: inherit; font-size: 13.5px; color: var(--paper); line-height: 1.4; }
+    font: inherit; font-size: 17.5px; color: var(--paper); line-height: 1.4; }
   .sel-nom:hover { text-decoration: underline; }
-  .sel-nom small { display: block; font-size: 11px; color: var(--stone); margin-top: 3px; }
+  .sel-nom small { display: block; font-size: 14.5px; color: var(--stone); margin-top: 3px; }
   .sel-etat { font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 12px; color: var(--stone); white-space: nowrap; text-align: right; }
-  .sel-verrou { color: var(--stone); }
+    font-size: 15.5px; color: var(--stone); white-space: nowrap; text-align: right; }
   .sel-promouvoir {
     grid-column: 1 / -1; justify-self: start;
     background: none; border: 1px solid rgba(201,166,97,.4); border-radius: 999px;
     color: var(--gold); font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 12.5px; padding: 5px 13px; cursor: pointer; transition: all .2s ease;
+    font-size: 16.5px; padding: 5px 13px; cursor: pointer; transition: all .2s ease;
   }
   .sel-promouvoir:hover { background: rgba(201,166,97,.16); color: var(--gold-bright); }
   .sel-vide { font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 13px; line-height: 1.65; color: var(--stone); }
-  .sel-rappel { font-size: 12.5px; color: var(--stone); margin-top: 14px;
+    font-size: 17px; line-height: 1.65; color: var(--stone); }
+  .sel-rappel { font-size: 16.5px; color: var(--stone); margin-top: 14px;
     padding-top: 13px; border-top: 1px solid var(--line-faint);
     font-family: 'Cormorant Garamond', serif; font-style: italic; }
 
 
   /* PASTILLE DE DIFFICULTÉ */
   .pastille-diff {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+    font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
     padding: 3px 9px 3px 7px; border-radius: 999px;
     border: 1px solid color-mix(in srgb, var(--dc) 45%, transparent);
     color: var(--dc); white-space: nowrap;
   }
   .pastille-diff i { width: 6px; height: 6px; border-radius: 50%; background: var(--dc); flex-shrink: 0; }
   .panneau-diff { margin-top: 12px; }
-  .comp-item .pastille-diff { font-size: 9px; padding: 2px 7px 2px 6px; }
+  .comp-item .pastille-diff { font-size: 11.5px; padding: 2px 7px 2px 6px; }
 
 
   /* M'ÉVALUER — parcours compétence par compétence.
@@ -711,19 +728,19 @@
   .situer { display: flex; flex-direction: column; min-height: 0; }
   .situer-progres {
     display: flex; align-items: center; gap: 12px;
-    padding: 0 0 14px; font-size: 12px; color: var(--stone);
+    padding: 0 0 14px; font-size: 15.5px; color: var(--stone);
   }
   .situer-jauge { flex: 1; height: 3px; border-radius: 2px; background: var(--line-faint); overflow: hidden; }
   .situer-jauge i { display: block; height: 100%; background: var(--teinte-p); transition: width .3s ease; }
   .situer-compte { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-  .situer-fil { font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--stone); }
+  .situer-fil { font-size: 13.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--stone); }
   .situer-fil b { color: var(--teinte-p); font-weight: 500; }
   .situer-nom {
     font-family: 'Cormorant Garamond', serif; font-weight: 500;
-    font-size: 23px; line-height: 1.2; margin: 8px 0 6px; text-wrap: balance;
+    font-size: 26.5px; line-height: 1.2; margin: 8px 0 6px; text-wrap: balance;
   }
-  .situer-def { font-size: 13.5px; line-height: 1.65; color: var(--paper-dim); }
+  .situer-def { font-size: 17.5px; line-height: 1.65; color: var(--paper-dim); }
 
   .situer-pied {
     display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
@@ -731,25 +748,25 @@
   }
   .situer-btn {
     padding: 10px 20px; border-radius: 999px; cursor: pointer;
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px;
     border: 1px solid var(--line-faint); background: rgba(240,235,224,.03); color: var(--paper-dim);
     transition: all .25s ease;
   }
   .situer-btn:hover:not(:disabled) { border-color: var(--line); color: var(--paper); }
   .situer-btn:disabled { opacity: .4; cursor: default; }
   .situer-passer { margin-left: auto; }
-  .situer-astuce { width: 100%; font-size: 12px; color: var(--stone);
+  .situer-astuce { width: 100%; font-size: 15.5px; color: var(--stone);
     font-family: 'Cormorant Garamond', serif; font-style: italic; }
 
   /* Fin de bloc : le moment où l'on propose d'enregistrer, pour pouvoir s'y reprendre. */
   .situer-bilan { text-align: center; padding: 12px 0 4px; }
-  .situer-bilan .mark { display: block; font-size: 34px; color: var(--gold); opacity: .55; margin-bottom: 14px; }
-  .situer-bilan h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 21px; margin-bottom: 10px; }
-  .situer-bilan p { font-size: 13.5px; line-height: 1.65; color: var(--paper-dim); max-width: 46ch; margin: 0 auto; }
+  .situer-bilan .mark { display: block; font-size: 39px; color: var(--gold); opacity: .55; margin-bottom: 14px; }
+  .situer-bilan h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 24px; margin-bottom: 10px; }
+  .situer-bilan p { font-size: 17.5px; line-height: 1.65; color: var(--paper-dim); max-width: 46ch; margin: 0 auto; }
   .situer-bilan-chiffres { display: flex; justify-content: center; gap: 28px; margin: 20px 0 6px; }
   .situer-bilan-chiffres div { text-align: center; }
-  .situer-bilan-chiffres dt { font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--stone); }
-  .situer-bilan-chiffres dd { font-family: 'Cormorant Garamond', serif; font-size: 26px; margin-top: 3px;
+  .situer-bilan-chiffres dt { font-size: 12.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--stone); }
+  .situer-bilan-chiffres dd { font-family: 'Cormorant Garamond', serif; font-size: 30px; margin-top: 3px;
     font-variant-numeric: tabular-nums; }
 
   /* Bouton d'entrée depuis une dimension. */
@@ -758,12 +775,12 @@
     padding: 9px 18px; border-radius: 999px; cursor: pointer;
     border: 1px solid color-mix(in srgb, var(--teinte) 45%, transparent);
     background: color-mix(in srgb, var(--teinte) 10%, transparent);
-    color: var(--paper); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13.5px;
+    color: var(--paper); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17.5px;
     transition: all .25s ease;
   }
   .dimension-situer:hover { background: color-mix(in srgb, var(--teinte) 20%, transparent); }
   .dimension-situer small { font-style: normal; font-family: 'Inter Tight', sans-serif;
-    font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--stone); }
+    font-size: 13.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--stone); }
 
 
   /* NOTE PERSONNELLE
@@ -774,10 +791,10 @@
     display: flex; align-items: center; gap: 10px; width: 100%;
     background: none; border: none; padding: 0; cursor: pointer;
     color: var(--stone); font: inherit;
-    font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
+    font-size: 13px; letter-spacing: .26em; text-transform: uppercase;
   }
   .note-entete:hover { color: var(--paper-dim); }
-  .note-entete .chev { margin-left: auto; font-size: 11px; transition: transform .25s ease; letter-spacing: 0; }
+  .note-entete .chev { margin-left: auto; font-size: 14.5px; transition: transform .25s ease; letter-spacing: 0; }
   .note-bloc.ouverte .note-entete .chev { transform: rotate(180deg); }
   .note-marque {
     width: 6px; height: 6px; border-radius: 50%; background: var(--teinte-p);
@@ -790,7 +807,7 @@
     width: 100%; min-height: 108px; resize: vertical;
     padding: 13px 15px; border-radius: 11px;
     border: 1px solid var(--line-faint); background: rgba(240,235,224,.03);
-    color: var(--paper); font-family: 'Inter Tight', sans-serif; font-size: 13.5px; line-height: 1.6;
+    color: var(--paper); font-family: 'Inter Tight', sans-serif; font-size: 17.5px; line-height: 1.6;
     outline: none; transition: border-color .25s ease;
   }
   .note-champ::placeholder { color: var(--stone); }
@@ -798,7 +815,7 @@
 
   .note-pied { display: flex; align-items: center; gap: 12px; margin-top: 9px; flex-wrap: wrap; }
   .note-etat {
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12.5px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16.5px;
     color: var(--stone); display: inline-flex; align-items: center; gap: 7px;
   }
   .note-etat.encours { color: var(--paper-dim); }
@@ -808,21 +825,21 @@
   .note-btn {
     margin-left: auto; padding: 7px 15px; border-radius: 999px; cursor: pointer;
     border: 1px solid var(--line-faint); background: rgba(240,235,224,.03); color: var(--paper-dim);
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px;
     transition: all .25s ease;
   }
   .note-btn:hover:not(:disabled) { border-color: var(--line); color: var(--paper); }
   .note-btn:disabled { opacity: .4; cursor: default; }
-  .note-compteur { font-size: 11px; color: var(--stone); font-variant-numeric: tabular-nums; }
+  .note-compteur { font-size: 14.5px; color: var(--stone); font-variant-numeric: tabular-nums; }
 
   /* Signalement d'une compétence annotée, partout où elle apparaît en liste. */
   .marque-note {
     display: inline-flex; align-items: center; gap: 5px;
-    font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase;
+    font-size: 12.5px; letter-spacing: .13em; text-transform: uppercase;
     color: var(--paper-dim); border: 1px solid var(--line-faint);
     border-radius: 999px; padding: 1px 8px 1px 6px;
   }
-  .marque-note::before { content: '✎'; font-size: 10px; letter-spacing: 0; }
+  .marque-note::before { content: '✎'; font-size: 13px; letter-spacing: 0; }
 
 
   /* TABLEAU DE SYNTHÈSE
@@ -833,7 +850,7 @@
   .syn-filtre {
     padding: 6px 13px; border-radius: 999px; cursor: pointer;
     border: 1px solid var(--line-faint); background: rgba(240,235,224,.03);
-    color: var(--paper-dim); font: inherit; font-size: 12px;
+    color: var(--paper-dim); font: inherit; font-size: 15.5px;
     transition: all .2s ease;
   }
   .syn-filtre:hover { border-color: var(--line); color: var(--paper); }
@@ -843,7 +860,7 @@
 
   .syn-action { margin-top: 12px; }
   .syn-vide { font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 13.5px; color: var(--stone); padding: 22px 2px; }
+    font-size: 17.5px; color: var(--stone); padding: 22px 2px; }
 
   .syn-dim + .syn-dim { margin-top: 10px; }
   .syn-ligne {
@@ -855,10 +872,10 @@
   .syn-ligne:hover { border-color: var(--line); }
   .syn-dim > .syn-ligne { border-color: color-mix(in srgb, var(--h) 35%, transparent);
     background: color-mix(in srgb, var(--h) 7%, transparent); }
-  .syn-nom { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 16px; }
-  .syn-dim > .syn-ligne .syn-nom { font-size: 18px; }
-  .syn-compte { font-size: 11.5px; color: var(--stone); font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .syn-chev { font-size: 11px; color: var(--stone); transition: transform .25s ease; }
+  .syn-nom { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 18.5px; }
+  .syn-dim > .syn-ligne .syn-nom { font-size: 20.5px; }
+  .syn-compte { font-size: 15px; color: var(--stone); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .syn-chev { font-size: 14.5px; color: var(--stone); transition: transform .25s ease; }
   .syn-ouvert > .syn-ligne .syn-chev { transform: rotate(180deg); }
 
   /* Répartition par niveau : quatre segments, du non évalué à J'incarne. */
@@ -872,8 +889,6 @@
   .syn-corps { display: none; padding: 8px 0 4px 14px; }
   .syn-ouvert > .syn-corps { display: block; }
   .syn-theme + .syn-theme { margin-top: 6px; }
-  .syn-verrou { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
-    color: var(--stone); border: 1px solid var(--line-faint); border-radius: 999px; padding: 1px 7px; }
 
   .syn-comp {
     display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center;
@@ -883,9 +898,9 @@
     transition: border-color .2s ease;
   }
   .syn-comp:hover { border-color: var(--line-faint); }
-  .syn-comp-nom { font-size: 13px; line-height: 1.4; }
+  .syn-comp-nom { font-size: 17px; line-height: 1.4; }
   .syn-comp-niveau {
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12px;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15.5px;
     color: var(--stone); white-space: nowrap; text-align: right;
   }
   .syn-comp-niveau.situe { color: var(--paper-dim); }
@@ -939,7 +954,7 @@
   .ciel-nom {
     display: inline-flex; align-items: center; gap: 11px;
     background: none; border: none; cursor: pointer; padding: 0;
-    font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 24px;
+    font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 27.5px;
     color: var(--paper); transition: color .25s ease;
   }
   .ciel-nom:hover { color: var(--h); }
@@ -947,10 +962,12 @@
     box-shadow: 0 0 14px var(--h); flex-shrink: 0; }
   .ciel-compte {
     display: block; margin-top: 5px;
-    font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--stone);
+    font-size: 13.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--stone);
   }
   /* Visé sur la seule constellation : un `svg` non qualifié étirait aussi les petits
      repères de 20 px qu'on dessine ailleurs dans la carte. */
+  /* Sans plafond de hauteur (voir .constellation), les trois blocs dessinent à la même
+     échelle, donc à la même taille de libellé, quelle que soit la hauteur d'écran. */
   .ciel-carte > svg.constellation { width: 100%; height: auto; display: block; }
 
 
@@ -964,7 +981,7 @@
     padding: 10px 20px; border-radius: 999px; cursor: pointer;
     border: 1px solid color-mix(in srgb, var(--h) 50%, transparent);
     background: color-mix(in srgb, var(--h) 12%, transparent);
-    color: var(--paper); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px;
+    color: var(--paper); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px;
     transition: all .25s ease;
   }
   .ciel-cta:hover { background: color-mix(in srgb, var(--h) 24%, transparent); }
@@ -973,7 +990,7 @@
   }
   .ciel-cta.discret:hover { border-color: var(--line); color: var(--paper); }
 
-  /* Fil entre les blocs : purement visuel, aucune sémantique d'ouverture. */
+  /* Fil entre les blocs : purement visuel, il ne relie aucune thématique. */
   /* Le fil est purement décoratif : sa largeur ne porte aucun sens, on peut donc la
      dépenser. Elle sert à égaliser ce que MONTRE chaque amorce latérale — voir
      LARGEURS_FIL. */
@@ -984,7 +1001,7 @@
   .ciel-guide {
     text-align: center; margin-top: 6px;
     font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 12.5px; color: var(--stone);
+    font-size: 16.5px; color: var(--stone);
   }
 
   /* Retour vers le ciel, dans le détail : une navigation de lieu, pas un bouton d'outil. */
@@ -992,7 +1009,7 @@
     display: inline-flex; align-items: center; gap: 8px;
     background: none; border: none; padding: 0; cursor: pointer;
     color: var(--paper-dim); font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 14px; margin-bottom: 20px;
+    font-size: 18px; margin-bottom: 20px;
   }
   .detail-retour:hover { color: var(--paper); }
 
@@ -1017,16 +1034,37 @@
   }
 
   @media (max-width: 640px) {
-    /* Sur mobile la largeur est déjà la contrainte : plafonner aussi la hauteur
-       rapetissait les deux plus grandes constellations sous le seuil de lisibilité.
-       La page défile, une carte haute n'est pas un problème. */
-    .constellation { max-height: none; }
     .app { padding: 0 16px 60px; }
     .dimension-entete { padding: 16px 16px; gap: 14px; grid-template-columns: 28px 1fr auto; }
     .dimension-astre { width: 28px; height: 28px; }
-    .dimension-nom { font-size: 18px; }
+    .dimension-nom { font-size: 20.5px; }
     .dimension-corps { padding: 0 16px 18px; }
     .titre { padding: 30px 0 26px; }
+  }
+
+  @media (max-width: 640px) {
+    /* Premier écran mobile : les trois cartes doivent y tenir entières.
+       Avec la police agrandie, les boutons d'en-tête, les compteurs et l'entrée
+       « M'évaluer » passaient sur deux lignes et poussaient la troisième carte à
+       1022 px. On reprend la place sur les marges et l'interlettrage des capitales,
+       pas sur le corps du texte : c'est lui qu'on voulait plus lisible. */
+    .header { padding: 16px 0 12px; gap: 10px 14px; }
+    .header-etat { gap: 8px; flex-wrap: wrap; font-size: 15.5px; }
+    .btn-mois { padding: 6px 13px; white-space: nowrap; }
+    .titre { padding: 18px 0 16px; }
+    .titre h1 { font-size: 28px; }
+    .titre h1::before, .titre h1::after { margin: 0 12px; }
+    .titre p { margin-top: 8px; line-height: 1.5; }
+    .dernier-point { margin-top: 6px; }
+    .dimensions { gap: 10px; }
+    .dimension-entete { padding: 13px 14px; }
+    .dimension-compte { letter-spacing: .03em; margin-top: 3px; }
+    .dimension:not(.ouverte) .dimension-amorce { padding: 0 14px 13px; }
+    /* Le compteur passe sous le libellé quand la ligne ne suffit pas (écrans de
+       moins de 390 px) : un bouton qui déborde de sa carte serait pire. */
+    .dimension-situer { margin-top: 0; padding: 8px 14px; gap: 0 8px; flex-wrap: wrap; }
+    .dimension-situer span, .dimension-situer small { white-space: nowrap; }
+    .dimension-situer small { letter-spacing: .03em; }
   }
 </style>
 </head>
@@ -1055,8 +1093,7 @@
       <button type="button" class="btn-mois" id="btn-mois" hidden>
         Mon mois <span class="compte" id="btn-mois-compte"></span>
       </button>
-      <span class="puce"></span>
-      <span id="header-etat-texte"></span>
+      <span class="header-statut"><span class="puce"></span><span id="header-etat-texte"></span></span>
     </div>
   </header>
 
@@ -1149,7 +1186,6 @@
   const TEINTES_HEX = {};
   const DIFFICULTES = {};
   let MAX_MAINTENANT = 3;
-  let NIVEAU_ACQUIS = 2;
   let ORDRE_CIEL = null;
   let CIEL_CENTRE = null;
   let LARGEURS_FIL = {};
@@ -1186,7 +1222,6 @@
     }
 
     MAX_MAINTENANT = referentiel.limites?.maxCiblesMaintenant ?? MAX_MAINTENANT;
-    NIVEAU_ACQUIS = referentiel.limites?.niveauAcquis ?? NIVEAU_ACQUIS;
 
     // Ciel : ordre visuel et bloc centré. Sans configuration, on retombe sur l'ordre
     // canonique et le premier bloc — ce qui reste juste pour une instance qui n'aurait
@@ -1389,7 +1424,13 @@
   const R_ANNEAU = 38;   // rayon sur lequel les étoiles se répartissent
   const R_NOYAU = 17;    // rayon du noyau de la thématique
   const TRIM = 50;       // les traits de filiation s'arrêtent avant l'anneau d'étoiles
-  const DECALAGE_NOM = 56;
+  // Haut du nom de thématique, sous l'anneau. Le nom est accroché par son HAUT
+  // (dominant-baseline: hanging) et non par sa ligne de base : sa taille varie selon le
+  // lieu (20, 17 ou 17,5 unités, voir .theme-nom), et une ligne de base fixe faisait
+  // remonter les noms les plus grands. Dans le ciel, 14 noms touchaient leur étoile du
+  // bas dès qu'elle atteignait « J'incarne ». Ici : anneau (38) + plus grande étoile
+  // (5,8) + 5 d'air, quelle que soit la taille du texte.
+  const DECALAGE_NOM = 49;
 
   // Luminosité d'une étoile selon le niveau : 4 crans, de l'étoile éteinte (0) à
   // l'étoile pleine (3). Le niveau 0 n'est pas un palier nommé, c'est l'absence.
@@ -1426,11 +1467,10 @@
     return { minX, minY, largeur: maxX - minX, hauteur: maxY - minY };
   }
 
-  function etoileSvg(x, y, niveau, teinte, verrouillee, competence) {
+  function etoileSvg(x, y, niveau, teinte, competence) {
     const c = CRANS[niveau] ?? CRANS[0];
-    const couleur = verrouillee ? '#8d8677' : teinte;
     const halo = c.halo > 0
-      ? `<circle cx="${x}" cy="${y}" r="${c.halo}" fill="${couleur}" fill-opacity="${(c.haloOpacite * (verrouillee ? 0.45 : 1)).toFixed(3)}"/>`
+      ? `<circle class="etoile-halo" cx="${x}" cy="${y}" r="${c.halo}" fill="${teinte}" fill-opacity="${c.haloOpacite}"/>`
       : '';
     // Cible de clic large et invisible : une étoile de niveau 0 ne fait que 2,2 unités
     // de rayon, impossible à viser au doigt. Le repère visuel reste petit, la zone
@@ -1438,7 +1478,7 @@
     return `<g class="etoile" data-competence="${echapper(competence.id)}" role="button" tabindex="0"
               aria-label="${echapper(competence.name)}">
       ${halo}
-      <circle class="etoile-corps" cx="${x}" cy="${y}" r="${c.r}" fill="${couleur}" fill-opacity="${(c.opacite * (verrouillee ? 0.5 : 1)).toFixed(2)}"/>
+      <circle class="etoile-corps" cx="${x}" cy="${y}" r="${c.r}" fill="${teinte}" fill-opacity="${c.opacite}"/>
       <circle class="etoile-cible" cx="${x}" cy="${y}" r="16" fill="transparent"/>
     </g>`;
   }
@@ -1453,7 +1493,13 @@
     };
     return `<div class="constellation-legende">
       ${[0, 1, 2, 3].map(cran).join('')}
-      <span><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" fill="none" stroke="#8d8677" stroke-width="1.4" stroke-dasharray="3 3"/></svg>Thématique à débloquer</span>
+      <span>${[0, 0.5, 1].map((t) => {
+        const l = lumiereTheme(t);
+        return `<svg width="20" height="20" viewBox="0 0 20 20">
+          <circle cx="10" cy="10" r="7" fill="var(--night-deep)" stroke="${teinte}" stroke-width="1.4" stroke-opacity="${l.noyau}"/>
+          <circle cx="10" cy="10" r="5.6" fill="${teinte}" fill-opacity="${l.coeur}"/>
+        </svg>`;
+      }).join('')}Une thématique s'éclaire avec tes niveaux</span>
     </div>`;
   }
 
@@ -1486,33 +1532,27 @@
       const y1 = source.y + uy * TRIM;
       const x2 = cible.x - ux * TRIM;
       const y2 = cible.y - uy * TRIM;
-      // Un chemin n'est plein que s'il est entièrement praticable : partir d'une
-      // thématique verrouillée doit se voir autant qu'aboutir sur une. Sans cela, un
-      // trait plein sortait d'un nœud éteint — cas réel sur Alignement, où Cohérence
-      // de vie s'ouvre par Valeurs pendant que Stress et régulation reste fermée.
-      const sourceFermee = etat.computed.themes[source.id]?.status !== 'open';
-      const cibleFermee = etat.computed.themes[cibleId]?.status !== 'open';
-      const verrouillee = sourceFermee || cibleFermee;
-      return `<line class="filiation${verrouillee ? ' filiation-verrouillee' : ''}" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`;
+      // Toujours plein : un trait dit par où le parcours passe, il ne ferme plus rien.
+      // `data-source` permet de suivre la lumière de la source sans tout redessiner.
+      return `<line class="filiation" data-source="${echapper(source.id)}" stroke-opacity="${opaciteTrait(illuminationDe(source.id))}" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`;
     })).join('');
 
     const groupes = themes.map((theme) => {
-      const ouverte = etat.computed.themes[theme.id]?.status === 'open';
       const competences = etat.referentiel.competencies.filter((c) => c.theme === theme.id);
       const points = positionsEtoiles(theme.x, theme.y, competences.length);
       const etoiles = competences.map((c, i) => etoileSvg(
-        points[i].x, points[i].y, etat.computed.levels[c.id] ?? 0, teinte, !ouverte, c
+        points[i].x, points[i].y, etat.computed.levels[c.id] ?? 0, teinte, c
       )).join('');
 
-      const couleurNoyau = ouverte ? teinte : '#8d8677';
-      return `<g class="theme ${ouverte ? 'theme-ouvert' : 'theme-verrouille'}" data-theme="${echapper(theme.id)}" data-code="${echapper(theme.code)}"
-                 role="button" tabindex="0" aria-label="${echapper(theme.name)}${ouverte ? '' : ' — à débloquer'}">
+      const l = lumiereTheme(illuminationDe(theme.id));
+      return `<g class="theme" data-theme="${echapper(theme.id)}" data-code="${echapper(theme.code)}"
+                 role="button" tabindex="0" aria-label="${echapper(theme.name)}">
         <circle class="theme-cible" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU + 12}" fill="transparent"/>
-        <circle class="theme-halo" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU + 9}" fill="${couleurNoyau}" fill-opacity="${ouverte ? 0.10 : 0.04}"/>
-        <circle class="theme-noyau" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU}" fill="var(--night-deep)" stroke="${couleurNoyau}" stroke-opacity="${ouverte ? 0.85 : 0.4}"/>
-        ${ouverte ? '' : `<text class="theme-cadenas" x="${theme.x}" y="${theme.y + 4}">✦</text>`}
+        <circle class="theme-halo" cx="${theme.x}" cy="${theme.y}" r="${l.haloR}" fill="${teinte}" fill-opacity="${l.halo}"/>
+        <circle class="theme-noyau" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU}" fill="var(--night-deep)" stroke="${teinte}" stroke-opacity="${l.noyau}"/>
+        <circle class="theme-lumiere" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU - 2.5}" fill="${teinte}" fill-opacity="${l.coeur}"/>
         ${etoiles}
-        <text class="theme-nom" x="${theme.x}" y="${theme.y + DECALAGE_NOM}">${echapper(theme.name)}</text>
+        <text class="theme-nom" dominant-baseline="hanging" x="${theme.x}" y="${theme.y + DECALAGE_NOM}">${echapper(theme.name)}</text>
       </g>`;
     }).join('');
 
@@ -1563,7 +1603,7 @@
   }
 
   // Échelle en dessous de laquelle les libellés deviennent illisibles. À 0.85, un
-  // libellé de 15 unités s'affiche autour de 12.8 px.
+  // libellé de 20 unités s'affiche autour de 17 px (voir .theme-nom).
   const ECHELLE_MINI = 0.85;
 
   // Et une échelle AU-DESSUS de laquelle on cesse d'agrandir.
@@ -1572,8 +1612,8 @@
   // le référentiel, plus elle est donc grossie à l'écran. Après le resserrement des
   // positions dans Notion, « Moi » passait à 22 px de libellé et la vue du détail
   // gagnait 38 % de hauteur — le resserrement produisait l'effet inverse de celui
-  // cherché. À 1.15, un libellé de 15 unités s'affiche autour de 17 px, ce qui remet
-  // les trois dimensions dans un même ordre de grandeur.
+  // cherché. À 1.15 les trois dimensions restent dans un même ordre de grandeur ; la
+  // taille des libellés du détail se règle dans .constellation-zone .theme-nom.
   const ECHELLE_MAXI = 1.15;
 
   // Deux réglages faits APRÈS le rendu, parce qu'ils dépendent de la largeur réelle
@@ -1656,82 +1696,99 @@
   }
 
   // ============================================================
-  // OUVERTURE — APERÇU LOCAL
+  // ILLUMINATION — APERÇU LOCAL ET RENDU
   // ============================================================
-  // Le serveur reste la seule autorité : il revalide à l'enregistrement et renvoie
-  // l'ouverture qu'il a calculée, qui écrase celle-ci. Ce calcul local n'existe que
-  // pour le retour immédiat, parce que le contrat évalue l'ouverture sur les niveaux
-  // SOUMIS : monter deux compétences d'Émotions doit déverrouiller Besoins à l'écran
-  // sans attendre la sauvegarde.
-  function calculerOuvertureLocale(levels) {
-    const parTheme = new Map();
-    etat.referentiel.competencies.forEach((c) => {
-      if (!c.theme) return;
-      if (!parTheme.has(c.theme)) parTheme.set(c.theme, []);
-      parTheme.get(c.theme).push(c.id);
-    });
-    const sources = new Map(etat.referentiel.themes.map((t) => [t.id, []]));
-    etat.referentiel.themes.forEach((s) => s.feeds.forEach((c) => {
-      if (sources.has(c)) sources.get(c).push(s.id);
-    }));
-    const nomDe = new Map(etat.referentiel.themes.map((t) => [t.id, t.name]));
+  // Le serveur reste la seule autorité (illumination-v2.js) : sa réponse écrase cet
+  // aperçu à chaque enregistrement. Il n'existe que pour le retour immédiat — monter une
+  // étoile doit éclairer sa thématique à l'écran sans attendre la sauvegarde. Même
+  // formule, au même arrondi :
+  //
+  //     somme des niveaux ÷ (NIVEAU_MAX × compétences actives)
+  const NIVEAU_MAX = 3;
 
-    const avance = (id) => {
-      const codes = parTheme.get(id) ?? [];
-      const atteintes = codes.filter((c) => (levels[c] ?? 0) >= NIVEAU_ACQUIS).length;
-      return { atteintes, seuil: Math.max(1, Math.floor(codes.length / 2)) };
-    };
-
+  function calculerIlluminationLocale(levels) {
     const res = {};
-    etat.referentiel.themes.forEach((t) => {
-      const src = sources.get(t.id) ?? [];
-      if (src.length === 0) { res[t.id] = { status: 'open', unlock_hint: '' }; return; }
-      const details = src.map((id) => ({ nom: nomDe.get(id), ...avance(id) }));
-      const ouverte = details.some((d) => d.atteintes >= d.seuil);
-      res[t.id] = {
-        status: ouverte ? 'open' : 'locked',
-        unlock_hint: ouverte ? '' : indiceLocal(details),
-      };
+    etat.referentiel.themes.forEach((t) => { res[t.id] = { illumination: 0, somme: 0, competences: 0 }; });
+    etat.referentiel.competencies.forEach((c) => {
+      const r = res[c.theme];
+      if (!r) return;
+      r.somme += Math.min(NIVEAU_MAX, Math.max(0, Math.round(Number(levels[c.id]) || 0)));
+      r.competences += 1;
+    });
+    Object.values(res).forEach((r) => {
+      r.illumination = r.competences === 0 ? 0 : Math.round((r.somme / (NIVEAU_MAX * r.competences)) * 10000) / 10000;
     });
     return res;
   }
 
-  // Même formulation que le serveur, mot pour mot : l'aperçu local ne doit pas dire
-  // autre chose que ce que dira la réponse après enregistrement.
-  function indiceLocal(details) {
-    const palier = etat.referentiel.scale[NIVEAU_ACQUIS];
-    const reste = (d) => Math.max(0, d.seuil - d.atteintes);
-    const compte = (n) => `${n} compétence${n > 1 ? 's' : ''}`;
-    if (details.length === 1) {
-      const d = details[0];
-      return `Encore ${compte(reste(d))} dans « ${d.nom} » au palier « ${palier} », et cette thématique s'ouvre.`;
-    }
-    const nombre = details.length === 2 ? 'Deux' : 'Plusieurs';
-    const chemins = details.map((d, i) => (i === 0 ? compte(reste(d)) : String(reste(d))) + ` dans « ${d.nom} »`).join(', ou ');
-    return `${nombre} chemins mènent ici, un seul suffit : au palier « ${palier} », ${chemins}.`;
+  const illuminationDe = (themeId) => etat.computed.themes[themeId]?.illumination ?? 0;
+
+  // Dégradé CONTINU plutôt que paliers. Les étoiles ont déjà leurs 4 crans, et une
+  // thématique en agrège de 3 à 14 : des paliers masqueraient exactement le progrès
+  // qu'on veut rendre visible — trois compétences montées d'un cran sur sept font
+  // passer de 33 % à 48 %, ce qu'un palier « entre 1/3 et 2/3 » avalerait.
+  //
+  // Le cœur du nœud se remplit de la teinte ; le contour et le halo suivent. À 0, le
+  // nœud reste nettement dessiné dans sa teinte : éteint n'est pas grisé, rien n'est
+  // fermé.
+  function lumiereTheme(t) {
+    return {
+      coeur: +(0.62 * t).toFixed(3),
+      noyau: +(0.38 + 0.57 * t).toFixed(3),
+      halo: +(0.03 + 0.17 * t).toFixed(3),
+      haloR: +(R_NOYAU + 8 + 8 * t).toFixed(1),
+    };
   }
 
-  const estOuverte = (themeId) => etat.computed.themes[themeId]?.status === 'open';
+  // Style des traits de filiation.
+  //   'source'   : intensité qui suit la lumière de la thématique source — le parcours
+  //                se dessine à mesure qu'on l'emprunte.
+  //   'uniforme' : tous les traits pareils, pleins.
+  const TRAITS = 'source';
+  function opaciteTrait(tSource) {
+    return TRAITS === 'uniforme' ? 0.22 : +(0.10 + 0.40 * tSource).toFixed(3);
+  }
+
+  // Mise à jour EN PLACE de la lumière des thématiques et des traits, dans le détail
+  // comme dans le ciel. Redessiner la carte à chaque clic la recentrerait sur mobile.
+  function majLumieres() {
+    document.querySelectorAll('.theme[data-theme]').forEach((g) => {
+      const l = lumiereTheme(illuminationDe(g.dataset.theme));
+      g.querySelector('.theme-lumiere')?.setAttribute('fill-opacity', l.coeur);
+      g.querySelector('.theme-noyau')?.setAttribute('stroke-opacity', l.noyau);
+      const halo = g.querySelector('.theme-halo');
+      if (halo) { halo.setAttribute('fill-opacity', l.halo); halo.setAttribute('r', l.haloR); }
+    });
+    document.querySelectorAll('.filiation[data-source]').forEach((trait) => {
+      trait.setAttribute('stroke-opacity', opaciteTrait(illuminationDe(trait.dataset.source)));
+    });
+    majEtatEntete();
+  }
+
+  // Tant que rien n'est éclairé, on invite ; ensuite on dit ce qui s'est allumé. Pas de
+  // ratio : « 4 sur 36 » se lirait comme 32 portes éteintes.
+  function majEtatEntete() {
+    const total = etat.referentiel.themes.length;
+    const eclairees = Object.values(etat.computed.themes).filter((t) => t.illumination > 0).length;
+    elHeaderEtatTexte.textContent = eclairees === 0
+      ? `${total} thématiques à explorer`
+      : `${eclairees} thématique${eclairees > 1 ? 's' : ''} éclairée${eclairees > 1 ? 's' : ''}`;
+  }
 
   // ============================================================
   // MODIFICATIONS
   // ============================================================
   function appliquerChangement(majEtat) {
-    const avant = JSON.stringify(Object.entries(etat.computed.themes).map(([k, v]) => k + v.status));
     majEtat();
     etat.computed.levels = { ...etat.computed.levels, ...brouillon.levels };
-    etat.computed.themes = calculerOuvertureLocale(brouillon.levels);
-    const apres = JSON.stringify(Object.entries(etat.computed.themes).map(([k, v]) => k + v.status));
+    etat.computed.themes = calculerIlluminationLocale(brouillon.levels);
 
     enregistrerBrouillon();
     majBarre();
     majBoutonMois();
     majAvancements();
-    // Une ouverture qui bascule change les traits, les teintes et les cadenas : on
-    // redessine la constellation concernée. Sinon un simple rafraîchissement d'étoiles
-    // suffit, et l'animation reste imperceptible.
-    if (avant !== apres) redessinerConstellations();
-    else rafraichirEtoiles();
+    rafraichirEtoiles();
+    majLumieres();
     if (etat.vue === 'ciel') rendreCiel();
   }
 
@@ -1775,17 +1832,6 @@
       )];
       brouillon.later = brouillon.later.filter((c) => c !== entrant);
     });
-  }
-
-  // Une cible « maintenant » dont la thématique s'est refermée doit partir avec elle,
-  // sinon le serveur refuserait l'enregistrement entier en 400.
-  function elaguerCiblesFermees() {
-    const avant = brouillon.current.length;
-    brouillon.current = brouillon.current.filter((code) => {
-      const c = etat.referentiel.competencies.find((x) => x.id === code);
-      return c && estOuverte(c.theme);
-    });
-    return avant - brouillon.current.length;
   }
 
   // ============================================================
@@ -2033,23 +2079,21 @@
     </section>`;
   }
 
-  // Sélections. « Maintenant » est plafonné et réservé aux thématiques ouvertes ;
-  // « plus tard » est libre et disponible partout, y compris en thématique fermée.
+  // Sélections. « Maintenant » est plafonné ; « plus tard » est libre. Les deux sont
+  // disponibles sur toute compétence, dès le premier jour.
   function sectionSelections(competence) {
-    const ouverte = estOuverte(competence.theme);
     const estMaintenant = brouillon.current.includes(competence.id);
     const estPlusTard = brouillon.later.includes(competence.id);
     const plein = brouillon.current.length >= MAX_MAINTENANT && !estMaintenant;
 
     let raison = '';
-    if (!ouverte) raison = "Cette thématique n'est pas encore ouverte : tu peux la garder pour plus tard, et la travailler dès qu'elle se débloque.";
-    else if (plein) raison = `Tu travailles déjà ${MAX_MAINTENANT} compétences ce mois. En choisir une autre te proposera laquelle remplacer.`;
+    if (plein) raison = `Tu travailles déjà ${MAX_MAINTENANT} compétences ce mois. En choisir une autre te proposera laquelle remplacer.`;
 
     return `<section class="panneau-section">
       <p class="panneau-label">Ton intention</p>
       <div class="cibles">
         <button type="button" class="cible-btn cible-maintenant${estMaintenant ? ' active' : ''}"
-          id="btn-maintenant" ${ouverte ? '' : 'disabled'} aria-pressed="${estMaintenant}">
+          id="btn-maintenant" aria-pressed="${estMaintenant}">
           <span class="pastille"></span>${estMaintenant ? 'Je la travaille ce mois' : 'La travailler ce mois'}
         </button>
         <button type="button" class="cible-btn cible-plus-tard${estPlusTard ? ' active' : ''}"
@@ -2097,16 +2141,13 @@
   // ============================================================
   // PANNEAU DE THÉMATIQUE
   // ============================================================
-  // Une thématique verrouillée est entièrement consultable : définition, compétences,
-  // énoncés, ressources, auto-évaluation et « plus tard ». Seule l'action « maintenant »
-  // est bloquée. C'est ce qui en fait un horizon et non un mur.
+  // Toute thématique est accessible : définition, compétences, lumière, et sa place
+  // dans le parcours.
   function ouvrirTheme(themeId, idDimension) {
     const theme = etat.referentiel.themes.find((t) => t.id === themeId);
     if (!theme) return;
     const dimension = etat.referentiel.dimensions.find((d) => d.id === idDimension);
     const teinte = TEINTES_HEX[idDimension] || '#f0ebe0';
-    const ouverte = estOuverte(themeId);
-    const infos = etat.computed.themes[themeId] || {};
 
     themeAffiche = { id: themeId, dimension: idDimension };
     competenceAffichee = null;
@@ -2119,7 +2160,7 @@
         brouillon.later.includes(c.id) ? '<span class="comp-marque comp-marque-plus-tard">Plus tard</span>' : '',
       ].filter(Boolean).join('');
       return `<button type="button" class="comp-item" data-competence="${echapper(c.id)}">
-        <span class="comp-astre">${astreCran(Math.max(niveau, 1), ouverte ? teinte : '#8d8677')
+        <span class="comp-astre">${astreCran(Math.max(niveau, 1), teinte)
           .replace('fill-opacity="' + CRANS[Math.max(niveau, 1)].opacite + '"', `fill-opacity="${niveau === 0 ? 0.22 : CRANS[niveau].opacite}"`)}</span>
         <span>
           <span class="comp-nom">${echapper(c.name)}</span>
@@ -2136,19 +2177,7 @@
       ${theme.definition ? `<p class="panneau-def">${echapper(theme.definition)}</p>` : ''}
     `;
 
-    const horizon = ouverte ? '' : `
-      <section class="panneau-section">
-        <div class="horizon">
-          <span class="horizon-marque">${astreCran(2, '#8d8677')}</span>
-          <p class="horizon-texte">
-            <b>Pas encore ouverte</b>
-            ${echapper(infos.unlock_hint || '')}
-            <br><br>Tu peux déjà tout lire ici, t'y évaluer, et garder une compétence pour plus tard.
-          </p>
-        </div>
-      </section>`;
-
-    elPanneauCorps.innerHTML = horizon + `
+    elPanneauCorps.innerHTML = sectionEclat(theme) + `
       <section class="panneau-section">
         <p class="panneau-label">${competences.length} compétence${competences.length > 1 ? 's' : ''}</p>
         <div class="liste-comp">${items}</div>
@@ -2161,6 +2190,41 @@
 
     afficherPanneau();
     document.body.dataset.panneau = 'theme:' + theme.code;
+  }
+
+  // Lumière de la thématique, et sa place dans le parcours.
+  //
+  // Le parcours reprend les traits `Nourrit` en mots. C'était la condition d'ouverture ;
+  // c'est désormais une indication : par où cette thématique se prépare, et ce qu'elle
+  // prépare à son tour. Rien n'y est exigé.
+  function sectionEclat(theme) {
+    const t = illuminationDe(theme.id);
+    const nomsDe = (ids) => ids
+      .map((id) => etat.referentiel.themes.find((x) => x.id === id))
+      .filter(Boolean)
+      .map((x) => `<b>${echapper(x.name)}</b>`);
+    const enListe = (morceaux) => morceaux.length <= 1 ? morceaux.join('')
+      : morceaux.slice(0, -1).join(', ') + ' et ' + morceaux[morceaux.length - 1];
+    const sources = nomsDe(etat.referentiel.themes.filter((x) => x.feeds.includes(theme.id)).map((x) => x.id));
+    const suites = nomsDe(theme.feeds);
+
+    const phrases = [];
+    if (sources.length) phrases.push(`Elle s'appuie sur ${enListe(sources)}.`);
+    if (suites.length) phrases.push(`Elle prépare ${enListe(suites)}.`);
+    if (!sources.length && suites.length) phrases.unshift('Un bon point de départ.');
+
+    const lecture = t === 0
+      ? 'Encore éteinte : elle s’éclaire à mesure que tu t’évalues sur ses compétences.'
+      : t >= 1
+        ? 'Pleinement éclairée : tu incarnes chacune de ses compétences.'
+        : 'Elle s’éclaire à mesure que tes niveaux montent sur ses compétences.';
+
+    return `<section class="panneau-section">
+      <p class="panneau-label">Sa lumière</p>
+      <div class="eclat-jauge" role="img" aria-label="Lumière de la thématique : ${Math.round(t * 100)} %"><i style="width:${(t * 100).toFixed(1)}%"></i></div>
+      <p class="eclat-texte">${lecture}</p>
+      ${phrases.length ? `<p class="eclat-parcours">${phrases.join(' ')}</p>` : ''}
+    </section>`;
   }
 
   // Le masquage est différé le temps de l'animation de fermeture. Rouvrir pendant ce
@@ -2193,16 +2257,11 @@
     if (!c) return '';
     const t = etat.referentiel.themes.find((x) => x.id === c.theme);
     const niveau = brouillon.levels[code] ?? 0;
-    const ouverte = estOuverte(c.theme);
-    const etatTexte = options.cible
-      ? (niveau === 0 ? 'À évaluer' : echapper(etat.referentiel.scale[niveau]))
-      : (ouverte
-          ? `<span>Accessible</span>`
-          : `<span class="sel-verrou">Thématique à débloquer</span>`);
+    const etatTexte = niveau === 0 ? 'À évaluer' : echapper(etat.referentiel.scale[niveau]);
 
-    // La promotion n'a de sens que si la thématique est ouverte : c'est la seule
-    // contrainte du serveur sur « maintenant ».
-    const promouvoir = (!options.cible && ouverte)
+    // Promouvoir depuis « plus tard » : seul le plafond de trois s'applique, et il est
+    // traité au clic en proposant un remplacement.
+    const promouvoir = !options.cible
       ? `<button type="button" class="sel-promouvoir" data-promouvoir="${echapper(code)}">La travailler ce mois</button>`
       : '';
 
@@ -2426,7 +2485,7 @@
           : `Il te reste ${restantes} compétence${restantes > 1 ? 's' : ''}. Enregistre ce que tu viens de faire, tu reprendras où tu en es.`}</p>
         <dl class="situer-bilan-chiffres">
           <div><dt>Évaluées à l'instant</dt><dd>${nouvelles}</dd></div>
-          <div><dt>Évaluées en tout</dt><dd>${situees}<span style="color:var(--stone);font-size:15px"> / ${situer.codes.length}</span></dd></div>
+          <div><dt>Évaluées en tout</dt><dd>${situees}<span style="color:var(--stone);font-size:19.5px"> / ${situer.codes.length}</span></dd></div>
         </dl>
         <div class="situer-pied" style="justify-content:center">
           ${termine ? '' : '<button type="button" class="situer-btn" id="situer-continuer">Continuer →</button>'}
@@ -2460,7 +2519,6 @@
     tout:      { libelle: 'Tout',            garde: () => true },
     cibles:    { libelle: 'Mes cibles',      garde: (c) => brouillon.current.includes(c.id) || brouillon.later.includes(c.id) },
     nonSituees:{ libelle: 'Non évaluées',     garde: (c) => (brouillon.levels[c.id] ?? 0) === 0 },
-    ouvertes:  { libelle: 'Thém. ouvertes',  garde: (c) => estOuverte(c.theme) },
     // Les filtres de difficulté sont ajoutés par appliquerConfigClub() : leurs libellés
     // sont des réglages de club, pas des constantes d'interface.
   };
@@ -2563,13 +2621,11 @@
         if (comps.length === 0) return '';
         const codes = comps.map((c) => c.id);
         const situees = codes.filter((x) => (brouillon.levels[x] ?? 0) > 0).length;
-        const ouverteT = estOuverte(t.id);
         const cle = 'T:' + t.id;
         return `<div class="syn-theme${synDeplies.has(cle) ? ' syn-ouvert' : ''}" data-cle="${cle}">
           <button type="button" class="syn-ligne" data-plier="${cle}">
             <span class="syn-nom">${echapper(t.name)}</span>
-            <span class="syn-compte">${situees}/${codes.length} évaluées${ouverteT ? '' : ' · '}</span>
-            ${ouverteT ? '' : '<span class="syn-verrou">à débloquer</span>'}
+            <span class="syn-compte">${situees}/${codes.length} évaluées</span>
             <span class="syn-chev">▾</span>
             ${repartition(codes, teinte)}
           </button>
@@ -2746,14 +2802,13 @@
       if (!competence) return;
       const zone = g.closest('[data-constellation]');
       const teinte = TEINTES_HEX[zone?.dataset.constellation] || '#f0ebe0';
-      const verrouillee = !estOuverte(competence.theme);
       const c = CRANS[brouillon.levels[code] ?? 0] ?? CRANS[0];
-      const couleur = verrouillee ? '#8d8677' : teinte;
+      const couleur = teinte;
 
       const corps = g.querySelector('.etoile-corps');
       corps.setAttribute('r', c.r);
       corps.setAttribute('fill', couleur);
-      corps.setAttribute('fill-opacity', (c.opacite * (verrouillee ? 0.5 : 1)).toFixed(2));
+      corps.setAttribute('fill-opacity', c.opacite);
 
       let halo = g.querySelector('.etoile-halo');
       if (c.halo > 0) {
@@ -2766,7 +2821,7 @@
         }
         halo.setAttribute('r', c.halo);
         halo.setAttribute('fill', couleur);
-        halo.setAttribute('fill-opacity', (c.haloOpacite * (verrouillee ? 0.45 : 1)).toFixed(3));
+        halo.setAttribute('fill-opacity', c.haloOpacite);
       } else if (halo) {
         halo.remove();
       }
@@ -2779,8 +2834,7 @@
       zone.innerHTML = '';
       rendreConstellation(zone.dataset.constellation);
     });
-    const ouvertes = Object.values(etat.computed.themes).filter((t) => t.status === 'open').length;
-    elHeaderEtatTexte.textContent = `${ouvertes} thématique${ouvertes > 1 ? 's' : ''} à explorer`;
+    majEtatEntete();
   }
 
   // ============================================================
@@ -2834,7 +2888,6 @@
   }
 
   async function enregistrer() {
-    const retires = elaguerCiblesFermees();
     elBtnEnregistrer.disabled = true;
     elBtnEnregistrer.textContent = 'Enregistrement…';
 
@@ -2873,11 +2926,7 @@
       redessinerConstellations();
       if (competenceAffichee) rafraichirPanneau(competenceAffichee.code);
 
-      bandeau('Ton sphérier est enregistré.',
-        retires > 0
-          ? `${retires} cible${retires > 1 ? 's ont' : ' a'} été retirée${retires > 1 ? 's' : ''} : sa thématique s'est refermée.`
-          : 'Tu peux fermer cette page.',
-        'succes');
+      bandeau('Ton sphérier est enregistré.', 'Tu peux fermer cette page.', 'succes');
     } catch (err) {
       // Rien n'est perdu : le brouillon local tient, l'écran garde les modifications.
       bandeau("L'enregistrement n'a pas abouti.",
@@ -2893,7 +2942,7 @@
   document.getElementById('btn-annuler').addEventListener('click', () => {
     brouillon = { levels: { ...reference.levels }, current: [...reference.current], later: [...reference.later] };
     etat.computed.levels = { ...reference.levels };
-    etat.computed.themes = calculerOuvertureLocale(brouillon.levels);
+    etat.computed.themes = calculerIlluminationLocale(brouillon.levels);
     try { localStorage.removeItem(cleBrouillon()); } catch {}
     majBarre();
     redessinerConstellations();
@@ -2927,11 +2976,10 @@
   // l'impression fausse d'un sphérier déséquilibré.
   //
   // Le fil ne portant aucun sens, sa largeur est le seul réglage libre. On la dépense
-  // pour égaliser ce que révèle chaque amorce : 5 thématiques entières de chaque côté.
-  // Mesuré sur le rendu — il faut 328 px de AUT et 292 px de MON pour en montrer cinq,
-  // et chaque côté dispose de 388 px sur une piste de 1240. À refaire si la police de
-  // la constellation ou les positions changent : ces largeurs en dépendent.
-  // Fil décoratif entre deux blocs. Il ne dit rien de l'ouverture : la filiation reste
+  // pour égaliser ce que révèle chaque amorce. Les valeurs, et la mesure qui les fonde,
+  // sont dans `CIEL.largeursFil` de club.config.js : à refaire si la police de la
+  // constellation, celle des en-têtes ou les positions changent.
+  // Fil décoratif entre deux blocs. Il ne relie aucune thématique : la filiation reste
   // interne à chaque dimension. Il est là pour que le ciel se lise comme une carte
   // unique plutôt que comme trois pages côte à côte.
   //
@@ -3063,8 +3111,8 @@
   // Point d'ancrage horizontal d'un bloc dans la piste : le milieu de ses thématiques
   // RACINES, et non le milieu géométrique de sa boîte. Sur desktop les deux coïncident
   // presque. Sur mobile, où un bloc est plus large que la piste, c'est la différence
-  // entre s'ouvrir sur les thématiques par lesquelles on peut commencer et s'ouvrir sur
-  // une zone verrouillée. Même raisonnement que pour l'ouverture d'une constellation.
+  // entre s'ouvrir sur les points de départ du parcours et s'ouvrir sur une feuille
+  // arbitraire. Même raisonnement que pour l'ouverture d'une constellation.
   function ancreHorizontale(bloc, idDimension) {
     const centreBoite = bloc.offsetLeft + bloc.offsetWidth / 2;
     const dimension = etat.referentiel.dimensions.find((d) => d.id === idDimension);
@@ -3217,7 +3265,7 @@
         };
         if (estModifie()) {
           etat.computed.levels = { ...etat.computed.levels, ...brouillon.levels };
-          etat.computed.themes = calculerOuvertureLocale(brouillon.levels);
+          etat.computed.themes = calculerIlluminationLocale(brouillon.levels);
           bandeau('Tes modifications ont été retrouvées.',
             "Elles n'avaient pas été enregistrées : elles t'attendaient sur cet appareil.", 'succes');
         } else {
@@ -3234,10 +3282,7 @@
       majBarre();
       majBoutonMois();
 
-      const ouvertes = Object.values(etat.computed.themes).filter((t) => t.status === 'open').length;
-      // Formulation tournée vers ce qui est accessible : un ratio « 6 sur 40 » se lit
-      // comme 34 portes fermées, alors que c'est une invitation.
-      elHeaderEtatTexte.textContent = `${ouvertes} thématique${ouvertes > 1 ? 's' : ''} à explorer`;
+      majEtatEntete();
       elHeaderEtat.hidden = false;
 
       document.body.dataset.pret = 'oui';
