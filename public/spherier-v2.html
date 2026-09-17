@@ -305,14 +305,14 @@
        une constellation plus haute que l'écran se lit en faisant défiler la page. */
   }
 
+  /* L'opacité d'un trait est posée en attribut par le rendu (voir opaciteTrait) : pas
+     de stroke-opacity ici, une règle CSS l'emporterait sur l'attribut. */
   .filiation {
     stroke: var(--paper);
-    stroke-opacity: 0.20;
     stroke-width: 1.2;
   }
-  .filiation-verrouillee { stroke-opacity: 0.09; stroke-dasharray: 3 6; }
 
-  .theme-halo { pointer-events: none; }
+  .theme-halo, .theme-lumiere { pointer-events: none; }
   .theme-noyau { stroke-width: 1.6; }
   .theme-nom {
     font-family: 'Cormorant Garamond', serif;
@@ -334,9 +334,6 @@
   @media (max-width: 640px) {
     .constellation-zone .theme-nom { font-size: 17.5px; }
   }
-  .theme-verrouille .theme-nom { fill: var(--stone); }
-  .theme-verrouille .theme-noyau { stroke-dasharray: 3 3; }
-  .theme-cadenas { font-size: 10px; text-anchor: middle; fill: var(--stone); }
 
   .etoile { pointer-events: none; }
 
@@ -601,24 +598,26 @@
     color: inherit; font: inherit; font-size: 16.5px; padding: 5px 13px; border-radius: 999px; cursor: pointer; }
 
 
-  /* THÉMATIQUE : cliquable, verrouillée comprise — c'est ce qui fait du verrou un
-     horizon plutôt qu'un mur. */
+  /* THÉMATIQUE : toujours cliquable, toujours accessible. */
   .theme { cursor: pointer; }
   .theme:focus-visible { outline: none; }
   .theme:focus-visible .theme-noyau { stroke: var(--gold-bright); stroke-width: 2.4; }
   .theme:hover .theme-noyau { stroke-width: 2.4; }
 
-  /* CONDITION D'OUVERTURE */
-  .horizon {
-    display: flex; gap: 13px; align-items: flex-start;
-    padding: 15px 17px; margin-top: 4px;
-    border: 1px solid rgba(240,235,224,.16); border-radius: 12px;
-    background: rgba(240,235,224,.035);
+  /* LUMIÈRE ET PARCOURS D'UNE THÉMATIQUE
+     La jauge dit la même chose que le cœur du nœud dans la carte, sans chiffre : un
+     pourcentage se lirait comme une note. Le parcours reprend les traits `Nourrit`
+     en mots — une indication, plus une condition. */
+  .eclat-jauge {
+    height: 6px; border-radius: 3px; overflow: hidden;
+    background: rgba(240,235,224,.07); border: 1px solid var(--line-faint);
   }
-  .horizon-marque { flex-shrink: 0; margin-top: 1px; }
-  .horizon-texte { font-size: 17.5px; line-height: 1.65; color: var(--paper-dim); }
-  .horizon-texte b { display: block; color: var(--paper); font-weight: 500;
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19.5px; margin-bottom: 5px; }
+  .eclat-jauge i { display: block; height: 100%; border-radius: 3px;
+    background: var(--teinte-p); box-shadow: 0 0 10px var(--teinte-p); }
+  .eclat-texte { margin-top: 9px; font-size: 16.5px; line-height: 1.55; color: var(--stone);
+    font-family: 'Cormorant Garamond', serif; font-style: italic; }
+  .eclat-parcours { margin-top: 12px; font-size: 16.5px; line-height: 1.6; color: var(--paper-dim); }
+  .eclat-parcours b { color: var(--paper); font-weight: 500; }
 
   /* LISTE DES COMPÉTENCES D'UNE THÉMATIQUE */
   .liste-comp { display: flex; flex-direction: column; gap: 7px; }
@@ -635,9 +634,9 @@
   .comp-nom { font-size: 17.5px; line-height: 1.4; }
   .comp-palier { font-family: 'Cormorant Garamond', serif; font-style: italic;
     font-size: 15.5px; color: var(--stone); white-space: nowrap; }
-  .comp-marques { display: flex; gap: 5px; align-items: center; margin-top: 3px; }
+  .comp-marques { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; margin-top: 3px; }
   .comp-marque { font-size: 12.5px; letter-spacing: .13em; text-transform: uppercase;
-    padding: 1px 7px; border-radius: 999px; border: 1px solid currentColor; }
+    padding: 1px 7px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
   .comp-marque-maintenant { color: var(--gold); }
   .comp-marque-plus-tard { color: var(--paper-dim); border-style: dashed; }
 
@@ -697,7 +696,6 @@
   .sel-nom small { display: block; font-size: 14.5px; color: var(--stone); margin-top: 3px; }
   .sel-etat { font-family: 'Cormorant Garamond', serif; font-style: italic;
     font-size: 15.5px; color: var(--stone); white-space: nowrap; text-align: right; }
-  .sel-verrou { color: var(--stone); }
   .sel-promouvoir {
     grid-column: 1 / -1; justify-self: start;
     background: none; border: 1px solid rgba(201,166,97,.4); border-radius: 999px;
@@ -714,7 +712,7 @@
 
   /* PASTILLE DE DIFFICULTÉ */
   .pastille-diff {
-    display: inline-flex; align-items: center; gap: 6px;
+    display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
     font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
     padding: 3px 9px 3px 7px; border-radius: 999px;
     border: 1px solid color-mix(in srgb, var(--dc) 45%, transparent);
@@ -891,8 +889,6 @@
   .syn-corps { display: none; padding: 8px 0 4px 14px; }
   .syn-ouvert > .syn-corps { display: block; }
   .syn-theme + .syn-theme { margin-top: 6px; }
-  .syn-verrou { font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase;
-    color: var(--stone); border: 1px solid var(--line-faint); border-radius: 999px; padding: 1px 7px; }
 
   .syn-comp {
     display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center;
@@ -994,7 +990,7 @@
   }
   .ciel-cta.discret:hover { border-color: var(--line); color: var(--paper); }
 
-  /* Fil entre les blocs : purement visuel, aucune sémantique d'ouverture. */
+  /* Fil entre les blocs : purement visuel, il ne relie aucune thématique. */
   /* Le fil est purement décoratif : sa largeur ne porte aucun sens, on peut donc la
      dépenser. Elle sert à égaliser ce que MONTRE chaque amorce latérale — voir
      LARGEURS_FIL. */
@@ -1190,7 +1186,6 @@
   const TEINTES_HEX = {};
   const DIFFICULTES = {};
   let MAX_MAINTENANT = 3;
-  let NIVEAU_ACQUIS = 2;
   let ORDRE_CIEL = null;
   let CIEL_CENTRE = null;
   let LARGEURS_FIL = {};
@@ -1227,7 +1222,6 @@
     }
 
     MAX_MAINTENANT = referentiel.limites?.maxCiblesMaintenant ?? MAX_MAINTENANT;
-    NIVEAU_ACQUIS = referentiel.limites?.niveauAcquis ?? NIVEAU_ACQUIS;
 
     // Ciel : ordre visuel et bloc centré. Sans configuration, on retombe sur l'ordre
     // canonique et le premier bloc — ce qui reste juste pour une instance qui n'aurait
@@ -1430,7 +1424,13 @@
   const R_ANNEAU = 38;   // rayon sur lequel les étoiles se répartissent
   const R_NOYAU = 17;    // rayon du noyau de la thématique
   const TRIM = 50;       // les traits de filiation s'arrêtent avant l'anneau d'étoiles
-  const DECALAGE_NOM = 56;
+  // Haut du nom de thématique, sous l'anneau. Le nom est accroché par son HAUT
+  // (dominant-baseline: hanging) et non par sa ligne de base : sa taille varie selon le
+  // lieu (20, 17 ou 17,5 unités, voir .theme-nom), et une ligne de base fixe faisait
+  // remonter les noms les plus grands. Dans le ciel, 14 noms touchaient leur étoile du
+  // bas dès qu'elle atteignait « J'incarne ». Ici : anneau (38) + plus grande étoile
+  // (5,8) + 5 d'air, quelle que soit la taille du texte.
+  const DECALAGE_NOM = 49;
 
   // Luminosité d'une étoile selon le niveau : 4 crans, de l'étoile éteinte (0) à
   // l'étoile pleine (3). Le niveau 0 n'est pas un palier nommé, c'est l'absence.
@@ -1467,11 +1467,10 @@
     return { minX, minY, largeur: maxX - minX, hauteur: maxY - minY };
   }
 
-  function etoileSvg(x, y, niveau, teinte, verrouillee, competence) {
+  function etoileSvg(x, y, niveau, teinte, competence) {
     const c = CRANS[niveau] ?? CRANS[0];
-    const couleur = verrouillee ? '#8d8677' : teinte;
     const halo = c.halo > 0
-      ? `<circle cx="${x}" cy="${y}" r="${c.halo}" fill="${couleur}" fill-opacity="${(c.haloOpacite * (verrouillee ? 0.45 : 1)).toFixed(3)}"/>`
+      ? `<circle class="etoile-halo" cx="${x}" cy="${y}" r="${c.halo}" fill="${teinte}" fill-opacity="${c.haloOpacite}"/>`
       : '';
     // Cible de clic large et invisible : une étoile de niveau 0 ne fait que 2,2 unités
     // de rayon, impossible à viser au doigt. Le repère visuel reste petit, la zone
@@ -1479,7 +1478,7 @@
     return `<g class="etoile" data-competence="${echapper(competence.id)}" role="button" tabindex="0"
               aria-label="${echapper(competence.name)}">
       ${halo}
-      <circle class="etoile-corps" cx="${x}" cy="${y}" r="${c.r}" fill="${couleur}" fill-opacity="${(c.opacite * (verrouillee ? 0.5 : 1)).toFixed(2)}"/>
+      <circle class="etoile-corps" cx="${x}" cy="${y}" r="${c.r}" fill="${teinte}" fill-opacity="${c.opacite}"/>
       <circle class="etoile-cible" cx="${x}" cy="${y}" r="16" fill="transparent"/>
     </g>`;
   }
@@ -1494,7 +1493,13 @@
     };
     return `<div class="constellation-legende">
       ${[0, 1, 2, 3].map(cran).join('')}
-      <span><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" fill="none" stroke="#8d8677" stroke-width="1.4" stroke-dasharray="3 3"/></svg>Thématique à débloquer</span>
+      <span>${[0, 0.5, 1].map((t) => {
+        const l = lumiereTheme(t);
+        return `<svg width="20" height="20" viewBox="0 0 20 20">
+          <circle cx="10" cy="10" r="7" fill="var(--night-deep)" stroke="${teinte}" stroke-width="1.4" stroke-opacity="${l.noyau}"/>
+          <circle cx="10" cy="10" r="5.6" fill="${teinte}" fill-opacity="${l.coeur}"/>
+        </svg>`;
+      }).join('')}Une thématique s'éclaire avec tes niveaux</span>
     </div>`;
   }
 
@@ -1527,33 +1532,27 @@
       const y1 = source.y + uy * TRIM;
       const x2 = cible.x - ux * TRIM;
       const y2 = cible.y - uy * TRIM;
-      // Un chemin n'est plein que s'il est entièrement praticable : partir d'une
-      // thématique verrouillée doit se voir autant qu'aboutir sur une. Sans cela, un
-      // trait plein sortait d'un nœud éteint — cas réel sur Alignement, où Cohérence
-      // de vie s'ouvre par Valeurs pendant que Stress et régulation reste fermée.
-      const sourceFermee = etat.computed.themes[source.id]?.status !== 'open';
-      const cibleFermee = etat.computed.themes[cibleId]?.status !== 'open';
-      const verrouillee = sourceFermee || cibleFermee;
-      return `<line class="filiation${verrouillee ? ' filiation-verrouillee' : ''}" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`;
+      // Toujours plein : un trait dit par où le parcours passe, il ne ferme plus rien.
+      // `data-source` permet de suivre la lumière de la source sans tout redessiner.
+      return `<line class="filiation" data-source="${echapper(source.id)}" stroke-opacity="${opaciteTrait(illuminationDe(source.id))}" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`;
     })).join('');
 
     const groupes = themes.map((theme) => {
-      const ouverte = etat.computed.themes[theme.id]?.status === 'open';
       const competences = etat.referentiel.competencies.filter((c) => c.theme === theme.id);
       const points = positionsEtoiles(theme.x, theme.y, competences.length);
       const etoiles = competences.map((c, i) => etoileSvg(
-        points[i].x, points[i].y, etat.computed.levels[c.id] ?? 0, teinte, !ouverte, c
+        points[i].x, points[i].y, etat.computed.levels[c.id] ?? 0, teinte, c
       )).join('');
 
-      const couleurNoyau = ouverte ? teinte : '#8d8677';
-      return `<g class="theme ${ouverte ? 'theme-ouvert' : 'theme-verrouille'}" data-theme="${echapper(theme.id)}" data-code="${echapper(theme.code)}"
-                 role="button" tabindex="0" aria-label="${echapper(theme.name)}${ouverte ? '' : ' — à débloquer'}">
+      const l = lumiereTheme(illuminationDe(theme.id));
+      return `<g class="theme" data-theme="${echapper(theme.id)}" data-code="${echapper(theme.code)}"
+                 role="button" tabindex="0" aria-label="${echapper(theme.name)}">
         <circle class="theme-cible" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU + 12}" fill="transparent"/>
-        <circle class="theme-halo" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU + 9}" fill="${couleurNoyau}" fill-opacity="${ouverte ? 0.10 : 0.04}"/>
-        <circle class="theme-noyau" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU}" fill="var(--night-deep)" stroke="${couleurNoyau}" stroke-opacity="${ouverte ? 0.85 : 0.4}"/>
-        ${ouverte ? '' : `<text class="theme-cadenas" x="${theme.x}" y="${theme.y + 4}">✦</text>`}
+        <circle class="theme-halo" cx="${theme.x}" cy="${theme.y}" r="${l.haloR}" fill="${teinte}" fill-opacity="${l.halo}"/>
+        <circle class="theme-noyau" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU}" fill="var(--night-deep)" stroke="${teinte}" stroke-opacity="${l.noyau}"/>
+        <circle class="theme-lumiere" cx="${theme.x}" cy="${theme.y}" r="${R_NOYAU - 2.5}" fill="${teinte}" fill-opacity="${l.coeur}"/>
         ${etoiles}
-        <text class="theme-nom" x="${theme.x}" y="${theme.y + DECALAGE_NOM}">${echapper(theme.name)}</text>
+        <text class="theme-nom" dominant-baseline="hanging" x="${theme.x}" y="${theme.y + DECALAGE_NOM}">${echapper(theme.name)}</text>
       </g>`;
     }).join('');
 
@@ -1697,82 +1696,99 @@
   }
 
   // ============================================================
-  // OUVERTURE — APERÇU LOCAL
+  // ILLUMINATION — APERÇU LOCAL ET RENDU
   // ============================================================
-  // Le serveur reste la seule autorité : il revalide à l'enregistrement et renvoie
-  // l'ouverture qu'il a calculée, qui écrase celle-ci. Ce calcul local n'existe que
-  // pour le retour immédiat, parce que le contrat évalue l'ouverture sur les niveaux
-  // SOUMIS : monter deux compétences d'Émotions doit déverrouiller Besoins à l'écran
-  // sans attendre la sauvegarde.
-  function calculerOuvertureLocale(levels) {
-    const parTheme = new Map();
-    etat.referentiel.competencies.forEach((c) => {
-      if (!c.theme) return;
-      if (!parTheme.has(c.theme)) parTheme.set(c.theme, []);
-      parTheme.get(c.theme).push(c.id);
-    });
-    const sources = new Map(etat.referentiel.themes.map((t) => [t.id, []]));
-    etat.referentiel.themes.forEach((s) => s.feeds.forEach((c) => {
-      if (sources.has(c)) sources.get(c).push(s.id);
-    }));
-    const nomDe = new Map(etat.referentiel.themes.map((t) => [t.id, t.name]));
+  // Le serveur reste la seule autorité (illumination-v2.js) : sa réponse écrase cet
+  // aperçu à chaque enregistrement. Il n'existe que pour le retour immédiat — monter une
+  // étoile doit éclairer sa thématique à l'écran sans attendre la sauvegarde. Même
+  // formule, au même arrondi :
+  //
+  //     somme des niveaux ÷ (NIVEAU_MAX × compétences actives)
+  const NIVEAU_MAX = 3;
 
-    const avance = (id) => {
-      const codes = parTheme.get(id) ?? [];
-      const atteintes = codes.filter((c) => (levels[c] ?? 0) >= NIVEAU_ACQUIS).length;
-      return { atteintes, seuil: Math.max(1, Math.floor(codes.length / 2)) };
-    };
-
+  function calculerIlluminationLocale(levels) {
     const res = {};
-    etat.referentiel.themes.forEach((t) => {
-      const src = sources.get(t.id) ?? [];
-      if (src.length === 0) { res[t.id] = { status: 'open', unlock_hint: '' }; return; }
-      const details = src.map((id) => ({ nom: nomDe.get(id), ...avance(id) }));
-      const ouverte = details.some((d) => d.atteintes >= d.seuil);
-      res[t.id] = {
-        status: ouverte ? 'open' : 'locked',
-        unlock_hint: ouverte ? '' : indiceLocal(details),
-      };
+    etat.referentiel.themes.forEach((t) => { res[t.id] = { illumination: 0, somme: 0, competences: 0 }; });
+    etat.referentiel.competencies.forEach((c) => {
+      const r = res[c.theme];
+      if (!r) return;
+      r.somme += Math.min(NIVEAU_MAX, Math.max(0, Math.round(Number(levels[c.id]) || 0)));
+      r.competences += 1;
+    });
+    Object.values(res).forEach((r) => {
+      r.illumination = r.competences === 0 ? 0 : Math.round((r.somme / (NIVEAU_MAX * r.competences)) * 10000) / 10000;
     });
     return res;
   }
 
-  // Même formulation que le serveur, mot pour mot : l'aperçu local ne doit pas dire
-  // autre chose que ce que dira la réponse après enregistrement.
-  function indiceLocal(details) {
-    const palier = etat.referentiel.scale[NIVEAU_ACQUIS];
-    const reste = (d) => Math.max(0, d.seuil - d.atteintes);
-    const compte = (n) => `${n} compétence${n > 1 ? 's' : ''}`;
-    if (details.length === 1) {
-      const d = details[0];
-      return `Encore ${compte(reste(d))} dans « ${d.nom} » au palier « ${palier} », et cette thématique s'ouvre.`;
-    }
-    const nombre = details.length === 2 ? 'Deux' : 'Plusieurs';
-    const chemins = details.map((d, i) => (i === 0 ? compte(reste(d)) : String(reste(d))) + ` dans « ${d.nom} »`).join(', ou ');
-    return `${nombre} chemins mènent ici, un seul suffit : au palier « ${palier} », ${chemins}.`;
+  const illuminationDe = (themeId) => etat.computed.themes[themeId]?.illumination ?? 0;
+
+  // Dégradé CONTINU plutôt que paliers. Les étoiles ont déjà leurs 4 crans, et une
+  // thématique en agrège de 3 à 14 : des paliers masqueraient exactement le progrès
+  // qu'on veut rendre visible — trois compétences montées d'un cran sur sept font
+  // passer de 33 % à 48 %, ce qu'un palier « entre 1/3 et 2/3 » avalerait.
+  //
+  // Le cœur du nœud se remplit de la teinte ; le contour et le halo suivent. À 0, le
+  // nœud reste nettement dessiné dans sa teinte : éteint n'est pas grisé, rien n'est
+  // fermé.
+  function lumiereTheme(t) {
+    return {
+      coeur: +(0.62 * t).toFixed(3),
+      noyau: +(0.38 + 0.57 * t).toFixed(3),
+      halo: +(0.03 + 0.17 * t).toFixed(3),
+      haloR: +(R_NOYAU + 8 + 8 * t).toFixed(1),
+    };
   }
 
-  const estOuverte = (themeId) => etat.computed.themes[themeId]?.status === 'open';
+  // Style des traits de filiation.
+  //   'source'   : intensité qui suit la lumière de la thématique source — le parcours
+  //                se dessine à mesure qu'on l'emprunte.
+  //   'uniforme' : tous les traits pareils, pleins.
+  const TRAITS = 'source';
+  function opaciteTrait(tSource) {
+    return TRAITS === 'uniforme' ? 0.22 : +(0.10 + 0.40 * tSource).toFixed(3);
+  }
+
+  // Mise à jour EN PLACE de la lumière des thématiques et des traits, dans le détail
+  // comme dans le ciel. Redessiner la carte à chaque clic la recentrerait sur mobile.
+  function majLumieres() {
+    document.querySelectorAll('.theme[data-theme]').forEach((g) => {
+      const l = lumiereTheme(illuminationDe(g.dataset.theme));
+      g.querySelector('.theme-lumiere')?.setAttribute('fill-opacity', l.coeur);
+      g.querySelector('.theme-noyau')?.setAttribute('stroke-opacity', l.noyau);
+      const halo = g.querySelector('.theme-halo');
+      if (halo) { halo.setAttribute('fill-opacity', l.halo); halo.setAttribute('r', l.haloR); }
+    });
+    document.querySelectorAll('.filiation[data-source]').forEach((trait) => {
+      trait.setAttribute('stroke-opacity', opaciteTrait(illuminationDe(trait.dataset.source)));
+    });
+    majEtatEntete();
+  }
+
+  // Tant que rien n'est éclairé, on invite ; ensuite on dit ce qui s'est allumé. Pas de
+  // ratio : « 4 sur 36 » se lirait comme 32 portes éteintes.
+  function majEtatEntete() {
+    const total = etat.referentiel.themes.length;
+    const eclairees = Object.values(etat.computed.themes).filter((t) => t.illumination > 0).length;
+    elHeaderEtatTexte.textContent = eclairees === 0
+      ? `${total} thématiques à explorer`
+      : `${eclairees} thématique${eclairees > 1 ? 's' : ''} éclairée${eclairees > 1 ? 's' : ''}`;
+  }
 
   // ============================================================
   // MODIFICATIONS
   // ============================================================
   function appliquerChangement(majEtat) {
-    const avant = JSON.stringify(Object.entries(etat.computed.themes).map(([k, v]) => k + v.status));
     majEtat();
     etat.computed.levels = { ...etat.computed.levels, ...brouillon.levels };
-    etat.computed.themes = calculerOuvertureLocale(brouillon.levels);
-    const apres = JSON.stringify(Object.entries(etat.computed.themes).map(([k, v]) => k + v.status));
+    etat.computed.themes = calculerIlluminationLocale(brouillon.levels);
 
     enregistrerBrouillon();
     majBarre();
     majBoutonMois();
     majAvancements();
-    // Une ouverture qui bascule change les traits, les teintes et les cadenas : on
-    // redessine la constellation concernée. Sinon un simple rafraîchissement d'étoiles
-    // suffit, et l'animation reste imperceptible.
-    if (avant !== apres) redessinerConstellations();
-    else rafraichirEtoiles();
+    rafraichirEtoiles();
+    majLumieres();
     if (etat.vue === 'ciel') rendreCiel();
   }
 
@@ -1816,17 +1832,6 @@
       )];
       brouillon.later = brouillon.later.filter((c) => c !== entrant);
     });
-  }
-
-  // Une cible « maintenant » dont la thématique s'est refermée doit partir avec elle,
-  // sinon le serveur refuserait l'enregistrement entier en 400.
-  function elaguerCiblesFermees() {
-    const avant = brouillon.current.length;
-    brouillon.current = brouillon.current.filter((code) => {
-      const c = etat.referentiel.competencies.find((x) => x.id === code);
-      return c && estOuverte(c.theme);
-    });
-    return avant - brouillon.current.length;
   }
 
   // ============================================================
@@ -2074,23 +2079,21 @@
     </section>`;
   }
 
-  // Sélections. « Maintenant » est plafonné et réservé aux thématiques ouvertes ;
-  // « plus tard » est libre et disponible partout, y compris en thématique fermée.
+  // Sélections. « Maintenant » est plafonné ; « plus tard » est libre. Les deux sont
+  // disponibles sur toute compétence, dès le premier jour.
   function sectionSelections(competence) {
-    const ouverte = estOuverte(competence.theme);
     const estMaintenant = brouillon.current.includes(competence.id);
     const estPlusTard = brouillon.later.includes(competence.id);
     const plein = brouillon.current.length >= MAX_MAINTENANT && !estMaintenant;
 
     let raison = '';
-    if (!ouverte) raison = "Cette thématique n'est pas encore ouverte : tu peux la garder pour plus tard, et la travailler dès qu'elle se débloque.";
-    else if (plein) raison = `Tu travailles déjà ${MAX_MAINTENANT} compétences ce mois. En choisir une autre te proposera laquelle remplacer.`;
+    if (plein) raison = `Tu travailles déjà ${MAX_MAINTENANT} compétences ce mois. En choisir une autre te proposera laquelle remplacer.`;
 
     return `<section class="panneau-section">
       <p class="panneau-label">Ton intention</p>
       <div class="cibles">
         <button type="button" class="cible-btn cible-maintenant${estMaintenant ? ' active' : ''}"
-          id="btn-maintenant" ${ouverte ? '' : 'disabled'} aria-pressed="${estMaintenant}">
+          id="btn-maintenant" aria-pressed="${estMaintenant}">
           <span class="pastille"></span>${estMaintenant ? 'Je la travaille ce mois' : 'La travailler ce mois'}
         </button>
         <button type="button" class="cible-btn cible-plus-tard${estPlusTard ? ' active' : ''}"
@@ -2138,16 +2141,13 @@
   // ============================================================
   // PANNEAU DE THÉMATIQUE
   // ============================================================
-  // Une thématique verrouillée est entièrement consultable : définition, compétences,
-  // énoncés, ressources, auto-évaluation et « plus tard ». Seule l'action « maintenant »
-  // est bloquée. C'est ce qui en fait un horizon et non un mur.
+  // Toute thématique est accessible : définition, compétences, lumière, et sa place
+  // dans le parcours.
   function ouvrirTheme(themeId, idDimension) {
     const theme = etat.referentiel.themes.find((t) => t.id === themeId);
     if (!theme) return;
     const dimension = etat.referentiel.dimensions.find((d) => d.id === idDimension);
     const teinte = TEINTES_HEX[idDimension] || '#f0ebe0';
-    const ouverte = estOuverte(themeId);
-    const infos = etat.computed.themes[themeId] || {};
 
     themeAffiche = { id: themeId, dimension: idDimension };
     competenceAffichee = null;
@@ -2160,7 +2160,7 @@
         brouillon.later.includes(c.id) ? '<span class="comp-marque comp-marque-plus-tard">Plus tard</span>' : '',
       ].filter(Boolean).join('');
       return `<button type="button" class="comp-item" data-competence="${echapper(c.id)}">
-        <span class="comp-astre">${astreCran(Math.max(niveau, 1), ouverte ? teinte : '#8d8677')
+        <span class="comp-astre">${astreCran(Math.max(niveau, 1), teinte)
           .replace('fill-opacity="' + CRANS[Math.max(niveau, 1)].opacite + '"', `fill-opacity="${niveau === 0 ? 0.22 : CRANS[niveau].opacite}"`)}</span>
         <span>
           <span class="comp-nom">${echapper(c.name)}</span>
@@ -2177,19 +2177,7 @@
       ${theme.definition ? `<p class="panneau-def">${echapper(theme.definition)}</p>` : ''}
     `;
 
-    const horizon = ouverte ? '' : `
-      <section class="panneau-section">
-        <div class="horizon">
-          <span class="horizon-marque">${astreCran(2, '#8d8677')}</span>
-          <p class="horizon-texte">
-            <b>Pas encore ouverte</b>
-            ${echapper(infos.unlock_hint || '')}
-            <br><br>Tu peux déjà tout lire ici, t'y évaluer, et garder une compétence pour plus tard.
-          </p>
-        </div>
-      </section>`;
-
-    elPanneauCorps.innerHTML = horizon + `
+    elPanneauCorps.innerHTML = sectionEclat(theme) + `
       <section class="panneau-section">
         <p class="panneau-label">${competences.length} compétence${competences.length > 1 ? 's' : ''}</p>
         <div class="liste-comp">${items}</div>
@@ -2202,6 +2190,41 @@
 
     afficherPanneau();
     document.body.dataset.panneau = 'theme:' + theme.code;
+  }
+
+  // Lumière de la thématique, et sa place dans le parcours.
+  //
+  // Le parcours reprend les traits `Nourrit` en mots. C'était la condition d'ouverture ;
+  // c'est désormais une indication : par où cette thématique se prépare, et ce qu'elle
+  // prépare à son tour. Rien n'y est exigé.
+  function sectionEclat(theme) {
+    const t = illuminationDe(theme.id);
+    const nomsDe = (ids) => ids
+      .map((id) => etat.referentiel.themes.find((x) => x.id === id))
+      .filter(Boolean)
+      .map((x) => `<b>${echapper(x.name)}</b>`);
+    const enListe = (morceaux) => morceaux.length <= 1 ? morceaux.join('')
+      : morceaux.slice(0, -1).join(', ') + ' et ' + morceaux[morceaux.length - 1];
+    const sources = nomsDe(etat.referentiel.themes.filter((x) => x.feeds.includes(theme.id)).map((x) => x.id));
+    const suites = nomsDe(theme.feeds);
+
+    const phrases = [];
+    if (sources.length) phrases.push(`Elle s'appuie sur ${enListe(sources)}.`);
+    if (suites.length) phrases.push(`Elle prépare ${enListe(suites)}.`);
+    if (!sources.length && suites.length) phrases.unshift('Un bon point de départ.');
+
+    const lecture = t === 0
+      ? 'Encore éteinte : elle s’éclaire à mesure que tu t’évalues sur ses compétences.'
+      : t >= 1
+        ? 'Pleinement éclairée : tu incarnes chacune de ses compétences.'
+        : 'Elle s’éclaire à mesure que tes niveaux montent sur ses compétences.';
+
+    return `<section class="panneau-section">
+      <p class="panneau-label">Sa lumière</p>
+      <div class="eclat-jauge" role="img" aria-label="Lumière de la thématique : ${Math.round(t * 100)} %"><i style="width:${(t * 100).toFixed(1)}%"></i></div>
+      <p class="eclat-texte">${lecture}</p>
+      ${phrases.length ? `<p class="eclat-parcours">${phrases.join(' ')}</p>` : ''}
+    </section>`;
   }
 
   // Le masquage est différé le temps de l'animation de fermeture. Rouvrir pendant ce
@@ -2234,16 +2257,11 @@
     if (!c) return '';
     const t = etat.referentiel.themes.find((x) => x.id === c.theme);
     const niveau = brouillon.levels[code] ?? 0;
-    const ouverte = estOuverte(c.theme);
-    const etatTexte = options.cible
-      ? (niveau === 0 ? 'À évaluer' : echapper(etat.referentiel.scale[niveau]))
-      : (ouverte
-          ? `<span>Accessible</span>`
-          : `<span class="sel-verrou">Thématique à débloquer</span>`);
+    const etatTexte = niveau === 0 ? 'À évaluer' : echapper(etat.referentiel.scale[niveau]);
 
-    // La promotion n'a de sens que si la thématique est ouverte : c'est la seule
-    // contrainte du serveur sur « maintenant ».
-    const promouvoir = (!options.cible && ouverte)
+    // Promouvoir depuis « plus tard » : seul le plafond de trois s'applique, et il est
+    // traité au clic en proposant un remplacement.
+    const promouvoir = !options.cible
       ? `<button type="button" class="sel-promouvoir" data-promouvoir="${echapper(code)}">La travailler ce mois</button>`
       : '';
 
@@ -2501,7 +2519,6 @@
     tout:      { libelle: 'Tout',            garde: () => true },
     cibles:    { libelle: 'Mes cibles',      garde: (c) => brouillon.current.includes(c.id) || brouillon.later.includes(c.id) },
     nonSituees:{ libelle: 'Non évaluées',     garde: (c) => (brouillon.levels[c.id] ?? 0) === 0 },
-    ouvertes:  { libelle: 'Thém. ouvertes',  garde: (c) => estOuverte(c.theme) },
     // Les filtres de difficulté sont ajoutés par appliquerConfigClub() : leurs libellés
     // sont des réglages de club, pas des constantes d'interface.
   };
@@ -2604,13 +2621,11 @@
         if (comps.length === 0) return '';
         const codes = comps.map((c) => c.id);
         const situees = codes.filter((x) => (brouillon.levels[x] ?? 0) > 0).length;
-        const ouverteT = estOuverte(t.id);
         const cle = 'T:' + t.id;
         return `<div class="syn-theme${synDeplies.has(cle) ? ' syn-ouvert' : ''}" data-cle="${cle}">
           <button type="button" class="syn-ligne" data-plier="${cle}">
             <span class="syn-nom">${echapper(t.name)}</span>
-            <span class="syn-compte">${situees}/${codes.length} évaluées${ouverteT ? '' : ' · '}</span>
-            ${ouverteT ? '' : '<span class="syn-verrou">à débloquer</span>'}
+            <span class="syn-compte">${situees}/${codes.length} évaluées</span>
             <span class="syn-chev">▾</span>
             ${repartition(codes, teinte)}
           </button>
@@ -2787,14 +2802,13 @@
       if (!competence) return;
       const zone = g.closest('[data-constellation]');
       const teinte = TEINTES_HEX[zone?.dataset.constellation] || '#f0ebe0';
-      const verrouillee = !estOuverte(competence.theme);
       const c = CRANS[brouillon.levels[code] ?? 0] ?? CRANS[0];
-      const couleur = verrouillee ? '#8d8677' : teinte;
+      const couleur = teinte;
 
       const corps = g.querySelector('.etoile-corps');
       corps.setAttribute('r', c.r);
       corps.setAttribute('fill', couleur);
-      corps.setAttribute('fill-opacity', (c.opacite * (verrouillee ? 0.5 : 1)).toFixed(2));
+      corps.setAttribute('fill-opacity', c.opacite);
 
       let halo = g.querySelector('.etoile-halo');
       if (c.halo > 0) {
@@ -2807,7 +2821,7 @@
         }
         halo.setAttribute('r', c.halo);
         halo.setAttribute('fill', couleur);
-        halo.setAttribute('fill-opacity', (c.haloOpacite * (verrouillee ? 0.45 : 1)).toFixed(3));
+        halo.setAttribute('fill-opacity', c.haloOpacite);
       } else if (halo) {
         halo.remove();
       }
@@ -2820,8 +2834,7 @@
       zone.innerHTML = '';
       rendreConstellation(zone.dataset.constellation);
     });
-    const ouvertes = Object.values(etat.computed.themes).filter((t) => t.status === 'open').length;
-    elHeaderEtatTexte.textContent = `${ouvertes} thématique${ouvertes > 1 ? 's' : ''} à explorer`;
+    majEtatEntete();
   }
 
   // ============================================================
@@ -2875,7 +2888,6 @@
   }
 
   async function enregistrer() {
-    const retires = elaguerCiblesFermees();
     elBtnEnregistrer.disabled = true;
     elBtnEnregistrer.textContent = 'Enregistrement…';
 
@@ -2914,11 +2926,7 @@
       redessinerConstellations();
       if (competenceAffichee) rafraichirPanneau(competenceAffichee.code);
 
-      bandeau('Ton sphérier est enregistré.',
-        retires > 0
-          ? `${retires} cible${retires > 1 ? 's ont' : ' a'} été retirée${retires > 1 ? 's' : ''} : sa thématique s'est refermée.`
-          : 'Tu peux fermer cette page.',
-        'succes');
+      bandeau('Ton sphérier est enregistré.', 'Tu peux fermer cette page.', 'succes');
     } catch (err) {
       // Rien n'est perdu : le brouillon local tient, l'écran garde les modifications.
       bandeau("L'enregistrement n'a pas abouti.",
@@ -2934,7 +2942,7 @@
   document.getElementById('btn-annuler').addEventListener('click', () => {
     brouillon = { levels: { ...reference.levels }, current: [...reference.current], later: [...reference.later] };
     etat.computed.levels = { ...reference.levels };
-    etat.computed.themes = calculerOuvertureLocale(brouillon.levels);
+    etat.computed.themes = calculerIlluminationLocale(brouillon.levels);
     try { localStorage.removeItem(cleBrouillon()); } catch {}
     majBarre();
     redessinerConstellations();
@@ -2971,7 +2979,7 @@
   // pour égaliser ce que révèle chaque amorce. Les valeurs, et la mesure qui les fonde,
   // sont dans `CIEL.largeursFil` de club.config.js : à refaire si la police de la
   // constellation, celle des en-têtes ou les positions changent.
-  // Fil décoratif entre deux blocs. Il ne dit rien de l'ouverture : la filiation reste
+  // Fil décoratif entre deux blocs. Il ne relie aucune thématique : la filiation reste
   // interne à chaque dimension. Il est là pour que le ciel se lise comme une carte
   // unique plutôt que comme trois pages côte à côte.
   //
@@ -3103,8 +3111,8 @@
   // Point d'ancrage horizontal d'un bloc dans la piste : le milieu de ses thématiques
   // RACINES, et non le milieu géométrique de sa boîte. Sur desktop les deux coïncident
   // presque. Sur mobile, où un bloc est plus large que la piste, c'est la différence
-  // entre s'ouvrir sur les thématiques par lesquelles on peut commencer et s'ouvrir sur
-  // une zone verrouillée. Même raisonnement que pour l'ouverture d'une constellation.
+  // entre s'ouvrir sur les points de départ du parcours et s'ouvrir sur une feuille
+  // arbitraire. Même raisonnement que pour l'ouverture d'une constellation.
   function ancreHorizontale(bloc, idDimension) {
     const centreBoite = bloc.offsetLeft + bloc.offsetWidth / 2;
     const dimension = etat.referentiel.dimensions.find((d) => d.id === idDimension);
@@ -3257,7 +3265,7 @@
         };
         if (estModifie()) {
           etat.computed.levels = { ...etat.computed.levels, ...brouillon.levels };
-          etat.computed.themes = calculerOuvertureLocale(brouillon.levels);
+          etat.computed.themes = calculerIlluminationLocale(brouillon.levels);
           bandeau('Tes modifications ont été retrouvées.',
             "Elles n'avaient pas été enregistrées : elles t'attendaient sur cet appareil.", 'succes');
         } else {
@@ -3274,10 +3282,7 @@
       majBarre();
       majBoutonMois();
 
-      const ouvertes = Object.values(etat.computed.themes).filter((t) => t.status === 'open').length;
-      // Formulation tournée vers ce qui est accessible : un ratio « 6 sur 40 » se lit
-      // comme 34 portes fermées, alors que c'est une invitation.
-      elHeaderEtatTexte.textContent = `${ouvertes} thématique${ouvertes > 1 ? 's' : ''} à explorer`;
+      majEtatEntete();
       elHeaderEtat.hidden = false;
 
       document.body.dataset.pret = 'oui';

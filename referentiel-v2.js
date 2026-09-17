@@ -2,7 +2,7 @@ require('dotenv').config({ quiet: true });
 
 const { Client, collectPaginatedAPI } = require('@notionhq/client');
 const { DIMENSIONS, ECHELLE, VERSION_REFERENTIEL, DIFFICULTES, CIEL,
-        MAX_CIBLES_MAINTENANT, NIVEAU_ACQUIS, CLUB, verifierClub } = require('./club.config.js');
+        MAX_CIBLES_MAINTENANT, CLUB, verifierClub } = require('./club.config.js');
 
 const { NOTION_TOKEN, DB_THEMES, DB_COMPETENCES, DB_RESSOURCES } = process.env;
 
@@ -131,8 +131,8 @@ async function lireReferentielDepuisNotion() {
       x: nombre(p, 'Position X'),
       y: nombre(p, 'Position Y'),
       order: nombre(p, 'Ordre'),
-      // Surcharge facultative du seuil d'ouverture. Vide = calcul automatique.
-      seuil: nombre(p, 'Seuil'),
+      // `Seuil` n'est plus lu : il n'y a plus de règle d'ouverture. La propriété reste
+      // en base Notion, et l'export de sauvegarde la conserve.
     }))
     .sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity));
 
@@ -194,7 +194,7 @@ async function lireReferentielDepuisNotion() {
     // teintes, libellés de difficulté, plafonds, ordre du ciel. Ajouter une dimension
     // ou renommer un palier ne demande alors de toucher qu'à club.config.js.
     difficulties: DIFFICULTES,
-    limites: { maxCiblesMaintenant: MAX_CIBLES_MAINTENANT, niveauAcquis: NIVEAU_ACQUIS },
+    limites: { maxCiblesMaintenant: MAX_CIBLES_MAINTENANT },
     ciel: CIEL,
     dimensions: DIMENSIONS,
     themes,

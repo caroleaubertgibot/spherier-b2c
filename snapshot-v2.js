@@ -1,5 +1,5 @@
 const { creerClientServeur, TABLE_SNAPSHOTS } = require('./supabase-client.js');
-const { calculerOuverture, niveauxComplets, normaliserNiveau } = require('./ouverture-v2.js');
+const { calculerIllumination, niveauxComplets, normaliserNiveau } = require('./illumination-v2.js');
 // Importée plutôt que redéfinie : la même constante à deux endroits finit toujours par
 // diverger, et ici la divergence rendrait les snapshots illisibles en silence.
 const { VERSION_REFERENTIEL, MAX_CIBLES_MAINTENANT } = require('./club.config.js');
@@ -34,21 +34,23 @@ async function lireDernierSnapshotV2(clientId) {
 }
 
 // Assemble l'état renvoyé au navigateur : le snapshot brut, et l'état calculé.
-// Le calcul d'ouverture vit côté serveur, un seul endroit où la règle existe.
+// L'illumination des thématiques est calculée ici ; le navigateur n'en tient qu'un
+// aperçu local, écrasé par cette réponse.
 function composerEtat({ referentiel, snapshot }) {
   const levels = snapshot?.blob?.levels ?? {};
   return {
     snapshot,
     computed: {
       levels: niveauxComplets({ referentiel, levels }),
-      themes: calculerOuverture({ referentiel, levels }),
+      themes: calculerIllumination({ referentiel, levels }),
     },
   };
 }
 
 // Valide et normalise ce que le navigateur propose d'enregistrer.
 // Les contraintes sont vérifiées ICI et pas seulement dans l'interface : une requête
-// forgée ne doit pas pouvoir contourner le plafond ni le verrouillage pédagogique.
+// forgée ne doit pas pouvoir contourner le plafond. Il n'y a plus de contrainte de
+// thématique : toute compétence peut être une cible du mois dès le premier jour.
 function validerEtNormaliser({ referentiel, corps }) {
   const erreurs = [];
 
@@ -96,18 +98,6 @@ function validerEtNormaliser({ referentiel, corps }) {
     erreurs.push(`selections.current est limité à ${MAX_CIBLES_MAINTENANT} compétences (reçu ${currentFiltre.length}).`);
   }
 
-  // L'ouverture est évaluée sur les niveaux SOUMIS, pas sur ceux du snapshot précédent :
-  // monter une compétence et sélectionner la thématique ainsi débloquée doit pouvoir se
-  // faire en un seul enregistrement.
-  const ouverture = calculerOuverture({ referentiel, levels });
-  const horsThematiqueOuverte = currentFiltre.filter((code) => {
-    const themeId = competenceParCode.get(code).theme;
-    return ouverture[themeId]?.status !== 'open';
-  });
-  if (horsThematiqueOuverte.length > 0) {
-    erreurs.push(`selections.current ne peut viser que des thématiques ouvertes (refusé : ${horsThematiqueOuverte.join(', ')}).`);
-  }
-
   if (erreurs.length > 0) return { erreurs };
 
   return {
@@ -117,7 +107,7 @@ function validerEtNormaliser({ referentiel, corps }) {
     blob: {
       referential_version: VERSION_REFERENTIEL,
       levels,
-      // « plus tard » est libre : sans plafond, et autorisé même en thématique verrouillée.
+      // « plus tard » est libre : sans plafond.
       selections: { current: currentFiltre, later: laterFiltre },
     },
   };

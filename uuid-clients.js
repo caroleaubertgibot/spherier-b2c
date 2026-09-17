@@ -92,10 +92,11 @@ async function principal() {
     }
     if (!etat) { console.log(`  ${f.nom.padEnd(24)} INJOIGNABLE`); process.exitCode = 1; continue; }
     const niveaux = Object.values(etat.computed?.levels ?? {}).filter((v) => v > 0).length;
-    const ouvertes = Object.values(etat.computed?.themes ?? {}).filter((v) => v.status === 'open').length;
-    const ok = etat.snapshot === null && niveaux === 0 && ouvertes > 0;
+    const themes = Object.values(etat.computed?.themes ?? {});
+    const eteintes = themes.filter((v) => v.illumination === 0).length;
+    const ok = etat.snapshot === null && niveaux === 0 && themes.length > 0 && eteintes === themes.length;
     if (!ok) process.exitCode = 1;
-    console.log(`  ${f.nom.padEnd(24)}${ok ? 'profil vierge' : 'ÉCART'} · ${ouvertes} thématiques ouvertes`);
+    console.log(`  ${f.nom.padEnd(24)}${ok ? 'profil vierge' : 'ÉCART'} · ${themes.length} thématiques, toutes éteintes`);
   }
 
   console.log('\nLIENS\n');

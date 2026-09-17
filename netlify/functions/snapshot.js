@@ -31,8 +31,8 @@ exports.handler = async (event) => {
   try {
     const referentiel = await getReferentielV2();
 
-    // Plafond de « maintenant » et verrouillage pédagogique vérifiés côté serveur :
-    // l'interface n'est pas la seule barrière.
+    // Plafond de « maintenant » vérifié côté serveur : l'interface n'est pas la seule
+    // barrière.
     const { erreurs, clientId, libelle, blob } = validerEtNormaliser({ referentiel, corps });
     if (erreurs.length > 0) {
       return reponse(400, { erreur: erreurs.join(' '), details: erreurs });
@@ -41,7 +41,7 @@ exports.handler = async (event) => {
     const snapshot = await ecrireSnapshotV2({ clientId, libelle, blob });
 
     // Renvoyer l'état recalculé évite au navigateur un aller-retour supplémentaire, et
-    // garantit qu'il affiche l'ouverture telle que le serveur vient de la déterminer.
+    // garantit qu'il affiche l'illumination telle que le serveur vient de la calculer.
     return reponse(201, composerEtat({ referentiel, snapshot }));
   } catch (err) {
     console.error('snapshot:', err);
