@@ -9,6 +9,16 @@
   framework = "#static"
   publish = "public"
 
+# Les pratiques sont des pages publiques — pas de secret, pas de donnée de membre —
+# mais elles n'ont rien à faire dans un moteur de recherche : elles n'ont de sens que
+# pour un membre qui vient de son sphérier. Chaque page porte déjà sa balise `robots` ;
+# cet en-tête la double au niveau du serveur, pour les moteurs qui ne liraient pas le
+# HTML, et pour les fichiers qui n'en sont pas.
+[[headers]]
+  for = "/pratiques/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 # Chemins courts côté navigateur, indépendants de l'emplacement des fonctions.
 [[redirects]]
   from = "/api/referential"
