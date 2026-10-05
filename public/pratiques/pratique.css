@@ -100,8 +100,13 @@ h1 {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 5px 14px; border-radius: 999px;
   border: 1px solid var(--trait); background: rgba(240, 235, 224, .03);
-  font-size: 15px; color: var(--papier-doux); white-space: nowrap;
+  font-size: 15px; color: var(--papier-doux);
+  /* Pas de `nowrap` : un repère peut être long — « chaque jour, et un temps en fin
+     de semaine » déborde la largeur d'un téléphone. Il passe à la ligne dans sa
+     pastille plutôt que de pousser la page de côté. */
+  max-width: 100%;
 }
+.reperes b { flex-shrink: 0; }
 .reperes b { color: var(--pierre); font-weight: 400; letter-spacing: .1em;
   text-transform: uppercase; font-size: 12.5px; }
 
